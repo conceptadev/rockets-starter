@@ -1,0 +1,19 @@
+{
+  "name": "rockets-starter",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "scripts": {
+    "start": "yarn start:api",
+    "start:dev": "yarn start:api:dev",
+    "start:debug": "yarn start:api:debug",
+    "start:api": "yarn workspace rockets-api start",
+    "start:api:dev": "yarn workspace rockets-api start:dev",
+    "start:api:debug": "yarn workspace rockets-api start:debug",
+    "test": "yarn test:api",
+    "test:api": "yarn workspace rockets-api test"
+  }
+}
