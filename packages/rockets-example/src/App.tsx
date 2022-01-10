@@ -8,6 +8,8 @@ import { ProtectedRoute, PublicRoute, Route, Router, useNavigate} from "@rockts-
 
 import {SimpleLoginForm, Notification} from '@rockts-org/rockets-ui-components'
 
+import '@rockts-org/rockets-ui-components/dist/tailwind.css'
+
 const LoginForm = () => {
   const {doLogin, user } = useAuth();
   const { notify} = useNotifications();
