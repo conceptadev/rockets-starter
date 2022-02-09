@@ -15,8 +15,5 @@
     "start:api:debug": "yarn workspace rockets-api start:debug",
     "test": "yarn test:api",
     "test:api": "yarn workspace rockets-api test"
-  },
-  "resolutions": {
-    "@rockts-org/data-provider": "file:///Concepta/rockets/rockets-react/packages/data-provider"
   }
 }

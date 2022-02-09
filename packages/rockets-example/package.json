@@ -1,5 +1,5 @@
 {
-  "name": "data-provider-poc",
+  "name": "rockets-example",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -21,16 +21,13 @@
     "react-router": "^6.0.2",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
-    "@rockts-org/rockets-ui-components": "file:///Concepta/rockets/rockets-react-ui/packages/react-ui-components",
-    "@rockts-org/auth-provider": "file:///Concepta/rockets/rockets-react/packages/auth-provider",
-    "@rockts-org/react-router": "file:///Concepta/rockets/rockets-react/packages/react-router",
-    "@rockts-org/notification-provider": "file:///Concepta/rockets/rockets-react/packages/notification-provider",
+    "@rockts-org/react-ui-components": "^1.0.0-alpha.0",
+    "@rockts-org/react-auth-provider": "^1.0.0-alpha.0",
+    "@rockts-org/react-router": "^1.0.0-alpha.0",
+    "@rockts-org/react-notification-provider": "^1.0.0-alpha.0",
     "rxjs": "^7.4.0",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
-  },
-  "resolutions": {
-    "@rockts-org/data-provider": "file:///Concepta/rockets/rockets-react/packages/data-provider"
   },
   "scripts": {
     "start": "react-scripts start",
