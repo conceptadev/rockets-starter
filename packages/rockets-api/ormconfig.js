@@ -18,8 +18,8 @@ module.exports = {
     '../../node_modules/@rockts-org/nestjs-user/dist/entities/user.entity.js',
   ],
   subscribers: ['dist/**/*.subscriber.js'],
-  factories: ['dist/**/*.factory.js'],
-  seeds: ['dist/**/*.seeder.js'],
+  factories: ['dist/**/factories/*.factory.js'],
+  seeds: ['dist/**/seeders/*.seeder.js'],
   migrations: ['dist/migrations/*.js'],
   cli: {
     migrationsDir: 'src/migrations',

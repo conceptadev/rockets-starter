@@ -1900,55 +1900,55 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
-"@rockts-org/nestjs-auth-jwt@^4.0.0-alpha.2":
-  version "4.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-auth-jwt/-/nestjs-auth-jwt-4.0.0-alpha.2.tgz#adbd7ddcb6d69fd7647cbf2302ad3d86da7d3b78"
-  integrity sha512-xPrtYZ4JZvGzhCr34cdvH4R7NhMxGnwteeiISjx+G/ebm8ctXxyocNLZY+b8Jlz8aRPufl11gFuinwBnYt4f3A==
+"@rockts-org/nestjs-auth-jwt@^4.0.0-alpha.4":
+  version "4.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-auth-jwt/-/nestjs-auth-jwt-4.0.0-alpha.4.tgz#9f32f0a06bcfa9181745830191d8f8f7733daa31"
+  integrity sha512-ddBWWlSTL7OMnZnOy9e83w8/iVMcikBw35BOaJKIP1igSBuU1g4aJRW5MFVL5UC2cj3MQAWCShX9/cQhzBbGQQ==
   dependencies:
     "@nestjs/common" "^8.0.2"
     "@nestjs/config" "^1.1.6"
     "@nestjs/core" "^8.0.2"
     "@nestjs/passport" "^8.0.1"
     "@nestjs/platform-fastify" "^8.0.6"
-    "@rockts-org/nestjs-authentication" "^4.0.0-alpha.2"
-    "@rockts-org/nestjs-common" "^4.0.0-alpha.2"
-    "@rockts-org/nestjs-jwt" "^4.0.0-alpha.2"
+    "@rockts-org/nestjs-authentication" "^4.0.0-alpha.4"
+    "@rockts-org/nestjs-common" "^4.0.0-alpha.4"
+    "@rockts-org/nestjs-jwt" "^4.0.0-alpha.4"
     class-validator "^0.13.2"
     express "^4.17.1"
     fastify "^3.25.3"
 
-"@rockts-org/nestjs-auth-local@^4.0.0-alpha.2":
-  version "4.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-auth-local/-/nestjs-auth-local-4.0.0-alpha.2.tgz#37c80d4a7ef942aab8cfb6824879a3afadd580f0"
-  integrity sha512-V2/ksXB/BDgBISjdjaUZv/C1+gZg+W0Ly8iAmYxT/ulo9do3GA13rquE4Qkx4eNI7ET6IEM+s/nDm3DgiwIQGA==
+"@rockts-org/nestjs-auth-local@^4.0.0-alpha.4":
+  version "4.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-auth-local/-/nestjs-auth-local-4.0.0-alpha.4.tgz#7021f10c6c1ff57d07179cc3ee6cd8ea17490c6f"
+  integrity sha512-SmWZefJyrjx+0eN1P4reqn6xpo0+K9ov9KeoZqiJneKL6hEyt+1fQkrCm8/vTQf7OweUPYX+u3g7WvXpzRx71A==
   dependencies:
     "@nestjs/common" "^8.0.2"
     "@nestjs/config" "^1.1.6"
     "@nestjs/core" "^8.0.2"
     "@nestjs/passport" "^8.0.1"
     "@nestjs/platform-fastify" "^8.0.6"
-    "@rockts-org/nestjs-authentication" "^4.0.0-alpha.2"
-    "@rockts-org/nestjs-common" "^4.0.0-alpha.2"
-    "@rockts-org/nestjs-password" "^4.0.0-alpha.2"
-    "@rockts-org/nestjs-user" "^4.0.0-alpha.2"
+    "@rockts-org/nestjs-authentication" "^4.0.0-alpha.4"
+    "@rockts-org/nestjs-common" "^4.0.0-alpha.4"
+    "@rockts-org/nestjs-password" "^4.0.0-alpha.4"
+    "@rockts-org/nestjs-user" "^4.0.0-alpha.4"
     "@sentry/node" "^6.11.0"
     class-validator "^0.13.2"
     express "^4.17.1"
     fastify "^3.25.3"
     passport-local "^1.0.0"
 
-"@rockts-org/nestjs-authentication@^4.0.0-alpha.2":
-  version "4.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-authentication/-/nestjs-authentication-4.0.0-alpha.2.tgz#2a9852e8f4c33936535dcc70b649ac336f4788bb"
-  integrity sha512-OYlYscWsZq4j0be9/fwL0oS9q+CwZn6lmKmi8Vpn6ZmkSmIjp7mHUwtBT7qeeurauuYm+HpZ0sIUiKXRI0bTYQ==
+"@rockts-org/nestjs-authentication@^4.0.0-alpha.4":
+  version "4.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-authentication/-/nestjs-authentication-4.0.0-alpha.4.tgz#0023a45b1ddc603a2bc29b5bc73009f3509127ce"
+  integrity sha512-wnHq9fwQ271kJykiL5A/RyL8kneSn3kkclIm2sL2b/VTdz5J9yUUqrrufzkFsqg4PBRXreHuvjziBhpT06o9WQ==
   dependencies:
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
     "@nestjs/core" "^8.0.8"
     "@nestjs/passport" "^8.0.1"
-    "@rockts-org/nestjs-common" "^4.0.0-alpha.2"
-    "@rockts-org/nestjs-jwt" "^4.0.0-alpha.2"
-    "@rockts-org/nestjs-password" "^4.0.0-alpha.2"
+    "@rockts-org/nestjs-common" "^4.0.0-alpha.4"
+    "@rockts-org/nestjs-jwt" "^4.0.0-alpha.4"
+    "@rockts-org/nestjs-password" "^4.0.0-alpha.4"
     "@types/zxcvbn" "^4.4.1"
     bcrypt "^5.0.1"
     passport "^0.5.0"
@@ -1957,18 +1957,18 @@
     passport-strategy "^1.0.0"
     zxcvbn "^4.4.2"
 
-"@rockts-org/nestjs-common@^4.0.0-alpha.2":
-  version "4.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-common/-/nestjs-common-4.0.0-alpha.2.tgz#033ffe1a738afaec0e6fffddebc3b78cf2cf25ca"
-  integrity sha512-ipfqZtzeaAGdduP0zD5cA+xNIrtP01/rFu13Myib4XSOQrVDw9HF8/tTtgv2OVf8SfJCMEkiQAe+C765HJP6lA==
+"@rockts-org/nestjs-common@^4.0.0-alpha.4":
+  version "4.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-common/-/nestjs-common-4.0.0-alpha.4.tgz#ca96f21d3673989cc246352a6f4b7252f810f49b"
+  integrity sha512-HUluttdRubI02cpkUnRW+6w5n9sjV85jNJYybIpR8YerSPKlRMeVPl14+8emW2ccicNfNr0CAJ7rztNCR6FkRg==
   dependencies:
     "@golevelup/nestjs-modules" "^0.4.3"
     "@nestjs/common" "^8.0.8"
 
-"@rockts-org/nestjs-crud@^4.0.0-alpha.2":
-  version "4.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-crud/-/nestjs-crud-4.0.0-alpha.2.tgz#94a4f198b9bf61404c800245bb6297f1b800262c"
-  integrity sha512-FCpfkra1x8qz0AaeIRXZA6ZHhWZz7hzTOBAvNCec2GjEY13ZLoiqo+OscF5x5WrvEV5ajMsGPnPen/C5GcLpJg==
+"@rockts-org/nestjs-crud@^4.0.0-alpha.4":
+  version "4.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-crud/-/nestjs-crud-4.0.0-alpha.4.tgz#f517dfb905690a9b94b6cc74fa4c4c97ca0df99c"
+  integrity sha512-1GYTthOOreOnpjcOm7h77CE56J4zBGZuQSlk/YI4QsrTr05lb0UsMOTWNnewalIiTGHDOsL+Lf2ylW3fvp9mBg==
   dependencies:
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.0.0"
@@ -1976,53 +1976,54 @@
     "@nestjsx/crud" "^5.0.0-alpha.3"
     "@nestjsx/crud-request" "^5.0.0-alpha.3"
     "@nestjsx/crud-typeorm" "^5.0.0-alpha.3"
-    "@rockts-org/nestjs-common" "^4.0.0-alpha.2"
+    "@rockts-org/nestjs-common" "^4.0.0-alpha.4"
 
-"@rockts-org/nestjs-jwt@^4.0.0-alpha.2":
-  version "4.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-jwt/-/nestjs-jwt-4.0.0-alpha.2.tgz#cd9bbe9bb9251fed59b85ca2347df7ab50c6d6ec"
-  integrity sha512-isgaK++yxzGKqmEfmZ3t0nwT+Y8SMi7fdZKofh6N5VxmQxtjv+6RclKBMnbHORYn2hgn2g6Hgp3B6vEf9P2YxA==
+"@rockts-org/nestjs-jwt@^4.0.0-alpha.4":
+  version "4.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-jwt/-/nestjs-jwt-4.0.0-alpha.4.tgz#3b01e6992e57918f6beb1a950bc1920da635b7ac"
+  integrity sha512-R+7tp1nz6wm2SHIKTdUqb1w/V4HG67RzJND2GSTt1CFCMvbmtmSjHX+DygriYUuwtg19b7ms0T6M8mt+C64azA==
   dependencies:
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
     "@nestjs/jwt" "^8.0.0"
-    "@rockts-org/nestjs-common" "^4.0.0-alpha.2"
+    "@rockts-org/nestjs-common" "^4.0.0-alpha.4"
     passport-jwt "^4.0.0"
     passport-strategy "^1.0.0"
 
-"@rockts-org/nestjs-password@^4.0.0-alpha.2":
-  version "4.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-password/-/nestjs-password-4.0.0-alpha.2.tgz#84883a6cc0af3f0b439991f095ad8534aa5c0423"
-  integrity sha512-EUeISHWtJrFpnW8fC/vqExfW15RuIwcpAPS+9/GXR1F9TCs8lmGHj2bC5CaVA5ZwaS/NPy/5aFY/mMAdpxBRwA==
+"@rockts-org/nestjs-password@^4.0.0-alpha.4":
+  version "4.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-password/-/nestjs-password-4.0.0-alpha.4.tgz#d580807c6fb2a3341de7f761073a541ce774af5d"
+  integrity sha512-oIgHa7EmVGihTpW4WvSxX+hPtv2F4hYW0rNtid4lRjmByRbpPanJ1QaxQE/+4/sYXrGgp1tVgN1gM/x+FIlFMg==
   dependencies:
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
     "@nestjs/core" "^8.0.8"
-    "@rockts-org/nestjs-common" "^4.0.0-alpha.2"
+    "@rockts-org/nestjs-common" "^4.0.0-alpha.4"
     "@types/zxcvbn" "^4.4.1"
     bcrypt "^5.0.1"
     zxcvbn "^4.4.2"
 
-"@rockts-org/nestjs-typeorm-ext@^4.0.0-alpha.2":
-  version "4.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-typeorm-ext/-/nestjs-typeorm-ext-4.0.0-alpha.2.tgz#f426f2eeaa29fb307aeb12c6752e75b9dfb54fc3"
-  integrity sha512-kKskYXjxnlPl8tcYpQX7XM1QD1rL+Pk7b9DfzdR/I+QN78NYlChPFROk/iTVCbqWib2CRCpU1Wiv7yvdF/X+ug==
+"@rockts-org/nestjs-typeorm-ext@^4.0.0-alpha.4":
+  version "4.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-typeorm-ext/-/nestjs-typeorm-ext-4.0.0-alpha.4.tgz#445f785203549c05176cdcbf1acef52aecb98330"
+  integrity sha512-YKdesaeWS2/SqZxL5iR/aS4QqdgapHuhiaO7LbyAFTv9W60gLdNenmi9G0DDSyZLJgpFdRzomoYyrlND3gUngA==
   dependencies:
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
     "@nestjs/typeorm" "^8.0.2"
-    "@rockts-org/nestjs-common" "^4.0.0-alpha.2"
+    "@rockts-org/nestjs-common" "^4.0.0-alpha.4"
 
-"@rockts-org/nestjs-user@^4.0.0-alpha.2":
-  version "4.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-user/-/nestjs-user-4.0.0-alpha.2.tgz#a86f76159a291726961e1e0a10aca56c92757634"
-  integrity sha512-zO5aavN4RZicPF4dkvyGlKx2zMno/0LLueguv0HHhFA8ivxWN9bHTirIt4vgwkSgLTPCuQt87+omfTleeieMbQ==
+"@rockts-org/nestjs-user@^4.0.0-alpha.4":
+  version "4.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-user/-/nestjs-user-4.0.0-alpha.4.tgz#e9a84298e537972e4db97596e94fd4b1b77a3a0f"
+  integrity sha512-IU4+8Duef1C1pWfYphIBuxxmDx2lAweiR6pmabnJ5PTrEruZZ16+irRFyvS9UM5go55yW6bCotWV61x14EDO8A==
   dependencies:
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
-    "@rockts-org/nestjs-common" "^4.0.0-alpha.2"
-    "@rockts-org/nestjs-crud" "^4.0.0-alpha.2"
-    "@rockts-org/nestjs-typeorm-ext" "^4.0.0-alpha.2"
+    "@rockts-org/nestjs-common" "^4.0.0-alpha.4"
+    "@rockts-org/nestjs-crud" "^4.0.0-alpha.4"
+    "@rockts-org/nestjs-password" "^4.0.0-alpha.4"
+    "@rockts-org/nestjs-typeorm-ext" "^4.0.0-alpha.4"
 
 "@rockts-org/react-auth-provider@^1.0.0-alpha.0":
   version "1.0.0-alpha.0"
@@ -4941,7 +4942,7 @@ cli-highlight@^2.1.11:
     parse5-htmlparser2-tree-adapter "^6.0.0"
     yargs "^16.0.0"
 
-cli-spinners@^2.5.0:
+cli-spinners@^2.2.0, cli-spinners@^2.5.0:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/cli-spinners/-/cli-spinners-2.6.1.tgz#adc954ebe281c37a6319bfa401e6dd2488ffb70d"
   integrity sha512-x/5fWmGMnbKQAaNwN+UZlV79qBLM9JFnJuJ03gIi5whrob0xV0ofNVHy9DhwGdsMJQc2OKv0oGmLzvaqvAVv+g==
@@ -6990,6 +6991,11 @@ extsprintf@^1.2.0:
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.1.tgz#8d172c064867f235c0c84a596806d279bf4bcc07"
   integrity sha512-Wrk35e8ydCKDj/ArClo1VrPVmN8zph5V4AtHwIuHhvMXsKf73UT3BOD+azBIW+3wOJ4FhEH7zyaJCFvChjYvMA==
 
+faker@4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/faker/-/faker-4.1.0.tgz#1e45bbbecc6774b3c195fad2835109c6d748cc3f"
+  integrity sha1-HkW7vsxndLPBlfrSg1EJxtdIzD8=
+
 fast-decode-uri-component@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/fast-decode-uri-component/-/fast-decode-uri-component-1.0.1.tgz#46f8b6c22b30ff7a81357d4f59abfae938202543"
@@ -7658,6 +7664,18 @@ glob-to-regexp@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/glob-to-regexp/-/glob-to-regexp-0.4.1.tgz#c75297087c851b9a578bd217dd59a92f59fe546e"
   integrity sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==
+
+glob@7.1.6:
+  version "7.1.6"
+  resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.6.tgz#141f33b81a7c2492e125594307480c46679278a6"
+  integrity sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==
+  dependencies:
+    fs.realpath "^1.0.0"
+    inflight "^1.0.4"
+    inherits "2"
+    minimatch "^3.0.4"
+    once "^1.3.0"
+    path-is-absolute "^1.0.0"
 
 glob@^7.0.0, glob@^7.0.3, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4, glob@^7.1.6, glob@^7.1.7:
   version "7.2.0"
@@ -10325,6 +10343,13 @@ lodash@4, lodash@4.17.21, "lodash@>=3.5 <5", lodash@^4.17.11, lodash@^4.17.14, l
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
+log-symbols@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-3.0.0.tgz#f3a08516a5dea893336a7dee14d18a1cfdab77c4"
+  integrity sha512-dSkNGuI7iG3mfvDzUuYZyvk5dD9ocYCYzNU6CYDE6+Xqd+gwme6Z00NS3dUh8mq/73HaEtT7m6W+yUPtU6BZnQ==
+  dependencies:
+    chalk "^2.4.2"
+
 log-symbols@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-4.1.0.tgz#3fbdbb95b4683ac9fc785111e792e558d4abd503"
@@ -11317,6 +11342,20 @@ optionator@^0.9.1:
     prelude-ls "^1.2.1"
     type-check "^0.4.0"
     word-wrap "^1.2.3"
+
+ora@4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/ora/-/ora-4.0.3.tgz#752a1b7b4be4825546a7a3d59256fa523b6b6d05"
+  integrity sha512-fnDebVFyz309A73cqCipVL1fBZewq4vwgSHfxh43vVy31mbyoQ8sCH3Oeaog/owYOs/lLlGVPCISQonTneg6Pg==
+  dependencies:
+    chalk "^3.0.0"
+    cli-cursor "^3.1.0"
+    cli-spinners "^2.2.0"
+    is-interactive "^1.0.0"
+    log-symbols "^3.0.0"
+    mute-stream "0.0.8"
+    strip-ansi "^6.0.0"
+    wcwidth "^1.0.1"
 
 ora@5.4.1, ora@^5.4.1:
   version "5.4.1"
@@ -13256,7 +13295,7 @@ reduce-css-calc@^2.1.8:
     css-unit-converter "^1.1.1"
     postcss-value-parser "^3.3.0"
 
-reflect-metadata@^0.1.13:
+reflect-metadata@0.1.13, reflect-metadata@^0.1.13:
   version "0.1.13"
   resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
   integrity sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
@@ -15306,6 +15345,18 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
+typeorm-seeding@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/typeorm-seeding/-/typeorm-seeding-1.6.1.tgz#4fe3a1aec9a611007d1135419cde286cced8defd"
+  integrity sha512-xJIW1pp72hv6npPqbQ7xDvawcDmS60EDUjK++UCfiqT0WE4xTzCn+QK1ZijLkD3GYCqFPuFt4nmeyRJn6VO2Vw==
+  dependencies:
+    chalk "^4.0.0"
+    faker "4.1.0"
+    glob "7.1.6"
+    ora "4.0.3"
+    reflect-metadata "0.1.13"
+    yargs "15.3.1"
+
 typeorm@^0.2.41:
   version "0.2.41"
   resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.2.41.tgz#88758101ac158dc0a0a903d70eaacea2974281cc"
@@ -16313,7 +16364,7 @@ yargs-parser@^13.1.2:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
 
-yargs-parser@^18.1.2:
+yargs-parser@^18.1.1, yargs-parser@^18.1.2:
   version "18.1.3"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-18.1.3.tgz#be68c4975c6b2abf469236b0c870362fab09a7b0"
   integrity sha512-o50j0JeToy/4K6OZcaQmW6lyXXKhq7csREXcDwk2omFPJEwUNOVtJKvmDr9EI1fAJZUyZcRF7kxGBWmRXudrCQ==
@@ -16325,6 +16376,23 @@ yargs-parser@^21.0.0:
   version "21.0.0"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-21.0.0.tgz#a485d3966be4317426dd56bdb6a30131b281dc55"
   integrity sha512-z9kApYUOCwoeZ78rfRYYWdiU/iNL6mwwYlkkZfJoyMR1xps+NEBX5X7XmRpxkZHhXJ6+Ey00IwKxBBSW9FIjyA==
+
+yargs@15.3.1:
+  version "15.3.1"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-15.3.1.tgz#9505b472763963e54afe60148ad27a330818e98b"
+  integrity sha512-92O1HWEjw27sBfgmXiixJWT5hRBp2eobqXicLtPBIDBhYB+1HpwZlXmbW2luivBJHBzki+7VyCLRtAkScbTBQA==
+  dependencies:
+    cliui "^6.0.0"
+    decamelize "^1.2.0"
+    find-up "^4.1.0"
+    get-caller-file "^2.0.1"
+    require-directory "^2.1.1"
+    require-main-filename "^2.0.0"
+    set-blocking "^2.0.0"
+    string-width "^4.2.0"
+    which-module "^2.0.0"
+    y18n "^4.0.0"
+    yargs-parser "^18.1.1"
 
 yargs@^12.0.2:
   version "12.0.5"
