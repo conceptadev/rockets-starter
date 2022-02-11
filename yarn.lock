@@ -1900,55 +1900,72 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
-"@rockts-org/nestjs-auth-jwt@^4.0.0-alpha.4":
-  version "4.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-auth-jwt/-/nestjs-auth-jwt-4.0.0-alpha.4.tgz#9f32f0a06bcfa9181745830191d8f8f7733daa31"
-  integrity sha512-ddBWWlSTL7OMnZnOy9e83w8/iVMcikBw35BOaJKIP1igSBuU1g4aJRW5MFVL5UC2cj3MQAWCShX9/cQhzBbGQQ==
+"@rockts-org/nestjs-auth-jwt@^4.0.0-alpha.5":
+  version "4.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-auth-jwt/-/nestjs-auth-jwt-4.0.0-alpha.5.tgz#49c1811cdc8a83c0605166f03df21e852cc978f2"
+  integrity sha512-4Key43MlamHF5XmojF+eAhj9yApfW70qcPs9JIbbRNUJFvjNck8z1wihl5+72Be++Lid8kO3FRq2UMUYGTVIRQ==
   dependencies:
     "@nestjs/common" "^8.0.2"
     "@nestjs/config" "^1.1.6"
     "@nestjs/core" "^8.0.2"
     "@nestjs/passport" "^8.0.1"
     "@nestjs/platform-fastify" "^8.0.6"
-    "@rockts-org/nestjs-authentication" "^4.0.0-alpha.4"
-    "@rockts-org/nestjs-common" "^4.0.0-alpha.4"
-    "@rockts-org/nestjs-jwt" "^4.0.0-alpha.4"
+    "@rockts-org/nestjs-authentication" "^4.0.0-alpha.5"
+    "@rockts-org/nestjs-common" "^4.0.0-alpha.5"
+    "@rockts-org/nestjs-jwt" "^4.0.0-alpha.5"
     class-validator "^0.13.2"
     express "^4.17.1"
     fastify "^3.25.3"
 
-"@rockts-org/nestjs-auth-local@^4.0.0-alpha.4":
-  version "4.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-auth-local/-/nestjs-auth-local-4.0.0-alpha.4.tgz#7021f10c6c1ff57d07179cc3ee6cd8ea17490c6f"
-  integrity sha512-SmWZefJyrjx+0eN1P4reqn6xpo0+K9ov9KeoZqiJneKL6hEyt+1fQkrCm8/vTQf7OweUPYX+u3g7WvXpzRx71A==
+"@rockts-org/nestjs-auth-local@^4.0.0-alpha.5":
+  version "4.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-auth-local/-/nestjs-auth-local-4.0.0-alpha.5.tgz#d47b4a746cd1d52f623d2bb2fc1e5106649239e3"
+  integrity sha512-t/txbOtxITQgBPZMpNTTLO+2+HETiIst9rH9zYndKC9OrSRd62Br87xQDgSXAcJ3wNjr5yduqEakv3SEh9I4Jg==
   dependencies:
     "@nestjs/common" "^8.0.2"
     "@nestjs/config" "^1.1.6"
     "@nestjs/core" "^8.0.2"
     "@nestjs/passport" "^8.0.1"
     "@nestjs/platform-fastify" "^8.0.6"
-    "@rockts-org/nestjs-authentication" "^4.0.0-alpha.4"
-    "@rockts-org/nestjs-common" "^4.0.0-alpha.4"
-    "@rockts-org/nestjs-password" "^4.0.0-alpha.4"
-    "@rockts-org/nestjs-user" "^4.0.0-alpha.4"
+    "@rockts-org/nestjs-authentication" "^4.0.0-alpha.5"
+    "@rockts-org/nestjs-common" "^4.0.0-alpha.5"
+    "@rockts-org/nestjs-password" "^4.0.0-alpha.5"
+    "@rockts-org/nestjs-user" "^4.0.0-alpha.5"
     "@sentry/node" "^6.11.0"
     class-validator "^0.13.2"
     express "^4.17.1"
     fastify "^3.25.3"
     passport-local "^1.0.0"
 
-"@rockts-org/nestjs-authentication@^4.0.0-alpha.4":
-  version "4.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-authentication/-/nestjs-authentication-4.0.0-alpha.4.tgz#0023a45b1ddc603a2bc29b5bc73009f3509127ce"
-  integrity sha512-wnHq9fwQ271kJykiL5A/RyL8kneSn3kkclIm2sL2b/VTdz5J9yUUqrrufzkFsqg4PBRXreHuvjziBhpT06o9WQ==
+"@rockts-org/nestjs-auth-refresh@^4.0.0-alpha.5":
+  version "4.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-auth-refresh/-/nestjs-auth-refresh-4.0.0-alpha.5.tgz#449f698c6b6f1f257826aaf49a68928467605841"
+  integrity sha512-R+XcpgpDy6fVqNOGSz6I4DRSlk2EoN+Rc6jMFlGiMqi8AD2MdQvlaBOhzoTyp2vpuK+2DtLdNQBsfb/+ms8d+w==
+  dependencies:
+    "@nestjs/common" "^8.0.2"
+    "@nestjs/config" "^1.1.6"
+    "@nestjs/core" "^8.0.2"
+    "@nestjs/passport" "^8.0.1"
+    "@nestjs/platform-fastify" "^8.0.6"
+    "@rockts-org/nestjs-authentication" "^4.0.0-alpha.5"
+    "@rockts-org/nestjs-common" "^4.0.0-alpha.5"
+    "@rockts-org/nestjs-jwt" "^4.0.0-alpha.5"
+    class-validator "^0.13.2"
+    express "^4.17.1"
+    fastify "^3.25.3"
+
+"@rockts-org/nestjs-authentication@^4.0.0-alpha.5":
+  version "4.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-authentication/-/nestjs-authentication-4.0.0-alpha.5.tgz#2ef1ec52e06535466bcff915d231f59d241eddaa"
+  integrity sha512-nF7Jt6XyYFn+Is3uPE2pRC7+vNSjkuQ4DGFS6JbxYDXG3Xx912Wf/k8u+Xl5Mv9sS0sQC5ooFcVlShZLWJqcuw==
   dependencies:
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
     "@nestjs/core" "^8.0.8"
     "@nestjs/passport" "^8.0.1"
-    "@rockts-org/nestjs-common" "^4.0.0-alpha.4"
-    "@rockts-org/nestjs-jwt" "^4.0.0-alpha.4"
-    "@rockts-org/nestjs-password" "^4.0.0-alpha.4"
+    "@rockts-org/nestjs-common" "^4.0.0-alpha.5"
+    "@rockts-org/nestjs-jwt" "^4.0.0-alpha.5"
+    "@rockts-org/nestjs-password" "^4.0.0-alpha.5"
     "@types/zxcvbn" "^4.4.1"
     bcrypt "^5.0.1"
     passport "^0.5.0"
@@ -1957,18 +1974,18 @@
     passport-strategy "^1.0.0"
     zxcvbn "^4.4.2"
 
-"@rockts-org/nestjs-common@^4.0.0-alpha.4":
-  version "4.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-common/-/nestjs-common-4.0.0-alpha.4.tgz#ca96f21d3673989cc246352a6f4b7252f810f49b"
-  integrity sha512-HUluttdRubI02cpkUnRW+6w5n9sjV85jNJYybIpR8YerSPKlRMeVPl14+8emW2ccicNfNr0CAJ7rztNCR6FkRg==
+"@rockts-org/nestjs-common@^4.0.0-alpha.5":
+  version "4.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-common/-/nestjs-common-4.0.0-alpha.5.tgz#8ed649d706b8eab45c1bffb9dbdff324cdc8cd01"
+  integrity sha512-hqowflFrlF/SLe0+cfqgBSVv0+F4nHZYcNVm0C8Cpdk7veGEC6a+VNJ9GeBBipNBGNwUxh8Mi+QI7kRwTuW/MQ==
   dependencies:
     "@golevelup/nestjs-modules" "^0.4.3"
     "@nestjs/common" "^8.0.8"
 
-"@rockts-org/nestjs-crud@^4.0.0-alpha.4":
-  version "4.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-crud/-/nestjs-crud-4.0.0-alpha.4.tgz#f517dfb905690a9b94b6cc74fa4c4c97ca0df99c"
-  integrity sha512-1GYTthOOreOnpjcOm7h77CE56J4zBGZuQSlk/YI4QsrTr05lb0UsMOTWNnewalIiTGHDOsL+Lf2ylW3fvp9mBg==
+"@rockts-org/nestjs-crud@^4.0.0-alpha.5":
+  version "4.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-crud/-/nestjs-crud-4.0.0-alpha.5.tgz#52978554f9320956e506d209eaf650a497afaeb7"
+  integrity sha512-gZh5+i5IvQ2vK9fZz9rKoXnNuyjw/DLXRmqp4QJ0G0RaErX9Fi3ZhPx/0nhwvn/MgaKUVE58VzIogQsml1PPfw==
   dependencies:
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.0.0"
@@ -1976,54 +1993,54 @@
     "@nestjsx/crud" "^5.0.0-alpha.3"
     "@nestjsx/crud-request" "^5.0.0-alpha.3"
     "@nestjsx/crud-typeorm" "^5.0.0-alpha.3"
-    "@rockts-org/nestjs-common" "^4.0.0-alpha.4"
+    "@rockts-org/nestjs-common" "^4.0.0-alpha.5"
 
-"@rockts-org/nestjs-jwt@^4.0.0-alpha.4":
-  version "4.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-jwt/-/nestjs-jwt-4.0.0-alpha.4.tgz#3b01e6992e57918f6beb1a950bc1920da635b7ac"
-  integrity sha512-R+7tp1nz6wm2SHIKTdUqb1w/V4HG67RzJND2GSTt1CFCMvbmtmSjHX+DygriYUuwtg19b7ms0T6M8mt+C64azA==
+"@rockts-org/nestjs-jwt@^4.0.0-alpha.5":
+  version "4.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-jwt/-/nestjs-jwt-4.0.0-alpha.5.tgz#abe8f1477ba6554e2f06381011b86d0331de0f65"
+  integrity sha512-l5GyaqQEbdcI4QeU3m/Hn5WmXNdUP/3dV+lvcDmVdpaKqynFJpJLyLBnFaGJUdfAZ1YkbiLvGf1FqvvC76PuJQ==
   dependencies:
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
     "@nestjs/jwt" "^8.0.0"
-    "@rockts-org/nestjs-common" "^4.0.0-alpha.4"
+    "@rockts-org/nestjs-common" "^4.0.0-alpha.5"
     passport-jwt "^4.0.0"
     passport-strategy "^1.0.0"
 
-"@rockts-org/nestjs-password@^4.0.0-alpha.4":
-  version "4.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-password/-/nestjs-password-4.0.0-alpha.4.tgz#d580807c6fb2a3341de7f761073a541ce774af5d"
-  integrity sha512-oIgHa7EmVGihTpW4WvSxX+hPtv2F4hYW0rNtid4lRjmByRbpPanJ1QaxQE/+4/sYXrGgp1tVgN1gM/x+FIlFMg==
+"@rockts-org/nestjs-password@^4.0.0-alpha.5":
+  version "4.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-password/-/nestjs-password-4.0.0-alpha.5.tgz#f7ef260e7d175857cc809ac080eba54cc55fdcba"
+  integrity sha512-MOADRHbOd9i54BSJTbGhC7Q9K1ysme8EMvJPTp4YPNqyUBrkt/fjpIwt4fiduNQclk42jyUyFcT35DReW7/CuA==
   dependencies:
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
     "@nestjs/core" "^8.0.8"
-    "@rockts-org/nestjs-common" "^4.0.0-alpha.4"
+    "@rockts-org/nestjs-common" "^4.0.0-alpha.5"
     "@types/zxcvbn" "^4.4.1"
     bcrypt "^5.0.1"
     zxcvbn "^4.4.2"
 
-"@rockts-org/nestjs-typeorm-ext@^4.0.0-alpha.4":
-  version "4.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-typeorm-ext/-/nestjs-typeorm-ext-4.0.0-alpha.4.tgz#445f785203549c05176cdcbf1acef52aecb98330"
-  integrity sha512-YKdesaeWS2/SqZxL5iR/aS4QqdgapHuhiaO7LbyAFTv9W60gLdNenmi9G0DDSyZLJgpFdRzomoYyrlND3gUngA==
+"@rockts-org/nestjs-typeorm-ext@^4.0.0-alpha.5":
+  version "4.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-typeorm-ext/-/nestjs-typeorm-ext-4.0.0-alpha.5.tgz#07f5468a14518d45a591075f598d4aa3ae747c73"
+  integrity sha512-eQJXbiBVua5IFZpzFn5nX64zhhNFI1z2T91raIVJ47dqQpFMUyYTo4FWDNBXKLjWq7r+Obu5uVPymLtNCkHd/w==
   dependencies:
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
     "@nestjs/typeorm" "^8.0.2"
-    "@rockts-org/nestjs-common" "^4.0.0-alpha.4"
+    "@rockts-org/nestjs-common" "^4.0.0-alpha.5"
 
-"@rockts-org/nestjs-user@^4.0.0-alpha.4":
-  version "4.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-user/-/nestjs-user-4.0.0-alpha.4.tgz#e9a84298e537972e4db97596e94fd4b1b77a3a0f"
-  integrity sha512-IU4+8Duef1C1pWfYphIBuxxmDx2lAweiR6pmabnJ5PTrEruZZ16+irRFyvS9UM5go55yW6bCotWV61x14EDO8A==
+"@rockts-org/nestjs-user@^4.0.0-alpha.5":
+  version "4.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@rockts-org/nestjs-user/-/nestjs-user-4.0.0-alpha.5.tgz#0b1d120f632a96dd259a1b2ef50762aa932f03d9"
+  integrity sha512-dGiBpelNUkXagzj8bx28qsAWkOc9wIEBzliOIAFQ7xlucyw+3g7RR/EE53y/NATZF1IqODt6HlhzOenLpPm1Dw==
   dependencies:
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
-    "@rockts-org/nestjs-common" "^4.0.0-alpha.4"
-    "@rockts-org/nestjs-crud" "^4.0.0-alpha.4"
-    "@rockts-org/nestjs-password" "^4.0.0-alpha.4"
-    "@rockts-org/nestjs-typeorm-ext" "^4.0.0-alpha.4"
+    "@rockts-org/nestjs-common" "^4.0.0-alpha.5"
+    "@rockts-org/nestjs-crud" "^4.0.0-alpha.5"
+    "@rockts-org/nestjs-password" "^4.0.0-alpha.5"
+    "@rockts-org/nestjs-typeorm-ext" "^4.0.0-alpha.5"
 
 "@rockts-org/react-auth-provider@^1.0.0-alpha.0":
   version "1.0.0-alpha.0"
