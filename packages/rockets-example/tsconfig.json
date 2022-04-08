@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "sourceMap": true,
+    "rootDir": "./",
+    "outDir": "./dist",
+    "typeRoots": ["./node_modules/@types", "../../node_modules/@types"],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES6",
+    "noImplicitAny": false
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/theme.js",
+    "server.js",
+  ],
+  "exclude": ["node_modules/**/*.stories.*", "node_modules/**/*.test.*"]
+}
