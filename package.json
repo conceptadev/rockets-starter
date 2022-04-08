@@ -1,5 +1,6 @@
 {
   "name": "rockets-starter",
+  "license": "BSD-3-Clause",
   "private": true,
   "workspaces": {
     "packages": [

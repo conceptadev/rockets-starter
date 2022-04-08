@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "Rockets Starter",
   "author": "Concepta Team",
+  "license": "BSD-3-Clause",
   "private": true,
-  "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
