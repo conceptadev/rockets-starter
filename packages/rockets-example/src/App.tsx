@@ -1,22 +1,19 @@
-import React, { PropsWithChildren } from "react";
 import "./App.css";
+import "@concepta/react-ui-components/dist/tailwind.css";
 
-import { AuthProvider, useAuth } from "@rockts-org/react-auth-provider";
+import { AuthProvider, useAuth } from "@concepta/react-auth-provider";
+import { Notification, SimpleLoginForm } from "@concepta/react-ui-components";
 import {
   NotificationProvider,
   useNotifications,
-} from "@rockts-org/react-notification-provider";
-
+} from "@concepta/react-notification-provider";
 import {
   ProtectedRoute,
   PublicRoute,
   Router,
   useNavigate,
-} from "@rockts-org/react-router";
-
-import { SimpleLoginForm, Notification } from "@rockts-org/react-ui-components";
-
-import "@rockts-org/react-ui-components/dist/tailwind.css";
+} from "@concepta/react-router";
+import React, { PropsWithChildren } from "react";
 
 const LoginForm = () => {
   const { doLogin, user } = useAuth();

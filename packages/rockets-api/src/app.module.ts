@@ -1,13 +1,13 @@
+import { AuthJwtModule } from '@concepta/nestjs-auth-jwt';
+import { AuthLocalModule } from '@concepta/nestjs-auth-local';
+import { AuthRefreshModule } from '@concepta/nestjs-auth-refresh';
+import { AuthenticationModule } from '@concepta/nestjs-authentication';
+import { CrudModule } from '@concepta/nestjs-crud';
+import { JwtModule } from '@concepta/nestjs-jwt';
 import { Module } from '@nestjs/common';
-import { AuthJwtModule } from '@rockts-org/nestjs-auth-jwt';
-import { AuthLocalModule } from '@rockts-org/nestjs-auth-local';
-import { AuthRefreshModule } from '@rockts-org/nestjs-auth-refresh';
-import { AuthenticationModule } from '@rockts-org/nestjs-authentication';
-import { CrudModule } from '@rockts-org/nestjs-crud';
-import { JwtModule } from '@rockts-org/nestjs-jwt';
-import { PasswordModule } from '@rockts-org/nestjs-password';
-import { TypeOrmExtModule } from '@rockts-org/nestjs-typeorm-ext';
-import { UserModule } from '@rockts-org/nestjs-user';
+import { PasswordModule } from '@concepta/nestjs-password';
+import { TypeOrmExtModule } from '@concepta/nestjs-typeorm-ext';
+import { UserModule } from '@concepta/nestjs-user';
 
 @Module({
   imports: [

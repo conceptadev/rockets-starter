@@ -1,4 +1,4 @@
-import { User, UserFactory } from '@rockts-org/nestjs-user';
+import { User, UserFactory } from '@concepta/nestjs-user';
 
 const userFactory = new UserFactory(User);
 userFactory.define();

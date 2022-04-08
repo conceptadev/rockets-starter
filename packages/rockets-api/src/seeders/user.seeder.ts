@@ -1,3 +1,3 @@
-import { UserSeeder } from '@rockts-org/nestjs-user';
+import { UserSeeder } from '@concepta/nestjs-user';
 
 export class CreateUsers extends UserSeeder {}

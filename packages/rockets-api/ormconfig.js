@@ -15,7 +15,7 @@ module.exports = {
     'postgresql://postgres:postgres@rockets-starter-postgres:5432/postgres',
   synchronize: process.env.DATABASE_SYNCHRONIZE || false,
   entities: [
-    '../../node_modules/@rockts-org/nestjs-user/dist/entities/user.entity.js',
+    '../../node_modules/@concepta/nestjs-user/dist/entities/user.entity.js',
   ],
   subscribers: ['dist/**/*.subscriber.js'],
   factories: ['dist/**/factories/*.factory.js'],
