@@ -2,7 +2,7 @@
   <img width="150" src="https://raw.githubusercontent.com/conceptadev/rockets/main/assets/rockets-icon.svg">
 </p>
 
-# Rockets React
+# Rockets Starter
 
 [![GH Commits](https://img.shields.io/github/commit-activity/m/conceptadev/rockets-starter?logo=github)](https://github.com/conceptadev/rockets-starter)
 [![GH Last Commit](https://img.shields.io/github/last-commit/conceptadev/rockets-starter?logo=github)](https://github.com/conceptadev/rockets-starter)
