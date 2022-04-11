@@ -1123,14 +1123,14 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@concepta/nestjs-auth-jwt@^4.0.0-alpha.8":
-  version "4.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-jwt/-/nestjs-auth-jwt-4.0.0-alpha.8.tgz#cfbacc67264b074fc628f651751582b0a424c58a"
-  integrity sha512-VQHsmx9Dv6n1T5lrYXHJwKA3czWtoJULtqUhbcLECPJXLd8VeZXif0kF9Zr8rvpf7fO6sX1bEQUgKdwLEHZvAw==
+"@concepta/nestjs-auth-jwt@^4.0.0-alpha.9":
+  version "4.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-jwt/-/nestjs-auth-jwt-4.0.0-alpha.9.tgz#9c8950d1db24877ddac27f31068fd4b879d7ff34"
+  integrity sha512-6RGlfTLlQ+hJLAb2xpsQTXKbeqpBer5oRGfSMWvCfDj14eOP6+1a3R27dX/IyLVZF606Y629tmNm4Ob9BDGjWA==
   dependencies:
-    "@concepta/nestjs-authentication" "^4.0.0-alpha.8"
-    "@concepta/nestjs-common" "^4.0.0-alpha.8"
-    "@concepta/nestjs-jwt" "^4.0.0-alpha.8"
+    "@concepta/nestjs-authentication" "^4.0.0-alpha.9"
+    "@concepta/nestjs-common" "^4.0.0-alpha.9"
+    "@concepta/nestjs-jwt" "^4.0.0-alpha.9"
     "@nestjs/common" "^8.0.2"
     "@nestjs/config" "^1.1.6"
     "@nestjs/core" "^8.0.2"
@@ -1139,14 +1139,14 @@
     express "^4.17.1"
     fastify "^3.25.3"
 
-"@concepta/nestjs-auth-local@^4.0.0-alpha.8":
-  version "4.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-local/-/nestjs-auth-local-4.0.0-alpha.8.tgz#e60410d9e8fd02d996b771ea8e505d218abe9f96"
-  integrity sha512-/A0K4tP3g6va8UktD/rDe4MBy5paqF4kuPFLXqGyHPwrsWAQjDsjnKdCsjyknNtyVnMXfe6fsrzd7KKvjSuXDQ==
+"@concepta/nestjs-auth-local@^4.0.0-alpha.9":
+  version "4.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-local/-/nestjs-auth-local-4.0.0-alpha.9.tgz#7f46ea4a633f5049c66b81c2dd004364246dab89"
+  integrity sha512-RYPijH1qwR85XScgImA6FpCGLzZCxz/1992GnMxmXKJk6tGu5K5aptkdlo0o7FNHgz0vbPr9EHI7rlahqeumEw==
   dependencies:
-    "@concepta/nestjs-authentication" "^4.0.0-alpha.8"
-    "@concepta/nestjs-common" "^4.0.0-alpha.8"
-    "@concepta/nestjs-password" "^4.0.0-alpha.8"
+    "@concepta/nestjs-authentication" "^4.0.0-alpha.9"
+    "@concepta/nestjs-common" "^4.0.0-alpha.9"
+    "@concepta/nestjs-password" "^4.0.0-alpha.9"
     "@nestjs/common" "^8.0.2"
     "@nestjs/config" "^1.1.6"
     "@nestjs/core" "^8.0.2"
@@ -1157,14 +1157,14 @@
     fastify "^3.25.3"
     passport-local "^1.0.0"
 
-"@concepta/nestjs-auth-refresh@^4.0.0-alpha.8":
-  version "4.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-refresh/-/nestjs-auth-refresh-4.0.0-alpha.8.tgz#81fb10ead947d4c689d2e078acff912156444e19"
-  integrity sha512-UwQwj6Xe35vuc4no3qGV9EB/QkCOUk9+EXtZrQ+UqwkjGdpqpHmPda7RjQbaVehJM25o9YX/fIIwZxsg4d0YFg==
+"@concepta/nestjs-auth-refresh@^4.0.0-alpha.9":
+  version "4.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-refresh/-/nestjs-auth-refresh-4.0.0-alpha.9.tgz#43403476774a149f5d845473a7c2e725a72fedcd"
+  integrity sha512-aLFEWd+ANK0zYsbz0d0KTO1dYq+W7qTtuQDmI6rCF9tXoqrYyHicOqFwv6wdA/DoKjrRazRULg7yVPYTNih8eg==
   dependencies:
-    "@concepta/nestjs-authentication" "^4.0.0-alpha.8"
-    "@concepta/nestjs-common" "^4.0.0-alpha.8"
-    "@concepta/nestjs-jwt" "^4.0.0-alpha.8"
+    "@concepta/nestjs-authentication" "^4.0.0-alpha.9"
+    "@concepta/nestjs-common" "^4.0.0-alpha.9"
+    "@concepta/nestjs-jwt" "^4.0.0-alpha.9"
     "@nestjs/common" "^8.0.2"
     "@nestjs/config" "^1.1.6"
     "@nestjs/core" "^8.0.2"
@@ -1173,13 +1173,13 @@
     express "^4.17.1"
     fastify "^3.25.3"
 
-"@concepta/nestjs-authentication@^4.0.0-alpha.8":
-  version "4.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-authentication/-/nestjs-authentication-4.0.0-alpha.8.tgz#f27c00ce1f8bdf8f135d99b6814a3ff1d76df30d"
-  integrity sha512-/Qlx2mbnuuQ++ErEHauLwe86yiioOjUColZ8Ehd0IyN5FT37IdoFZ+cx/hDspnb4xYVg1NmveT3Z86Djx7eQEg==
+"@concepta/nestjs-authentication@^4.0.0-alpha.9":
+  version "4.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-authentication/-/nestjs-authentication-4.0.0-alpha.9.tgz#73c755705d28622e200d8673f54533e12f17d26b"
+  integrity sha512-dtV/R8hhuciazbpSHm3kls2tN+VsJ0ggkLy1WYgWjp9AUyBYWXNLl4wY6nB75reNaFAMlxEPSugIL4uGOoX03w==
   dependencies:
-    "@concepta/nestjs-common" "^4.0.0-alpha.8"
-    "@concepta/nestjs-jwt" "^4.0.0-alpha.8"
+    "@concepta/nestjs-common" "^4.0.0-alpha.9"
+    "@concepta/nestjs-jwt" "^4.0.0-alpha.9"
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
     "@nestjs/core" "^8.0.8"
@@ -1192,20 +1192,20 @@
     passport-strategy "^1.0.0"
     zxcvbn "^4.4.2"
 
-"@concepta/nestjs-common@^4.0.0-alpha.8":
-  version "4.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-common/-/nestjs-common-4.0.0-alpha.8.tgz#9592bb8a8c750e6689fc72c0db49b269ca89b4ba"
-  integrity sha512-WJRtFrmGqUhZLYQ7jPCrkWzMWLpiMMAn1V+MZ/EdCKWl0CZ0fJayeeDpWesp7urDTuRzoodpKNbnSDG3Pb+USg==
+"@concepta/nestjs-common@^4.0.0-alpha.9":
+  version "4.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-common/-/nestjs-common-4.0.0-alpha.9.tgz#1c1aec71d1a51976c06de08075ac939df4deec2f"
+  integrity sha512-7dVORzI3aebBLPUq3Rt9WJ49BMjZyt57w8H7mU9AW+jJ/mz6kJX35UEicLmHQiRaQUTHkcWFV3Yq7ZUGzIhW9g==
   dependencies:
     "@golevelup/nestjs-modules" "^0.4.3"
     "@nestjs/common" "^8.0.8"
 
-"@concepta/nestjs-crud@^4.0.0-alpha.8":
-  version "4.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-crud/-/nestjs-crud-4.0.0-alpha.8.tgz#e9d613bc5748abc88d372e644c3880087297fa91"
-  integrity sha512-KoG10PlOxzaFap3kdMOKfUE74wXfaupQlW8Eay/iwRketum82cd+E5X+h3sIMWuyvwbLfNtVZsB0W6jGvfzgdg==
+"@concepta/nestjs-crud@^4.0.0-alpha.9":
+  version "4.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-crud/-/nestjs-crud-4.0.0-alpha.9.tgz#5a96407f3c5942ce8bb646abf145e22094fb5e44"
+  integrity sha512-/25YlKNRIJVQyfR9LXD9rMxwpHv4SY/vpO1ikSjcT2Lj1cFXWePzAYwUU45h+mzBcF0zNCx7AtDtfxH+jQiI3A==
   dependencies:
-    "@concepta/nestjs-common" "^4.0.0-alpha.8"
+    "@concepta/nestjs-common" "^4.0.0-alpha.9"
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.0.0"
     "@nestjs/core" "^8.0.8"
@@ -1214,24 +1214,24 @@
     "@nestjsx/crud-request" "^5.0.0-alpha.3"
     "@nestjsx/crud-typeorm" "^5.0.0-alpha.3"
 
-"@concepta/nestjs-jwt@^4.0.0-alpha.8":
-  version "4.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-jwt/-/nestjs-jwt-4.0.0-alpha.8.tgz#5b84bfa06d5c91af0cb2f07e8010a24709eea003"
-  integrity sha512-t+DhRak4fLMKLz7G+xdwYwUtm4RZXynqOWf1cjH0C1OOJQBD0PEpZZO5PZjYxWp98xjkQID0zKRqoHJiGVQxHw==
+"@concepta/nestjs-jwt@^4.0.0-alpha.9":
+  version "4.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-jwt/-/nestjs-jwt-4.0.0-alpha.9.tgz#7ede57a7096541805fceee207adb31297695e36f"
+  integrity sha512-7Fw/LToex4UZK5/Ht5Gt+Q5P4hveB6p2lJvEYYoAQw0vuY0Mo1cm55o59t3vLOgoilQ53vUWfEwPG4K3tECXMA==
   dependencies:
-    "@concepta/nestjs-common" "^4.0.0-alpha.8"
+    "@concepta/nestjs-common" "^4.0.0-alpha.9"
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
     "@nestjs/jwt" "^8.0.0"
     passport-jwt "^4.0.0"
     passport-strategy "^1.0.0"
 
-"@concepta/nestjs-password@^4.0.0-alpha.8":
-  version "4.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-password/-/nestjs-password-4.0.0-alpha.8.tgz#37ddff5db8590273d742aa08e668ae13f948f28a"
-  integrity sha512-jIvrPkz8qHDX2qC1hhqOhqWdbRKCYFPMJ3b3JHg+Qe49MBDq9FLFD36KfTvjNV6ILNl4J5QgBDHRA+ikIYufVA==
+"@concepta/nestjs-password@^4.0.0-alpha.9":
+  version "4.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-password/-/nestjs-password-4.0.0-alpha.9.tgz#a555c68421a972c65985bf2f73fc989c4649a8ee"
+  integrity sha512-JpzrLRUHncpRlQxeIBWkHtXKWVRXSQWTI6f3G09tSaS5Sy7nkPWCTluT8yEfg+dEmRaxtt8o5hry7tnvSJKBZQ==
   dependencies:
-    "@concepta/nestjs-common" "^4.0.0-alpha.8"
+    "@concepta/nestjs-common" "^4.0.0-alpha.9"
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
     "@nestjs/core" "^8.0.8"
@@ -1239,25 +1239,25 @@
     bcrypt "^5.0.1"
     zxcvbn "^4.4.2"
 
-"@concepta/nestjs-typeorm-ext@^4.0.0-alpha.8":
-  version "4.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-typeorm-ext/-/nestjs-typeorm-ext-4.0.0-alpha.8.tgz#d46dd5f903483da3b3a15f2049bd594e58dfaa3e"
-  integrity sha512-fHDa0qLr+hr/NMOrTmirEj5r/Vz3eVVatBmLy2+xKMrzWwzDLdoZCZCGpwE7rkfeBfgj3SIewUOt7F4CTEsE+Q==
+"@concepta/nestjs-typeorm-ext@^4.0.0-alpha.9":
+  version "4.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-typeorm-ext/-/nestjs-typeorm-ext-4.0.0-alpha.9.tgz#4dd72e68ba70471173dafb2b1962b1253e26e000"
+  integrity sha512-9p2oRtvu/zNJz224QGGileZ6Jeq5FaPblXG2ih/pKGk5YG8QzzEu/b3z7P2dF2KAXGN4cg/S2ViEpuf/9RdfjQ==
   dependencies:
-    "@concepta/nestjs-common" "^4.0.0-alpha.8"
+    "@concepta/nestjs-common" "^4.0.0-alpha.9"
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
     "@nestjs/typeorm" "^8.0.2"
 
-"@concepta/nestjs-user@^4.0.0-alpha.8":
-  version "4.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-user/-/nestjs-user-4.0.0-alpha.8.tgz#253087840098414f272b3e079a1c9a914a7e2976"
-  integrity sha512-/5xanlUTy9J1tXHfPPEGcEMsSJpcfCsu8SWYBcziYZ0H5N6JXbTwVvt/vElaFFIrI7vdfnWLRVEVi3FfHIQAtA==
+"@concepta/nestjs-user@^4.0.0-alpha.9":
+  version "4.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-user/-/nestjs-user-4.0.0-alpha.9.tgz#f6087421179f62ef434dfd5b9bea06a9ba500204"
+  integrity sha512-BuZTlwA09qEV8IEiCqyHNeskw32/nTriikaHzc9ZlMhhbmt3xM7db159MKY90fH8wZxjf4B5n8kY57QMuEm/wg==
   dependencies:
-    "@concepta/nestjs-common" "^4.0.0-alpha.8"
-    "@concepta/nestjs-crud" "^4.0.0-alpha.8"
-    "@concepta/nestjs-password" "^4.0.0-alpha.8"
-    "@concepta/nestjs-typeorm-ext" "^4.0.0-alpha.8"
+    "@concepta/nestjs-common" "^4.0.0-alpha.9"
+    "@concepta/nestjs-crud" "^4.0.0-alpha.9"
+    "@concepta/nestjs-password" "^4.0.0-alpha.9"
+    "@concepta/nestjs-typeorm-ext" "^4.0.0-alpha.9"
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
     "@nestjs/swagger" "^5.2.0"
@@ -1350,6 +1350,14 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
+"@devniel/nestjs-typeorm-testing@^0.1.5-alpha":
+  version "0.1.5-alpha"
+  resolved "https://registry.yarnpkg.com/@devniel/nestjs-typeorm-testing/-/nestjs-typeorm-testing-0.1.5-alpha.tgz#2abbddc086c825aa27a331d9b37a7af27fd8b34a"
+  integrity sha512-vq72MDJ+4S84v9b7wJ2/cy1CVUcGGLlqAx+bpHugJ9gbibgITkewKK9L6A6TePYHFqgBy31d68ewlQfA/+dtqQ==
+  dependencies:
+    pg "^7.18.2"
+    typeorm "^0.2.41"
+
 "@emotion/is-prop-valid@^1.1.0":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-1.1.2.tgz#34ad6e98e871aa6f7a20469b602911b8b11b3a95"
@@ -1386,6 +1394,11 @@
     js-yaml "^3.13.1"
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
+
+"@faker-js/faker@^6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-6.1.2.tgz#7093ea65e6d78eae388918a46968c083366bd621"
+  integrity sha512-QSvmexHCxeRUk1/yKmoEDaWB5Hohjvtim5g2JJwy8S/l0L4b3y/GxSpE6vN4SBoVGGahEQW21uqyRr7EofI35A==
 
 "@fastify/ajv-compiler@^1.0.0":
   version "1.1.0"
@@ -1817,6 +1830,17 @@
     "@types/node" "*"
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
+
+"@jorgebodega/typeorm-seeding@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@jorgebodega/typeorm-seeding/-/typeorm-seeding-3.2.0.tgz#6b0970ad54fc0998005f0453ef0efcd3c5934f02"
+  integrity sha512-Zs4C/fUay9o8Pqo22wroy1Km8jQsNWuHy72SEP/bQy+xOW5crRSmcQs1uIiI4Zher8SBSuvvhEBCJBJ4TPF9+A==
+  dependencies:
+    chalk "^4"
+    glob "^7.2.0"
+    ora "^5"
+    reflect-metadata "^0.1.13"
+    yargs "^17.3.0"
 
 "@jridgewell/resolve-uri@^3.0.3":
   version "3.0.5"
@@ -2740,9 +2764,9 @@
     "@types/jest" "*"
 
 "@types/uglify-js@*":
-  version "3.13.1"
-  resolved "https://registry.yarnpkg.com/@types/uglify-js/-/uglify-js-3.13.1.tgz#5e889e9e81e94245c75b6450600e1c5ea2878aea"
-  integrity sha512-O3MmRAk6ZuAKa9CHgg0Pr0+lUOqoMLpc9AS4R8ano2auvsg7IE8syF3Xh/NPr26TWklxYcqoEEFdzLLs1fV9PQ==
+  version "3.13.2"
+  resolved "https://registry.yarnpkg.com/@types/uglify-js/-/uglify-js-3.13.2.tgz#1044c1713fb81cb1ceef29ad8a9ee1ce08d690ef"
+  integrity sha512-/xFrPIo+4zOeNGtVMbf9rUm0N+i4pDf1ynExomqtokIJmVzR3962lJ1UE+MmexMkA0cmN9oTzg5Xcbwge0Ij2Q==
   dependencies:
     source-map "^0.6.1"
 
@@ -4746,7 +4770,7 @@ chalk@^1.1.3:
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
 
-chalk@^4.0.0, chalk@^4.1.0, chalk@^4.1.1, chalk@^4.1.2:
+chalk@^4, chalk@^4.0.0, chalk@^4.1.0, chalk@^4.1.1, chalk@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
   integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
@@ -4936,7 +4960,7 @@ cli-highlight@^2.1.11:
     parse5-htmlparser2-tree-adapter "^6.0.0"
     yargs "^16.0.0"
 
-cli-spinners@^2.2.0, cli-spinners@^2.5.0:
+cli-spinners@^2.5.0:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/cli-spinners/-/cli-spinners-2.6.1.tgz#adc954ebe281c37a6319bfa401e6dd2488ffb70d"
   integrity sha512-x/5fWmGMnbKQAaNwN+UZlV79qBLM9JFnJuJ03gIi5whrob0xV0ofNVHy9DhwGdsMJQc2OKv0oGmLzvaqvAVv+g==
@@ -6985,11 +7009,6 @@ extsprintf@^1.2.0:
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.1.tgz#8d172c064867f235c0c84a596806d279bf4bcc07"
   integrity sha512-Wrk35e8ydCKDj/ArClo1VrPVmN8zph5V4AtHwIuHhvMXsKf73UT3BOD+azBIW+3wOJ4FhEH7zyaJCFvChjYvMA==
 
-faker@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/faker/-/faker-4.1.0.tgz#1e45bbbecc6774b3c195fad2835109c6d748cc3f"
-  integrity sha1-HkW7vsxndLPBlfrSg1EJxtdIzD8=
-
 fast-decode-uri-component@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/fast-decode-uri-component/-/fast-decode-uri-component-1.0.1.tgz#46f8b6c22b30ff7a81357d4f59abfae938202543"
@@ -7631,19 +7650,7 @@ glob-to-regexp@^0.4.1:
   resolved "https://registry.yarnpkg.com/glob-to-regexp/-/glob-to-regexp-0.4.1.tgz#c75297087c851b9a578bd217dd59a92f59fe546e"
   integrity sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==
 
-glob@7.1.6:
-  version "7.1.6"
-  resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.6.tgz#141f33b81a7c2492e125594307480c46679278a6"
-  integrity sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==
-  dependencies:
-    fs.realpath "^1.0.0"
-    inflight "^1.0.4"
-    inherits "2"
-    minimatch "^3.0.4"
-    once "^1.3.0"
-    path-is-absolute "^1.0.0"
-
-glob@^7.0.0, glob@^7.0.3, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4, glob@^7.1.6, glob@^7.1.7:
+glob@^7.0.0, glob@^7.0.3, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4, glob@^7.1.6, glob@^7.1.7, glob@^7.2.0:
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.2.0.tgz#d15535af7732e02e948f4c41628bd910293f6023"
   integrity sha512-lmLf6gtyrPq8tTjSmrO94wBeQbFR3HbLHbuyD69wuyQkImp2hWqMGB47OX65FBkPffO641IP9jWa1z4ivqG26Q==
@@ -10305,13 +10312,6 @@ lodash@4, lodash@4.17.21, "lodash@>=3.5 <5", lodash@^4.17.11, lodash@^4.17.14, l
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
-log-symbols@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-3.0.0.tgz#f3a08516a5dea893336a7dee14d18a1cfdab77c4"
-  integrity sha512-dSkNGuI7iG3mfvDzUuYZyvk5dD9ocYCYzNU6CYDE6+Xqd+gwme6Z00NS3dUh8mq/73HaEtT7m6W+yUPtU6BZnQ==
-  dependencies:
-    chalk "^2.4.2"
-
 log-symbols@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-4.1.0.tgz#3fbdbb95b4683ac9fc785111e792e558d4abd503"
@@ -11329,21 +11329,7 @@ optionator@^0.9.1:
     type-check "^0.4.0"
     word-wrap "^1.2.3"
 
-ora@4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/ora/-/ora-4.0.3.tgz#752a1b7b4be4825546a7a3d59256fa523b6b6d05"
-  integrity sha512-fnDebVFyz309A73cqCipVL1fBZewq4vwgSHfxh43vVy31mbyoQ8sCH3Oeaog/owYOs/lLlGVPCISQonTneg6Pg==
-  dependencies:
-    chalk "^3.0.0"
-    cli-cursor "^3.1.0"
-    cli-spinners "^2.2.0"
-    is-interactive "^1.0.0"
-    log-symbols "^3.0.0"
-    mute-stream "0.0.8"
-    strip-ansi "^6.0.0"
-    wcwidth "^1.0.1"
-
-ora@5.4.1, ora@^5.4.1:
+ora@5.4.1, ora@^5, ora@^5.4.1:
   version "5.4.1"
   resolved "https://registry.yarnpkg.com/ora/-/ora-5.4.1.tgz#1b2678426af4ac4a509008e5e4ac9e9959db9e18"
   integrity sha512-5b6Y85tPxZZ7QytO+BQzysW31HJku27cRIlkbAXaNx+BdcVi+LlRFmVXzeF6a7JCwJpyw5c4b+YSVImQIrBpuQ==
@@ -11754,6 +11740,11 @@ performance-now@^2.1.0:
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
 
+pg-connection-string@0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/pg-connection-string/-/pg-connection-string-0.1.3.tgz#da1847b20940e42ee1492beaf65d49d91b245df7"
+  integrity sha1-2hhHsglA5C7hSSvq9l1J2RskXfc=
+
 pg-connection-string@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/pg-connection-string/-/pg-connection-string-2.5.0.tgz#538cadd0f7e603fc09a12590f3b8a452c2c0cf34"
@@ -11763,6 +11754,16 @@ pg-int8@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/pg-int8/-/pg-int8-1.0.1.tgz#943bd463bf5b71b4170115f80f8efc9a0c0eb78c"
   integrity sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==
+
+pg-packet-stream@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/pg-packet-stream/-/pg-packet-stream-1.1.0.tgz#e45c3ae678b901a2873af1e17b92d787962ef914"
+  integrity sha512-kRBH0tDIW/8lfnnOyTwKD23ygJ/kexQVXZs7gEyBljw4FYqimZFxnMMx50ndZ8In77QgfGuItS5LLclC2TtjYg==
+
+pg-pool@^2.0.10:
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/pg-pool/-/pg-pool-2.0.10.tgz#842ee23b04e86824ce9d786430f8365082d81c4a"
+  integrity sha512-qdwzY92bHf3nwzIUcj+zJ0Qo5lpG/YxchahxIN8+ZVmXqkahKXsnl2aiJPHLYN9o5mB/leG+Xh6XKxtP7e0sjg==
 
 pg-pool@^3.5.1:
   version "3.5.1"
@@ -11784,6 +11785,20 @@ pg-types@^2.1.0:
     postgres-bytea "~1.0.0"
     postgres-date "~1.0.4"
     postgres-interval "^1.1.0"
+
+pg@^7.18.2:
+  version "7.18.2"
+  resolved "https://registry.yarnpkg.com/pg/-/pg-7.18.2.tgz#4e219f05a00aff4db6aab1ba02f28ffa4513b0bb"
+  integrity sha512-Mvt0dGYMwvEADNKy5PMQGlzPudKcKKzJds/VbOeZJpb6f/pI3mmoXX0JksPgI3l3JPP/2Apq7F36O63J7mgveA==
+  dependencies:
+    buffer-writer "2.0.0"
+    packet-reader "1.0.0"
+    pg-connection-string "0.1.3"
+    pg-packet-stream "^1.1.0"
+    pg-pool "^2.0.10"
+    pg-types "^2.1.0"
+    pgpass "1.x"
+    semver "4.3.2"
 
 pg@^8.7.3:
   version "8.7.3"
@@ -13291,7 +13306,7 @@ reduce-css-calc@^2.1.8:
     css-unit-converter "^1.1.1"
     postcss-value-parser "^3.3.0"
 
-reflect-metadata@0.1.13, reflect-metadata@^0.1.13:
+reflect-metadata@^0.1.13:
   version "0.1.13"
   resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
   integrity sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
@@ -13867,6 +13882,11 @@ semver-store@^0.3.0:
   version "5.7.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.1.tgz#a954f931aeba508d307bbf069eff0c01c96116f7"
   integrity sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==
+
+semver@4.3.2:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-4.3.2.tgz#c7a07158a80bedd052355b770d82d6640f803be7"
+  integrity sha1-x6BxWKgL7dBSNVt3DYLWZA+AO+c=
 
 semver@7.0.0:
   version "7.0.0"
@@ -15337,18 +15357,6 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typeorm-seeding@^1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/typeorm-seeding/-/typeorm-seeding-1.6.1.tgz#4fe3a1aec9a611007d1135419cde286cced8defd"
-  integrity sha512-xJIW1pp72hv6npPqbQ7xDvawcDmS60EDUjK++UCfiqT0WE4xTzCn+QK1ZijLkD3GYCqFPuFt4nmeyRJn6VO2Vw==
-  dependencies:
-    chalk "^4.0.0"
-    faker "4.1.0"
-    glob "7.1.6"
-    ora "4.0.3"
-    reflect-metadata "0.1.13"
-    yargs "15.3.1"
-
 typeorm@^0.2.41:
   version "0.2.45"
   resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.2.45.tgz#e5bbb3af822dc4646bad96cfa48cd22fa4687cea"
@@ -16357,7 +16365,7 @@ yargs-parser@^13.1.2:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
 
-yargs-parser@^18.1.1, yargs-parser@^18.1.2:
+yargs-parser@^18.1.2:
   version "18.1.3"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-18.1.3.tgz#be68c4975c6b2abf469236b0c870362fab09a7b0"
   integrity sha512-o50j0JeToy/4K6OZcaQmW6lyXXKhq7csREXcDwk2omFPJEwUNOVtJKvmDr9EI1fAJZUyZcRF7kxGBWmRXudrCQ==
@@ -16369,23 +16377,6 @@ yargs-parser@^21.0.0:
   version "21.0.1"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-21.0.1.tgz#0267f286c877a4f0f728fceb6f8a3e4cb95c6e35"
   integrity sha512-9BK1jFpLzJROCI5TzwZL/TU4gqjK5xiHV/RfWLOahrjAko/e4DJkRDZQXfvqAsiZzzYhgAzbgz6lg48jcm4GLg==
-
-yargs@15.3.1:
-  version "15.3.1"
-  resolved "https://registry.yarnpkg.com/yargs/-/yargs-15.3.1.tgz#9505b472763963e54afe60148ad27a330818e98b"
-  integrity sha512-92O1HWEjw27sBfgmXiixJWT5hRBp2eobqXicLtPBIDBhYB+1HpwZlXmbW2luivBJHBzki+7VyCLRtAkScbTBQA==
-  dependencies:
-    cliui "^6.0.0"
-    decamelize "^1.2.0"
-    find-up "^4.1.0"
-    get-caller-file "^2.0.1"
-    require-directory "^2.1.1"
-    require-main-filename "^2.0.0"
-    set-blocking "^2.0.0"
-    string-width "^4.2.0"
-    which-module "^2.0.0"
-    y18n "^4.0.0"
-    yargs-parser "^18.1.1"
 
 yargs@^12.0.2:
   version "12.0.5"
@@ -16451,7 +16442,7 @@ yargs@^16.0.0, yargs@^16.2.0:
     y18n "^5.0.5"
     yargs-parser "^20.2.2"
 
-yargs@^17.0.1:
+yargs@^17.0.1, yargs@^17.3.0:
   version "17.4.0"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.4.0.tgz#9fc9efc96bd3aa2c1240446af28499f0e7593d00"
   integrity sha512-WJudfrk81yWFSOkZYpAZx4Nt7V4xp7S/uJkX0CnxovMCt1wCE8LNftPpNuF9X/u9gN5nsD7ycYtRcDf2pL3UiA==

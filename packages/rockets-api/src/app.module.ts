@@ -7,7 +7,7 @@ import { JwtModule } from '@concepta/nestjs-jwt';
 import { Module } from '@nestjs/common';
 import { PasswordModule } from '@concepta/nestjs-password';
 import { TypeOrmExtModule } from '@concepta/nestjs-typeorm-ext';
-import { UserModule } from '@concepta/nestjs-user';
+import { UserLookupService, UserModule } from '@concepta/nestjs-user';
 
 @Module({
   imports: [
@@ -19,9 +19,9 @@ import { UserModule } from '@concepta/nestjs-user';
         };
       },
     }),
-    AuthLocalModule.register(),
-    AuthJwtModule.register(),
-    AuthRefreshModule.register(),
+    AuthLocalModule.registerAsync({ ...createUserOpts() }),
+    AuthJwtModule.registerAsync({ ...createUserOpts() }),
+    AuthRefreshModule.registerAsync({ ...createUserOpts() }),
     AuthenticationModule.register(),
     JwtModule.register(),
     PasswordModule.register(),
@@ -30,3 +30,13 @@ import { UserModule } from '@concepta/nestjs-user';
   ],
 })
 export class AppModule {}
+
+function createUserOpts() {
+  return {
+    imports: [UserModule.deferred()],
+    inject: [UserLookupService],
+    useFactory: (userLookupService: UserLookupService) => ({
+      userLookupService,
+    }),
+  };
+}
