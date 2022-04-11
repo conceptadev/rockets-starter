@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useState } from "react";
 import "./App.css";
 
 import { AuthProvider, useAuth } from "@rockts-org/react-auth-provider";
@@ -15,12 +15,27 @@ import {
 } from "@rockts-org/react-router";
 
 import { SimpleLoginForm, Notification } from "@rockts-org/react-ui-components";
+import { ReactComponent as NewLogo } from "./newLogo.svg";
 
 import "@rockts-org/react-ui-components/dist/tailwind.css";
+
+interface IErrors {
+  user: string;
+  password: string;
+}
+
+interface UserData {
+  user: string;
+  password: string;
+}
 
 const LoginForm = () => {
   const { doLogin, user } = useAuth();
   const { notify } = useNotifications();
+  const [errors, setErrors] = useState<IErrors>({
+    user: "",
+    password: "",
+  });
   const navigateTo = useNavigate();
 
   React.useEffect(() => {
@@ -34,11 +49,36 @@ const LoginForm = () => {
     }
   }, [user]);
 
-  const onClickSignIn = async (user: string, password: string) => {
-    doLogin({ email: user, password });
+  const onClickSignIn = async ({ user, password }: UserData) => {
+    return doLogin({ username: user, password });
   };
 
-  return <SimpleLoginForm onClickSignIn={onClickSignIn} />;
+  const onValidate = ({ user, password }: UserData) => {
+    const newErrors = { ...errors };
+    let error = false;
+    if (!user) {
+      newErrors["user"] = "Username is required";
+      error = true;
+    }
+    if (!password) {
+      newErrors["password"] = "Password is required";
+      error = true;
+    }
+    if (error) {
+      return setErrors(newErrors);
+    }
+    return onClickSignIn({ user, password });
+  };
+
+  return (
+    <React.Fragment>
+      <SimpleLoginForm
+        onSignIn={onValidate}
+        errors={errors}
+        logo={<NewLogo />}
+      />
+    </React.Fragment>
+  );
 };
 
 const NotFound = () => {
