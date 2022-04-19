@@ -42,6 +42,7 @@
     "@concepta/nestjs-crud": "^4.0.0-alpha.9",
     "@concepta/nestjs-jwt": "^4.0.0-alpha.9",
     "@concepta/nestjs-password": "^4.0.0-alpha.9",
+    "@concepta/nestjs-swagger-ui": "^4.0.0-alpha.9",
     "@concepta/nestjs-typeorm-ext": "^4.0.0-alpha.9",
     "@concepta/nestjs-user": "^4.0.0-alpha.9",
     "@faker-js/faker": "^6.1.2",

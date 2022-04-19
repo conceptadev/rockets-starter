@@ -6,11 +6,13 @@ import { CrudModule } from '@concepta/nestjs-crud';
 import { JwtModule } from '@concepta/nestjs-jwt';
 import { Module } from '@nestjs/common';
 import { PasswordModule } from '@concepta/nestjs-password';
+import { SwaggerUiModule } from '@concepta/nestjs-swagger-ui';
 import { TypeOrmExtModule } from '@concepta/nestjs-typeorm-ext';
 import { UserLookupService, UserModule } from '@concepta/nestjs-user';
 
 @Module({
   imports: [
+    SwaggerUiModule.register(),
     TypeOrmExtModule.registerAsync({
       useFactory: async () => {
         return {
