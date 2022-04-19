@@ -1,5 +1,6 @@
 {
     "eslint.workingDirectories": [
         "packages/rockets-api"
-    ]
+    ],
+    "typescript.tsdk": "node_modules/typescript/lib"
 }

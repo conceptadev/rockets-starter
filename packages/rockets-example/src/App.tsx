@@ -1,23 +1,41 @@
+import React, { PropsWithChildren, useState } from "react";
 import "./App.css";
-import "@concepta/react-ui-components/dist/tailwind.css";
 
 import { AuthProvider, useAuth } from "@concepta/react-auth-provider";
-import { Notification, SimpleLoginForm } from "@concepta/react-ui-components";
 import {
   NotificationProvider,
   useNotifications,
 } from "@concepta/react-notification-provider";
+
 import {
   ProtectedRoute,
   PublicRoute,
   Router,
   useNavigate,
 } from "@concepta/react-router";
-import React, { PropsWithChildren } from "react";
+
+import { SimpleLoginForm, Notification } from "@concepta/react-ui-components";
+import { ReactComponent as NewLogo } from "./newLogo.svg";
+
+import "@concepta/react-ui-components/dist/tailwind.css";
+
+interface IErrors {
+  user: string;
+  password: string;
+}
+
+interface UserData {
+  user: string;
+  password: string;
+}
 
 const LoginForm = () => {
   const { doLogin, user } = useAuth();
   const { notify } = useNotifications();
+  const [errors, setErrors] = useState<IErrors>({
+    user: "",
+    password: "",
+  });
   const navigateTo = useNavigate();
 
   React.useEffect(() => {
@@ -31,11 +49,36 @@ const LoginForm = () => {
     }
   }, [user]);
 
-  const onClickSignIn = async (user: string, password: string) => {
-    doLogin({ email: user, password });
+  const onClickSignIn = async ({ user, password }: UserData) => {
+    return doLogin({ username: user, password });
   };
 
-  return <SimpleLoginForm onClickSignIn={onClickSignIn} />;
+  const onValidate = ({ user, password }: UserData) => {
+    const newErrors = { ...errors };
+    let error = false;
+    if (!user) {
+      newErrors["user"] = "Username is required";
+      error = true;
+    }
+    if (!password) {
+      newErrors["password"] = "Password is required";
+      error = true;
+    }
+    if (error) {
+      return setErrors(newErrors);
+    }
+    return onClickSignIn({ user, password });
+  };
+
+  return (
+    <React.Fragment>
+      <SimpleLoginForm
+        onSignIn={onValidate}
+        errors={errors}
+        logo={<NewLogo />}
+      />
+    </React.Fragment>
+  );
 };
 
 const NotFound = () => {
