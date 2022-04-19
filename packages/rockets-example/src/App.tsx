@@ -1,23 +1,23 @@
 import React, { PropsWithChildren, useState } from "react";
 import "./App.css";
 
-import { AuthProvider, useAuth } from "@rockts-org/react-auth-provider";
+import { AuthProvider, useAuth } from "@concepta/react-auth-provider";
 import {
   NotificationProvider,
   useNotifications,
-} from "@rockts-org/react-notification-provider";
+} from "@concepta/react-notification-provider";
 
 import {
   ProtectedRoute,
   PublicRoute,
   Router,
   useNavigate,
-} from "@rockts-org/react-router";
+} from "@concepta/react-router";
 
-import { SimpleLoginForm, Notification } from "@rockts-org/react-ui-components";
+import { SimpleLoginForm, Notification } from "@concepta/react-ui-components";
 import { ReactComponent as NewLogo } from "./newLogo.svg";
 
-import "@rockts-org/react-ui-components/dist/tailwind.css";
+import "@concepta/react-ui-components/dist/tailwind.css";
 
 interface IErrors {
   user: string;
