@@ -31,8 +31,8 @@
     "seed:config": "node typeorm-seeding config -r ./",
     "seed:run": "typeorm-seeding seed -r ./",
     "seed:rebuild": "yarn migration:rebuild && yarn seed:run",
-    "sandbox:init": "yarn migration:run && yarn seed:run",
-    "sandbox:rebuild": "yarn seed:rebuild"
+    "sandbox:init": "yarn build && yarn migration:run && yarn seed:run",
+    "sandbox:rebuild": "yarn build && yarn seed:rebuild"
   },
   "dependencies": {
     "@concepta/nestjs-auth-jwt": "^4.0.0-alpha.10",
