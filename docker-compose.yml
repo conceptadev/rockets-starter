@@ -1,0 +1,28 @@
+version: "3.4"
+
+volumes:
+  rockets:
+
+services:
+  # Update this to the name of the service you want to work with in your docker-compose.yml file
+  rockets-starter:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - rockets:/workspace
+    ports:
+      - 3001:3001
+    links:
+      - rockets-starter-postgres
+    environment:
+      NODE_ENV: development
+    command: /bin/sh -c "while sleep 1000; do :; done"
+
+  rockets-starter-postgres:
+    image: postgres
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres

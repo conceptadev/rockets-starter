@@ -3,26 +3,27 @@
  * !!!!! Changing these values is unlikely to have an effect on the running app !!!!!!
  */
 
+import { TypeOrmExtOptions } from '@concepta/nestjs-typeorm-ext';
+import { User } from '@concepta/nestjs-user/dist/seeding';
+
 const dbSSL =
   'string' === typeof process.env.DATABASE_SSL
     ? process.env.DATABASE_SSL === 'true'
     : process.env.DATABASE_SSL || false;
 
-module.exports = {
+export default {
   type: 'postgres',
   url:
     process.env.DATABASE_URL ||
     'postgresql://postgres:postgres@rockets-starter-postgres:5432/postgres',
   synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE) || false,
-  entities: [
-    '../../node_modules/@concepta/nestjs-user/dist/entities/user.entity.js',
-  ],
-  subscribers: ['dist/**/*.subscriber.js'],
-  seeders: ['dist/**/*.seeder.js'],
+  entities: [User],
+  subscribers: [__dirname + '/**/*.subscriber.js'],
+  seeders: [__dirname + '/**/*.seeder.js'],
   defaultSeeder: 'RootSeeder',
-  migrations: ['dist/migrations/*.js'],
+  migrations: [__dirname + '/migrations/*.js'],
   cli: {
-    migrationsDir: 'src/migrations',
+    migrationsDir: __dirname + '/migrations',
   },
   extra: {
     ssl: dbSSL
@@ -32,4 +33,4 @@ module.exports = {
       : false,
   },
   logging: 'all',
-};
+} as TypeOrmExtOptions;
