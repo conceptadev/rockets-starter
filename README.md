@@ -4,10 +4,17 @@
 
 # Rockets Starter
 
-A mono-repo composed of an example Rockets API implementation with a compilimentary
-Rockets React web front end.
+The starter project is a monorepo composed of an example
+[Rockets API(https://github.com/conceptadev/rockets)]
+implementation with a compilimentary
+[Rockets React](https://github.com/conceptadev/rockets-react)
+web front end.
 
-A Docker container for api, web, database is provided, as well as support for the VSCode Remote Containers extension (dev container).
+In this README you will find setup and installation instructions for many
+different environments, including
+[VSCode Container](#vscode-dev-container),
+[Docker](#docker-compose),
+and [local machine](#local-machine).
 
 ## Project
 
@@ -30,6 +37,9 @@ If you are familiar with VSCode, running the project in a dev container is highl
 It is an additional layer on top of Docker which enables you to edit the files on the container app
 directly from VSCode.
 
+The underlying Docker configuration provides a Node server and a PostgreSQL server. Both servers
+are pre-configured, there is no additional setup required.
+
 #### Prerequisites
 
 - [Visual Studio Code](https://code.visualstudio.com)
@@ -45,13 +55,15 @@ directly from VSCode.
 1. Once the project has loaded, you should see a notification in the lower right corner that a Dev Container configuration file has been detected.
 1. Click the _Re-open In Container_ button.
 
-VSCode will automatically invoke Docker to download, compose and connect to the container, and install all dependencies.
-Depending on your machine, this could take a while.
+VSCode will automatically invoke Docker to build, compose, connect to the container, and install all dependencies.
+Depending on your machine and internet connection, this could take a while.
 Don't worry, it only needs to build the container the first time!
 
 > By default, and for performance reasons, the `docker-compose.yml` is
 > configured to create a new Docker volume and check out a fresh copy of the repo there.
 > These are _NOT_ your local files, if you manually delete the volume, any modifications will be lost.
+
+Open a new terminal window, and you should find yourself in the `/workspace` directory.
 
 You are now connected to the container and ready to initialize and run [the sandbox](#the-sandbox) in the remote container!
 
@@ -59,6 +71,9 @@ You are now connected to the container and ready to initialize and run [the sand
 
 Running the project on Docker is a quick way to get the ideal environment created and configured.
 See also [VSCode Dev Container](#vscode-dev-container) which is an additional layer on top of Docker.
+
+The Docker configuration provides a Node server and a PostgreSQL server. Both servers
+are pre-configured, there is no additional setup required.
 
 #### Prerequisites
 
@@ -75,7 +90,7 @@ docker compose up
 ```
 
 This will build the container, and install all dependencies.
-Depending on your machine, this could take a while.
+Depending on your machine and internet connection, this could take a while.
 Don't worry, it only needs to build the container the first time!
 
 > By default, and for performance reasons, the `docker-compose.yml` is
@@ -86,10 +101,12 @@ Don't worry, it only needs to build the container the first time!
 
 1. Open Docker Desktop
 1. Open the _Containers / Apps_ menu.
-1. Select the container app containing `rockets-starter`. (It will be using the `maz37/rockets-node` image.)
+1. Select the container app whose name includes **rockets-starter**.
 1. Click the _CLI_ button to connect to the running docker app's terminal.
 
-You are now ready to initialize and run [the sandbox](#the-sandbox) in your docker container!.
+Open a new terminal window, and you should find yourself in the `/workspace` directory.
+
+You are now ready to initialize and run [the sandbox](#the-sandbox) in your Docker container!
 
 ### Local Machine
 
@@ -97,11 +114,11 @@ Follow the steps below to set up the environment on your local machine.
 
 #### Prerequisites
 
-Your local environment must have the following prerequistes installed:
+Your local environment must have the following prerequisites installed:
 
-- [Node v16+](https://nodejs.org/)
-- [PostgreSQL v11+](https://www.postgresql.org/download/) (v12+ recommended)
-- [Yarn](https://classic.yarnpkg.com/) (latest v1.X recommended)
+- [Node >= v16.10.0](https://nodejs.org/)
+- [PostgreSQL >= v11](https://www.postgresql.org/download/) (>= v12 recommended)
+- [Yarn >= 1.20.0](https://classic.yarnpkg.com/) (latest v1.X recommended)
 
 You can verify that you have these installed by running the following shell commands.
 
@@ -155,14 +172,12 @@ Starting again from the root of the project, run this command to initialize the 
 yarn sandbox:init
 ```
 
-This will create the database if it does not exist, run database migrations to create the schema, and run the database seeder to populate some data.
+This will run all database migrations to create the schema, and run the database seeder to populate some data.
 
-A Super Admin account has been created as follows:
+A Super Admin account will be created as follows:
 
-|          |            |
-| -------- | ---------- |
-| Username | superadmin |
-| Password | Test1234   |
+Username: `superadmin`
+Password: `Test1234`
 
 ### Start the API
 
@@ -188,9 +203,9 @@ The web should now be running at http://localhost:3000/login
 
 ### Rebuilding the Sandbox
 
-If you ever want to start over with a fresh database, run this command to rebuild the sandbox.
+If you ever want to start over with a fresh database, run this command to rebuild the schema.
 
-> IMPORTANT this is a destructive operation.
+> WARNING: this is a destructive operation!
 
 ```bash
 yarn sandbox:rebuild
