@@ -5,7 +5,7 @@
 # Rockets Starter
 
 The starter project is a monorepo composed of an example
-[Rockets API(https://github.com/conceptadev/rockets)]
+[Rockets API](https://github.com/conceptadev/rockets)
 implementation with a compilimentary
 [Rockets React](https://github.com/conceptadev/rockets-react)
 web front end.
