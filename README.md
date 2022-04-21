@@ -156,7 +156,7 @@ Or, you can create the `packages/rockets-api/.env` file containing a line like t
 DATABASE_URL=postgresql://postgres:postgres@localhost:5432/rockets-starter
 ```
 
-For more advanced configuration, you can edit the `packages/rockets-api/ormconfig.js` file directly.
+For more advanced configuration, you can edit the `packages/rockets-api/src/ormconfig.ts` file directly.
 
 You are now ready to initialize and run [the sandbox](#the-sandbox) on your local machine!.
 

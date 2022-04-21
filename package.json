@@ -15,6 +15,7 @@
     "start:api:dev": "yarn workspace rockets-api start:dev",
     "start:api:debug": "yarn workspace rockets-api start:debug",
     "start:web": "yarn workspace rockets-web start",
+    "build": "yarn workspace rockets-api build",
     "test": "yarn test:api",
     "test:api": "yarn workspace rockets-api test",
     "sandbox:init": "yarn workspace rockets-api sandbox:init",

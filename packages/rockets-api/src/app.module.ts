@@ -9,17 +9,13 @@ import { PasswordModule } from '@concepta/nestjs-password';
 import { SwaggerUiModule } from '@concepta/nestjs-swagger-ui';
 import { TypeOrmExtModule } from '@concepta/nestjs-typeorm-ext';
 import { UserLookupService, UserModule } from '@concepta/nestjs-user';
+import { default as ormconfig } from './ormconfig';
 
 @Module({
   imports: [
     SwaggerUiModule.register(),
     TypeOrmExtModule.registerAsync({
-      useFactory: async () => {
-        return {
-          type: 'postgres',
-          url: 'postgresql://postgres:postgres@rockets-starter-postgres:5432/postgres',
-        };
-      },
+      useFactory: async () => ormconfig,
     }),
     AuthLocalModule.registerAsync({ ...createUserOpts() }),
     AuthJwtModule.registerAsync({ ...createUserOpts() }),
