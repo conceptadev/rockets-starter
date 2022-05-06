@@ -23,7 +23,7 @@ export default {
   defaultSeeder: 'RootSeeder',
   migrations: [__dirname + '/migrations/*.js'],
   cli: {
-    migrationsDir: __dirname + '/migrations',
+    migrationsDir: './src/migrations',
   },
   extra: {
     ssl: dbSSL

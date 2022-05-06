@@ -19,7 +19,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm": "typeorm -f ./dist/ormconfig.js",
+    "typeorm": "yarn build && typeorm -f ./dist/ormconfig.js",
     "schema:drop": "yarn typeorm schema:drop",
     "schema:sync": "yarn typeorm schema:sync",
     "schema:rebuild": "yarn schema:drop && yarn schema:sync",
@@ -32,8 +32,8 @@
     "seed:config": "node typeorm-seeding config -r ./dist",
     "seed:run": "typeorm-seeding seed -r ./dist",
     "seed:rebuild": "yarn migration:rebuild && yarn seed:run",
-    "sandbox:init": "yarn build && yarn migration:run && yarn seed:run",
-    "sandbox:rebuild": "yarn build && yarn seed:rebuild"
+    "sandbox:init": "yarn migration:run && yarn seed:run",
+    "sandbox:rebuild": "yarn seed:rebuild"
   },
   "dependencies": {
     "@concepta/nestjs-auth-jwt": "^4.0.0-alpha.10",
