@@ -4,7 +4,8 @@
  */
 
 import { TypeOrmExtOptions } from '@concepta/nestjs-typeorm-ext';
-import { User } from '@concepta/nestjs-user/dist/seeding';
+import { UserEntity } from './entities/user.entity';
+import { OrgEntity } from './entities/org.entity';
 
 const dbSSL =
   'string' === typeof process.env.DATABASE_SSL
@@ -15,9 +16,9 @@ export default {
   type: 'postgres',
   url:
     process.env.DATABASE_URL ||
-    'postgresql://postgres:postgres@rockets-starter-postgres:5432/postgres',
+    'postgresql://postgres:postgres@localhost:5432/postgres',
   synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE) || false,
-  entities: [User],
+  entities: [UserEntity, OrgEntity],
   subscribers: [__dirname + '/**/*.subscriber.js'],
   seeders: [__dirname + '/**/*.seeder.js'],
   defaultSeeder: 'RootSeeder',

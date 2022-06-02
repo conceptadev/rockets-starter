@@ -9,7 +9,10 @@ import { PasswordModule } from '@concepta/nestjs-password';
 import { SwaggerUiModule } from '@concepta/nestjs-swagger-ui';
 import { TypeOrmExtModule } from '@concepta/nestjs-typeorm-ext';
 import { UserLookupService, UserModule } from '@concepta/nestjs-user';
+import { OrgModule } from '@concepta/nestjs-org';
 import { default as ormconfig } from './ormconfig';
+import { UserEntity } from './entities/user.entity';
+import { OrgEntity } from './entities/org.entity';
 
 @Module({
   imports: [
@@ -24,7 +27,22 @@ import { default as ormconfig } from './ormconfig';
     JwtModule.register(),
     PasswordModule.register(),
     CrudModule.register(),
-    UserModule.register(),
+    //TODO OrgModule will only work if imported before UserModule
+    OrgModule.registerAsync({
+      imports: [UserModule.deferred()],
+      inject: [UserLookupService],
+      useFactory: (userLookupService: UserLookupService) => ({
+        ownerLookupService: userLookupService,
+      }),
+      entities: {
+        org: { entity: OrgEntity },
+      },
+    }),
+    UserModule.register({
+      entities: {
+        user: { entity: UserEntity },
+      },
+    }),
   ],
 })
 export class AppModule {}
