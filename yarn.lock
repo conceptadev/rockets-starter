@@ -1123,14 +1123,15 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@concepta/nestjs-auth-jwt@^4.0.0-alpha.10":
-  version "4.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-jwt/-/nestjs-auth-jwt-4.0.0-alpha.10.tgz#4e60972f3ca49095920f1d801afe6bf56e94c7e8"
-  integrity sha512-mNtgBNxX12sBI2iVuRwmi22q4WA/rjXN8p7LxGRKRD8FGVgYF9/2KxxiFbmsyDfN2HBl8uskO7Jc5kq+EcdauA==
+"@concepta/nestjs-auth-jwt@^4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-jwt/-/nestjs-auth-jwt-4.0.0-alpha.13.tgz#15d1d1a80024e66860250e2eaa700b470e2f810a"
+  integrity sha512-ngJfNaMrubW8CG4ll8oG1yVYYGSRfI3r6C6/bpIdVoQfr8YApL+tKZ/EE2/SmXBgWd/1i5CGLUFcFAX9bJtPog==
   dependencies:
-    "@concepta/nestjs-authentication" "^4.0.0-alpha.10"
-    "@concepta/nestjs-common" "^4.0.0-alpha.10"
-    "@concepta/nestjs-jwt" "^4.0.0-alpha.10"
+    "@concepta/nestjs-authentication" "^4.0.0-alpha.13"
+    "@concepta/nestjs-core" "^4.0.0-alpha.13"
+    "@concepta/nestjs-jwt" "^4.0.0-alpha.13"
+    "@concepta/ts-core" "^4.0.0-alpha.13"
     "@nestjs/common" "^8.0.2"
     "@nestjs/config" "^1.1.6"
     "@nestjs/core" "^8.0.2"
@@ -1139,14 +1140,15 @@
     express "^4.17.1"
     fastify "^3.25.3"
 
-"@concepta/nestjs-auth-local@^4.0.0-alpha.10":
-  version "4.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-local/-/nestjs-auth-local-4.0.0-alpha.10.tgz#ce0fed5f83f9162fc6b4268c57018f0f90a357ed"
-  integrity sha512-qU7WgyZJ6F058Yzu+jztpOrwZo43Ed+EmOYU3WbXkUQCrM+fpXdvi5g7gyO/xqh1Uwn9IQhCwQ44JMPVVctLoA==
+"@concepta/nestjs-auth-local@^4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-local/-/nestjs-auth-local-4.0.0-alpha.13.tgz#ff4418de4aad534c5b9757d52e68004d987bebe9"
+  integrity sha512-cFckBaHzuxoNGDcNbih0VlXKfVL+Q/0Gob3P45lPOoIAkIh85R1R+ag82bVqNb3Kd0E0SlDrjl8Z62yvGjJDhw==
   dependencies:
-    "@concepta/nestjs-authentication" "^4.0.0-alpha.10"
-    "@concepta/nestjs-common" "^4.0.0-alpha.10"
-    "@concepta/nestjs-password" "^4.0.0-alpha.10"
+    "@concepta/nestjs-authentication" "^4.0.0-alpha.13"
+    "@concepta/nestjs-core" "^4.0.0-alpha.13"
+    "@concepta/nestjs-password" "^4.0.0-alpha.13"
+    "@concepta/ts-core" "^4.0.0-alpha.13"
     "@nestjs/common" "^8.0.2"
     "@nestjs/config" "^1.1.6"
     "@nestjs/core" "^8.0.2"
@@ -1158,14 +1160,15 @@
     fastify "^3.25.3"
     passport-local "^1.0.0"
 
-"@concepta/nestjs-auth-refresh@^4.0.0-alpha.10":
-  version "4.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-refresh/-/nestjs-auth-refresh-4.0.0-alpha.10.tgz#98d99f2a2060f327df09e6d2434d3cf5f5992789"
-  integrity sha512-uU7Y7hfex3DpSR9o6uiOTrCjph8CbB9XYyEnXE4Qy7Tq1aU1syyFroP6bN4gY0my/HfGjbLGZUD9ePvUhn9ucw==
+"@concepta/nestjs-auth-refresh@^4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-refresh/-/nestjs-auth-refresh-4.0.0-alpha.13.tgz#05168d4a33a0064a9b22734a68cd3b6bd403db79"
+  integrity sha512-TVRM8YKP9ljxQKzO/PPEmYp7KSrC8PgwFi0tR2Ojco7XqGUzgSZ2USragC4MkxmtK/n1sFVkx2bVcMBaq+K/Xw==
   dependencies:
-    "@concepta/nestjs-authentication" "^4.0.0-alpha.10"
-    "@concepta/nestjs-common" "^4.0.0-alpha.10"
-    "@concepta/nestjs-jwt" "^4.0.0-alpha.10"
+    "@concepta/nestjs-authentication" "^4.0.0-alpha.13"
+    "@concepta/nestjs-core" "^4.0.0-alpha.13"
+    "@concepta/nestjs-jwt" "^4.0.0-alpha.13"
+    "@concepta/ts-core" "^4.0.0-alpha.13"
     "@nestjs/common" "^8.0.2"
     "@nestjs/config" "^1.1.6"
     "@nestjs/core" "^8.0.2"
@@ -1175,13 +1178,14 @@
     express "^4.17.1"
     fastify "^3.25.3"
 
-"@concepta/nestjs-authentication@^4.0.0-alpha.10":
-  version "4.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-authentication/-/nestjs-authentication-4.0.0-alpha.10.tgz#2161c36fa63f012c7122c5f003d79bd9082cbee6"
-  integrity sha512-DNXvD23Tt6kMU+TUxIH1kP64lkjm/8dPkm4uUFl+VFNKAGHzHBGOyUqS/6D7fV5MI401LzXadNVovJMVYr3TVw==
+"@concepta/nestjs-authentication@^4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-authentication/-/nestjs-authentication-4.0.0-alpha.13.tgz#e3ffea4acfc30428a4acccddd2cdf02e77c7a7c9"
+  integrity sha512-bIJk86ng+SE5E8SaCbMEzOACJKtmNm7AZ0iAOXs+rqb8NcwQQX/zbHMHu8cxP3SvjoNJJJTEURFZEH0Ob8rBQA==
   dependencies:
-    "@concepta/nestjs-common" "^4.0.0-alpha.10"
-    "@concepta/nestjs-jwt" "^4.0.0-alpha.10"
+    "@concepta/nestjs-core" "^4.0.0-alpha.13"
+    "@concepta/nestjs-jwt" "^4.0.0-alpha.13"
+    "@concepta/ts-core" "^4.0.0-alpha.13"
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
     "@nestjs/core" "^8.0.8"
@@ -1195,20 +1199,30 @@
     passport-strategy "^1.0.0"
     zxcvbn "^4.4.2"
 
-"@concepta/nestjs-common@^4.0.0-alpha.10":
-  version "4.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-common/-/nestjs-common-4.0.0-alpha.10.tgz#549d869bed32ec46f3b142284945d24aa8ac038a"
-  integrity sha512-qrTb4u6TqAj6uukoLWHunwODkA5PDLDArzojT5QmKaXNAB7eQk0QMkdGOlVuYE58JZocPlsx6C9oc5gFjyZ4Yw==
+"@concepta/nestjs-common@^4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-common/-/nestjs-common-4.0.0-alpha.13.tgz#a4ea6ad8ec4c39184ff4c1f40fd00254555b8b17"
+  integrity sha512-SHkZ3SHirmahEylKSkcVUqWfrk91R+HHsn3pLPbt+NNhmiP955mgDUrSmRqhsPQVDPMCiXolpxDobNpOMIM/Yw==
   dependencies:
-    "@golevelup/nestjs-modules" "^0.4.3"
-    "@nestjs/common" "^8.0.8"
+    "@concepta/ts-core" "^4.0.0-alpha.13"
+    "@nestjs/swagger" "^5.2.1"
 
-"@concepta/nestjs-crud@^4.0.0-alpha.10":
-  version "4.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-crud/-/nestjs-crud-4.0.0-alpha.10.tgz#5d0b1092ba2d946630364cfa253e26a01dd22fc7"
-  integrity sha512-6oA2O1Z9Vv1W2nZd6l51zWKV8ow1z+jsm1mefZWTQxIPCGhesOzH2m7EcvfAzA4Td91EY+c4RSwheQ9PVz1EIw==
+"@concepta/nestjs-core@^4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-core/-/nestjs-core-4.0.0-alpha.13.tgz#65763754f6d2f876569a8031927be9c121f94c3d"
+  integrity sha512-Ea+hPuBkwa9PuFN/l64bFaewccvGq7JY0sJ2qNU7XEAd4lMMdsNsz/2EMsn0dbr9P9QncOwQmCAzV8g48LtPVg==
   dependencies:
-    "@concepta/nestjs-common" "^4.0.0-alpha.10"
+    "@concepta/ts-core" "^4.0.0-alpha.13"
+    "@golevelup/nestjs-modules" "^0.4.3"
+    "@nestjs/common" "^8.0.0"
+
+"@concepta/nestjs-crud@^4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-crud/-/nestjs-crud-4.0.0-alpha.13.tgz#dc76a7fc212e6d98f336bf4905e0df20d4f6aa0b"
+  integrity sha512-G98PQcmPbAazaF1Az1cwM+nPFrAIzAx7uxA7EaNF73uVGrwmvsa2S+jduNZlMsJ4N8/qZ5urmBHaZsnKQni3Yw==
+  dependencies:
+    "@concepta/nestjs-core" "^4.0.0-alpha.13"
+    "@concepta/ts-core" "^4.0.0-alpha.13"
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.0.0"
     "@nestjs/core" "^8.0.8"
@@ -1217,24 +1231,51 @@
     "@nestjsx/crud-request" "^5.0.0-alpha.3"
     "@nestjsx/crud-typeorm" "^5.0.0-alpha.3"
 
-"@concepta/nestjs-jwt@^4.0.0-alpha.10":
-  version "4.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-jwt/-/nestjs-jwt-4.0.0-alpha.10.tgz#f95e89b534747a2888772321f81cc1882a238f5b"
-  integrity sha512-omt7T0gdtMf3t9aL5CvWd61/nX3WX9xU1xUvHGELK05gps4rmsL4NQhVb2Kh8hIPVejUxCnx+4Yl9rAiLY7RyA==
+"@concepta/nestjs-exception@^4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-exception/-/nestjs-exception-4.0.0-alpha.13.tgz#4562d53f26c8f277cd20fea7d7fe976b1fe3435a"
+  integrity sha512-lWztES0aB3ntIpcyUa5qo3cvkSYhZOt7AK6rFJGd0s/Jl9MvDbEHP0P1Q0O2miKmsfd3w8/vtieXhrW322b0lg==
   dependencies:
-    "@concepta/nestjs-common" "^4.0.0-alpha.10"
+    "@concepta/ts-core" "^4.0.0-alpha.13"
+    "@nestjs/common" "^8.0.8"
+    "@nestjs/swagger" "^5.2.1"
+
+"@concepta/nestjs-jwt@^4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-jwt/-/nestjs-jwt-4.0.0-alpha.13.tgz#b5d5c316cf5c0bd6e8095904956b45f0a37b3788"
+  integrity sha512-MSJHUE/VplxhlV0QBtFHyJFVIHLuD0y+yT7f/sv8EjusFotUYImBhZhaamnn1L3kFR2v/NSsc2mJZgOKuc2q3w==
+  dependencies:
+    "@concepta/nestjs-core" "^4.0.0-alpha.13"
+    "@concepta/ts-core" "^4.0.0-alpha.13"
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
     "@nestjs/jwt" "^8.0.0"
     passport-jwt "^4.0.0"
     passport-strategy "^1.0.0"
 
-"@concepta/nestjs-password@^4.0.0-alpha.10":
-  version "4.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-password/-/nestjs-password-4.0.0-alpha.10.tgz#491b57aeade34723e47f9eb9f6a9821f6f62da71"
-  integrity sha512-Rlas9gaSLh5NV/ZmHKdKOmbyDSCX5pt+Q9R7GnxJf0ifQVImRUxRRcdQq75SCy1nqGGA/o8n3UlGim4bPt2jRw==
+"@concepta/nestjs-org@^4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-org/-/nestjs-org-4.0.0-alpha.13.tgz#1cfc42424f8b854564367824a264fad6b50f9688"
+  integrity sha512-BoTI+ysmto2VNgycUuQCWKPZUjaOdTSgduzkOdvaXqtmZ6Qd3bKGwBJpnRzYtGOjuN+g5Vi40ms7VEiYUmU4bQ==
   dependencies:
-    "@concepta/nestjs-common" "^4.0.0-alpha.10"
+    "@concepta/nestjs-common" "^4.0.0-alpha.13"
+    "@concepta/nestjs-core" "^4.0.0-alpha.13"
+    "@concepta/nestjs-crud" "^4.0.0-alpha.13"
+    "@concepta/nestjs-exception" "^4.0.0-alpha.13"
+    "@concepta/nestjs-typeorm-ext" "^4.0.0-alpha.13"
+    "@concepta/ts-core" "^4.0.0-alpha.13"
+    "@concepta/typeorm-common" "^4.0.0-alpha.13"
+    "@nestjs/common" "^8.0.8"
+    "@nestjs/config" "^1.1.6"
+    "@nestjs/swagger" "^5.2.1"
+
+"@concepta/nestjs-password@^4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-password/-/nestjs-password-4.0.0-alpha.13.tgz#148963899cc45d0f2928f488f0028e9c6c07aa54"
+  integrity sha512-WPWXCM3qS5jjEyMvNSTSQw3cUvjUsMNE215V10GBt/sUPv/daF6OzlIhtX+sruJhfbIM+mG0C/+ZP0fHV34Agw==
+  dependencies:
+    "@concepta/nestjs-core" "^4.0.0-alpha.13"
+    "@concepta/ts-core" "^4.0.0-alpha.13"
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
     "@nestjs/core" "^8.0.8"
@@ -1242,36 +1283,41 @@
     bcrypt "^5.0.1"
     zxcvbn "^4.4.2"
 
-"@concepta/nestjs-swagger-ui@^4.0.0-alpha.10":
-  version "4.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-swagger-ui/-/nestjs-swagger-ui-4.0.0-alpha.10.tgz#1e4a85bf5bf2fa3a828b1312ebfb5745831ecc0d"
-  integrity sha512-ynoE95YJgtg0GDcWKsHgrPGROi0Xo6Qj5ktLPTr1zMx//EIlI6Cz7nP6cu6nvx3LmeGoUP1UcG2YPi3HR++v8A==
+"@concepta/nestjs-swagger-ui@^4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-swagger-ui/-/nestjs-swagger-ui-4.0.0-alpha.13.tgz#35297518630dd69c8d127ee4d6a59e05f9451f19"
+  integrity sha512-5sp3xOp8sSvCu6qZA/7vOAax7UWoqyLRzkAmyWzB0nr7zb4sznr5deJA6BZRDwi8/xxcnKu10NHXqYlM7b74Rg==
   dependencies:
-    "@concepta/nestjs-common" "^4.0.0-alpha.10"
+    "@concepta/nestjs-core" "^4.0.0-alpha.13"
+    "@concepta/ts-core" "^4.0.0-alpha.13"
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.0.0"
     "@nestjs/swagger" "^5.2.1"
     swagger-ui-express "^4.3.0"
 
-"@concepta/nestjs-typeorm-ext@^4.0.0-alpha.10":
-  version "4.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-typeorm-ext/-/nestjs-typeorm-ext-4.0.0-alpha.10.tgz#bcb54d60d8d1feab82a1b84cd2f570791117ddcb"
-  integrity sha512-IxlJ62+pJ955XQVzkd0VUAfU8bDRXuOZrdZUe2+wwp1S/s7/ig+1ya7Z76Bij4I9B8zJfu45RNIXtq0nToEgNA==
+"@concepta/nestjs-typeorm-ext@^4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-typeorm-ext/-/nestjs-typeorm-ext-4.0.0-alpha.13.tgz#f549642ca0f578d29fd22339caafadf28b234ac6"
+  integrity sha512-85rMUakWsI9TFN87rEG9mPnBl/s/ghD6RuG4nhVbpsg4EtqOEXVNrrtNlzg+TroHyrZXhD7ayYj2E0n911ccNQ==
   dependencies:
-    "@concepta/nestjs-common" "^4.0.0-alpha.10"
+    "@concepta/nestjs-core" "^4.0.0-alpha.13"
+    "@concepta/ts-core" "^4.0.0-alpha.13"
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
     "@nestjs/typeorm" "^8.0.2"
 
-"@concepta/nestjs-user@^4.0.0-alpha.10":
-  version "4.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-user/-/nestjs-user-4.0.0-alpha.10.tgz#ceaf4f637929af4abd19081ff4a4a962e93caabd"
-  integrity sha512-YsTIdCttu0QN4mhGPos9Ntycz5MAaxrVeIipja2VXbTWJYV5GUu+3/oKLLF4oiqHkDxtlTxT5xbfWH1YKL5w/A==
+"@concepta/nestjs-user@^4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-user/-/nestjs-user-4.0.0-alpha.13.tgz#83ed7d83663ce3121845324ee22ba748b682a5f5"
+  integrity sha512-x7Yz37JLZgMTeU9SnaYhqOuOzsS/CvRqlqwDqQsoYdk0f/5Gyj4IqceYMf3pyGO9rPCQowA+4kVzewtvv92RMw==
   dependencies:
-    "@concepta/nestjs-common" "^4.0.0-alpha.10"
-    "@concepta/nestjs-crud" "^4.0.0-alpha.10"
-    "@concepta/nestjs-password" "^4.0.0-alpha.10"
-    "@concepta/nestjs-typeorm-ext" "^4.0.0-alpha.10"
+    "@concepta/nestjs-common" "^4.0.0-alpha.13"
+    "@concepta/nestjs-core" "^4.0.0-alpha.13"
+    "@concepta/nestjs-crud" "^4.0.0-alpha.13"
+    "@concepta/nestjs-password" "^4.0.0-alpha.13"
+    "@concepta/nestjs-typeorm-ext" "^4.0.0-alpha.13"
+    "@concepta/ts-core" "^4.0.0-alpha.13"
+    "@concepta/typeorm-common" "^4.0.0-alpha.13"
     "@nestjs/common" "^8.0.8"
     "@nestjs/config" "^1.1.6"
     "@nestjs/swagger" "^5.2.1"
@@ -1329,6 +1375,18 @@
     styled-components "^5.3.3"
     twin.macro "^2.8.2"
     web-vitals "^1.0.1"
+
+"@concepta/ts-core@^4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@concepta/ts-core/-/ts-core-4.0.0-alpha.13.tgz#65d3b56f5a6d826703150e4bc7bca40b5f40d8e5"
+  integrity sha512-bmWW22+jqmuUqn8hPbgmBCdca65ZoRXwQGiOG4bFgkqsDoGoSg2tlVo1uy40eTBnPk3prVLhL+rA/ozKTCSTDg==
+
+"@concepta/typeorm-common@^4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@concepta/typeorm-common/-/typeorm-common-4.0.0-alpha.13.tgz#515641a45bcf6def02125ef4893d2bd45bf60fea"
+  integrity sha512-tuf3aymieWokPyRsrxwVeM+jzYE3Z/KUAO6ccriQCavGKmnDDX/9JEhYFfM8ePf5J9nt5hg9raPt424VqqRLcA==
+  dependencies:
+    "@concepta/ts-core" "^4.0.0-alpha.13"
 
 "@craco/craco@^6.3.0", "@craco/craco@^6.4.1":
   version "6.4.3"
