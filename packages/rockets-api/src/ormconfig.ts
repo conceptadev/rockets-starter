@@ -8,6 +8,7 @@ import { ConnectionOptions } from '@jorgebodega/typeorm-seeding';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { UserEntity } from './entities/user.entity';
 import { OrgEntity } from './entities/org.entity';
+import { FederatedEntity } from './entities/federated-entity';
 
 export const ormDefaultConfig = (): TypeOrmModuleOptions &
   Partial<ConnectionOptions> => {
@@ -18,7 +19,7 @@ export const ormDefaultConfig = (): TypeOrmModuleOptions &
       process.env.DATABASE_URL ??
       'postgresql://postgres:postgres@rockets-starter-postgres:5432/postgres',
     synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE) ?? false,
-    entities: [UserEntity, OrgEntity],
+    entities: [UserEntity, OrgEntity, FederatedEntity],
     subscribers: [__dirname + '/**/*.subscriber.js'],
     seeders: [__dirname + '/**/*.seeder.js'],
     defaultSeeder: 'RootSeeder',
