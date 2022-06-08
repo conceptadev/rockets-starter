@@ -9,11 +9,18 @@ import { Module } from '@nestjs/common';
 import { PasswordModule } from '@concepta/nestjs-password';
 import { SwaggerUiModule } from '@concepta/nestjs-swagger-ui';
 import { TypeOrmExtModule } from '@concepta/nestjs-typeorm-ext';
-import { UserLookupService, UserModule } from '@concepta/nestjs-user';
+import {
+  UserLookupService,
+  UserModule,
+  UserMutateService,
+} from '@concepta/nestjs-user';
 import { OrgModule } from '@concepta/nestjs-org';
 import { ormConfig } from './ormconfig';
 import { UserEntity } from './entities/user.entity';
 import { OrgEntity } from './entities/org.entity';
+import { AuthGithubModule } from '@concepta/nestjs-auth-github';
+import { FederatedModule } from '@concepta/nestjs-federated';
+import { FederatedEntity } from './entities/federated-entity';
 
 @Module({
   imports: [
@@ -44,6 +51,22 @@ import { OrgEntity } from './entities/org.entity';
         org: { entity: OrgEntity },
       },
     }),
+    //TODO FederatedModule will only work if imported before UserModule
+    FederatedModule.registerAsync({
+      imports: [UserModule.deferred()],
+      inject: [UserLookupService, UserMutateService],
+      useFactory: (userLookupService, userMutateService) => ({
+        userLookupService,
+        userMutateService,
+      }),
+      entities: {
+        federated: {
+          entity: FederatedEntity,
+          // connection: ormConfig
+        },
+      },
+    }),
+    AuthGithubModule.register(),
     UserModule.register({
       entities: {
         user: { entity: UserEntity },

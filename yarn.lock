@@ -1123,6 +1123,22 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@concepta/nestjs-auth-github@^4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-github/-/nestjs-auth-github-4.0.0-alpha.13.tgz#56b9624f8dad806dfc56948dc26abfb41c7ac024"
+  integrity sha512-KSRMh4cJw8L18it5o0JPgKMmDGLuAatOjYGqZ2q/gBnjp94h+sV7JFvwNqvGyIS+yaAF7zUetTcQpvqT1cldow==
+  dependencies:
+    "@concepta/nestjs-authentication" "^4.0.0-alpha.13"
+    "@concepta/nestjs-core" "^4.0.0-alpha.13"
+    "@concepta/nestjs-federated" "^4.0.0-alpha.13"
+    "@concepta/ts-core" "^4.0.0-alpha.13"
+    "@nestjs/common" "^8.0.2"
+    "@nestjs/config" "^1.1.6"
+    "@nestjs/core" "^8.0.2"
+    "@nestjs/passport" "^8.0.1"
+    "@nestjs/swagger" "^5.2.1"
+    passport-github "^1.1.0"
+
 "@concepta/nestjs-auth-jwt@^4.0.0-alpha.13":
   version "4.0.0-alpha.13"
   resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-jwt/-/nestjs-auth-jwt-4.0.0-alpha.13.tgz#15d1d1a80024e66860250e2eaa700b470e2f810a"
@@ -1238,6 +1254,22 @@
   dependencies:
     "@concepta/ts-core" "^4.0.0-alpha.13"
     "@nestjs/common" "^8.0.8"
+    "@nestjs/swagger" "^5.2.1"
+
+"@concepta/nestjs-federated@^4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-federated/-/nestjs-federated-4.0.0-alpha.13.tgz#9f1b24ee10a0d2ced149894decd82641ac8b145f"
+  integrity sha512-+xkS5y8Atw4iES/A2uPcOdMRP7nuWqGANjUtma9FCFtBY5DavyjrIJYfV6RzB1pY0SMI76XhzCyirxiT9kpm1w==
+  dependencies:
+    "@concepta/nestjs-authentication" "^4.0.0-alpha.13"
+    "@concepta/nestjs-common" "^4.0.0-alpha.13"
+    "@concepta/nestjs-core" "^4.0.0-alpha.13"
+    "@concepta/nestjs-typeorm-ext" "^4.0.0-alpha.13"
+    "@concepta/ts-core" "^4.0.0-alpha.13"
+    "@concepta/typeorm-common" "^4.0.0-alpha.13"
+    "@nestjs/common" "^8.0.0"
+    "@nestjs/config" "^1.1.6"
+    "@nestjs/passport" "^8.0.0"
     "@nestjs/swagger" "^5.2.1"
 
 "@concepta/nestjs-jwt@^4.0.0-alpha.13":
@@ -2021,7 +2053,7 @@
   resolved "https://registry.yarnpkg.com/@nestjs/mapped-types/-/mapped-types-1.0.1.tgz#78b62041c7a407db4a90eb140567321602bed18e"
   integrity sha512-NFvofzSinp00j5rzUd4tf+xi9od6383iY0JP7o0Bnu1fuItAUkWBgc4EKuIQ3D+c2QI3i9pG1kDWAeY27EMGtg==
 
-"@nestjs/passport@^8.0.1":
+"@nestjs/passport@^8.0.0", "@nestjs/passport@^8.0.1":
   version "8.2.1"
   resolved "https://registry.yarnpkg.com/@nestjs/passport/-/passport-8.2.1.tgz#a2abff9f51b3857b3423f5380a00f475aa298fe7"
   integrity sha512-HXEKMLX1x865+lsJB4srwKHBciDNAhWY1Ha+xbxYRbk7J5leGDoHJAmeqe+Wb3NDn5nkboggLV87t0q2mbYc8w==
