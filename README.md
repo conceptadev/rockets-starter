@@ -146,6 +146,8 @@ You may need to modify the database configuration depending on how your local Po
 
 The simplest way to change the connection settings is by exporting the `DATABASE_URL` env variable like the following example.
 
+> For both examples below, you will need to modify the the `DATABASE_URL` to match your environment.
+
 ```bash
 export DATABASE_URL=postgresql://postgres:postgres@localhost:5432/rockets-starter
 ```

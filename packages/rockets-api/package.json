@@ -36,7 +36,6 @@
     "sandbox:rebuild": "yarn seed:rebuild"
   },
   "dependencies": {
-    "@concepta/nestjs-access-control": "^4.0.0-alpha.16",
     "@concepta/nestjs-auth-github": "^4.0.0-alpha.16",
     "@concepta/nestjs-auth-jwt": "^4.0.0-alpha.16",
     "@concepta/nestjs-auth-local": "^4.0.0-alpha.16",

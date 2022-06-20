@@ -19,7 +19,7 @@ export const ormDefaultConfig = (): TypeOrmModuleOptions &
     type: 'postgres',
     url:
       process.env.DATABASE_URL ??
-      'postgresql://postgres:postgres@localhost:5432/rockets-starter',
+      'postgresql://postgres:postgres@rockets-starter-postgres:5432/postgres',
     synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE) ?? false,
     entities: [
       UserEntity,

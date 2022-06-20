@@ -17,14 +17,11 @@ import {
 import { OrgModule } from '@concepta/nestjs-org';
 import { AuthGithubModule } from '@concepta/nestjs-auth-github';
 import { FederatedModule } from '@concepta/nestjs-federated';
-import { AccessControlModule } from '@concepta/nestjs-access-control';
 import { RoleModule } from '@concepta/nestjs-role';
 import { ormConfig } from './ormconfig';
-import { acRules } from './app.acl';
 import { UserEntity } from './entities/user.entity';
 import { OrgEntity } from './entities/org.entity';
 import { FederatedEntity } from './entities/federated-entity';
-import { ACService } from './auth/access-control.service';
 import { RoleEntity } from './entities/role.entity';
 import { UserRoleEntity } from './entities/user-role.entity';
 
@@ -73,10 +70,6 @@ import { UserRoleEntity } from './entities/user-role.entity';
       },
     }),
     AuthGithubModule.register(),
-    AccessControlModule.register({
-      service: ACService,
-      settings: { rules: acRules },
-    }),
     RoleModule.register({
       settings: {
         assignments: {
