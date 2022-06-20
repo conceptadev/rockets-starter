@@ -15,12 +15,15 @@ import {
   UserMutateService,
 } from '@concepta/nestjs-user';
 import { OrgModule } from '@concepta/nestjs-org';
+import { AuthGithubModule } from '@concepta/nestjs-auth-github';
+import { FederatedModule } from '@concepta/nestjs-federated';
+import { RoleModule } from '@concepta/nestjs-role';
 import { ormConfig } from './ormconfig';
 import { UserEntity } from './entities/user.entity';
 import { OrgEntity } from './entities/org.entity';
-import { AuthGithubModule } from '@concepta/nestjs-auth-github';
-import { FederatedModule } from '@concepta/nestjs-federated';
 import { FederatedEntity } from './entities/federated-entity';
+import { RoleEntity } from './entities/role.entity';
+import { UserRoleEntity } from './entities/user-role.entity';
 
 @Module({
   imports: [
@@ -67,6 +70,21 @@ import { FederatedEntity } from './entities/federated-entity';
       },
     }),
     AuthGithubModule.register(),
+    RoleModule.register({
+      settings: {
+        assignments: {
+          user: { entityKey: 'userRole' },
+        },
+      },
+      entities: {
+        role: {
+          entity: RoleEntity,
+        },
+        userRole: {
+          entity: UserRoleEntity,
+        },
+      },
+    }),
     UserModule.register({
       entities: {
         user: { entity: UserEntity },
