@@ -1,11 +1,11 @@
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from '@jorgebodega/typeorm-seeding';
-import { UserFactory, UserSeeder } from '@concepta/nestjs-user/dist/seeding';
-import { RoleSeeder } from '@concepta/nestjs-role/dist/seeding';
 import { OrgSeeder } from '@concepta/nestjs-org/dist/seeding';
-import { UserEntity } from './entities/user.entity';
-import { RoleEntity } from './entities/role.entity';
 import { OrgEntity } from './entities/org.entity';
+import { UserFactory, UserSeeder } from '@concepta/nestjs-user/dist/seeding';
+import { UserEntity } from './entities/user.entity';
+import { RoleSeeder } from '@concepta/nestjs-role/dist/seeding';
+import { RoleEntity } from './entities/role.entity';
 
 export class RootSeeder extends Seeder {
   async run(connection: Connection) {
@@ -20,11 +20,7 @@ export class RootSeeder extends Seeder {
 
 class OwnerFactory extends Factory<UserEntity> {
   protected async definition(): Promise<UserEntity> {
-    const user = new UserEntity();
-    //TODO temporary, change to faker later;
-    user.username = 'me';
-    user.email = 'me@mail.com';
-
-    return user;
+    const userFactory = new UserFactory(UserEntity);
+    return userFactory.create();
   }
 }
