@@ -18,7 +18,7 @@ import { OrgModule } from '@concepta/nestjs-org';
 import { AuthGithubModule } from '@concepta/nestjs-auth-github';
 import { FederatedModule } from '@concepta/nestjs-federated';
 import { RoleModule } from '@concepta/nestjs-role';
-import { ormConfig } from './ormconfig';
+import { ormConfig } from './config/typeorm.config';
 import { UserEntity } from './entities/user.entity';
 import { OrgEntity } from './entities/org.entity';
 import { FederatedEntity } from './entities/federated-entity';
