@@ -1,3 +1,4 @@
+import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigType } from '@nestjs/config';
 import { AuthJwtModule } from '@concepta/nestjs-auth-jwt';
 import { AuthLocalModule } from '@concepta/nestjs-auth-local';
@@ -5,7 +6,6 @@ import { AuthRefreshModule } from '@concepta/nestjs-auth-refresh';
 import { AuthenticationModule } from '@concepta/nestjs-authentication';
 import { CrudModule } from '@concepta/nestjs-crud';
 import { JwtModule } from '@concepta/nestjs-jwt';
-import { Module } from '@nestjs/common';
 import { PasswordModule } from '@concepta/nestjs-password';
 import { SwaggerUiModule } from '@concepta/nestjs-swagger-ui';
 import { TypeOrmExtModule } from '@concepta/nestjs-typeorm-ext';
@@ -18,7 +18,11 @@ import { OrgModule } from '@concepta/nestjs-org';
 import { AuthGithubModule } from '@concepta/nestjs-auth-github';
 import { FederatedModule } from '@concepta/nestjs-federated';
 import { RoleModule } from '@concepta/nestjs-role';
-import { ormConfig } from './ormconfig';
+import { AuthRecoveryModule } from '@concepta/nestjs-auth-recovery';
+import { OtpModule, OtpService } from '@concepta/nestjs-otp';
+import { EmailModule, EmailService } from '@concepta/nestjs-email';
+
+import { ormConfig } from './config/typeorm.config';
 import { UserEntity } from './entities/user.entity';
 import { OrgEntity } from './entities/org.entity';
 import { FederatedEntity } from './entities/federated-entity';
@@ -82,6 +86,43 @@ import { UserRoleEntity } from './entities/user-role.entity';
         },
         userRole: {
           entity: UserRoleEntity,
+        },
+      },
+    }),
+    //TODO FederatedModule will only work if imported before UserModule and Email modules
+    AuthRecoveryModule.registerAsync({
+      imports: [
+        UserModule.deferred(),
+        OtpModule.deferred(),
+        EmailModule.deferred(),
+      ],
+      inject: [UserLookupService, UserMutateService, OtpService, EmailService],
+      useFactory: (
+        userLookupService,
+        userMutateService,
+        otpService,
+        emailService,
+      ) => ({
+        userLookupService,
+        userMutateService,
+        otpService,
+        emailService,
+      }),
+    }),
+    // To use a real a service, override the email env vars and replace this for 'EmailModule.register()'.
+    EmailModule.register({
+      mailerService: {
+        sendMail(): Promise<void> {
+          console.log('email sent');
+
+          return Promise.resolve();
+        },
+      },
+    }),
+    OtpModule.register({
+      entities: {
+        userOtp: {
+          entity: UserEntity,
         },
       },
     }),
