@@ -17,7 +17,7 @@ export const ormConfigFactory = (): DataSourceOptions & { url: string } => {
     type: 'postgres',
     url:
       process.env.DATABASE_URL ??
-      'postgresql://postgres:postgres@rockets-starter-postgres:5432/postgres',
+      'postgresql://postgres:postgres@rockets-starter-postgres:5432/rockets-starter',
     entities: [
       UserEntity,
       OrgEntity,

@@ -24,5 +24,6 @@ services:
     ports:
       - 5433:5432
     environment:
+      POSTGRES_DB: rockets-starter
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
