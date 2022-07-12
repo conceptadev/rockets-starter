@@ -55,6 +55,7 @@
     "@concepta/nestjs-user": "^4.0.0-alpha.17",
     "@concepta/ts-common": "^4.0.0-alpha.17",
     "@concepta/ts-core": "^4.0.0-alpha.17",
+    "@concepta/typeorm-common": "^4.0.0-alpha.17",
     "@concepta/typeorm-seeding": "^4.0.0-alpha.4",
     "@faker-js/faker": "^6.1.2",
     "@nestjs/common": "^8.0.0",

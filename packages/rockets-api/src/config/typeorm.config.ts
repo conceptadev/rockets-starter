@@ -10,6 +10,7 @@ import { OrgEntity } from '../entities/org.entity';
 import { FederatedEntity } from '../entities/federated-entity';
 import { RoleEntity } from '../entities/role.entity';
 import { UserRoleEntity } from '../entities/user-role.entity';
+import { UserOtpEntity } from '../entities/user-otp.entity';
 
 export const ormConfigFactory = (): DataSourceOptions & { url: string } => {
   // return the configuration
@@ -24,6 +25,7 @@ export const ormConfigFactory = (): DataSourceOptions & { url: string } => {
       FederatedEntity,
       RoleEntity,
       UserRoleEntity,
+      UserOtpEntity,
     ],
     subscribers: [__dirname + '/../**/*.subscriber.js'],
     migrations: [__dirname + '/../migrations/*.js'],

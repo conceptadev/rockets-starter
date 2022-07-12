@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { ConfigModule, ConfigType } from '@nestjs/config';
 import { AuthJwtModule } from '@concepta/nestjs-auth-jwt';
 import { AuthLocalModule } from '@concepta/nestjs-auth-local';
@@ -28,6 +28,8 @@ import { OrgEntity } from './entities/org.entity';
 import { FederatedEntity } from './entities/federated-entity';
 import { RoleEntity } from './entities/role.entity';
 import { UserRoleEntity } from './entities/user-role.entity';
+import { UserOtpEntity } from './entities/user-otp.entity';
+import { EmailSendOptionsInterface } from '@concepta/ts-common/dist/email/interfaces/email-send-options.interface';
 
 @Module({
   imports: [
@@ -112,8 +114,8 @@ import { UserRoleEntity } from './entities/user-role.entity';
     // To use a real a service, override the email env vars and replace this for 'EmailModule.register()'.
     EmailModule.register({
       mailerService: {
-        sendMail(): Promise<void> {
-          console.log('email sent');
+        sendMail(sendMailOptions: EmailSendOptionsInterface): Promise<void> {
+          Logger.debug('email sent', sendMailOptions);
 
           return Promise.resolve();
         },
@@ -122,7 +124,7 @@ import { UserRoleEntity } from './entities/user-role.entity';
     OtpModule.register({
       entities: {
         userOtp: {
-          entity: UserEntity,
+          entity: UserOtpEntity,
         },
       },
     }),
