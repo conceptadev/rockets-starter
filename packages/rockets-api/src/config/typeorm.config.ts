@@ -12,7 +12,7 @@ import { RoleEntity } from '../entities/role.entity';
 import { UserRoleEntity } from '../entities/user-role.entity';
 import { UserOtpEntity } from '../entities/user-otp.entity';
 
-export const ormConfigFactory = (): DataSourceOptions & { url: string } => {
+export const ormConfigFactory = (): DataSourceOptions => {
   // return the configuration
   return {
     type: 'postgres',
