@@ -2,17 +2,12 @@ import './formulario.css';
 import vetorGit from '../../assets/imgs/Vectorgithub.svg';
 import vetorGoogle from '../../assets/imgs/Vectorgoogle.svg';
 import vetorLinkedin from '../../assets/imgs/Vectorlinkedin.svg';
-import { useState } from 'react';
 
-export const Formulario = () => {
+export const Formulario = ({formData, setFormData}) => {
 
-    const [name, setName] = useState();
+    
 
-    function inputChangeName(e){
-        setName(e.target.value);
-    }
-
-    console.log(name)
+    
 
     return (
       <div className="formularioContainer">
@@ -48,22 +43,18 @@ export const Formulario = () => {
         <div className="formularioInfos">
 
             <label htmlFor="">Nome</label>
-            <input type="text" placeholder='Seu nome' value={name} onChange={inputChangeName}/>
+            <input className="inputGeneral" type="text" placeholder='Seu nome' value={formData.name} onChange={(event) => setFormData({...formData, name: event.target.value})}/>
 
             <label htmlFor="">Email</label>
-            <input type="text" placeholder='Email'/>
+            <input className="inputGeneral" type="text" placeholder='Email' value={formData.email} onChange={(event) => setFormData({...formData, email: event.target.value})}/>
 
             <label htmlFor="">Senha</label>
-            <input type="password" placeholder='Senha'/>
+            <input className="inputGeneral" type="password" placeholder='Senha' value={formData.password} onChange={(event) => setFormData({...formData, password: event.target.value})}/>
 
             <label htmlFor="">Confimar senha</label>
-            <input type="password" placeholder='Confirmar senha'/>
+            <input className="inputGeneral" type="password" placeholder='Confirmar senha' value={formData.passwordConfirm} onChange={(event) => setFormData({...formData, passwordConfirm: event.target.value})}/>
             
-            <button className='buttonFormulario'>Continuar</button>
-        </div>
-
-        <div>
-            <small>Já possui conta?<span> Faça login</span></small>
+            
         </div>
 
       </div>
