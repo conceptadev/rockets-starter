@@ -12,7 +12,7 @@ services:
     volumes:
       - rockets:/workspace
     ports:
-      - 3001:3001
+      - 3002:3002
     links:
       - rockets-starter-postgres
     environment:

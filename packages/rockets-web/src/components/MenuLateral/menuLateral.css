@@ -1,0 +1,32 @@
+.menuContainer{
+    background: #06857D;
+    max-width: 487px;
+    width: 487px;
+    height: calc(100vh - 79px);
+}
+
+.menuContentUm{
+    width: 362px;
+    margin-bottom: 62px;
+    margin-left: 53px;
+}
+
+.menuContentDois{
+    width: 325px;
+    margin-left: 73px;
+}
+
+.menuContentPUm{
+    margin-left: 20px;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 39px;
+    color: #FFFFFF;
+}
+.menuContentPDois{
+    margin-top: 25px;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 31px;
+    color: #FFFFFF;
+}

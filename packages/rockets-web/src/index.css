@@ -17,7 +17,7 @@ code {
 /* BASIC */
 
 html {
-  background-color: #56baed;
+  background-color: #FFFFFF;
 }
 
 body {
@@ -33,32 +33,18 @@ body {
   height:100%
 }
 
-.app {
-  display: flex;
-  height:100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+
 
 .submit{
   cursor: pointer;
 }
 
-.wrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: column; 
-  justify-content: center;
-  width: 100%;
-  min-height: 100%;
-  padding: 20px;
-}
 
 
 /* ANIMATIONS */
 
 /* Simple CSS3 Fade-in-down Animation */
+/*
 .fadeInDown {
   -webkit-animation-name: fadeInDown;
   animation-name: fadeInDown;
@@ -93,8 +79,10 @@ body {
     transform: none;
   }
 }
-
+*/
 /* Simple CSS3 Fade-in Animation */
+
+/*
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
@@ -137,8 +125,10 @@ body {
   -moz-animation-delay: 1s;
   animation-delay: 1s;
 }
-
+*/
 /* Simple CSS3 Fade-in Animation */
+
+/*
 .underlineHover:after {
   display: block;
   left: 0;
@@ -176,6 +166,7 @@ body {
 
 /*  */
 
+/*
 .lds-dual-ring {
   display: inline-block;
   width: 80px;
@@ -200,3 +191,4 @@ body {
     transform: rotate(360deg);
   }
 }
+*/

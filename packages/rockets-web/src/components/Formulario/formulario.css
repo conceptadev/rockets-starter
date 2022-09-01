@@ -1,0 +1,106 @@
+.formularioContainer{
+    width: 464px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.facaSeuCadastro{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 52px;
+}
+
+.cadastroTitle{
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
+    color: #222222;
+    margin-bottom: 51px;
+}
+
+.redesSociais{
+    display: flex;
+    gap: 20px;
+}
+
+.blocoRedes{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 8px;
+    width: 107px;
+    height: 40px;
+    background: #6366F1;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+
+.formularioInfos{
+    margin-top: 38px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.formularioInfos input{
+    width: 432px;
+    height: 46px;
+    background: #FFFFFF;
+    border: 1px solid #D5DAE1;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 25px;
+}
+
+.formularioInfos label{
+    margin-bottom: 6px;
+}
+
+.buttonFormulario{
+    width: 433px;
+    height: 41px;
+    margin-top: 45px;
+    background: linear-gradient(180deg, #09BDB2 0%, #06857D 100%);
+    box-shadow: 0px 1px 2px rgba(105, 81, 255, 0.05);
+    border-radius: 10px;
+
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 28px;
+    color: #F0FDF4;
+}
+
+span{
+    color: #09BDB2;
+}
+
+.separar{
+    display: flex;
+    align-items: center;
+}
+
+.line{
+    width: 120px;
+    height: 0px;
+    border-bottom: 1px solid #787878;
+}
+
+.smallOu{
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.smallRedes{
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FFFFFF;
+}
