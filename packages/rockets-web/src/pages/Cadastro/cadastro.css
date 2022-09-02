@@ -26,25 +26,3 @@
     justify-content: center;
     flex-direction: column;
 }
-
-.btnContinuar{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.buttonFormulario{
-    display: block;
-}
-.buttonFormulario-active{
-    display: none;
-}
-
-.smallz{
-    display: block;
-
-}
-
-.smallz-active{
-    display: none;
-}

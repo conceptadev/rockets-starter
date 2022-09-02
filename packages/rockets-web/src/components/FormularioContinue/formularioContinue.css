@@ -31,6 +31,7 @@
     border-radius: 8px;
     margin-right: 20px;
     margin-bottom: 30px;
+    padding: 14px;
 }
 
 .cel{
@@ -40,4 +41,56 @@
     border: 1px solid #D5DAE1;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
     border-radius: 8px;
+    padding: 14px;
+}
+
+.btnRegistrar{
+    width: 433px;
+    height: 41px;
+    text-align: center;
+    background: linear-gradient(180deg, #09BDB2 0%, #06857D 100%);
+    box-shadow: 0px 1px 2px rgba(105, 81, 255, 0.05);
+    border-radius: 10px;
+}
+
+.textArea{
+    width: 454px;
+    height: 179px;
+    background: #FFFFFF;
+    border: 1px solid #D5DAE1;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.labelFormContinue{
+    margin-bottom: 6px;
+}
+
+.anexarCurriculo{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-top: 23px;
+}
+
+.btnCurriculo{
+    background: #6366F1;
+    box-shadow: 0px 1px 2px rgba(105, 81, 255, 0.05);
+    border-radius: 5px;
+    width: 202px;
+    height: 36px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 28px;
+    color: #F0FDF4;
+    margin-right: 18px;
+}
+
+.centerBtnContinue{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 68px;
 }
