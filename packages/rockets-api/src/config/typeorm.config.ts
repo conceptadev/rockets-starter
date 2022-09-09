@@ -11,10 +11,12 @@ import { FederatedEntity } from '../entities/federated-entity';
 import { RoleEntity } from '../entities/role.entity';
 import { UserRoleEntity } from '../entities/user-role.entity';
 import { UserOtpEntity } from '../entities/user-otp.entity';
+import { InvitationEntity } from '../entities/invitation.entity';
 
 export const ormConfigFactory = (): DataSourceOptions => {
   // return the configuration
   return {
+    logging: 'all',
     type: 'postgres',
     url:
       process.env.DATABASE_URL ??
@@ -26,6 +28,7 @@ export const ormConfigFactory = (): DataSourceOptions => {
       RoleEntity,
       UserRoleEntity,
       UserOtpEntity,
+      InvitationEntity,
     ],
     subscribers: [__dirname + '/../**/*.subscriber.js'],
     migrations: [__dirname + '/../migrations/*.js'],

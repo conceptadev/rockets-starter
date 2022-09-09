@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class Initial1657650612024 implements MigrationInterface {
-  name = 'Initial1657650612024';
+export class Initial1662558696585 implements MigrationInterface {
+  name = 'Initial1662558696585';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
@@ -12,6 +12,9 @@ export class Initial1657650612024 implements MigrationInterface {
     );
     await queryRunner.query(
       `CREATE TABLE "user_otp" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "category" character varying NOT NULL, "type" character varying, "passcode" character varying NOT NULL, "expirationDate" TIMESTAMP WITH TIME ZONE NOT NULL, "assigneeId" uuid, "auditDatecreated" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "auditDateupdated" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "auditDatedeleted" TIMESTAMP WITH TIME ZONE, "auditVersion" integer NOT NULL, CONSTRAINT "PK_494c022ed33e6ee19a2bbb11b22" PRIMARY KEY ("id"))`,
+    );
+    await queryRunner.query(
+      `CREATE TABLE "invitation" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "active" boolean NOT NULL DEFAULT true, "email" character varying NOT NULL, "code" character varying NOT NULL, "category" character varying NOT NULL, "userId" uuid NOT NULL, "auditDatecreated" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "auditDateupdated" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "auditDatedeleted" TIMESTAMP WITH TIME ZONE, "auditVersion" integer NOT NULL, CONSTRAINT "PK_beb994737756c0f18a1c1f8669c" PRIMARY KEY ("id"))`,
     );
     await queryRunner.query(
       `CREATE TABLE "user" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "email" character varying NOT NULL, "username" character varying NOT NULL, "passwordHash" text, "passwordSalt" text, "auditDatecreated" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "auditDateupdated" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "auditDatedeleted" TIMESTAMP WITH TIME ZONE, "auditVersion" integer NOT NULL, CONSTRAINT "PK_cace4a159ff9f2512dd42373760" PRIMARY KEY ("id"))`,
@@ -32,6 +35,9 @@ export class Initial1657650612024 implements MigrationInterface {
       `ALTER TABLE "user_otp" ADD CONSTRAINT "FK_beffb5a47aeba564f383d642ea9" FOREIGN KEY ("assigneeId") REFERENCES "user"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`,
     );
     await queryRunner.query(
+      `ALTER TABLE "invitation" ADD CONSTRAINT "FK_05191060fae5b5485327709be7f" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`,
+    );
+    await queryRunner.query(
       `ALTER TABLE "org" ADD CONSTRAINT "FK_695b37d1cff3d535ded8707b889" FOREIGN KEY ("ownerId") REFERENCES "user"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`,
     );
   }
@@ -39,6 +45,9 @@ export class Initial1657650612024 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
       `ALTER TABLE "org" DROP CONSTRAINT "FK_695b37d1cff3d535ded8707b889"`,
+    );
+    await queryRunner.query(
+      `ALTER TABLE "invitation" DROP CONSTRAINT "FK_05191060fae5b5485327709be7f"`,
     );
     await queryRunner.query(
       `ALTER TABLE "user_otp" DROP CONSTRAINT "FK_beffb5a47aeba564f383d642ea9"`,
@@ -52,6 +61,7 @@ export class Initial1657650612024 implements MigrationInterface {
     await queryRunner.query(`DROP TABLE "federated"`);
     await queryRunner.query(`DROP TABLE "org"`);
     await queryRunner.query(`DROP TABLE "user"`);
+    await queryRunner.query(`DROP TABLE "invitation"`);
     await queryRunner.query(`DROP TABLE "user_otp"`);
     await queryRunner.query(`DROP TABLE "user_role"`);
     await queryRunner.query(`DROP TABLE "role"`);

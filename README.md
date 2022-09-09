@@ -118,7 +118,7 @@ Your local environment must have the following prerequisites installed:
 
 - [Node >= v16.10.0](https://nodejs.org/)
 - [PostgreSQL >= v11](https://www.postgresql.org/download/) (>= v12 recommended)
-- [Yarn >= 1.20.0](https://classic.yarnpkg.com/) (latest v1.X recommended)
+- [Yarn >= 1.21.0](https://classic.yarnpkg.com/) (latest v1.X recommended)
 
 You can verify that you have these installed by running the following shell commands.
 

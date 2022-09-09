@@ -21,6 +21,12 @@ import { RoleModule } from '@concepta/nestjs-role';
 import { AuthRecoveryModule } from '@concepta/nestjs-auth-recovery';
 import { OtpModule, OtpService } from '@concepta/nestjs-otp';
 import { EmailModule, EmailService } from '@concepta/nestjs-email';
+import { EmailSendOptionsInterface } from '@concepta/ts-common/dist/email/interfaces/email-send-options.interface';
+import {
+  InvitationAcceptedEventAsync,
+  InvitationModule,
+} from '@concepta/nestjs-invitation';
+import { EventModule } from '@concepta/nestjs-event';
 
 import { ormConfig } from './config/typeorm.config';
 import { UserEntity } from './entities/user.entity';
@@ -29,15 +35,16 @@ import { FederatedEntity } from './entities/federated-entity';
 import { RoleEntity } from './entities/role.entity';
 import { UserRoleEntity } from './entities/user-role.entity';
 import { UserOtpEntity } from './entities/user-otp.entity';
-import { EmailSendOptionsInterface } from '@concepta/ts-common/dist/email/interfaces/email-send-options.interface';
+import { InvitationEntity } from './entities/invitation.entity';
 
 @Module({
   imports: [
+    EventModule.forRoot({}),
     ConfigModule.forRoot({
       isGlobal: true,
       load: [ormConfig],
     }),
-    SwaggerUiModule.register(),
+    SwaggerUiModule.register({}),
     TypeOrmExtModule.registerAsync({
       inject: [ormConfig.KEY],
       useFactory: async (config: ConfigType<typeof ormConfig>) => config,
@@ -45,10 +52,10 @@ import { EmailSendOptionsInterface } from '@concepta/ts-common/dist/email/interf
     AuthLocalModule.registerAsync({ ...createUserOpts() }),
     AuthJwtModule.registerAsync({ ...createUserOpts() }),
     AuthRefreshModule.registerAsync({ ...createUserOpts() }),
-    AuthenticationModule.register(),
-    JwtModule.register(),
+    AuthenticationModule.register({}),
+    JwtModule.forRoot({}),
     PasswordModule.register(),
-    CrudModule.register(),
+    CrudModule.forRoot({}),
     //TODO OrgModule will only work if imported before UserModule
     OrgModule.registerAsync({
       imports: [UserModule.deferred()],
@@ -61,7 +68,7 @@ import { EmailSendOptionsInterface } from '@concepta/ts-common/dist/email/interf
       },
     }),
     //TODO FederatedModule will only work if imported before UserModule
-    FederatedModule.registerAsync({
+    FederatedModule.forRootAsync({
       imports: [UserModule.deferred()],
       inject: [UserLookupService, UserMutateService],
       useFactory: (userLookupService, userMutateService) => ({
@@ -75,7 +82,7 @@ import { EmailSendOptionsInterface } from '@concepta/ts-common/dist/email/interf
         },
       },
     }),
-    AuthGithubModule.register(),
+    AuthGithubModule.register({}),
     RoleModule.register({
       settings: {
         assignments: {
@@ -93,11 +100,7 @@ import { EmailSendOptionsInterface } from '@concepta/ts-common/dist/email/interf
     }),
     //TODO FederatedModule will only work if imported before UserModule and Email modules
     AuthRecoveryModule.registerAsync({
-      imports: [
-        UserModule.deferred(),
-        OtpModule.deferred(),
-        EmailModule.deferred(),
-      ],
+      imports: [UserModule.deferred(), OtpModule.deferred()],
       inject: [UserLookupService, UserMutateService, OtpService, EmailService],
       useFactory: (
         userLookupService,
@@ -112,7 +115,7 @@ import { EmailSendOptionsInterface } from '@concepta/ts-common/dist/email/interf
       }),
     }),
     // To use a real a service, override the email env vars and replace this for 'EmailModule.register()'.
-    EmailModule.register({
+    EmailModule.forRoot({
       mailerService: {
         sendMail(sendMailOptions: EmailSendOptionsInterface): Promise<void> {
           Logger.debug('email sent', sendMailOptions);
@@ -121,14 +124,37 @@ import { EmailSendOptionsInterface } from '@concepta/ts-common/dist/email/interf
         },
       },
     }),
+    InvitationModule.registerAsync({
+      imports: [UserModule.deferred(), OtpModule.deferred()],
+      inject: [UserLookupService, UserMutateService, OtpService, EmailService],
+      useFactory: (
+        userLookupService,
+        userMutateService,
+        otpService,
+        emailService,
+      ) => ({
+        userLookupService,
+        userMutateService,
+        otpService,
+        emailService,
+      }),
+      entities: {
+        invitation: {
+          entity: InvitationEntity,
+        },
+      },
+    }),
     OtpModule.register({
       entities: {
-        userOtp: {
+        'user-otp': {
           entity: UserOtpEntity,
         },
       },
     }),
     UserModule.register({
+      settings: {
+        invitationRequestEvent: InvitationAcceptedEventAsync,
+      },
       entities: {
         user: { entity: UserEntity },
       },
