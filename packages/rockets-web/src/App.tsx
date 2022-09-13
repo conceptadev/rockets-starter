@@ -20,6 +20,7 @@ import { ReactComponent as NewLogo } from "./newLogo.svg";
 //import "@concepta/react-ui-components/dist/tailwind.css";
 
 import { Cadastro } from './pages/Cadastro/cadastro';
+import {Dashboard} from './pages/Dashboard/dashboard';
 
 interface IErrors {
   user: string;
@@ -121,6 +122,7 @@ const Routes = () => {
       <ProtectedRoute path="/" Component={Home} />
       <PublicRoute path="/cadastro" Component={Cadastro}/>
       <PublicRoute path="/login" Component={LoginForm} />
+      <PublicRoute path="/dashboard" Component={Dashboard}/>
     </Router>
   );
 };

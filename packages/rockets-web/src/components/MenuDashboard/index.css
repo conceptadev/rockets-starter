@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.containerMenu{
+    box-sizing: content-box;
+    background-color: #06857D;
+    height: 100vh;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.menu-principal{
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top:250px;
+}
+.menu-principal li a{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 229px;
+    height: 42px;
+    border-radius: 5px;
+    padding: 11px 12px 10px;
+    gap: 8px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: white;
+    
+}
+.menu-principal li a:focus{
+    background-color:#09BDB2;
+
+}
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 100,
+  'GRAD' 0,
+  'opsz' 48
+}
+.material-symbols-outlined {
+    color: white;
+    margin-right: 8px;
+}
+
+.logout{
+    box-sizing: content-box;
+    color:white;
+    font-size: 30px;
+    padding: 5px;
+    background: #09BDB2;
+    border-radius: 5px;
+    margin-top: 27px;
+}
+.perfil-adm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    bottom: 90px;
+    color: white;
+    
+}
+.perfil-adm h2{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    margin-top: 11px;
+}
+.perfil-adm p{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 8px;
+    line-height: 10px;
+    margin-top: 7px;
+}
+
+.foto-perfil{
+    width: 72px;
+    height: 72px;
+}
