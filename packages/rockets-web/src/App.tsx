@@ -21,6 +21,7 @@ import { ReactComponent as NewLogo } from "./newLogo.svg";
 
 import { Cadastro } from './pages/Cadastro/cadastro';
 import {Dashboard} from './pages/Dashboard/dashboard';
+import UsuariosCadastrados from './pages/UsuariosCadastrados/usuariosCadastrados';
 
 interface IErrors {
   user: string;
@@ -123,6 +124,7 @@ const Routes = () => {
       <PublicRoute path="/cadastro" Component={Cadastro}/>
       <PublicRoute path="/login" Component={LoginForm} />
       <PublicRoute path="/dashboard" Component={Dashboard}/>
+      <PublicRoute path="/dashboard/usuarios-cadastrados" Component={UsuariosCadastrados}/>
     </Router>
   );
 };

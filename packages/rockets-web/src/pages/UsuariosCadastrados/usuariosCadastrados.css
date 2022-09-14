@@ -1,0 +1,9 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.container-user{
+    display: flex;
+    flex-direction: row;
+    background-color: #E5E5E5;
+}

@@ -14,10 +14,10 @@ export const MenuDashboard = ()=> {
             <div className="menu-principal">
                 <ul>
                     <li>
-                        <a href="#"><span className="material-symbols-outlined">rocket_launch</span>Usuários cadastrados</a>
+                        <a href='/dashboard/usuarios-cadastrados'><span className="material-symbols-outlined">rocket_launch</span>Usuários cadastrados</a>
                     </li>
                     <li>
-                        <a href="#"><span className="material-symbols-outlined">rocket_launch</span>Vagas</a>
+                        <a href="/dashboard/vagas"><span className="material-symbols-outlined">rocket_launch</span>Vagas</a>
                     </li>
                     <li>
                         <a href="#"><span className="material-symbols-outlined">rocket_launch</span>Lorem</a>

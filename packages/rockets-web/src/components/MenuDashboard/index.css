@@ -6,9 +6,10 @@
 
 .containerMenu{
     box-sizing: content-box;
-    background-color: #06857D;
+    background: #06857D;
     height: 100vh;
     width: 300px;
+
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -71,8 +72,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
-    bottom: 90px;
+    position: absolute;
+    top:70%;
     color: white;
     
 }
