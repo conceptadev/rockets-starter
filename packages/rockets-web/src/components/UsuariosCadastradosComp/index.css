@@ -25,6 +25,13 @@
     font-size: 24px;
     line-height: 29px;
     color: #222222;
+    display: flex;
+    flex-direction: row;
+}
+.notificacao{
+    position: relative;
+    left: 700px;
+    bottom: 50px;
 }
 
 .titulo-secundario{

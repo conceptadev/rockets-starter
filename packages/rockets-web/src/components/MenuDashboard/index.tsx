@@ -1,11 +1,13 @@
-import React from "react";
+import {useState} from "react";
 import logoBranco from '../../assets/imgs/RemoteLife_horizontal-branco-sem-slogan 1.svg';
 import './index.css';
 import user from '../../assets/imgs/Vector (9).svg';
+import { Link } from "react-router-dom";
 
 
 export const MenuDashboard = ()=> {
 
+    const [active1, setActive1] = useState(false);
 
 
     return(
@@ -14,16 +16,20 @@ export const MenuDashboard = ()=> {
             <div className="menu-principal">
                 <ul>
                     <li>
-                        <a href='/dashboard/usuarios-cadastrados'><span className="material-symbols-outlined">rocket_launch</span>Usuários cadastrados</a>
+                        <Link onClick={() =>  setActive1(true) } to='/dashboard/usuarios-cadastrados' className={`${active1 ? 'active' : ''}`} ><span className="material-symbols-outlined">rocket_launch</span>Usuários cadastrados</Link>
                     </li>
                     <li>
-                        <a href="/dashboard/vagas"><span className="material-symbols-outlined">rocket_launch</span>Vagas</a>
+                        <Link  to='/dashboard'><span className="material-symbols-outlined">rocket_launch</span>Vagas</Link>
+
+                        
                     </li>
                     <li>
-                        <a href="#"><span className="material-symbols-outlined">rocket_launch</span>Lorem</a>
+                        <Link to='/dashboard/usuarios-cadastrados'><span className="material-symbols-outlined">rocket_launch</span>Lorem Impsum</Link>
+                        
                     </li>
                     <li>
-                        <a href="#"><span className="material-symbols-outlined">rocket_launch</span>Lorem</a>
+                        <Link  to='/dashboard/usuarios-cadastrados'><span className="material-symbols-outlined">rocket_launch</span>Lorem Impsum</Link>
+                        
                     </li>
                 </ul>
             </div>

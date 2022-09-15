@@ -35,11 +35,16 @@
     font-size: 16px;
     line-height: 20px;
     color: white;
+    transition: .8s;
     
 }
-.menu-principal li a:focus{
-    background-color:#09BDB2;
+.menu-principal li a:hover{
+    background: #09BDB2;
+    
+}
 
+.active{
+    background: #09BDB2;
 }
 
 

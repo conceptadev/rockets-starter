@@ -1,7 +1,7 @@
 import React from "react";
 
 import './index.css';
-
+import notificacao from '../../assets/imgs/Vector (11).svg';
 
 
 import CardUsuario from "../CardsUsuarioCadastrados";
@@ -11,7 +11,10 @@ export default function UsuariosCadastradosComp(){
         
             
             <div className="container-conteudo">
-                <div className="titulo-principal"><h1>Usuários cadastrados</h1></div>
+                <div className="titulo-principal">
+                    <h1>Usuários cadastrados</h1>
+                    <img src={notificacao} alt="notificacao" className="notificacao"/>
+                </div>
                 <div className="title-e-order-select">
                     <h2 className="titulo-secundario">Novos Cadastrados</h2>
                     <div className="orderSelect">
