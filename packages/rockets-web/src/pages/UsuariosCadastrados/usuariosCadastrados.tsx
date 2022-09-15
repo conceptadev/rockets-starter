@@ -8,13 +8,10 @@ import user from '../../assets/imgs/Vector (9).svg';
 export default function UsuariosCadastrados(){
     return(
         <div className="container-user">
-            <div>
-                <MenuDashboard/>
-            </div>
-            <div>
-                <UsuariosCadastradosComp/>
-            </div>
             
+            <MenuDashboard/>
+            <UsuariosCadastradosComp/>
+
         </div>
     );
 }

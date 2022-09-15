@@ -1,25 +1,22 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-   
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-.container-user-cadastrado{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    
-}
 
 .container-conteudo{
+    
+    padding: 0;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items:flex-start;
-    background-color:#E5E5E5;
-   
+    justify-content: initial;
+    align-items:center;
+    height: 100vh;
+    width: 100%;
+    margin-left: 350px;
 }
+
 .titulo-principal{
+    position: relative;
+    right: 390px;
     margin-left: 77px;
     margin-top: 67px;
     font-family: 'Montserrat';
@@ -27,7 +24,6 @@
     font-weight: 700;
     font-size: 24px;
     line-height: 29px;
-
     color: #222222;
 }
 
@@ -42,19 +38,21 @@
 }
 
 .title-e-order-select{
-    margin-left: 77px;
+    
+    position: relative;
+    right: 25px;
     margin-top: 96px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content:space-around;
     align-items: center;
-    max-width: 1440px;
-    min-width: 100%;
+    
+
 }
 
 #orderSelect{
     
-    
+    margin-left: 481px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -72,6 +70,7 @@
     font-size: 12px;
     line-height: 15px;
     color: #787878;
+    
 }
 
 
@@ -104,15 +103,3 @@
     margin-left: 140px;
 }
 
-
-
-.cards{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-
-    background: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
-}

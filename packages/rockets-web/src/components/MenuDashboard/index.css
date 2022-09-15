@@ -5,30 +5,26 @@
 }
 
 .containerMenu{
-    box-sizing: content-box;
+    
     background: #06857D;
-    height: 100vh;
+    height: 100%;
     width: 300px;
-
+    overflow: auto;
+    position: fixed;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
 }
 .menu-principal{
-    
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top:250px;
+    position:absolute;
+    top: 250px;
 }
 .menu-principal li a{
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 229px;
+    width: 250px;
     height: 42px;
     border-radius: 5px;
     padding: 11px 12px 10px;
@@ -60,7 +56,7 @@
 }
 
 .logout{
-    box-sizing: content-box;
+    
     color:white;
     font-size: 30px;
     padding: 5px;
@@ -69,11 +65,11 @@
     margin-top: 27px;
 }
 .perfil-adm{
+    position: absolute;
+    top: 700px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute;
-    top:70%;
     color: white;
     
 }
