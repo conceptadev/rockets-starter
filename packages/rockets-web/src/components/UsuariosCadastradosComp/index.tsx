@@ -41,8 +41,7 @@ export default function UsuariosCadastradosComp(){
                     <CardUsuario/>
                     <CardUsuario/>
                     <CardUsuario/>
-                    <CardUsuario/>
-                    <CardUsuario/>
+                    
                 </div>
                 
             </div>

@@ -1,0 +1,33 @@
+.container-card-reduzido{
+    width: 418px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    margin-top: 16px;
+}
+
+.cards-reduzidos{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    gap: 17px;
+}
+.card-atuacao-reduzido{
+    margin-left: 17px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    color: #09BDB2;
+}
+.card-nome-reduzido{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    color: #333F51;
+}

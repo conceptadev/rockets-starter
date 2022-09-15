@@ -12,7 +12,7 @@ export const MenuDashboard = ()=> {
 
     return(
         <div className="containerMenu">
-            <img src={logoBranco} alt='Logo'/>
+            <Link to='/dashboard'><img src={logoBranco} alt='Logo'/></Link>
             <div className="menu-principal">
                 <ul>
                     <li>
