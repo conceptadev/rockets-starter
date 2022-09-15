@@ -7,9 +7,9 @@ import { useState } from 'react';
 export const Dashboard = () => {
 
     return (
-        <>
+        <div className='container'>
             <MenuDashboard/>
-        </>
+        </div>
 
     );
   };
