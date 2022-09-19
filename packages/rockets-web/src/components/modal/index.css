@@ -1,0 +1,104 @@
+.modal{
+    position: fixed;
+    top:0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0,0.3);
+    z-index: 99;
+}
+
+.modal .container-modal{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    width: 526px;
+    height: 704px;
+    margin: auto;
+    position: relative;
+    top: 100px;
+    left: 100px;
+    
+}
+.close{
+    width:14.44px;
+    height:14.44px;
+    position: relative;
+    left: 480px;
+    top:26px;
+}
+.foto-perfil-modal{
+    height: 148px;
+    width: 137px;
+    position: relative;
+    left: 195px;
+
+}
+.row{
+    position: relative;
+    top:40px;
+    left: 42px;
+    max-width:460px ;
+}
+.dados{
+    
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color:#787878;
+}
+.dados-user{
+    color:#222222;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+
+
+.alinhamento-btns{
+    display: flex;
+    flex-direction: row;
+}
+.btn-modal-curriculo{
+    position: relative;
+    left: 42px;
+    top:91px;
+    width: 200px;
+    height: 35px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 28px;
+    gap: 10px;
+
+
+    background: linear-gradient(180deg, #09BDB2 0%, #06857D 100%);
+    box-shadow: 0px 1px 2px rgba(105, 81, 255, 0.05);
+    border-radius: 5px;
+
+}
+.btn-modal-contato{
+    position: relative;
+    left: 76px;
+    top:91px;
+    width: 200px;
+    height: 35px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 28px;
+    gap: 10px;
+
+
+    background: linear-gradient(180deg, #09BDB2 0%, #06857D 100%);
+    box-shadow: 0px 1px 2px rgba(105, 81, 255, 0.05);
+    border-radius: 5px;
+
+}
