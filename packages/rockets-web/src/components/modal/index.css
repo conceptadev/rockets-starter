@@ -39,6 +39,7 @@
     top:40px;
     left: 42px;
     max-width:460px ;
+    margin-bottom: 16px;
 }
 .dados{
     
@@ -67,7 +68,7 @@
 .btn-modal-curriculo{
     position: relative;
     left: 42px;
-    top:91px;
+    top:75px;
     width: 200px;
     height: 35px;
 
@@ -86,7 +87,7 @@
 .btn-modal-contato{
     position: relative;
     left: 76px;
-    top:91px;
+    top:75px;
     width: 200px;
     height: 35px;
 
