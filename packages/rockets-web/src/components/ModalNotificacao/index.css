@@ -1,0 +1,72 @@
+
+
+.container-notificacao{
+    position: absolute;
+    width: 306px;
+    height: 509px;
+    left: 718px;
+    top: 30px;
+    z-index: 99;
+    background-color: #FFFFFF;
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+
+}
+.container-notificacao h1{
+    margin-top: 20px;
+    margin-bottom: 32px;
+    margin-left: 18px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+
+    color: #000000;
+}
+.notificacao-card{
+    display: flex;
+    flex-direction: row;    
+    align-items: center;
+    justify-content: center;
+    margin-top: 19px;
+    
+}
+
+.conteudo-notificacao{
+    height: 48px;
+    width: 217px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    
+
+}
+.foto-perfil-modal-notificacao{
+    height: 34px;
+    width: 34px;
+}
+.texto-principal-notificacao{
+    
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+
+    /* texto, title */
+
+    color: #333F51;
+}
+.tempo-notificacao{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 10px;
+
+
+    color: #999999;
+
+}
