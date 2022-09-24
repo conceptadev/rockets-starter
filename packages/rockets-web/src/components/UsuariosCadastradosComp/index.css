@@ -33,6 +33,12 @@
 }
 
 .titulo-secundario{
+    position: relative;
+    right: 382px;
+    
+    margin-top: 96px;
+
+
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
@@ -42,18 +48,7 @@
     color: #222222;
 }
 
-.title-e-order-select{
-    
-    position: relative;
-    right: 25px;
-    margin-top: 96px;
-    display: flex;
-    flex-direction: row;
-    justify-content:space-around;
-    align-items: center;
-    
 
-}
 
 #orderSelect{
     
