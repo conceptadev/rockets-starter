@@ -19,18 +19,10 @@ export const MenuDashboard = ()=> {
                         <Link onClick={() =>  setActive1(true) } to='/dashboard/usuarios-cadastrados' className={`${active1 ? 'active' : ''}`} ><span className="material-symbols-outlined">rocket_launch</span>Usuários cadastrados</Link>
                     </li>
                     <li>
-                        <Link  to='/dashboard'><span className="material-symbols-outlined">rocket_launch</span>Vagas</Link>
+                        <Link  to='/dashboard'><span className="material-symbols-outlined">account_circle</span>Vagas</Link>
+                        
+                    </li>
 
-                        
-                    </li>
-                    <li>
-                        <Link to='/dashboard/usuarios-cadastrados'><span className="material-symbols-outlined">rocket_launch</span>Lorem Impsum</Link>
-                        
-                    </li>
-                    <li>
-                        <Link  to='/dashboard/usuarios-cadastrados'><span className="material-symbols-outlined">rocket_launch</span>Lorem Impsum</Link>
-                        
-                    </li>
                 </ul>
             </div>
             <div className="perfil-adm">
