@@ -17,7 +17,11 @@ import {
 import { SimpleLoginForm, Notification } from "@concepta/react-ui-components";
 import { ReactComponent as NewLogo } from "./newLogo.svg";
 
-import "@concepta/react-ui-components/dist/tailwind.css";
+//import "@concepta/react-ui-components/dist/tailwind.css";
+
+import { Cadastro } from './pages/Cadastro/cadastro';
+import {Dashboard} from './pages/Dashboard/dashboard';
+import UsuariosCadastrados from './pages/UsuariosCadastrados/usuariosCadastrados';
 
 interface IErrors {
   user: string;
@@ -117,7 +121,10 @@ const Routes = () => {
       UnauthorizedComponent={Unauthorized}
     >
       <ProtectedRoute path="/" Component={Home} />
+      <PublicRoute path="/cadastro" Component={Cadastro}/>
       <PublicRoute path="/login" Component={LoginForm} />
+      <PublicRoute path="/dashboard" Component={Dashboard}/>
+      <PublicRoute path="/dashboard/usuarios-cadastrados" Component={UsuariosCadastrados}/>
     </Router>
   );
 };

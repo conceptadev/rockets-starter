@@ -1,0 +1,101 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.containerMenu{
+    
+    background: #06857D;
+    height: 100%;
+    width: 300px;
+    overflow: auto;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.menu-principal{
+    position:absolute;
+    top: 250px;
+}
+.menu-principal li a{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 250px;
+    height: 42px;
+    border-radius: 5px;
+    padding: 11px 12px 10px;
+    gap: 8px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: white;
+    transition: .8s;
+    
+}
+.menu-principal li a:hover{
+    background: #09BDB2;
+    
+}
+
+.active{
+    background: #09BDB2;
+}
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 100,
+  'GRAD' 0,
+  'opsz' 48
+}
+.material-symbols-outlined {
+    color: white;
+    margin-right: 8px;
+}
+
+.logout{
+    
+    color:white;
+    font-size: 30px;
+    padding: 5px;
+    background: #09BDB2;
+    border-radius: 5px;
+    margin-top: 27px;
+}
+.perfil-adm{
+    position: absolute;
+    top: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    
+}
+.perfil-adm h2{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    margin-top: 11px;
+}
+.perfil-adm p{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 8px;
+    line-height: 10px;
+    margin-top: 7px;
+}
+
+.foto-perfil{
+    width: 72px;
+    height: 72px;
+}

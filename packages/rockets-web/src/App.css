@@ -1,11 +1,11 @@
-@tailwind base;
+/* @tailwind base;
 /* https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/base.min.css */
-@tailwind components;
+/*@tailwind components;
 /* https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/components.min.css */
-@tailwind utilities;
+/*@tailwind utilities;
 /* https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/utilities.min.css */
 
-
+/*
 .App {
   text-align: center;
 }
@@ -43,4 +43,15 @@
   to {
     transform: rotate(360deg);
   }
+}
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,700;0,900;1,400&display=swap');
+*{
+  margin: 0%;
+  padding: 0%;
+  
+}
+.wrapper{
+  height: 100%;
 }
