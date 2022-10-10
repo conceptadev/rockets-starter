@@ -45,7 +45,7 @@ import { InvitationEntity } from './entities/invitation.entity';
       load: [ormConfig],
     }),
     SwaggerUiModule.register({}),
-    TypeOrmExtModule.registerAsync({
+    TypeOrmExtModule.forRootAsync({
       inject: [ormConfig.KEY],
       useFactory: async (config: ConfigType<typeof ormConfig>) => config,
     }),
@@ -54,11 +54,10 @@ import { InvitationEntity } from './entities/invitation.entity';
     AuthRefreshModule.registerAsync({ ...createUserOpts() }),
     AuthenticationModule.register({}),
     JwtModule.forRoot({}),
-    PasswordModule.register(),
+    PasswordModule.forRoot({}),
     CrudModule.forRoot({}),
     //TODO OrgModule will only work if imported before UserModule
     OrgModule.registerAsync({
-      imports: [UserModule.deferred()],
       inject: [UserLookupService],
       useFactory: (userLookupService: UserLookupService) => ({
         ownerLookupService: userLookupService,
@@ -69,7 +68,6 @@ import { InvitationEntity } from './entities/invitation.entity';
     }),
     //TODO FederatedModule will only work if imported before UserModule
     FederatedModule.forRootAsync({
-      imports: [UserModule.deferred()],
       inject: [UserLookupService, UserMutateService],
       useFactory: (userLookupService, userMutateService) => ({
         userLookupService,
@@ -100,7 +98,6 @@ import { InvitationEntity } from './entities/invitation.entity';
     }),
     //TODO FederatedModule will only work if imported before UserModule and Email modules
     AuthRecoveryModule.registerAsync({
-      imports: [UserModule.deferred(), OtpModule.deferred()],
       inject: [UserLookupService, UserMutateService, OtpService, EmailService],
       useFactory: (
         userLookupService,
@@ -125,7 +122,6 @@ import { InvitationEntity } from './entities/invitation.entity';
       },
     }),
     InvitationModule.registerAsync({
-      imports: [UserModule.deferred(), OtpModule.deferred()],
       inject: [UserLookupService, UserMutateService, OtpService, EmailService],
       useFactory: (
         userLookupService,
@@ -144,14 +140,14 @@ import { InvitationEntity } from './entities/invitation.entity';
         },
       },
     }),
-    OtpModule.register({
+    OtpModule.forRoot({
       entities: {
         'user-otp': {
           entity: UserOtpEntity,
         },
       },
     }),
-    UserModule.register({
+    UserModule.forRoot({
       settings: {
         invitationRequestEvent: InvitationAcceptedEventAsync,
       },
@@ -165,7 +161,6 @@ export class AppModule {}
 
 function createUserOpts() {
   return {
-    imports: [UserModule.deferred()],
     inject: [UserLookupService],
     useFactory: (userLookupService: UserLookupService) => ({
       userLookupService,
