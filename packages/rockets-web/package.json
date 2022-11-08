@@ -4,6 +4,11 @@
   "license": "BSD-3-Clause",
   "private": true,
   "dependencies": {
+    "@concepta/react-auth-provider": "^1.0.0-alpha.1",
+    "@concepta/react-material-ui": "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-material-ui?react-mui-build-react17",
+    "@concepta/react-notification-provider": "^1.0.0-alpha.1",
+    "@concepta/react-router": "^1.0.0-alpha.1",
+    "@concepta/react-ui-components": "^1.0.0-alpha.1",
     "@craco/craco": "^6.4.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -22,10 +27,6 @@
     "react-router": "^6.0.2",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
-    "@concepta/react-ui-components": "^1.0.0-alpha.1",
-    "@concepta/react-auth-provider": "^1.0.0-alpha.1",
-    "@concepta/react-router": "^1.0.0-alpha.1",
-    "@concepta/react-notification-provider": "^1.0.0-alpha.1",
     "rxjs": "^7.4.0",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
