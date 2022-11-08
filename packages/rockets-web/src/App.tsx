@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState } from "react";
+import React, { PropsWithChildren } from "react";
 import "./App.css";
 
 import { AuthProvider, useAuth } from "@concepta/react-auth-provider";
@@ -7,128 +7,32 @@ import {
   useNotifications,
 } from "@concepta/react-notification-provider";
 
-import {
-  ProtectedRoute,
-  PublicRoute,
-  Router,
-  useNavigate,
-} from "@concepta/react-router";
+import { ProtectedRoute, PublicRoute, Router } from "@concepta/react-router";
 
-import { SimpleLoginForm, Notification } from "@concepta/react-ui-components";
-import { ReactComponent as NewLogo } from "./newLogo.svg";
+import { Notification } from "@concepta/react-ui-components";
 
 import "@concepta/react-ui-components/dist/tailwind.css";
 
-interface IErrors {
-  user: string;
-  password: string;
-}
-
-interface UserData {
-  user: string;
-  password: string;
-}
-
-const LoginForm = () => {
-  const { doLogin, user } = useAuth();
-  const { notify } = useNotifications();
-  const [errors, setErrors] = useState<IErrors>({
-    user: "",
-    password: "",
-  });
-  const navigateTo = useNavigate();
-
-  React.useEffect(() => {
-    if (user) {
-      navigateTo("/", { replace: true });
-      notify({
-        title: "Success",
-        message: "Login Success",
-        messageType: "success",
-      });
-    }
-  }, [user]);
-
-  const onClickSignIn = async ({ user, password }: UserData) => {
-    return doLogin({ username: user, password });
-  };
-
-  const onValidate = ({ user, password }: UserData) => {
-    const newErrors = { ...errors };
-    let error = false;
-    if (!user) {
-      newErrors["user"] = "Username is required";
-      error = true;
-    }
-    if (!password) {
-      newErrors["password"] = "Password is required";
-      error = true;
-    }
-    if (error) {
-      return setErrors(newErrors);
-    }
-    return onClickSignIn({ user, password });
-  };
-
-  return (
-    <React.Fragment>
-      <SimpleLoginForm
-        onSignIn={onValidate}
-        errors={errors}
-        logo={<NewLogo />}
-      />
-    </React.Fragment>
-  );
-};
-
-const NotFound = () => {
-  return <div>Not Found</div>;
-};
-
-const Unauthorized = () => {
-  return <div>Unauthorized</div>;
-};
-
-const Home = () => {
-  return (
-    <div
-      style={{
-        height: "100%",
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        color: "white",
-      }}
-    >
-      LOGGED IN!
-    </div>
-  );
-};
-
-const Routes = () => {
-  const { user } = useAuth();
-
-  return (
-    <Router
-      isAuth={!!user}
-      NotFoundComponent={NotFound}
-      UnauthorizedComponent={Unauthorized}
-    >
-      <ProtectedRoute path="/" Component={Home} />
-      <PublicRoute path="/login" Component={LoginForm} />
-    </Router>
-  );
-};
+import Home from "./app/screens/Home";
+import Login from "./app/screens/Login";
+import NotFound from "./app/screens/NotFound";
+import Unauthorized from "./app/screens/Unauthorized";
 
 const App = () => {
   const { notification } = useNotifications();
+  const { user } = useAuth();
 
   return (
     <div className="app">
       <div className="wrapper fadeInDown">
-        <Routes />
+        <Router
+          isAuth={!!user}
+          NotFoundComponent={NotFound}
+          UnauthorizedComponent={Unauthorized}
+        >
+          <ProtectedRoute path="/" Component={Home} />
+          <PublicRoute path="/login" Component={Login} />
+        </Router>
         {notification && <Notification {...notification} />}
       </div>
     </div>
