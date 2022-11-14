@@ -1750,9 +1750,22 @@
     "@nestjs/config" "^2.2.0"
     "@nestjs/swagger" "^6.0.0"
 
-"@concepta/react-material-ui@https://gitpkg.now.sh/Dias999/rockets-react/packages/react-material-ui-build?build3":
+"@concepta/react-auth-provider@https://gitpkg.now.sh/Dias999/rockets-react/packages/react-auth-provider?build4":
   version "1.0.0-alpha.1"
-  resolved "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-material-ui-build?build3#1ff99fe797d5869bca850dcaa204618e3dffe389"
+  resolved "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-auth-provider?build4#9b784c68ba7dfd9166dc4d9f3d0f5736f7675581"
+  dependencies:
+    "@concepta/react-data-provider" "^1.0.0-alpha.1"
+
+"@concepta/react-data-provider@^1.0.0-alpha.1":
+  version "1.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@concepta/react-data-provider/-/react-data-provider-1.0.0-alpha.1.tgz#d1ceef768ff7c7cb3f8b55aa58363ff2fe9917d4"
+  integrity sha512-WRJVFIvPE7TKORz7OzuAP2bam7pembmEEoh+OxUaqFg5MHTOp1PHN6zuBcvkobHN7DRFb+qsxgKUfii/IU/32g==
+  dependencies:
+    axios "^0.24.0"
+
+"@concepta/react-material-ui@https://gitpkg.now.sh/Dias999/rockets-react/packages/react-material-ui?build4":
+  version "1.0.0-alpha.1"
+  resolved "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-material-ui?build4#e61c3c35339236ac5ef3d988efa8f713916a40fc"
   dependencies:
     "@mui/icons-material" "^5.10.6"
     "@mui/material" "^5.10.6"
@@ -1762,6 +1775,13 @@
     "@rjsf/utils" "^5.0.0-beta.12"
     "@rjsf/validator-ajv8" "^5.0.0-beta.12"
     json-schema "0.4.0"
+
+"@concepta/react-router@https://gitpkg.now.sh/Dias999/rockets-react/packages/react-router?build4":
+  version "1.0.0-alpha.1"
+  resolved "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-router?build4#a67b7abef68639aefc88b27b6fd2f9bab964b5b6"
+  dependencies:
+    react-router "^6.0.2"
+    react-router-dom "^6.0.2"
 
 "@concepta/ts-common@^4.0.0-alpha.22":
   version "4.0.0-alpha.22"
@@ -2746,6 +2766,11 @@
   version "2.11.6"
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
   integrity sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==
+
+"@remix-run/router@1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.0.3.tgz#953b88c20ea00d0eddaffdc1b115c08474aa295d"
+  integrity sha512-ceuyTSs7PZ/tQqi19YZNBc5X7kj1f8p+4DIyrcIYFY9h+hd1OKm4RqtiWldR9eGEvIiJfsqwM4BsuCtRIuEw6Q==
 
 "@rjsf/core@^5.0.0-beta.12":
   version "5.0.0-beta.12"
@@ -4100,6 +4125,13 @@ axe-core@^4.4.3:
   version "4.4.3"
   resolved "https://registry.npmjs.org/axe-core/-/axe-core-4.4.3.tgz"
   integrity sha512-32+ub6kkdhhWick/UjvEwRchgoetXqTK14INLqbGm5U2TzBkBNF3nQtLYm8ovxSkQWArjEQvftCKryjZaATu3w==
+
+axios@^0.24.0:
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.24.0.tgz#804e6fa1e4b9c5288501dd9dff56a7a0940d20d6"
+  integrity sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==
+  dependencies:
+    follow-redirects "^1.14.4"
 
 axobject-query@^2.2.0:
   version "2.2.0"
@@ -6397,7 +6429,7 @@ flatted@^3.1.0:
   resolved "https://registry.npmjs.org/flatted/-/flatted-3.2.7.tgz"
   integrity sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==
 
-follow-redirects@^1.0.0:
+follow-redirects@^1.0.0, follow-redirects@^1.14.4:
   version "1.15.2"
   resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.15.2.tgz"
   integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
@@ -10076,6 +10108,21 @@ react-refresh@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.11.0.tgz#77198b944733f0f1f1a90e791de4541f9f074046"
   integrity sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==
+
+react-router-dom@^6.0.2:
+  version "6.4.3"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.4.3.tgz#70093b5f65f85f1df9e5d4182eb7ff3a08299275"
+  integrity sha512-MiaYQU8CwVCaOfJdYvt84KQNjT78VF0TJrA17SIQgNHRvLnXDJO6qsFqq8F/zzB1BWZjCFIrQpu4QxcshitziQ==
+  dependencies:
+    "@remix-run/router" "1.0.3"
+    react-router "6.4.3"
+
+react-router@6.4.3, react-router@^6.0.2:
+  version "6.4.3"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.4.3.tgz#9ed3ee4d6e95889e9b075a5d63e29acc7def0d49"
+  integrity sha512-BT6DoGn6aV1FVP5yfODMOiieakp3z46P1Fk0RNzJMACzE7C339sFuHebfvWtnB4pzBvXXkHP2vscJzWRuUjTtA==
+  dependencies:
+    "@remix-run/router" "1.0.3"
 
 react-scripts@5.0.1:
   version "5.0.1"

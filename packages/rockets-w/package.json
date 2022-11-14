@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@concepta/react-material-ui": "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-material-ui-build?build3",
+    "@concepta/react-auth-provider": "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-auth-provider?build4",
+    "@concepta/react-material-ui": "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-material-ui?build4",
+    "@concepta/react-router": "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-router?build4",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.10.9",
@@ -26,7 +28,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set GENERATE_SOURCEMAP=false && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
