@@ -3,10 +3,10 @@ import React from "react";
 import Main from "app/screens/Main";
 import Theme from "app/screens/Theme";
 import Table from "app/screens/Table";
-// import Jsonform from 'app/screens/Jsonform'
-// import SimpleForm from 'app/screens/SimpleForm'
-// import TeamMembers from 'app/screens/TeamMembers'
-// import Profile from 'app/screens/Profile'
+import Jsonform from "app/screens/Jsonform";
+import SimpleForm from "app/screens/SimpleForm";
+import TeamMembers from "app/screens/TeamMembers";
+import Profile from "app/screens/Profile";
 
 interface Routes {
   name: string;
@@ -43,26 +43,26 @@ const routes: Array<Routes> = [
     route: "/table",
     component: Table,
   },
-  // {
-  //   name: 'Jsonform',
-  //   route: '/jsonform',
-  //   component: Jsonform,
-  // },
-  // {
-  //   name: 'Simple Forms',
-  //   route: '/simple-forms',
-  //   component: SimpleForm,
-  // },
-  // {
-  //   name: 'Team Members',
-  //   route: '/team-members',
-  //   component: TeamMembers,
-  // },
-  // {
-  //   name: 'Profile',
-  //   route: '/profile',
-  //   component: Profile,
-  // },
+  {
+    name: "Jsonform",
+    route: "/jsonform",
+    component: Jsonform,
+  },
+  {
+    name: "Simple Forms",
+    route: "/simple-forms",
+    component: SimpleForm,
+  },
+  {
+    name: "Team Members",
+    route: "/team-members",
+    component: TeamMembers,
+  },
+  {
+    name: "Profile",
+    route: "/profile",
+    component: Profile,
+  },
 ];
 
 export default routes;
