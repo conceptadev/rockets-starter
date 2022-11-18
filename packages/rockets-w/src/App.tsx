@@ -1,11 +1,13 @@
-import React from "react";
-// import logo from "./logo.svg";
-// import "./App.css";
-// import { SimpleForm } from "@concepta/react-material-ui/dist";
-// import { FormType } from "@concepta/react-material-ui/dist/components/SimpleForm";
-
+import { useContext } from "react";
+import { AuthProvider } from "@concepta/react-auth-provider";
+import { ThemeProvider } from "@concepta/react-material-ui/dist/styles";
+import {
+  ThemeContext,
+  ThemeContextType,
+} from "app/context/ThemeContextProvider";
 import { PublicRoute, Router } from "@concepta/react-router";
 import routes from "./routes";
+import { themeLight, themeDark } from "app/styles/theme";
 
 const NotFound = () => {
   return <div>Not Found</div>;
@@ -16,38 +18,27 @@ const Unauthorized = () => {
 };
 
 function App() {
-  // const form: FormType = {
-  //   title: "Simplest form ever",
-  //   submitButtonLabel: "Send",
-  //   fields: {
-  //     email: {
-  //       type: "string",
-  //       title: "Email",
-  //       required: true,
-  //     },
-  //     password: {
-  //       type: "password",
-  //       title: "Password",
-  //       required: true,
-  //     },
-  //   },
-  // };
+  const { darkMode } = useContext(ThemeContext) as ThemeContextType;
 
   return (
-    <Router
-      isAuth={false}
-      NotFoundComponent={NotFound}
-      UnauthorizedComponent={Unauthorized}
-    >
-      {routes.map((route) => (
-        <PublicRoute
-          path={route.route}
-          Component={route.component}
-          key={route.name}
-          {...route.props}
-        />
-      ))}
-    </Router>
+    <ThemeProvider theme={darkMode ? themeDark : themeLight}>
+      <AuthProvider>
+        <Router
+          isAuth={false}
+          NotFoundComponent={NotFound}
+          UnauthorizedComponent={Unauthorized}
+        >
+          {routes.map((route) => (
+            <PublicRoute
+              path={route.route}
+              Component={route.component}
+              key={route.name}
+              {...route.props}
+            />
+          ))}
+        </Router>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

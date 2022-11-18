@@ -1,6 +1,7 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 // import logo from "./logo.svg";
 // import "./App.css";
+import { useAuth } from "@concepta/react-auth-provider";
 import { SimpleForm } from "@concepta/react-material-ui/dist";
 import { FormType } from "@concepta/react-material-ui/dist/components/SimpleForm";
 import {
@@ -15,16 +16,26 @@ import {
 } from "@concepta/react-material-ui";
 import logo from "app/assets/images/logo.svg";
 
+interface IErrors {
+  username: string;
+  password: string;
+}
+
+interface UserData {
+  username: string;
+  password: string;
+}
+
 const Login: FC = () => {
-  const isSingUp = false;
+  const isSignUp = false;
 
   const form: FormType = {
     title: "Simplest form ever",
     submitButtonLabel: "Send",
     fields: {
-      email: {
+      username: {
         type: "string",
-        title: "Email",
+        title: "Username",
         required: true,
       },
       password: {
@@ -33,6 +44,50 @@ const Login: FC = () => {
         required: true,
       },
     },
+  };
+
+  // @ts-expect-error: add types
+  const { doLogin, user } = useAuth();
+  // const { notify } = useNotifications();
+  const [errors, setErrors] = useState<IErrors>({
+    username: "",
+    password: "",
+  });
+  // const navigateTo = useNavigate();
+
+  React.useEffect(() => {
+    if (user) {
+      console.log("user Logged", user);
+      // navigateTo("/", { replace: true });
+      // notify({
+      //   title: "Success",
+      //   message: "Login Success",
+      //   messageType: "success",
+      // });
+    }
+  }, [user]);
+
+  const onClickSignIn = async ({ username, password }: UserData) => {
+    console.log("onClickSignIn", { username, password });
+    return doLogin({ username, password });
+  };
+
+  const onValidate = ({ username, password }: UserData) => {
+    const newErrors = { ...errors };
+    let error = false;
+    if (!username) {
+      newErrors["username"] = "Username is required";
+      error = true;
+    }
+    if (!password) {
+      newErrors["password"] = "Password is required";
+      error = true;
+    }
+    if (error) {
+      console.log("error", error);
+      return setErrors(newErrors);
+    }
+    return onClickSignIn({ username, password });
   };
 
   return (
@@ -51,38 +106,23 @@ const Login: FC = () => {
       </Text>
 
       <Text fontSize={14} fontWeight={500} color="primary.dark">
-        {isSingUp ? "Sign up" : "Sign in"} to continue!
+        {isSignUp ? "Sign up" : "Sign in"} to continue!
       </Text>
 
       <Card sx={{ marginTop: "26px", padding: "24px" }}>
         <Box>
           <SimpleForm
             form={form}
-            onSubmit={(values) => console.log("values", values)}
+            onSubmit={(values) => onValidate(values.formData)}
             // validate={validate}
             // onError={onError}
             // initialData={initialData}
           />
-
-          <Divider>
-            <Text
-              fontSize={14}
-              fontWeight={400}
-              color="text.primary"
-              sx={{ my: 3 }}
-            >
-              Or continue with
-            </Text>
-          </Divider>
-          {/* 
-          <Button variant="outlined" fullWidth>
-            <GitHubIcon sx={{ color: "text.primary" }} />
-          </Button> */}
         </Box>
 
         <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>
-          <Link href={isSingUp ? "/login" : "/sign-up"} color="primary.dark">
-            {isSingUp
+          <Link href={isSignUp ? "/login" : "/sign-up"} color="primary.dark">
+            {isSignUp
               ? "Already have an account? Sign in"
               : "No account? Sign up"}
           </Link>
