@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@concepta/react-auth-provider": "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-auth-provider?build4",
-    "@concepta/react-material-ui": "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-material-ui?build4",
-    "@concepta/react-router": "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-router?build4",
+    "@concepta/react-auth-provider": "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-auth-provider?build8",
+    "@concepta/react-data-provider": "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-data-provider?build6",
+    "@concepta/react-material-ui": "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-material-ui?build7",
+    "@concepta/react-router": "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-router?build6",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.10.9",

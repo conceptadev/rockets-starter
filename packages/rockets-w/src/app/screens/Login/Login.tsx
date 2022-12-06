@@ -1,32 +1,28 @@
-import React, { FC, useState } from "react";
-// import logo from "./logo.svg";
-// import "./App.css";
+import React, { FC } from "react";
 import { useAuth } from "@concepta/react-auth-provider";
+import { useNavigate } from "@concepta/react-router";
 import { SimpleForm } from "@concepta/react-material-ui/dist";
 import { FormType } from "@concepta/react-material-ui/dist/components/SimpleForm";
 import {
   Box,
-  Button,
   Container,
   Image,
   Text,
   Card,
   Link,
-  Divider,
 } from "@concepta/react-material-ui";
+import { FormValidation } from "@rjsf/utils";
+import { IChangeEvent } from "@rjsf/core";
 import logo from "app/assets/images/logo.svg";
 
-interface IErrors {
-  username: string;
-  password: string;
-}
-
-interface UserData {
+interface FormData {
   username: string;
   password: string;
 }
 
 const Login: FC = () => {
+  const navigate = useNavigate();
+
   const isSignUp = false;
 
   const form: FormType = {
@@ -46,48 +42,29 @@ const Login: FC = () => {
     },
   };
 
-  // @ts-expect-error: add types
   const { doLogin, user } = useAuth();
-  // const { notify } = useNotifications();
-  const [errors, setErrors] = useState<IErrors>({
-    username: "",
-    password: "",
-  });
-  // const navigateTo = useNavigate();
 
   React.useEffect(() => {
     if (user) {
       console.log("user Logged", user);
-      // navigateTo("/", { replace: true });
-      // notify({
-      //   title: "Success",
-      //   message: "Login Success",
-      //   messageType: "success",
-      // });
+      navigate("/home");
     }
   }, [user]);
 
-  const onClickSignIn = async ({ username, password }: UserData) => {
-    console.log("onClickSignIn", { username, password });
-    return doLogin({ username, password });
+  const validate = (formData: FormData, errors: FormValidation) => {
+    if (!formData.username) {
+      errors?.switch?.addError("Username is required");
+    }
+    if (!formData.password) {
+      errors?.switch?.addError("Password is required");
+    }
+
+    return errors;
   };
 
-  const onValidate = ({ username, password }: UserData) => {
-    const newErrors = { ...errors };
-    let error = false;
-    if (!username) {
-      newErrors["username"] = "Username is required";
-      error = true;
-    }
-    if (!password) {
-      newErrors["password"] = "Password is required";
-      error = true;
-    }
-    if (error) {
-      console.log("error", error);
-      return setErrors(newErrors);
-    }
-    return onClickSignIn({ username, password });
+  const handleSubmit = async (values: IChangeEvent<FormData>) => {
+    const { username, password } = values?.formData;
+    doLogin({ username, password });
   };
 
   return (
@@ -111,13 +88,7 @@ const Login: FC = () => {
 
       <Card sx={{ marginTop: "26px", padding: "24px" }}>
         <Box>
-          <SimpleForm
-            form={form}
-            onSubmit={(values) => onValidate(values.formData)}
-            // validate={validate}
-            // onError={onError}
-            // initialData={initialData}
-          />
+          <SimpleForm form={form} onSubmit={handleSubmit} validate={validate} />
         </Box>
 
         <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>
