@@ -1,11 +1,3 @@
-@tailwind base;
-/* https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/base.min.css */
-@tailwind components;
-/* https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/components.min.css */
-@tailwind utilities;
-/* https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/utilities.min.css */
-
-
 .App {
   text-align: center;
 }

@@ -1,42 +1,38 @@
 {
   "name": "rockets-web",
   "version": "0.1.0",
-  "license": "BSD-3-Clause",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^6.4.1",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "axios": "^0.24.0",
-    "body-parser": "^1.19.0",
-    "json-server": "^0.14.2",
-    "jsonwebtoken": "^8.1.0",
-    "loader-utils": "^3.2.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-router": "^6.0.2",
-    "react-router-dom": "^6.0.2",
-    "react-scripts": "4.0.3",
-    "@concepta/react-ui-components": "^1.0.0-alpha.1",
-    "@concepta/react-auth-provider": "^1.0.0-alpha.1",
-    "@concepta/react-router": "^1.0.0-alpha.1",
-    "@concepta/react-notification-provider": "^1.0.0-alpha.1",
-    "rxjs": "^7.4.0",
-    "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
+    "@concepta/react-auth-provider": "^1.0.0-alpha.2",
+    "@concepta/react-data-provider": "^1.0.0-alpha.2",
+    "@concepta/react-material-ui": "^1.0.0-alpha.2",
+    "@concepta/react-router": "^1.0.0-alpha.2",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.10.6",
+    "@mui/material": "^5.10.17",
+    "@rjsf/core": "^5.0.0-beta.13",
+    "@rjsf/mui": "^5.0.0-beta.13",
+    "@rjsf/utils": "^5.0.0-beta.13",
+    "@rjsf/validator-ajv6": "^5.0.0-beta.13",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.3",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.8.4",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-scripts eject",
-    "start-server": "json-server --watch ./database.json --port 3001",
-    "start-server-auth": "node server.js"
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -55,14 +51,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "autoprefixer": "^9",
-    "customize-cra": "^1.0.0",
-    "file-loader": "^6.2.0",
-    "postcss": "^7",
-    "react-app-rewired": "^2.1.8",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "ts-loader": "8.2.0"
   }
 }

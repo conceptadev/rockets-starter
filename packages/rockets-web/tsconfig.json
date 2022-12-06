@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
-    "composite": true,
-    "sourceMap": true,
-    "rootDir": "./",
-    "outDir": "./dist",
-    "typeRoots": ["./node_modules/@types", "../../node_modules/@types"],
+    "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
@@ -16,17 +15,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "ES6",
-    "noImplicitAny": false
+    "baseUrl": "src"
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/theme.js",
-    "server.js",
-  ],
-  "exclude": ["node_modules/**/*.stories.*", "node_modules/**/*.test.*"]
+  "include": ["src"]
 }
