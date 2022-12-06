@@ -1757,21 +1757,24 @@
     "@nestjs/config" "^2.2.0"
     "@nestjs/swagger" "^6.0.0"
 
-"@concepta/react-auth-provider@https://gitpkg.now.sh/Dias999/rockets-react/packages/react-auth-provider?build9":
-  version "1.0.0-alpha.1"
-  resolved "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-auth-provider?build9#7bd0d3c7e9f3046f849aa18a4ff9dbbdee4bd8a9"
+"@concepta/react-auth-provider@^1.0.0-alpha.2":
+  version "1.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@concepta/react-auth-provider/-/react-auth-provider-1.0.0-alpha.2.tgz#839cba87a869f02ba72de2d21e17c202ace8be88"
+  integrity sha512-HLpTWnkl8ernQO9joMJChYGy2/hPxb67sKpyEtYUjlp91T8mlhlQNE4FFwW9rBdswK9CmkmSJDEAJ64MiSP5Qw==
   dependencies:
-    "@concepta/react-data-provider" "^1.0.0-alpha.1"
+    "@concepta/react-data-provider" "^1.0.0-alpha.2"
 
-"@concepta/react-data-provider@^1.0.0-alpha.1", "@concepta/react-data-provider@https://gitpkg.now.sh/Dias999/rockets-react/packages/react-data-provider?build9":
-  version "1.0.0-alpha.1"
-  resolved "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-data-provider?build9#e5ce8b29df078935b18d5625d819200bc5bdee7c"
+"@concepta/react-data-provider@^1.0.0-alpha.2":
+  version "1.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@concepta/react-data-provider/-/react-data-provider-1.0.0-alpha.2.tgz#3ea4d3a79259a39fe2baa50141b72404b2f8aed5"
+  integrity sha512-6BgRKe0q+x0eVuHtQVHrwoHrKoD7FUE/HwD4hNqmweqbqqhEanQGmXKynlJLi7Uudp3GihjwJhUWslDUP9QKSg==
   dependencies:
     axios "^0.24.0"
 
-"@concepta/react-material-ui@https://gitpkg.now.sh/Dias999/rockets-react/packages/react-material-ui?build9":
-  version "1.0.0-alpha.1"
-  resolved "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-material-ui?build9#20aeb74f23fb71cb44c43c44948ebf39eadf0bbe"
+"@concepta/react-material-ui@^1.0.0-alpha.2":
+  version "1.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@concepta/react-material-ui/-/react-material-ui-1.0.0-alpha.2.tgz#9f2bfc192768909c70a5390c55438447e19fde0d"
+  integrity sha512-VgNdfVI+qRNTCsmzeZrprHwF0z57GGFwYIyVgU3alZLfmiz1/+uYyXWwEGQIprj60C4BwAXDRT8PZLp5gno2pg==
   dependencies:
     "@emotion/react" "^11.10.4"
     "@emotion/styled" "^11.10.4"
@@ -1784,11 +1787,11 @@
     "@rjsf/validator-ajv6" "^5.0.0-beta.13"
     json-schema "0.4.0"
 
-"@concepta/react-router@https://gitpkg.now.sh/Dias999/rockets-react/packages/react-router?build9":
-  version "1.0.0-alpha.1"
-  resolved "https://gitpkg.now.sh/Dias999/rockets-react/packages/react-router?build9#8ccc1fc327ce0a0b98b4d2cfcfdbf4f988bb8840"
+"@concepta/react-router@^1.0.0-alpha.2":
+  version "1.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@concepta/react-router/-/react-router-1.0.0-alpha.2.tgz#73673b422fab8d9607b6a66882ea19d82643dd10"
+  integrity sha512-mrcbdyI2M84f9F9HPRAVxwac4XtqfKl31cMgw1F9FwW4TfErtTdoVTkz4WpNMvgfd9Oyx98VqXkZqTSqHnnKnA==
   dependencies:
-    react-router "^6.0.2"
     react-router-dom "^6.0.2"
 
 "@concepta/ts-common@^4.0.0-alpha.22":
@@ -10175,7 +10178,7 @@ react-router-dom@^6.0.2:
     "@remix-run/router" "1.0.4"
     react-router "6.4.4"
 
-react-router@6.4.4, react-router@^6.0.2:
+react-router@6.4.4:
   version "6.4.4"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.4.4.tgz#8e7794f55ccc7050cb03937c87ff3720ce9f8b60"
   integrity sha512-SA6tSrUCRfuLWeYsTJDuriRqfFIsrSvuH7SqAJHegx9ZgxadE119rU8oOX/rG5FYEthpdEaEljdjDlnBxvfr+Q==
