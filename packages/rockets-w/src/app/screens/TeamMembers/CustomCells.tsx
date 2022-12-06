@@ -1,11 +1,12 @@
-import { FC } from 'react'
-import { Box, Dropdown, Text } from '@concepta/react-material-ui'
-import { DropdownItem } from '@concepta/react-material-ui/dist/components/Dropdown'
+import { FC } from "react";
+import { Dropdown, Text } from "@concepta/react-material-ui";
+import Box from "@mui/material/Box";
+import { DropdownItem } from "@concepta/react-material-ui/dist/components/Dropdown";
 
 type CustomNameCellProps = {
-  name: string
-  email: string
-}
+  name: string;
+  email: string;
+};
 
 const CustomNameCell: FC<CustomNameCellProps> = ({ name, email }) => (
   <>
@@ -16,32 +17,32 @@ const CustomNameCell: FC<CustomNameCellProps> = ({ name, email }) => (
       {email}
     </Text>
   </>
-)
+);
 
 type CustomRoleCellProps = {
-  id: string
-  role: string
-}
+  id: string;
+  role: string;
+};
 
 const CustomRoleCell: FC<CustomRoleCellProps> = ({ id, role }) => {
   const options: DropdownItem[] = [
     {
-      key: 'resend',
-      onClick: () => console.log('resend', id),
-      text: 'Resend Invite',
+      key: "resend",
+      onClick: () => console.log("resend", id),
+      text: "Resend Invite",
     },
     {
-      key: 'revoke',
-      onClick: () => console.log('revoke', id),
-      text: 'Revoke',
+      key: "revoke",
+      onClick: () => console.log("revoke", id),
+      text: "Revoke",
     },
-  ]
+  ];
 
   return (
     <Box display="flex" alignItems="center" justifyContent="flex-end">
       {role} <Dropdown options={options} toggleDirection="vertical" />
     </Box>
-  )
-}
+  );
+};
 
-export { CustomNameCell, CustomRoleCell }
+export { CustomNameCell, CustomRoleCell };

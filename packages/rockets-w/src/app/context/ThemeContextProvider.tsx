@@ -5,9 +5,7 @@ export type ThemeContextType = {
   setDarkMode: (isOn: boolean) => void;
 };
 
-export const ThemeContext = createContext<ThemeContextType>(
-  {} as ThemeContextType
-);
+export const ThemeContext = createContext<ThemeContextType | null>(null);
 
 type Props = {
   children: ReactNode;

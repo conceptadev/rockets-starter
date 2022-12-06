@@ -3,14 +3,10 @@ import { useAuth } from "@concepta/react-auth-provider";
 import { useNavigate } from "@concepta/react-router";
 import { SimpleForm } from "@concepta/react-material-ui/dist";
 import { FormType } from "@concepta/react-material-ui/dist/components/SimpleForm";
-import {
-  Box,
-  Container,
-  Image,
-  Text,
-  Card,
-  Link,
-} from "@concepta/react-material-ui";
+import { Image, Text, Link } from "@concepta/react-material-ui";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Card from "@mui/material/Card";
 import { FormValidation } from "@rjsf/utils";
 import { IChangeEvent } from "@rjsf/core";
 import logo from "app/assets/images/logo.svg";

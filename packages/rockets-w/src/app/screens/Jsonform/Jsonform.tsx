@@ -1,11 +1,13 @@
-import { FC } from 'react'
-import { Text, Container, Divider } from '@concepta/react-material-ui'
-import ScreenWithContainer from 'app/components/ScreenWithContainer'
-import ArrayForm from './ArrayForm'
-import ArrayMultiForm from './ArrayMultiForm'
-import SimpleForm from './SimpleForm'
-import OtherFormElements from './OtherFormElements'
-import SwitchElementForm from './SwitchElementForm'
+import { FC } from "react";
+import { Text } from "@concepta/react-material-ui";
+import Container from "@mui/material/Container";
+import Divider from "@mui/material/Divider";
+import ScreenWithContainer from "app/components/ScreenWithContainer";
+import ArrayForm from "./ArrayForm";
+import ArrayMultiForm from "./ArrayMultiForm";
+import SimpleForm from "./SimpleForm";
+import OtherFormElements from "./OtherFormElements";
+import SwitchElementForm from "./SwitchElementForm";
 
 const Jsonform: FC = () => (
   <ScreenWithContainer currentId="jsonform">
@@ -40,6 +42,6 @@ const Jsonform: FC = () => (
       <ArrayMultiForm />
     </Container>
   </ScreenWithContainer>
-)
+);
 
-export default Jsonform
+export default Jsonform;

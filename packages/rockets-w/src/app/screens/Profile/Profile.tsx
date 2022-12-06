@@ -1,53 +1,49 @@
-import React, { FC, useState } from 'react'
-import {
-  Box,
-  Button,
-  Dialog,
-  TextField,
-  Text,
-} from '@concepta/react-material-ui'
-import { useTheme } from '@concepta/react-material-ui/dist/styles'
-import ScreenWithContainer from 'app/components/ScreenWithContainer'
-import ChangePasswordForm from './ChangePasswordForm'
-import ConfirmationModal from './ConfirmationModal'
+import React, { FC, useState } from "react";
+import { Dialog, TextField, Text } from "@concepta/react-material-ui";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import useTheme from "@mui/material/styles/useTheme";
+import ScreenWithContainer from "app/components/ScreenWithContainer";
+import ChangePasswordForm from "./ChangePasswordForm";
+import ConfirmationModal from "./ConfirmationModal";
 
 const Profile: FC = () => {
-  const theme = useTheme()
+  const theme = useTheme();
 
-  const lightMode = theme.palette.mode === 'light'
+  const lightMode = theme.palette.mode === "light";
 
-  const [addMemberModalOpen, setAddMemberModalOpen] = useState<boolean>(false)
+  const [addMemberModalOpen, setAddMemberModalOpen] = useState<boolean>(false);
   const [confirmationModalOpen, setConfirmationModalOpen] =
-    useState<boolean>(false)
+    useState<boolean>(false);
 
-  const [form, setForm] = useState({ firstName: 'John', lastName: 'Smith' })
+  const [form, setForm] = useState({ firstName: "John", lastName: "Smith" });
 
   const openMemberModal = () => {
-    setAddMemberModalOpen(true)
-  }
+    setAddMemberModalOpen(true);
+  };
 
   const closeMemberModal = () => {
-    setAddMemberModalOpen(false)
-  }
+    setAddMemberModalOpen(false);
+  };
 
   const openConfirmationModal = () => {
-    setConfirmationModalOpen(true)
-  }
+    setConfirmationModalOpen(true);
+  };
 
   const closeConfirmationModal = () => {
-    setConfirmationModalOpen(false)
-  }
+    setConfirmationModalOpen(false);
+  };
 
   const handleFormChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
       [evt.target.name]: evt.target.value,
-    })
-  }
+    });
+  };
 
   const sendForm = () => {
-    console.log('form:', form)
-  }
+    console.log("form:", form);
+  };
 
   return (
     <>
@@ -56,14 +52,14 @@ const Profile: FC = () => {
           <Text
             fontWeight="500"
             fontSize={24}
-            sx={{ color: lightMode ? '#111827' : '#dce2ee' }}
+            sx={{ color: lightMode ? "#111827" : "#dce2ee" }}
           >
             Profile
           </Text>
           <Text
             fontWeight="400"
             fontSize={14}
-            sx={{ color: lightMode ? '#6B7280' : '#9098a7' }}
+            sx={{ color: lightMode ? "#6B7280" : "#9098a7" }}
           >
             Update your profile
           </Text>
@@ -124,7 +120,7 @@ const Profile: FC = () => {
         <ConfirmationModal handleClose={closeConfirmationModal} />
       </Dialog>
     </>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

@@ -1,72 +1,74 @@
-import { FC } from 'react'
-import { Box, Button, Text } from '@concepta/react-material-ui'
-import { RJSFSchema, UiSchema } from '@rjsf/utils'
-import validator from '@rjsf/validator-ajv8'
-import { IChangeEvent } from '@rjsf/core'
-import Form from '@rjsf/mui'
+import { FC } from "react";
+import { Text } from "@concepta/react-material-ui";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import { RJSFSchema, UiSchema } from "@rjsf/utils";
+import validator from "@rjsf/validator-ajv6";
+import { IChangeEvent } from "@rjsf/core";
+import Form from "@rjsf/mui";
 import {
   CustomCheckboxWidget,
   CustomCheckboxesWidget,
   CustomRadioWidget,
   CustomSelectWidget,
-} from '@concepta/react-material-ui/dist/styles/CustomWidgets'
+} from "@concepta/react-material-ui/dist/styles/CustomWidgets";
 
 type FormData = {
-  checkboxSolo: boolean
-  checkboxGroup: string[]
-  radio: string
-  select: string
-}
+  checkboxSolo: boolean;
+  checkboxGroup: string[];
+  radio: string;
+  select: string;
+};
 
 const OtherFormElements: FC = () => {
   const schema: RJSFSchema = {
-    type: 'object',
+    type: "object",
     properties: {
       checkboxSolo: {
-        type: 'boolean',
-        title: 'I agree to subscribe',
+        type: "boolean",
+        title: "I agree to subscribe",
         enum: [true, false],
       },
       checkboxGroup: {
-        type: 'array',
-        title: 'A multiple choices list',
+        type: "array",
+        title: "A multiple choices list",
         items: {
-          type: 'string',
-          enum: ['foo', 'bar', 'fuzz', 'qux'],
+          type: "string",
+          enum: ["foo", "bar", "fuzz", "qux"],
         },
         uniqueItems: true,
       },
       radio: {
-        type: 'string',
-        title: 'Which is your favorite for gaming?',
-        enum: ['PS5', 'Xbox', 'PC', 'Mobile'],
+        type: "string",
+        title: "Which is your favorite for gaming?",
+        enum: ["PS5", "Xbox", "PC", "Mobile"],
       },
       select: {
-        type: 'string',
+        type: "string",
         title: "Who's your favorite character",
-        enum: ['Mario', 'Sonic', 'Lara Croft', 'Pac-man'],
+        enum: ["Mario", "Sonic", "Lara Croft", "Pac-man"],
       },
     },
-  }
+  };
 
   const uiSchema: UiSchema = {
     checkboxSolo: {
-      'ui:widget': CustomCheckboxWidget,
+      "ui:widget": CustomCheckboxWidget,
     },
     checkboxGroup: {
-      'ui:widget': CustomCheckboxesWidget,
+      "ui:widget": CustomCheckboxesWidget,
     },
     radio: {
-      'ui:widget': CustomRadioWidget,
+      "ui:widget": CustomRadioWidget,
     },
     select: {
-      'ui:widget': CustomSelectWidget,
+      "ui:widget": CustomSelectWidget,
     },
-  }
+  };
 
   const handleSubmit = (values: IChangeEvent<FormData>) => {
-    console.log('values', values.formData)
-  }
+    console.log("values", values.formData);
+  };
 
   return (
     <>
@@ -89,7 +91,7 @@ const OtherFormElements: FC = () => {
           validator={validator}
           noHtml5Validate={true}
           showErrorList={false}
-          onError={err => console.log('errors', err)}
+          onError={(err) => console.log("errors", err)}
         >
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3 }}>
             Submit
@@ -97,7 +99,7 @@ const OtherFormElements: FC = () => {
         </Form>
       </Box>
     </>
-  )
-}
+  );
+};
 
-export default OtherFormElements
+export default OtherFormElements;

@@ -1,4 +1,4 @@
-import { createTheme } from "@concepta/react-material-ui/dist/styles";
+import createTheme from "@mui/material/styles/createTheme";
 
 export const themeLight = createTheme({
   palette: {

@@ -1,36 +1,38 @@
-import { FC } from 'react'
-import { Box, Button, Text } from '@concepta/react-material-ui'
-import { RJSFSchema, UiSchema } from '@rjsf/utils'
-import validator from '@rjsf/validator-ajv8'
-import { IChangeEvent } from '@rjsf/core'
-import Form from '@rjsf/mui'
-import { CustomSwitchWidget } from '@concepta/react-material-ui/dist/styles/CustomWidgets'
+import { FC } from "react";
+import { Text } from "@concepta/react-material-ui";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import { RJSFSchema, UiSchema } from "@rjsf/utils";
+import validator from "@rjsf/validator-ajv6";
+import { IChangeEvent } from "@rjsf/core";
+import Form from "@rjsf/mui";
+import { CustomSwitchWidget } from "@concepta/react-material-ui/dist/styles/CustomWidgets";
 
 type FormData = {
-  checkboxSolo: boolean
-}
+  checkboxSolo: boolean;
+};
 
 const OtherFormElements: FC = () => {
   const schema: RJSFSchema = {
-    type: 'object',
+    type: "object",
     properties: {
       checkboxSolo: {
-        type: 'boolean',
-        title: 'I agree to subscribe',
+        type: "boolean",
+        title: "I agree to subscribe",
         enum: [true, false],
       },
     },
-  }
+  };
 
   const uiSchema: UiSchema = {
     checkboxSolo: {
-      'ui:widget': CustomSwitchWidget,
+      "ui:widget": CustomSwitchWidget,
     },
-  }
+  };
 
   const handleSubmit = (values: IChangeEvent<FormData>) => {
-    console.log('values', values.formData)
-  }
+    console.log("values", values.formData);
+  };
 
   return (
     <>
@@ -53,7 +55,7 @@ const OtherFormElements: FC = () => {
           onSubmit={handleSubmit}
           noHtml5Validate={true}
           showErrorList={false}
-          onError={err => console.log('errors', err)}
+          onError={(err) => console.log("errors", err)}
         >
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3 }}>
             Submit
@@ -61,7 +63,7 @@ const OtherFormElements: FC = () => {
         </Form>
       </Box>
     </>
-  )
-}
+  );
+};
 
-export default OtherFormElements
+export default OtherFormElements;
