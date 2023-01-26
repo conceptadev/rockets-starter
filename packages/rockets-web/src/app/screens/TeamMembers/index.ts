@@ -1,3 +1,3 @@
-import TeamMembers from './TeamMembers'
+import TeamMembers from './TeamMembers';
 
-export default TeamMembers
+export default TeamMembers;

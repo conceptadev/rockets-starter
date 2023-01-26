@@ -1,4 +1,4 @@
-import { HeadersProps } from '@concepta/react-material-ui/dist/components/Table/Table'
+import { HeadersProps } from '@concepta/react-material-ui/dist/components/Table/Table';
 
 function createData(
   id: string,
@@ -15,7 +15,7 @@ function createData(
     status,
     role,
     lastLogin,
-  }
+  };
 }
 
 export const headers: HeadersProps[] = [
@@ -43,7 +43,7 @@ export const headers: HeadersProps[] = [
     disablePadding: false,
     label: 'Last Login',
   },
-]
+];
 
 export const rows = [
   createData(
@@ -142,4 +142,4 @@ export const rows = [
     'Teacher',
     '10.01.21',
   ),
-]
+];

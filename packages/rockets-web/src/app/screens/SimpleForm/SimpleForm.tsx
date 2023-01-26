@@ -1,8 +1,8 @@
-import { FC } from "react";
-import { Text } from "@concepta/react-material-ui";
-import Container from "@mui/material/Container";
-import ScreenWithContainer from "app/components/ScreenWithContainer";
-import Form from "./Form";
+import { FC } from 'react';
+import { Text } from '@concepta/react-material-ui';
+import Container from '@mui/material/Container';
+import ScreenWithContainer from 'app/components/ScreenWithContainer';
+import Form from './Form';
 
 const SimpleForm: FC = () => (
   <ScreenWithContainer currentId="simpleform">

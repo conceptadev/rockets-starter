@@ -1,38 +1,38 @@
-import { FC } from 'react'
-import { SimpleForm } from '@concepta/react-material-ui'
-import { FormType } from '@concepta/react-material-ui/dist/components/SimpleForm'
-import { FormValidation } from '@rjsf/utils'
+import { FC } from 'react';
+import { SimpleForm } from '@concepta/react-material-ui';
+import { FormType } from '@concepta/react-material-ui/dist/components/SimpleForm';
+import { FormValidation } from '@rjsf/utils';
 
 type FormData = {
-  email: string
-  password: string
-  checkbox: boolean
-  checkboxes: string[]
-  character: string
-  series: string
-  address: string[]
+  email: string;
+  password: string;
+  checkbox: boolean;
+  checkboxes: string[];
+  character: string;
+  series: string;
+  address: string[];
   multiAddress: {
-    name: string
-    city: string
-    addressType: string
-    isPrimaryAddress: boolean
-  }[]
-  radio: string
-  switch: boolean
-}
+    name: string;
+    city: string;
+    addressType: string;
+    isPrimaryAddress: boolean;
+  }[];
+  radio: string;
+  switch: boolean;
+};
 
 const Form: FC = () => {
   const validate = (formData: FormData, errors: FormValidation) => {
     if (!formData.switch) {
-      errors?.switch?.addError('Must accept to proceed')
+      errors?.switch?.addError('Must accept to proceed');
     }
 
-    return errors
-  }
+    return errors;
+  };
 
-  const onError = (error: any) => {
-    console.log('error', error)
-  }
+  const onError = (error: unknown) => {
+    console.error(error);
+  };
 
   const form: FormType = {
     title: 'Simplest form ever',
@@ -109,7 +109,7 @@ const Form: FC = () => {
         title: 'Is this thing on?',
       },
     },
-  }
+  };
 
   const initialData = {
     email: 'myemail@gomail.com',
@@ -129,7 +129,7 @@ const Form: FC = () => {
     ],
     radio: 'ps5',
     switch: true,
-  }
+  };
 
   return (
     <SimpleForm
@@ -139,7 +139,7 @@ const Form: FC = () => {
       onError={onError}
       initialData={initialData}
     />
-  )
-}
+  );
+};
 
-export default Form
+export default Form;

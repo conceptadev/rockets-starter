@@ -1,14 +1,14 @@
-import { FC } from "react";
-import { Text } from "@concepta/react-material-ui";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import { RJSFSchema } from "@rjsf/utils";
-import validator from "@rjsf/validator-ajv6";
-import Form from "@rjsf/mui";
+import { FC } from 'react';
+import { Text } from '@concepta/react-material-ui';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { RJSFSchema } from '@rjsf/utils';
+import validator from '@rjsf/validator-ajv6';
+import Form from '@rjsf/mui';
 import {
   CustomTextFieldWidget,
   ArrayFieldTemplate,
-} from "@concepta/react-material-ui/dist/styles/CustomWidgets";
+} from '@concepta/react-material-ui/dist/styles/CustomWidgets';
 
 const ArrayForm: FC = () => {
   const widgets = {
@@ -16,16 +16,16 @@ const ArrayForm: FC = () => {
   };
 
   const schema: RJSFSchema = {
-    type: "object",
-    required: ["name"],
+    type: 'object',
+    required: ['name'],
     properties: {
-      name: { type: "string", title: "Name" },
+      name: { type: 'string', title: 'Name' },
       address: {
-        type: "array",
-        title: "Address",
+        type: 'array',
+        title: 'Address',
         items: {
-          title: "Address",
-          type: "string",
+          title: 'Address',
+          type: 'string',
         },
       },
     },
@@ -34,7 +34,7 @@ const ArrayForm: FC = () => {
   const log = (type: string) => console.log.bind(console, type);
 
   const formData = {
-    address: [""],
+    address: [''],
   };
 
   return (
@@ -55,9 +55,9 @@ const ArrayForm: FC = () => {
           schema={schema}
           formData={formData}
           validator={validator}
-          onChange={log("changed")}
-          onSubmit={(values) => console.log("values", values)}
-          onError={log("errors")}
+          onChange={log('changed')}
+          onSubmit={values => console.log('values', values)}
+          onError={log('errors')}
           widgets={widgets}
           templates={{ ArrayFieldTemplate }}
           noHtml5Validate={true}

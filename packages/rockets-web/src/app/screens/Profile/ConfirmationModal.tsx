@@ -1,8 +1,8 @@
-import { FC } from "react";
-import { Text } from "@concepta/react-material-ui";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import CheckIcon from "@mui/icons-material/Check";
+import { FC } from 'react';
+import { Text } from '@concepta/react-material-ui';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import CheckIcon from '@mui/icons-material/Check';
 
 type Props = {
   handleClose: () => void;
@@ -13,9 +13,9 @@ const ConfirmationModal: FC<Props> = ({ handleClose }) => {
       <Box
         display="flex"
         sx={{
-          backgroundColor: "#d1fae5",
-          padding: "12px",
-          borderRadius: "50%",
+          backgroundColor: '#d1fae5',
+          padding: '12px',
+          borderRadius: '50%',
           mb: 2,
         }}
       >

@@ -1,18 +1,18 @@
-import { FC } from 'react'
-import { SimpleForm } from '@concepta/react-material-ui'
-import { FormType } from '@concepta/react-material-ui/dist/components/SimpleForm'
-import { FormValidation } from '@rjsf/utils'
+import { FC } from 'react';
+import { SimpleForm } from '@concepta/react-material-ui';
+import { FormType } from '@concepta/react-material-ui/dist/components/SimpleForm';
+import { FormValidation } from '@rjsf/utils';
 
 type FormData = {
-  oldPassword: string
-  newPassword: string
-  confirmPassword: string
-}
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+};
 
 type ChangePasswordFormProps = {
-  closeMemberModal: () => void
-  openConfirmationModal: () => void
-}
+  closeMemberModal: () => void;
+  openConfirmationModal: () => void;
+};
 
 const ChangePasswordForm: FC<ChangePasswordFormProps> = ({
   closeMemberModal,
@@ -37,27 +37,27 @@ const ChangePasswordForm: FC<ChangePasswordFormProps> = ({
         required: true,
       },
     },
-  }
+  };
 
   const validate = (formData: FormData, errors: FormValidation) => {
     if (formData.newPassword != formData.confirmPassword) {
-      errors?.confirmPassword?.addError('Password confirmation do not match')
+      errors?.confirmPassword?.addError('Password confirmation do not match');
     }
 
-    return errors
-  }
+    return errors;
+  };
 
   return (
     <SimpleForm
       form={form}
       onSubmit={values => {
-        console.log('values', values)
-        closeMemberModal()
-        openConfirmationModal()
+        console.log('values', values);
+        closeMemberModal();
+        openConfirmationModal();
       }}
       validate={validate}
     />
-  )
-}
+  );
+};
 
-export default ChangePasswordForm
+export default ChangePasswordForm;

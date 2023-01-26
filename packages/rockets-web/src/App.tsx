@@ -1,13 +1,13 @@
-import { useContext } from "react";
-import { AuthProvider } from "@concepta/react-auth-provider";
-import { ThemeProvider } from "@concepta/react-material-ui/dist/styles";
+import { useContext } from 'react';
+import { AuthProvider } from '@concepta/react-auth-provider';
+import { ThemeProvider } from '@concepta/react-material-ui/dist/styles';
 import {
   ThemeContext,
   ThemeContextType,
-} from "app/context/ThemeContextProvider";
-import { PublicRoute, Router } from "@concepta/react-router";
-import routes from "./routes";
-import { themeLight, themeDark } from "app/styles/theme";
+} from 'app/context/ThemeContextProvider';
+import { PublicRoute, Router } from '@concepta/react-router';
+import routes from './routes';
+import { themeLight, themeDark } from 'app/styles/theme';
 
 const NotFound = () => {
   return <div>Not Found</div>;
@@ -28,7 +28,7 @@ function App() {
           NotFoundComponent={NotFound}
           UnauthorizedComponent={Unauthorized}
         >
-          {routes.map((route) => (
+          {routes.map(route => (
             <PublicRoute
               path={route.route}
               Component={route.component}

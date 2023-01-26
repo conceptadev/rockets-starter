@@ -1,13 +1,13 @@
-import { FC, useState } from "react";
-import { Dialog, Table, Text } from "@concepta/react-material-ui";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import useTheme from "@mui/material/styles/useTheme";
-import { RowsProps } from "@concepta/react-material-ui/dist/components/Table/Table";
-import ScreenWithContainer from "app/components/ScreenWithContainer";
-import { rows, headers } from "./fakeData";
-import { CustomNameCell, CustomRoleCell } from "./CustomCells";
-import { MemberForm } from "./Styles";
+import { FC, useState } from 'react';
+import { Dialog, Table, Text } from '@concepta/react-material-ui';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import useTheme from '@mui/material/styles/useTheme';
+import { RowsProps } from '@concepta/react-material-ui/dist/components/Table/Table';
+import ScreenWithContainer from 'app/components/ScreenWithContainer';
+import { rows, headers } from './fakeData';
+import { CustomNameCell, CustomRoleCell } from './CustomCells';
+import { MemberForm } from './Styles';
 
 const TeamMembers: FC = () => {
   const theme = useTheme();
@@ -22,7 +22,7 @@ const TeamMembers: FC = () => {
   };
 
   const customRows: () => RowsProps[] = () => {
-    return rows.map((row) => {
+    return rows.map(row => {
       const { id, name, email, role } = row;
 
       return {
@@ -39,7 +39,7 @@ const TeamMembers: FC = () => {
     });
   };
 
-  const lightMode = theme.palette.mode === "light";
+  const lightMode = theme.palette.mode === 'light';
 
   return (
     <ScreenWithContainer currentId="teamMembers">
@@ -48,14 +48,14 @@ const TeamMembers: FC = () => {
           <Text
             fontWeight="500"
             fontSize={24}
-            sx={{ color: lightMode ? "#111827" : "#dce2ee" }}
+            sx={{ color: lightMode ? '#111827' : '#dce2ee' }}
           >
             Team Members
           </Text>
           <Text
             fontWeight="400"
             fontSize={14}
-            sx={{ color: lightMode ? "#6B7280" : "#9098a7" }}
+            sx={{ color: lightMode ? '#6B7280' : '#9098a7' }}
           >
             Invite other members to your account
           </Text>

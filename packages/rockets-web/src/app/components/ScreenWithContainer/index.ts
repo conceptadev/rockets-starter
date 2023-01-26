@@ -1,3 +1,3 @@
-import ScreenWithContainer from './ScreenWithContainer'
+import ScreenWithContainer from './ScreenWithContainer';
 
-export default ScreenWithContainer
+export default ScreenWithContainer;

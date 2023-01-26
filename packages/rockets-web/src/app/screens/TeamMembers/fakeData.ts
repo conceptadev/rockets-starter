@@ -1,4 +1,4 @@
-import { HeadersProps } from '@concepta/react-material-ui/dist/components/Table/Table'
+import { HeadersProps } from '@concepta/react-material-ui/dist/components/Table/Table';
 
 function createData(
   id: string,
@@ -11,7 +11,7 @@ function createData(
     name,
     email,
     role,
-  }
+  };
 }
 
 export const headers: HeadersProps[] = [
@@ -28,7 +28,7 @@ export const headers: HeadersProps[] = [
     label: 'Role',
     textAlign: 'right',
   },
-]
+];
 
 export const rows = [
   createData('johnSmith', 'John Smith', 'johnsmith@example.com', 'Owner'),
@@ -93,4 +93,4 @@ export const rows = [
     'emailaddress@example.com',
     'Invited',
   ),
-]
+];

@@ -1,3 +1,3 @@
-import Jsonform from './Jsonform'
+import Jsonform from './Jsonform';
 
-export default Jsonform
+export default Jsonform;

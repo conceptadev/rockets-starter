@@ -1,3 +1,3 @@
-import SimpleForm from './SimpleForm'
+import SimpleForm from './SimpleForm';
 
-export default SimpleForm
+export default SimpleForm;
