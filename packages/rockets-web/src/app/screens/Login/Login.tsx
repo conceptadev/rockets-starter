@@ -1,62 +1,53 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
+
+// Concepta Components
 import { useAuth } from '@concepta/react-auth-provider';
 import { useNavigate } from '@concepta/react-router';
-import { SimpleForm } from '@concepta/react-material-ui/dist';
-import { FormType } from '@concepta/react-material-ui/dist/components/SimpleForm';
-import { Image, Text, Link } from '@concepta/react-material-ui';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Card from '@mui/material/Card';
-import { FormValidation } from '@rjsf/utils';
+import {
+  FormTemplate,
+  Image,
+  Link,
+  SimpleForm,
+  Text,
+} from '@concepta/react-material-ui/dist';
+
+// Content
+import form from 'app/forms/Login';
+import content from 'app/content/content';
+
+// External Components
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { IChangeEvent } from '@rjsf/core';
-import logo from 'app/assets/images/logo.svg';
+
+// Project Components
+import Plugins from './../../components/Plugins';
+import Github from './../../components/Github';
+import CustomAlert from '../../components/CustomAlert';
 
 interface FormData {
   username: string;
   password: string;
 }
 
-const Login: FC = () => {
+interface LoginProps {
+  title: string;
+}
+
+const Login: FC<LoginProps> = () => {
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   const isSignUp = false;
 
-  const form: FormType = {
-    title: 'Simplest form ever',
-    submitButtonLabel: 'Send',
-    fields: {
-      username: {
-        type: 'string',
-        title: 'Username',
-        required: true,
-      },
-      password: {
-        type: 'password',
-        title: 'Password',
-        required: true,
-      },
-    },
-  };
-
   const { doLogin, user } = useAuth();
 
   React.useEffect(() => {
+    setError(false);
     if (user) {
       console.log('user Logged', user);
-      navigate('/home');
+      navigate('/complete-profile');
     }
   }, [user]);
-
-  const validate = (formData: FormData, errors: FormValidation) => {
-    if (!formData.username) {
-      errors?.switch?.addError('Username is required');
-    }
-    if (!formData.password) {
-      errors?.switch?.addError('Password is required');
-    }
-
-    return errors;
-  };
 
   const handleSubmit = async (values: IChangeEvent<FormData>) => {
     const { username, password } = values?.formData;
@@ -64,38 +55,42 @@ const Login: FC = () => {
   };
 
   return (
-    <Container maxWidth="xs" sx={{ textAlign: 'center', padding: '48px 0' }}>
-      <Image src={logo} alt="Logo" />
-
-      <Text
-        variant="h4"
-        fontFamily="Inter"
-        fontSize={30}
-        fontWeight={800}
-        mt={1}
-        gutterBottom
+    <>
+      <FormTemplate
+        title={content.signIn.title}
+        subtitle={content.signIn.signIn}
+        icon={<Image src={content.signIn.logo} alt="Logo" />}
+        subtitleTextProps={{ fontSize: '22px' }}
       >
-        Welcome
-      </Text>
-
-      <Text fontSize={14} fontWeight={500} color="primary.dark">
-        {isSignUp ? 'Sign up' : 'Sign in'} to continue!
-      </Text>
-
-      <Card sx={{ marginTop: '26px', padding: '24px' }}>
-        <Box>
-          <SimpleForm form={form} onSubmit={handleSubmit} validate={validate} />
-        </Box>
-
-        <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>
-          <Link href={isSignUp ? '/login' : '/sign-up'} color="primary.dark">
-            {isSignUp
-              ? 'Already have an account? Sign in'
-              : 'No account? Sign up'}
+        <SimpleForm form={form} onSubmit={handleSubmit} />
+        <Text mb={3} mt={3} fontSize={14} fontWeight={500} gutterBottom>
+          <Link
+            fontSize={14}
+            fontWeight={400}
+            gutterBottom
+            sx={{ marginTop: 3, textDecoration: 'none' }}
+            href={isSignUp ? '/login' : '/sign-up'}
+          >
+            {content.signIn.forgotPassword}
           </Link>
         </Text>
-      </Card>
-    </Container>
+        <Plugins text={content.signIn.continueWith}>
+          <Github />
+        </Plugins>
+        <Text mb={3} mt={3} fontSize={14} fontWeight={500} gutterBottom>
+          <Link href={isSignUp ? '/login' : '/sign-up'}>
+            {isSignUp
+              ? content.signIn.alreadyAccount
+              : content.signIn.noAccount}
+          </Link>
+        </Text>
+      </FormTemplate>
+      <CustomAlert
+        icon={<CheckCircleIcon fontSize="inherit" />}
+        message="Request error message"
+        status={error}
+      />
+    </>
   );
 };
 

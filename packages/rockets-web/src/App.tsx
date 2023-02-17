@@ -7,7 +7,7 @@ import {
 } from 'app/context/ThemeContextProvider';
 import { PublicRoute, Router } from '@concepta/react-router';
 import routes from './routes';
-import { themeLight, themeDark } from 'app/styles/theme';
+import { themeLight } from 'app/styles/theme';
 
 const NotFound = () => {
   return <div>Not Found</div>;
@@ -21,7 +21,7 @@ function App() {
   const { darkMode } = useContext(ThemeContext) as ThemeContextType;
 
   return (
-    <ThemeProvider theme={darkMode ? themeDark : themeLight}>
+    <ThemeProvider theme={!darkMode ? themeLight : themeLight}>
       <AuthProvider>
         <Router
           isAuth={false}

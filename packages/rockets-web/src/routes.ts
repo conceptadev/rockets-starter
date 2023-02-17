@@ -1,5 +1,5 @@
 import Login from 'app/screens/Login';
-import React, { FC } from 'react';
+import React from 'react';
 import Main from 'app/screens/Main';
 import Theme from 'app/screens/Theme';
 import Table from 'app/screens/Table';
@@ -7,12 +7,15 @@ import Jsonform from 'app/screens/Jsonform';
 import SimpleForm from 'app/screens/SimpleForm';
 import TeamMembers from 'app/screens/TeamMembers';
 import Profile from 'app/screens/Profile';
+import CompleteProfile from 'app/screens/CompleteProfile';
+import RecoverPassword from 'app/screens/RecoverPassword';
+import ChangePassword from 'app/screens/RecoverPassword/Steps/ChangePassword';
 
 interface Routes {
   name: string;
   route: string;
-  component: React.FC<FC> | null;
-  props?: Record<string, unknown>;
+  component: React.FC<any> | null;
+  props?: Record<string, any>;
 }
 
 const routes: Array<Routes> = [
@@ -21,6 +24,21 @@ const routes: Array<Routes> = [
     route: '/login',
     component: Login,
     props: { type: 'signIn' },
+  },
+  {
+    name: 'Complete Profile',
+    route: '/complete-profile',
+    component: CompleteProfile,
+  },
+  {
+    name: 'Recover Password',
+    route: '/recover-password',
+    component: RecoverPassword,
+  },
+  {
+    name: 'Change Password',
+    route: '/change-password',
+    component: ChangePassword,
   },
   // {
   //   name: 'Sign up',
