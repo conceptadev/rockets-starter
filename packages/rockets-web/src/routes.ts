@@ -10,6 +10,7 @@ import Profile from 'app/screens/Profile';
 import CompleteProfile from 'app/screens/CompleteProfile';
 import RecoverPassword from 'app/screens/RecoverPassword';
 import ChangePassword from 'app/screens/RecoverPassword/Steps/ChangePassword';
+import Example from 'app/screens/Example';
 
 interface Routes {
   name: string;
@@ -24,6 +25,11 @@ const routes: Array<Routes> = [
     route: '/login',
     component: Login,
     props: { type: 'signIn' },
+  },
+  {
+    name: 'Example',
+    route: '/example',
+    component: Example,
   },
   {
     name: 'Complete Profile',
