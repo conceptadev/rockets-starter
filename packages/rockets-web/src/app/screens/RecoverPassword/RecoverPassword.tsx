@@ -1,32 +1,23 @@
-import { FormTemplate, Image, SimpleForm } from '@concepta/react-material-ui';
-import content from 'app/content/content';
-import form from 'app/forms/RecoverPassword';
+// import { FormTemplate, Image, SimpleForm } from '@concepta/react-material-ui';
+// import content from 'app/content/content';
+// import form from 'app/forms/RecoverPassword';
 import { useEffect, useState } from 'react';
-import SuccessRequest from './Steps/SuccessRequest/SuccessRequest';
 import { Alert } from 'App';
 import CustomAlert from 'app/components/CustomAlert';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CustomForgotPassword from 'app/components/CustomForgotPassword';
+import CustomSuccessRequest from 'app/components/CustomForgotPassword/Steps/CustomSuccessRequest';
 
 const RecoverPassword = () => {
   const { opened, setOpened, message } = Alert.useContainer();
 
   const [success, setSuccess] = useState(false);
   useEffect(() => {
-    setSuccess(false);
+    setSuccess(true);
   }, []);
   return (
     <>
-      {success ? (
-        <SuccessRequest />
-      ) : (
-        <FormTemplate
-          icon={<Image src={content.signIn.logo} alt="Logo" />}
-          title={content.recoverPassword.title}
-          subtitle={content.recoverPassword.subtitle}
-        >
-          <SimpleForm form={form} />
-        </FormTemplate>
-      )}
+      {success ? <CustomSuccessRequest /> : <CustomForgotPassword />}
       {opened && (
         <CustomAlert
           close={() => setOpened(false)}

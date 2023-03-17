@@ -26,22 +26,24 @@ interface CustomForgotPasswordProps {
   customForm?: object;
   handleSubmit?: () => void;
   form?: FormType;
-  defaultValues: ContentDefault;
+  defaultValues?: ContentDefault;
   success?: boolean;
   successComponent?: React.ReactNode;
+  content?: ContentDefault;
 }
 
 const CustomForgotPassword: React.FC<CustomForgotPasswordProps> = ({
   handleSubmit,
   form = defaultForm,
   defaultValues = {
-    title: 'Don’t worry, happens to the best of us',
-    subtitle: `Sign in to continue`,
+    title: 'Recover Password',
+    subtitle: `Don’t worry, happens to the best of us`,
     emailRecovery: 'Email me a recovery link',
     logo: <Image src={logo} alt="Logo" />,
   },
   success,
   successComponent,
+  content,
 }) => {
   return (
     <>
@@ -49,9 +51,11 @@ const CustomForgotPassword: React.FC<CustomForgotPasswordProps> = ({
         successComponent
       ) : (
         <FormTemplate
-          icon={defaultValues.logo}
-          title={defaultValues.title}
-          subtitle={defaultValues.subtitle}
+          title={content?.title ? content.title : defaultValues.title}
+          subtitle={
+            content?.subtitle ? content?.subtitle : defaultValues.subtitle
+          }
+          icon={content?.logo ? content?.logo : defaultValues.logo}
         >
           <SimpleForm form={form} onSubmit={handleSubmit} />
         </FormTemplate>

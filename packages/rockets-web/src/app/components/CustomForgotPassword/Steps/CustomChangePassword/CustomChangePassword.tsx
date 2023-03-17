@@ -25,24 +25,29 @@ const defaultForm: FormType = {
   },
 };
 
-interface ChangePasswordProps {
+interface CustomChangePassword {
   defaultValues?: ContentDefault;
   form?: FormType;
+  content?: ContentDefault;
 }
 
-const ChangePassword: React.FC<ChangePasswordProps> = ({
+const CustomChangePassword: React.FC<CustomChangePassword> = ({
   form = defaultForm,
   defaultValues = {
     title: 'Change Password',
     buttonText: 'Change Password',
     logo: <Image src={logo} alt="Logo" />,
   },
+  content,
 }) => {
   return (
-    <FormTemplate title={defaultValues.title} icon={defaultValues.logo}>
+    <FormTemplate
+      title={content?.title ? content.title : defaultValues.title}
+      icon={content?.logo ? content.logo : defaultValues.logo}
+    >
       <SimpleForm form={form} />
     </FormTemplate>
   );
 };
 
-export default ChangePassword;
+export default CustomChangePassword;

@@ -12,6 +12,7 @@ interface ContentDefault {
 interface CustomCompleteProfileProps {
   form?: FormType;
   defaultValues: ContentDefault;
+  content: ContentDefault;
 }
 
 const defaultForm: FormType = {
@@ -36,12 +37,13 @@ const CustomCompleteProfile: React.FC<CustomCompleteProfileProps> = ({
     subtitle: `Sign in to continue`,
     logo: <Image src={logo} alt="Logo" />,
   },
+  content,
 }) => {
   return (
     <FormTemplate
-      title={defaultValues.title}
-      subtitle={defaultValues.subtitle}
-      icon={defaultValues.logo}
+      title={content?.title ? content.title : defaultValues.title}
+      subtitle={content?.subtitle ? content?.subtitle : defaultValues.subtitle}
+      icon={content?.logo ? content?.logo : defaultValues.logo}
     >
       <SimpleForm form={form} />
     </FormTemplate>

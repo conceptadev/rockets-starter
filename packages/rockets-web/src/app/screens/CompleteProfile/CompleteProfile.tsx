@@ -6,8 +6,6 @@ import { SimpleForm } from '@concepta/react-material-ui';
 import content from 'app/content/content';
 import form from 'app/forms/CompleteProfile';
 
-// Project Components
-
 // Assets
 import logo from 'app/assets/images/logo.svg';
 
