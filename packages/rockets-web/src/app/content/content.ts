@@ -2,7 +2,7 @@ import logo from '../assets/images/logo.svg';
 
 export const content = {
   signIn: {
-    title: 'Welcome',
+    title: 'Welcome Back',
     signIn: 'Sign in to continue',
     forgotPassword: 'Forgot your password?',
     noAccount: 'No account? Sign up',

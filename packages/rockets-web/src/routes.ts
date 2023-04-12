@@ -5,6 +5,7 @@ import Theme from 'app/screens/Theme';
 import Table from 'app/screens/Table';
 import Jsonform from 'app/screens/Jsonform';
 import SimpleForm from 'app/screens/SimpleForm';
+import LiveForm from 'app/screens/LiveForm';
 import TeamMembers from 'app/screens/TeamMembers';
 import Profile from 'app/screens/Profile';
 import CompleteProfile from 'app/screens/CompleteProfile';
@@ -70,6 +71,11 @@ const routes: Array<Routes> = [
     name: 'Simple Forms',
     route: '/simple-forms',
     component: SimpleForm,
+  },
+  {
+    name: 'Live Form',
+    route: '/live-forms',
+    component: LiveForm,
   },
   {
     name: 'Team Members',

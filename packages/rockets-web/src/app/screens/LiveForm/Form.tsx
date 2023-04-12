@@ -1,8 +1,6 @@
 import { FC } from 'react';
-// import { SimpleForm } from '@concepta/react-material-ui';
-// import { FormType } from '@concepta/react-material-ui/dist/components/SimpleForm';
 import { FormValidation, RJSFSchema } from '@rjsf/utils';
-import SimpleFormExperiment from 'app/components/SimpleFormExperiment';
+import LiveForm from 'app/components/LiveForm';
 
 type FormData = {
   email: string;
@@ -168,8 +166,7 @@ const Form: FC = () => {
   };
 
   return (
-    <SimpleFormExperiment
-      schema={schema}
+    <LiveForm
       // advancedProperties={advancedProperties}
       onSubmit={values => console.log('values', values)}
       customValidate={validate}
