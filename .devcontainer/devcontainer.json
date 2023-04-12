@@ -14,19 +14,21 @@
 	// The optional 'workspaceFolder' property is the path VS Code should open by default when
 	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
 	"workspaceFolder": "/workspace",
-	// Set *default* container specific settings.json values on container create.
-	"settings": {},
 	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"gitlab.gitlab-workflow",
-		"ms-azuretools.vscode-docker",
-		"dbaeumer.vscode-eslint",
-		"eamodio.gitlens",
-		"ms-vsliveshare.vsliveshare",
-		"ms-vsliveshare.vsliveshare-audio",
-		"ms-vsliveshare.vsliveshare-pack",
-		"esbenp.prettier-vscode"
-	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"gitlab.gitlab-workflow",
+				"ms-azuretools.vscode-docker",
+				"dbaeumer.vscode-eslint",
+				"eamodio.gitlens",
+				"ms-vsliveshare.vsliveshare",
+				"ms-vsliveshare.vsliveshare-audio",
+				"ms-vsliveshare.vsliveshare-pack",
+				"esbenp.prettier-vscode"
+			]
+		}
+	}
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
