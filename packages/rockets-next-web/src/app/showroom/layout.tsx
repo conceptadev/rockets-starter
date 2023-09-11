@@ -71,7 +71,7 @@ export default function Showroom({ children }: { children: ReactNode }) {
       id: "/showroom/simpleform",
       icon: <CodeIcon />,
       text: "Simple Forms",
-      onClick: () => router.push("/showroom/simple-forms"),
+      onClick: () => router.push("/showroom/simple-form"),
     },
     {
       id: "/showroom/theme",
@@ -83,13 +83,13 @@ export default function Showroom({ children }: { children: ReactNode }) {
       id: "login",
       icon: <PersonOutlineOutlinedIcon />,
       text: "Login",
-      onClick: () => router.push("/showroom/login"),
+      onClick: () => router.push("/login"),
     },
     {
       id: "signUp",
       icon: <PersonOutlineOutlinedIcon />,
       text: "SignUp",
-      onClick: () => router.push("/showroom/sign-up"),
+      onClick: () => router.push("/sign-up"),
     },
   ];
 
