@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import ContainerWithDrawer from "@/components/ContainerWithDrawer/ContainerWithDrawer";
+import { ContainerWithDrawer } from "@concepta/react-material-ui";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
