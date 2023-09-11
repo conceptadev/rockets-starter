@@ -59,8 +59,8 @@ const Login: FC = () => {
   };
 
   const handleSubmit = async (values: IChangeEvent<FormData>) => {
-    const { username, password } = values?.formData;
-    doLogin({ username, password });
+    const { username, password } = values?.formData || {};
+    username && password && doLogin({ username, password });
   };
 
   return (
