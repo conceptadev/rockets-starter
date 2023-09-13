@@ -1,7 +1,7 @@
 {
-    "eslint.workingDirectories": [
-        "packages/rockets-api",
-        "packages/rockets-web"
-    ],
-    "typescript.tsdk": "node_modules/typescript/lib"
+  "eslint.workingDirectories": [
+    "packages/rockets-api",
+    "packages/rockets-next-web"
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
