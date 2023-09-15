@@ -1,56 +1,55 @@
 import React, { FC, Fragment, ReactElement } from 'react';
 import useDataProvider, { useQuery } from '@concepta/react-data-provider';
 import { Text } from '@concepta/react-material-ui';
-import { FormProps } from '@rjsf/core';
 import validator from '@rjsf/validator-ajv6';
 import Form from '@rjsf/mui';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { LiveFormProps } from './LiveFormProps';
+
 import { RJSFSchema } from '@rjsf/utils';
 
-export type LiveFormContent = {
-  title?: string;
-  buttonTitle?: string;
-};
+import { ArrayFieldTemplate } from '@concepta/react-material-ui/dist/styles/CustomWidgets';
 
-export type LiveFormProps = Omit<FormProps, 'schema' | 'validator'> & {
-  validator?: FormProps['validator'];
-  lfFormKey?: string;
-  lfContent?: LiveFormContent;
-  lfTitle?: ReactElement;
-  lfButton?: ReactElement;
-};
+import { mapAdvancedProperties } from './lib/mapAdvancedProperties';
+import { mergeFormData } from './lib/mergeFormData';
+import { uiSchemaGenerator } from './lib/uiSchemaGenerator';
 
 const LiveForm: FC<LiveFormProps> = ({
-  uiSchema,
+  // uiSchema,
   formData,
+  advancedProperties,
   lfFormKey,
   lfContent,
   lfTitle,
   lfButton,
+  lfSchemaProvider = null,
+  lfAdvancedPropertiesMapper = mapAdvancedProperties,
   ...props
 }) => {
+  console.log(lfFormKey);
+
   const { get } = useDataProvider();
 
   const getJsonSchema = () => {
     return get({
-      uri: `/json-schema/${lfFormKey}`,
+      uri: `http://localhost:3001/json-schema/testing`,
     });
   };
 
-  const { data, isPending, error } = useQuery(getJsonSchema);
+  const { data } = useQuery(lfSchemaProvider || getJsonSchema, true);
 
-  const errorMessage: ReactElement = error ? (
-    <Text>
-      {typeof error === 'string' ? error : 'Unknown form configuration error'}
-    </Text>
-  ) : (
-    <Fragment />
-  );
-
-  const dataToSchema = (data: RJSFSchema): RJSFSchema => {
-    return data;
+  const finalSchema: RJSFSchema = {
+    properties: lfAdvancedPropertiesMapper(data, advancedProperties),
   };
+
+  // const errorMessage: ReactElement = error ? (
+  //   <Text>
+  //     {typeof error === 'string' ? error : 'Unknown form configuration error'}
+  //   </Text>
+  // ) : (
+  //   <Fragment />
+  // );
 
   const defaultTitle: ReactElement = (
     <Text
@@ -61,13 +60,13 @@ const LiveForm: FC<LiveFormProps> = ({
       mt={4}
       gutterBottom
     >
-      {lfContent?.title ?? 'Default Title'}
+      {lfContent?.title || 'Default Title'}
     </Text>
   );
 
   const defaultButton: ReactElement = (
     <Button type="submit" fullWidth variant="contained" sx={{ mt: 3 }}>
-      {lfContent?.buttonTitle ?? 'Submit'}
+      {lfContent?.buttonTitle || 'Submit'}
     </Button>
   );
 
@@ -75,27 +74,26 @@ const LiveForm: FC<LiveFormProps> = ({
     <Fragment>
       {lfTitle ?? defaultTitle}
 
-      {!isPending && data ? (
+      {data && (
         <Box>
-          {errorMessage ? (
+          {/* {errorMessage ? (
             errorMessage
-          ) : (
-            <Form
-              schema={dataToSchema(data)}
-              uiSchema={uiSchema}
-              formData={formData}
-              noHtml5Validate={true}
-              showErrorList={false}
-              validator={validator}
-              liveValidate={true}
-              {...props}
-            >
-              {lfButton ?? defaultButton}
-            </Form>
-          )}
+          ) : ( */}
+          <Form
+            schema={finalSchema}
+            uiSchema={uiSchemaGenerator(finalSchema, advancedProperties)}
+            formData={mergeFormData(finalSchema, formData)}
+            noHtml5Validate={true}
+            showErrorList={false}
+            templates={{ ArrayFieldTemplate }}
+            validator={validator}
+            liveValidate={true}
+            {...props}
+          >
+            {lfButton ?? defaultButton}
+          </Form>
+          {/* )} */}
         </Box>
-      ) : (
-        <></>
       )}
     </Fragment>
   );

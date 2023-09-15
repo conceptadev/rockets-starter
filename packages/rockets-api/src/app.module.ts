@@ -36,6 +36,8 @@ import { RoleEntity } from './entities/role.entity';
 import { UserRoleEntity } from './entities/user-role.entity';
 import { UserOtpEntity } from './entities/user-otp.entity';
 import { InvitationEntity } from './entities/invitation.entity';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -156,8 +158,10 @@ import { InvitationEntity } from './entities/invitation.entity';
       },
     }),
   ],
+  providers: [AppService],
+  controllers: [AppController]
 })
-export class AppModule {}
+export class AppModule { }
 
 function createUserOpts() {
   return {
