@@ -101,10 +101,10 @@ export default function Showroom({ children }: { children: ReactNode }) {
       logo="/logo.svg"
       showNotifications
       notificationsNumber={6}
-      notificationsOnClick={() => console.log("click")}
-      avatar="https://source.unsplash.com/random"
-      text="John Smith"
-      subText="Amazing Inc."
+      notificationsOnClick={() => console.log('click')}
+      headerAvatar="https://source.unsplash.com/random"
+      headerText="John Smith"
+      headerSubText="Amazing Inc."
     >
       {children}
     </ContainerWithDrawer>
