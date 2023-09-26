@@ -41,11 +41,11 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
     },
   };
 
-  const { doLogin, user } = useAuth?.() || {};
+  const { doLogin, user } = useAuth() || {};
 
   React.useEffect(() => {
     if (user) {
-      router.push('/home');
+      router.push('/showroom/home');
     }
   }, [user, router]);
 

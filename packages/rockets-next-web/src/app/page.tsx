@@ -2,16 +2,19 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@concepta/react-auth-provider';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
 const Home = () => {
   const router = useRouter();
-  const { accessToken } = useAuth();
+
+  const checkAccessToken = async () => {
+    const accessToken = localStorage.getItem('accessToken');
+    router.replace(accessToken ? '/showroom/home' : '/login');
+  };
 
   useEffect(() => {
-    router.replace(accessToken ? '/showroom/home' : '/login');
+    checkAccessToken();
   }, []);
 
   return (
