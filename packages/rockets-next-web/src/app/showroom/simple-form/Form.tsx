@@ -134,7 +134,7 @@ const Form: FC = () => {
   return (
     <SimpleForm
       form={form}
-      onSubmit={values => console.log('values', values)}
+      onSubmit={(values) => console.log('values', values)}
       validate={validate}
       onError={onError}
       initialData={initialData}

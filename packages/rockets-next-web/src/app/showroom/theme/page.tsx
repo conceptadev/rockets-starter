@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { FC, useContext } from "react";
-import { Switch } from "@concepta/react-material-ui";
-import { ThemeContext, ThemeContextType } from "@/context/ThemeContextProvider";
+import { FC, useContext } from 'react';
+import { Switch } from '@concepta/react-material-ui';
+import { ThemeContext, ThemeContextType } from '@/context/ThemeContextProvider';
 
 const Theme: FC = () => {
   const { darkMode, setDarkMode } =
@@ -15,10 +15,10 @@ const Theme: FC = () => {
   return (
     <>
       <Switch
-        sx={{ margin: "0 auto" }}
+        sx={{ margin: '0 auto' }}
         checked={darkMode}
         onChange={handleChange}
-        inputProps={{ "aria-label": "controlled" }}
+        inputProps={{ 'aria-label': 'controlled' }}
       />
       Dark Mode
     </>

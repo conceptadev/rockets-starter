@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { ReactNode } from "react";
-import { usePathname, useRouter } from "next/navigation";
-import { ContainerWithDrawer } from "@concepta/react-material-ui";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
-import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
-import PaymentsOutlinedIcon from "@mui/icons-material/PaymentsOutlined";
-import ExtensionOutlinedIcon from "@mui/icons-material/ExtensionOutlined";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import ColorLensOutlinedIcon from "@mui/icons-material/ColorLensOutlined";
-import GridOnIcon from "@mui/icons-material/GridOn";
-import CodeIcon from "@mui/icons-material/Code";
+import { ReactNode } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { ContainerWithDrawer } from '@concepta/react-material-ui';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import BusinessOutlinedIcon from '@mui/icons-material/BusinessOutlined';
+import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
+import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
+import ExtensionOutlinedIcon from '@mui/icons-material/ExtensionOutlined';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import ColorLensOutlinedIcon from '@mui/icons-material/ColorLensOutlined';
+import GridOnIcon from '@mui/icons-material/GridOn';
+import CodeIcon from '@mui/icons-material/Code';
 
 export default function Showroom({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -19,77 +19,77 @@ export default function Showroom({ children }: { children: ReactNode }) {
 
   const drawerMenuItems = [
     {
-      id: "/showroom/profile",
+      id: '/showroom/profile',
       icon: <PersonOutlineOutlinedIcon />,
-      text: "Profile",
-      onClick: () => router.push("/showroom/profile"),
+      text: 'Profile',
+      onClick: () => router.push('/showroom/profile'),
     },
     {
-      id: "/showroom/account",
+      id: '/showroom/account',
       icon: <BusinessOutlinedIcon />,
-      text: "Account",
-      onClick: () => alert("foo"),
+      text: 'Account',
+      onClick: () => alert('foo'),
       active: true,
     },
     {
-      id: "/showroom/billing",
+      id: '/showroom/billing',
       icon: <PaymentsOutlinedIcon />,
-      text: "Billing",
-      onClick: () => alert("foo"),
+      text: 'Billing',
+      onClick: () => alert('foo'),
     },
     {
-      id: "/showroom/integrations",
+      id: '/showroom/integrations',
       icon: <ExtensionOutlinedIcon />,
-      text: "Integrations",
-      onClick: () => alert("foo"),
+      text: 'Integrations',
+      onClick: () => alert('foo'),
     },
     {
-      id: "/showroom/home",
+      id: '/showroom/home',
       icon: <HomeOutlinedIcon />,
-      text: "Home",
-      onClick: () => router.push("/showroom/home"),
+      text: 'Home',
+      onClick: () => router.push('/showroom/home'),
     },
     {
-      id: "/showroom/table",
+      id: '/showroom/table',
       icon: <GridOnIcon />,
-      text: "Table",
-      onClick: () => router.push("/showroom/table"),
+      text: 'Table',
+      onClick: () => router.push('/showroom/table'),
     },
     {
-      id: "/showroom/teamMembers",
+      id: '/showroom/teamMembers',
       icon: <GroupsOutlinedIcon />,
-      text: "TeamMembers",
-      onClick: () => router.push("/showroom/team-members"),
+      text: 'TeamMembers',
+      onClick: () => router.push('/showroom/team-members'),
     },
     {
-      id: "/showroom/jsonform",
+      id: '/showroom/jsonform',
       icon: <CodeIcon />,
-      text: "Jsonform",
-      onClick: () => router.push("/showroom/jsonform"),
+      text: 'Jsonform',
+      onClick: () => router.push('/showroom/jsonform'),
     },
     {
-      id: "/showroom/simpleform",
+      id: '/showroom/simpleform',
       icon: <CodeIcon />,
-      text: "Simple Forms",
-      onClick: () => router.push("/showroom/simple-form"),
+      text: 'Simple Forms',
+      onClick: () => router.push('/showroom/simple-form'),
     },
     {
-      id: "/showroom/theme",
+      id: '/showroom/theme',
       icon: <ColorLensOutlinedIcon />,
-      text: "Theme",
-      onClick: () => router.push("/showroom/theme"),
+      text: 'Theme',
+      onClick: () => router.push('/showroom/theme'),
     },
     {
-      id: "login",
+      id: 'login',
       icon: <PersonOutlineOutlinedIcon />,
-      text: "Login",
-      onClick: () => router.push("/login"),
+      text: 'Login',
+      onClick: () => router.push('/login'),
     },
     {
-      id: "signUp",
+      id: 'signUp',
       icon: <PersonOutlineOutlinedIcon />,
-      text: "SignUp",
-      onClick: () => router.push("/sign-up"),
+      text: 'SignUp',
+      onClick: () => router.push('/sign-up'),
     },
   ];
 

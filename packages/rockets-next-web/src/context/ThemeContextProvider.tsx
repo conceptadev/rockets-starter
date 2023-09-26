@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { createContext, FC, ReactNode, useState } from "react";
+import { createContext, FC, ReactNode, useState } from 'react';
 
 export type ThemeContextType = {
   darkMode: boolean;
