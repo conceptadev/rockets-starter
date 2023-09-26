@@ -47,7 +47,7 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
     if (user) {
       router.push("/home");
     }
-  }, [user]);
+  }, [user, router]);
 
   const validate = (formData: FormData, errors: FormValidation) => {
     if (!formData.username) {
