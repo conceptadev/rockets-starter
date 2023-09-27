@@ -55,7 +55,7 @@ const OtherFormElements: FC = () => {
           onSubmit={handleSubmit}
           noHtml5Validate={true}
           showErrorList={false}
-          onError={err => console.log('errors', err)}
+          onError={(err) => console.log('errors', err)}
         >
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3 }}>
             Submit

@@ -33,7 +33,7 @@ const MemberForm: FC<MemberFormProps> = ({ closeMemberModal }) => {
   return (
     <SimpleForm
       form={form}
-      onSubmit={values => {
+      onSubmit={(values) => {
         console.log('values', values);
         closeMemberModal();
       }}

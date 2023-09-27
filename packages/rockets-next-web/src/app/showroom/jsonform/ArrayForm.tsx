@@ -56,7 +56,7 @@ const ArrayForm: FC = () => {
           formData={formData}
           validator={validator}
           onChange={log('changed')}
-          onSubmit={values => console.log('values', values)}
+          onSubmit={(values) => console.log('values', values)}
           onError={log('errors')}
           widgets={widgets}
           templates={{ ArrayFieldTemplate }}

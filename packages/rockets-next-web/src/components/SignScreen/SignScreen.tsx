@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import React, { FC } from "react";
-import { useAuth } from "@concepta/react-auth-provider";
-import { useRouter } from "next/navigation";
-import { SimpleForm } from "@concepta/react-material-ui/dist";
-import { FormType } from "@concepta/react-material-ui/dist/components/SimpleForm";
-import { Image, Text, Link } from "@concepta/react-material-ui";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Card from "@mui/material/Card";
-import { FormValidation } from "@rjsf/utils";
-import { IChangeEvent } from "@rjsf/core";
+import React, { FC } from 'react';
+import { useAuth } from '@concepta/react-auth-provider';
+import { useRouter } from 'next/navigation';
+import { SimpleForm } from '@concepta/react-material-ui/dist';
+import { FormType } from '@concepta/react-material-ui/dist/components/SimpleForm';
+import { Image, Text, Link } from '@concepta/react-material-ui';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Card from '@mui/material/Card';
+import { FormValidation } from '@rjsf/utils';
+import { IChangeEvent } from '@rjsf/core';
 
 interface FormData {
   username: string;
@@ -25,36 +25,36 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
   const router = useRouter();
 
   const form: FormType = {
-    title: "Simplest form ever",
-    submitButtonLabel: "Send",
+    title: 'Simplest form ever',
+    submitButtonLabel: 'Send',
     fields: {
       username: {
-        type: "string",
-        title: "Username",
+        type: 'string',
+        title: 'Username',
         required: true,
       },
       password: {
-        type: "password",
-        title: "Password",
+        type: 'password',
+        title: 'Password',
         required: true,
       },
     },
   };
 
-  const { doLogin, user } = useAuth?.() || {};
+  const { doLogin, user } = useAuth() || {};
 
   React.useEffect(() => {
     if (user) {
-      router.push("/home");
+      router.push('/showroom/home');
     }
-  }, [user]);
+  }, [user, router]);
 
   const validate = (formData: FormData, errors: FormValidation) => {
     if (!formData.username) {
-      errors?.switch?.addError("Username is required");
+      errors?.switch?.addError('Username is required');
     }
     if (!formData.password) {
-      errors?.switch?.addError("Password is required");
+      errors?.switch?.addError('Password is required');
     }
 
     return errors;
@@ -66,7 +66,7 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
   };
 
   return (
-    <Container maxWidth="xs" sx={{ textAlign: "center", padding: "48px 0" }}>
+    <Container maxWidth="xs" sx={{ textAlign: 'center', padding: '48px 0' }}>
       <Image src="/logo.svg" alt="Logo" />
 
       <Text
@@ -81,19 +81,19 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
       </Text>
 
       <Text fontSize={14} fontWeight={500} color="primary.dark">
-        {isSignUp ? "Sign up" : "Sign in"} to continue!
+        {isSignUp ? 'Sign up' : 'Sign in'} to continue!
       </Text>
 
-      <Card sx={{ marginTop: "26px", padding: "24px" }}>
+      <Card sx={{ marginTop: '26px', padding: '24px' }}>
         <Box>
           <SimpleForm form={form} onSubmit={handleSubmit} validate={validate} />
         </Box>
 
         <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>
-          <Link href={isSignUp ? "/login" : "/sign-up"} color="primary.dark">
+          <Link href={isSignUp ? '/login' : '/sign-up'} color="primary.dark">
             {isSignUp
-              ? "Already have an account? Sign in"
-              : "No account? Sign up"}
+              ? 'Already have an account? Sign in'
+              : 'No account? Sign up'}
           </Link>
         </Text>
       </Card>
