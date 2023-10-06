@@ -1,10 +1,10 @@
-import { HeadersProps } from '@concepta/react-material-ui/dist/components/Table/Table';
+import { HeadersProps } from "@concepta/react-material-ui/dist/components/Table/Table";
 
 function createData(
   id: string,
   name: string,
   email: string,
-  role: string,
+  role: string
 ): Record<string, string> {
   return {
     id,
@@ -16,81 +16,81 @@ function createData(
 
 export const headers: HeadersProps[] = [
   {
-    id: 'name',
+    id: "name",
     numeric: false,
     disablePadding: false,
-    label: 'Name',
+    label: "Name",
   },
   {
-    id: 'role',
+    id: "role",
     numeric: false,
     disablePadding: false,
-    label: 'Role',
-    textAlign: 'right',
+    label: "Role",
+    textAlign: "right",
   },
 ];
 
 export const rows = [
-  createData('johnSmith', 'John Smith', 'johnsmith@example.com', 'Owner'),
-  createData('codyFisher', 'Cody Fisher', 'cody.fisher@example.com', 'Admin'),
+  createData("johnSmith", "John Smith", "johnsmith@example.com", "Owner"),
+  createData("codyFisher", "Cody Fisher", "cody.fisher@example.com", "Admin"),
   createData(
-    'estherHoward',
-    'Esther Howard',
-    'esther.howard@example.com',
-    'Member',
+    "estherHoward",
+    "Esther Howard",
+    "esther.howard@example.com",
+    "Member"
   ),
   createData(
-    'ythereaErato',
-    'Cytherea Erato',
-    'emailaddress@example.com',
-    'Invited',
+    "ythereaErato",
+    "Cytherea Erato",
+    "emailaddress@example.com",
+    "Invited"
   ),
   createData(
-    'jenny.wilson@example.com',
-    '',
-    'jenny.wilson@example.com',
-    'Invited',
+    "jenny.wilson@example.com",
+    "",
+    "jenny.wilson@example.com",
+    "Invited"
   ),
   createData(
-    'zeusAristaios',
-    'Zeus Aristaios',
-    'emailaddress@example.com',
-    'Member',
+    "zeusAristaios",
+    "Zeus Aristaios",
+    "emailaddress@example.com",
+    "Member"
   ),
   createData(
-    'deimosRheie',
-    'Deimos Rheie',
-    'emailaddress@example.com',
-    'Reader',
+    "deimosRheie",
+    "Deimos Rheie",
+    "emailaddress@example.com",
+    "Reader"
   ),
   createData(
-    'mnemosyneAndromeda',
-    'Mnemosyne Andromeda',
-    'emailaddress@example.com',
-    'Reader',
+    "mnemosyneAndromeda",
+    "Mnemosyne Andromeda",
+    "emailaddress@example.com",
+    "Reader"
   ),
   createData(
-    'pythiosPhoibos',
-    'Pythios Phoibos',
-    'emailaddress@example.com',
-    'Reader',
+    "pythiosPhoibos",
+    "Pythios Phoibos",
+    "emailaddress@example.com",
+    "Reader"
   ),
   createData(
-    'pontusCrius',
-    'Pontus Crius',
-    'emailaddress@example.com',
-    'Invited',
+    "pontusCrius",
+    "Pontus Crius",
+    "emailaddress@example.com",
+    "Invited"
   ),
   createData(
-    'poseidonApollo',
-    'Poseidon Apollo',
-    'emailaddress@example.com',
-    'Member',
+    "poseidonApollo",
+    "Poseidon Apollo",
+    "emailaddress@example.com",
+    "Member"
   ),
   createData(
-    'deianeiraZeus',
-    'Deianeira Zeus',
-    'emailaddress@example.com',
-    'Invited',
+    "deianeiraZeus",
+    "Deianeira Zeus",
+    "emailaddress@example.com",
+    "Invited"
   ),
 ];

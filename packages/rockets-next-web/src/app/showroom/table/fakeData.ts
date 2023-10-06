@@ -1,4 +1,4 @@
-import { HeadersProps } from '@concepta/react-material-ui/dist/components/Table/Table';
+import { HeadersProps } from "@concepta/react-material-ui/dist/components/Table/Table";
 
 function createData(
   id: string,
@@ -6,7 +6,7 @@ function createData(
   email: string,
   status: string,
   role: string,
-  lastLogin: string,
+  lastLogin: string
 ): Record<string, string> {
   return {
     id,
@@ -20,126 +20,126 @@ function createData(
 
 export const headers: HeadersProps[] = [
   {
-    id: 'name',
+    id: "name",
     numeric: false,
     disablePadding: false,
-    label: 'Name',
+    label: "Name",
   },
   {
-    id: 'status',
+    id: "status",
     numeric: false,
     disablePadding: false,
-    label: '',
+    label: "",
   },
   {
-    id: 'role',
+    id: "role",
     numeric: false,
     disablePadding: false,
-    label: 'Role',
+    label: "Role",
   },
   {
-    id: 'lastLogin',
+    id: "lastLogin",
     numeric: false,
     disablePadding: false,
-    label: 'Last Login',
+    label: "Last Login",
   },
 ];
 
 export const rows = [
   createData(
-    'carmelGreen',
-    'Carmel Green',
-    'emailaddress@myschoolworx.com',
-    'schedule',
-    'Teacher',
-    '10.01.21',
+    "carmelGreen",
+    "Carmel Green",
+    "emailaddress@myschoolworx.com",
+    "schedule",
+    "Teacher",
+    "10.01.21"
   ),
   createData(
-    'taylorSmith',
-    'Taylor Smith',
-    'emailaddress@myschoolworx.com',
-    'unavailable',
-    'Teacher',
-    '10.01.21',
+    "taylorSmith",
+    "Taylor Smith",
+    "emailaddress@myschoolworx.com",
+    "unavailable",
+    "Teacher",
+    "10.01.21"
   ),
   createData(
-    'narkissosHeracles',
-    'Narkissos Heracles',
-    'emailaddress@myschoolworx.com',
-    'available',
-    'Teacher',
-    '10.01.21',
+    "narkissosHeracles",
+    "Narkissos Heracles",
+    "emailaddress@myschoolworx.com",
+    "available",
+    "Teacher",
+    "10.01.21"
   ),
   createData(
-    'ythereaErato',
-    'Cytherea Erato',
-    'emailaddress@myschoolworx.com',
-    'unavailable',
-    'Teacher',
-    '10.01.21',
+    "ythereaErato",
+    "Cytherea Erato",
+    "emailaddress@myschoolworx.com",
+    "unavailable",
+    "Teacher",
+    "10.01.21"
   ),
   createData(
-    'ismeneMelaina',
-    'Ismene Melaina',
-    'emailaddress@myschoolworx.com',
-    'available',
-    'Teacher',
-    '10.01.21',
+    "ismeneMelaina",
+    "Ismene Melaina",
+    "emailaddress@myschoolworx.com",
+    "available",
+    "Teacher",
+    "10.01.21"
   ),
   createData(
-    'zeusAristaios',
-    'Zeus Aristaios',
-    'emailaddress@myschoolworx.com',
-    'available',
-    'Teacher',
-    '10.01.21',
+    "zeusAristaios",
+    "Zeus Aristaios",
+    "emailaddress@myschoolworx.com",
+    "available",
+    "Teacher",
+    "10.01.21"
   ),
   createData(
-    'deimosRheie',
-    'Deimos Rheie',
-    'emailaddress@myschoolworx.com',
-    'schedule',
-    'Teacher',
-    '10.01.21',
+    "deimosRheie",
+    "Deimos Rheie",
+    "emailaddress@myschoolworx.com",
+    "schedule",
+    "Teacher",
+    "10.01.21"
   ),
   createData(
-    'mnemosyneAndromeda',
-    'Mnemosyne Andromeda',
-    'emailaddress@myschoolworx.com',
-    'schedule',
-    'Teacher',
-    '10.01.21',
+    "mnemosyneAndromeda",
+    "Mnemosyne Andromeda",
+    "emailaddress@myschoolworx.com",
+    "schedule",
+    "Teacher",
+    "10.01.21"
   ),
   createData(
-    'pythiosPhoibos',
-    'Pythios Phoibos',
-    'emailaddress@myschoolworx.com',
-    'schedule',
-    'Teacher',
-    '10.01.21',
+    "pythiosPhoibos",
+    "Pythios Phoibos",
+    "emailaddress@myschoolworx.com",
+    "schedule",
+    "Teacher",
+    "10.01.21"
   ),
   createData(
-    'pontusCrius',
-    'Pontus Crius',
-    'emailaddress@myschoolworx.com',
-    'unavailable',
-    'Teacher',
-    '10.01.21',
+    "pontusCrius",
+    "Pontus Crius",
+    "emailaddress@myschoolworx.com",
+    "unavailable",
+    "Teacher",
+    "10.01.21"
   ),
   createData(
-    'poseidonApollo',
-    'Poseidon Apollo',
-    'emailaddress@myschoolworx.com',
-    'available',
-    'Teacher',
-    '10.01.21',
+    "poseidonApollo",
+    "Poseidon Apollo",
+    "emailaddress@myschoolworx.com",
+    "available",
+    "Teacher",
+    "10.01.21"
   ),
   createData(
-    'deianeiraZeus',
-    'Deianeira Zeus',
-    'emailaddress@myschoolworx.com',
-    'unavailable',
-    'Teacher',
-    '10.01.21',
+    "deianeiraZeus",
+    "Deianeira Zeus",
+    "emailaddress@myschoolworx.com",
+    "unavailable",
+    "Teacher",
+    "10.01.21"
   ),
 ];

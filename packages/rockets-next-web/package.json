@@ -22,5 +22,9 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "@concepta/eslint-config": "^1.1.1",
+    "@concepta/prettier-config": "^1.1.1"
   }
 }

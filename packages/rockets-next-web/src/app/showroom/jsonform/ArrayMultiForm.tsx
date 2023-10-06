@@ -1,15 +1,15 @@
-import { FC } from 'react';
-import { Text } from '@concepta/react-material-ui';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import { RJSFSchema, UiSchema, FormValidation } from '@rjsf/utils';
-import validator from '@rjsf/validator-ajv6';
-import Form from '@rjsf/mui';
+import { FC } from "react";
+import { Text } from "@concepta/react-material-ui";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import { RJSFSchema, UiSchema, FormValidation } from "@rjsf/utils";
+import validator from "@rjsf/validator-ajv6";
+import Form from "@rjsf/mui";
 import {
   CustomTextFieldWidget,
   ArrayFieldTemplate,
   CustomSelectWidget,
-} from '@concepta/react-material-ui/dist/styles/CustomWidgets';
+} from "@concepta/react-material-ui/dist/styles/CustomWidgets";
 
 type Address = {
   name: string;
@@ -28,33 +28,33 @@ const ArrayForm: FC = () => {
   };
 
   const schema: RJSFSchema = {
-    type: 'object',
-    required: ['name', 'address'],
+    type: "object",
+    required: ["name", "address"],
     properties: {
-      name: { type: 'string', title: 'Name' },
+      name: { type: "string", title: "Name" },
       address: {
-        type: 'array',
-        title: 'Address',
+        type: "array",
+        title: "Address",
         items: {
-          type: 'object',
-          required: ['name', 'city'],
+          type: "object",
+          required: ["name", "city"],
           properties: {
             name: {
-              title: 'Adress',
-              type: 'string',
+              title: "Adress",
+              type: "string",
             },
             city: {
-              title: 'City',
-              type: 'string',
+              title: "City",
+              type: "string",
             },
             addressType: {
-              title: 'Type of address',
-              type: 'string',
-              enum: ['House', 'Apartment', 'Comercial building'],
+              title: "Type of address",
+              type: "string",
+              enum: ["House", "Apartment", "Comercial building"],
             },
             isPrimaryAddress: {
-              title: 'Home address',
-              type: 'boolean',
+              title: "Home address",
+              type: "boolean",
               enum: [true, false],
             },
           },
@@ -67,24 +67,26 @@ const ArrayForm: FC = () => {
     adress: {
       items: {
         isPrimaryAddress: {
-          'ui:widget': 'radio',
+          "ui:widget": "radio",
         },
         addressType: {
-          'ui:widget': 'select',
+          "ui:widget": "select",
         },
       },
     },
   };
 
-  const log = (type: string) => console.log.bind(console, type);
+  const log = (type: string) =>
+    // eslint-disable-next-line no-console
+    console.log.bind(console, type);
 
   const formData = {
-    address: [{ name: '', city: '' }],
+    address: [{ name: "", city: "" }],
   };
 
   const validate = (formData: FormData, errors: FormValidation) => {
     if (!formData?.address?.length) {
-      errors?.address?.addError('Address is required');
+      errors?.address?.addError("Address is required");
     }
     return errors;
   };
@@ -107,9 +109,12 @@ const ArrayForm: FC = () => {
           schema={schema}
           uiSchema={uiSchema}
           formData={formData}
-          onChange={log('changed')}
-          onSubmit={(values) => console.log('values', values)}
-          onError={log('errors')}
+          onChange={log("changed")}
+          onSubmit={(values) =>
+            // eslint-disable-next-line no-console
+            console.log("values", values)
+          }
+          onError={log("errors")}
           widgets={widgets}
           validator={validator}
           templates={{ ArrayFieldTemplate }}
