@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import React, { FC, useState } from 'react';
-import { Dialog, TextField, Text } from '@concepta/react-material-ui';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import useTheme from '@mui/material/styles/useTheme';
-import ChangePasswordForm from './ChangePasswordForm';
-import ConfirmationModal from './ConfirmationModal';
+import React, { FC, useState } from "react";
+import { Dialog, TextField, Text } from "@concepta/react-material-ui";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import useTheme from "@mui/material/styles/useTheme";
+import ChangePasswordForm from "./ChangePasswordForm";
+import ConfirmationModal from "./ConfirmationModal";
 
 const Profile: FC = () => {
   const theme = useTheme();
 
-  const lightMode = theme.palette.mode === 'light';
+  const lightMode = theme.palette.mode === "light";
 
   const [addMemberModalOpen, setAddMemberModalOpen] = useState<boolean>(false);
   const [confirmationModalOpen, setConfirmationModalOpen] =
     useState<boolean>(false);
 
-  const [form, setForm] = useState({ firstName: 'John', lastName: 'Smith' });
+  const [form, setForm] = useState({ firstName: "John", lastName: "Smith" });
 
   const openMemberModal = () => {
     setAddMemberModalOpen(true);
@@ -43,7 +43,8 @@ const Profile: FC = () => {
   };
 
   const sendForm = () => {
-    console.log('form:', form);
+    // eslint-disable-next-line no-console
+    console.log("form:", form);
   };
 
   return (
@@ -52,14 +53,14 @@ const Profile: FC = () => {
         <Text
           fontWeight="500"
           fontSize={24}
-          sx={{ color: lightMode ? '#111827' : '#dce2ee' }}
+          sx={{ color: lightMode ? "#111827" : "#dce2ee" }}
         >
           Profile
         </Text>
         <Text
           fontWeight="400"
           fontSize={14}
-          sx={{ color: lightMode ? '#6B7280' : '#9098a7' }}
+          sx={{ color: lightMode ? "#6B7280" : "#9098a7" }}
         >
           Update your profile
         </Text>

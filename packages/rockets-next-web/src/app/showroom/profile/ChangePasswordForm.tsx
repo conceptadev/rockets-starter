@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import { SimpleForm } from '@concepta/react-material-ui';
-import { FormType } from '@concepta/react-material-ui/dist/components/SimpleForm';
-import { FormValidation } from '@rjsf/utils';
+import { FC } from "react";
+import { SimpleForm } from "@concepta/react-material-ui";
+import { FormType } from "@concepta/react-material-ui/dist/components/SimpleForm";
+import { FormValidation } from "@rjsf/utils";
 
 type FormData = {
   oldPassword: string;
@@ -19,21 +19,21 @@ const ChangePasswordForm: FC<ChangePasswordFormProps> = ({
   openConfirmationModal,
 }) => {
   const form: FormType = {
-    submitButtonLabel: 'Save',
+    submitButtonLabel: "Save",
     fields: {
       oldPassword: {
-        type: 'password',
-        title: 'Old password',
+        type: "password",
+        title: "Old password",
         required: true,
       },
       newPassword: {
-        type: 'password',
-        title: 'New password',
+        type: "password",
+        title: "New password",
         required: true,
       },
       confirmPassword: {
-        type: 'password',
-        title: 'Confirm password',
+        type: "password",
+        title: "Confirm password",
         required: true,
       },
     },
@@ -41,7 +41,7 @@ const ChangePasswordForm: FC<ChangePasswordFormProps> = ({
 
   const validate = (formData: FormData, errors: FormValidation) => {
     if (formData.newPassword != formData.confirmPassword) {
-      errors?.confirmPassword?.addError('Password confirmation do not match');
+      errors?.confirmPassword?.addError("Password confirmation do not match");
     }
 
     return errors;
@@ -51,7 +51,8 @@ const ChangePasswordForm: FC<ChangePasswordFormProps> = ({
     <SimpleForm
       form={form}
       onSubmit={(values) => {
-        console.log('values', values);
+        // eslint-disable-next-line no-console
+        console.log("values", values);
         closeMemberModal();
         openConfirmationModal();
       }}

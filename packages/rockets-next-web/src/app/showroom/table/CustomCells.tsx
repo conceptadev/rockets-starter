@@ -1,8 +1,8 @@
-import { FC } from 'react';
-import { Text } from '@concepta/react-material-ui';
-import WatchLaterIcon from '@mui/icons-material/WatchLater';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { FC } from "react";
+import { Text } from "@concepta/react-material-ui";
+import WatchLaterIcon from "@mui/icons-material/WatchLater";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 type CustomNameCellProps = {
   name: string;

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { FC } from 'react';
-import { Text } from '@concepta/react-material-ui';
-import Container from '@mui/material/Container';
-import Form from './Form';
+import { FC } from "react";
+import { Text } from "@concepta/react-material-ui";
+import Container from "@mui/material/Container";
+import Form from "./Form";
 
 const SimpleForm: FC = () => (
   <Container maxWidth="xs">

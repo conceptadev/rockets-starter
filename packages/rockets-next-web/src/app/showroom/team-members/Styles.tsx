@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import { SimpleForm } from '@concepta/react-material-ui';
-import Button from '@mui/material/Button';
-import { FormType } from '@concepta/react-material-ui/dist/components/SimpleForm';
+import { FC } from "react";
+import { SimpleForm } from "@concepta/react-material-ui";
+import Button from "@mui/material/Button";
+import { FormType } from "@concepta/react-material-ui/dist/components/SimpleForm";
 
 const Footer: FC = () => <Button>Save changes</Button>;
 
@@ -15,17 +15,17 @@ const MemberForm: FC<MemberFormProps> = ({ closeMemberModal }) => {
   };
 
   const form: FormType = {
-    submitButtonLabel: 'Send',
+    submitButtonLabel: "Send",
     fields: {
       email: {
-        type: 'string',
-        title: 'Email',
+        type: "string",
+        title: "Email",
         required: true,
       },
       role: {
-        title: 'Role',
-        type: 'select',
-        options: ['Owner', 'Admin', 'Member'],
+        title: "Role",
+        type: "select",
+        options: ["Owner", "Admin", "Member"],
       },
     },
   };
@@ -33,8 +33,7 @@ const MemberForm: FC<MemberFormProps> = ({ closeMemberModal }) => {
   return (
     <SimpleForm
       form={form}
-      onSubmit={(values) => {
-        console.log('values', values);
+      onSubmit={() => {
         closeMemberModal();
       }}
       onError={onError}

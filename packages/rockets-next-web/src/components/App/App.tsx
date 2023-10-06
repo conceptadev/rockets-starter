@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useContext } from 'react';
-import '../../../src/app/globals.css';
-import { Inter } from 'next/font/google';
-import { AuthProvider } from '@concepta/react-auth-provider';
-import { ThemeProvider } from '@concepta/react-material-ui/dist/styles';
-import { ThemeContext, ThemeContextType } from '@/context/ThemeContextProvider';
-import { themeLight, themeDark } from '@/styles/theme';
+import { useContext } from "react";
+import "../../../src/app/globals.css";
+import { Inter } from "next/font/google";
+import { AuthProvider } from "@concepta/react-auth-provider";
+import { ThemeProvider } from "@concepta/react-material-ui/dist/styles";
+import { ThemeContext, ThemeContextType } from "@/context/ThemeContextProvider";
+import { themeLight, themeDark } from "@/styles/theme";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 const App = ({ children }: { children: React.ReactNode }) => {
   const { darkMode } = (useContext?.(ThemeContext) as ThemeContextType) || {};

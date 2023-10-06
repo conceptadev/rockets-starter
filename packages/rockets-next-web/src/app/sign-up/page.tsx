@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { FC } from 'react';
-import SignScreen from '@/components/SignScreen/SignScreen';
+import { FC } from "react";
+import SignScreen from "@/components/SignScreen/SignScreen";
 
 const SignUp: FC = () => {
   return <SignScreen isSignUp />;

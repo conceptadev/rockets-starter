@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import { Dropdown, Text } from '@concepta/react-material-ui';
-import Box from '@mui/material/Box';
-import { DropdownItem } from '@concepta/react-material-ui/dist/components/Dropdown';
+import { FC } from "react";
+import { Dropdown, Text } from "@concepta/react-material-ui";
+import Box from "@mui/material/Box";
+import { DropdownItem } from "@concepta/react-material-ui/dist/components/Dropdown";
 
 type CustomNameCellProps = {
   name: string;
@@ -27,14 +27,16 @@ type CustomRoleCellProps = {
 const CustomRoleCell: FC<CustomRoleCellProps> = ({ id, role }) => {
   const options: DropdownItem[] = [
     {
-      key: 'resend',
-      onClick: () => console.log('resend', id),
-      text: 'Resend Invite',
+      key: "resend",
+      // eslint-disable-next-line no-console
+      onClick: () => console.log("resend", id),
+      text: "Resend Invite",
     },
     {
-      key: 'revoke',
-      onClick: () => console.log('revoke', id),
-      text: 'Revoke',
+      key: "revoke",
+      // eslint-disable-next-line no-console
+      onClick: () => console.log("revoke", id),
+      text: "Revoke",
     },
   ];
 
