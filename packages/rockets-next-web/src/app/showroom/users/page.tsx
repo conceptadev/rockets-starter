@@ -153,7 +153,12 @@ const UsersScreen: FC = () => {
         />
         <Button
           variant="contained"
-          onClick={() => setDrawerState({ ...drawerState, isOpen: true })}
+          onClick={() =>
+            setDrawerState({
+              viewMode: DRAWER_VIEW_MODE.CREATION,
+              isOpen: true,
+            })
+          }
         >
           Add new user
         </Button>
