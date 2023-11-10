@@ -8,11 +8,11 @@ import { useState, useCallback, useMemo } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
+import { SchemaForm } from "@concepta/react-material-ui";
 import { Table, Text, createTableStyles } from "@concepta/react-material-ui";
 import { TextField } from "@concepta/react-material-ui";
 import { TableContainer, TableHead, TableBody, TableRow } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
-import Form from "@rjsf/mui";
 import validator from "@rjsf/validator-ajv6";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
@@ -28,6 +28,7 @@ import {
   uiSchema,
   widgets,
   validate,
+  advancedProperties,
 } from "./formConfig";
 
 enum DRAWER_VIEW_MODE {
@@ -189,8 +190,9 @@ const UsersScreen: FC = () => {
       <Drawer open={drawerState.isOpen} anchor="right">
         <Box padding={4}>
           <Box mb={2}>
-            <Form
+            <SchemaForm.Form
               schema={schema}
+              advancedProperties={advancedProperties}
               uiSchema={uiSchema}
               validator={validator}
               onSubmit={handleFormSubmit}
@@ -198,10 +200,6 @@ const UsersScreen: FC = () => {
               customValidate={validate}
               noHtml5Validate={true}
               showErrorList={false}
-              onError={(err) =>
-                // eslint-disable-next-line no-console
-                console.log("errors", err)
-              }
               formData={currentRow}
               readonly={drawerState.viewMode === DRAWER_VIEW_MODE.DETAILS}
             >
@@ -228,7 +226,7 @@ const UsersScreen: FC = () => {
                   Close
                 </Button>
               </Box>
-            </Form>
+            </SchemaForm.Form>
           </Box>
         </Box>
       </Drawer>

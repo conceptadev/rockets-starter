@@ -1,4 +1,5 @@
 import type { RJSFSchema, UiSchema, FormValidation } from "@rjsf/utils";
+import type { AdvancedProperty } from "@concepta/react-material-ui/dist/components/SchemaForm/types";
 
 import {
   CustomTextFieldWidget,
@@ -46,6 +47,15 @@ export const schema: RJSFSchema = {
         { const: "counselor", title: "Counselor" },
       ],
     },
+  },
+};
+
+export const advancedProperties: Record<string, AdvancedProperty> = {
+  status: {
+    type: "select",
+  },
+  role: {
+    type: "select",
   },
 };
 
