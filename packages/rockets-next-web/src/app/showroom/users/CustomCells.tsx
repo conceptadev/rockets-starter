@@ -35,4 +35,18 @@ const CustomStatusCell: FC<CustomStatusCellProps> = ({ status }) => {
   return <>{statusIcon[status] && statusIcon[status]}</>;
 };
 
-export { CustomNameCell, CustomStatusCell };
+type CustomRoleCellProps = {
+  role: string;
+};
+
+const roleMapper: Record<string, string> = {
+  teacher: "Teacher",
+  director: "Director",
+  counselor: "Counselor",
+};
+
+const CustomRoleCell: FC<CustomRoleCellProps> = ({ role }) => {
+  return <>{roleMapper[role]}</>;
+};
+
+export { CustomNameCell, CustomStatusCell, CustomRoleCell };

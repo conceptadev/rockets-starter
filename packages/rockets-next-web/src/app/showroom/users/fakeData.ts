@@ -57,7 +57,7 @@ export const rows = [
     "Carmel Green",
     "emailaddress@myschoolworx.com",
     "schedule",
-    "Teacher",
+    "teacher",
     "10.01.21"
   ),
   createData(
@@ -65,7 +65,7 @@ export const rows = [
     "Taylor Smith",
     "emailaddress@myschoolworx.com",
     "unavailable",
-    "Teacher",
+    "teacher",
     "10.01.21"
   ),
   createData(
@@ -73,7 +73,7 @@ export const rows = [
     "Narkissos Heracles",
     "emailaddress@myschoolworx.com",
     "available",
-    "Teacher",
+    "teacher",
     "10.01.21"
   ),
   createData(
@@ -81,7 +81,7 @@ export const rows = [
     "Cytherea Erato",
     "emailaddress@myschoolworx.com",
     "unavailable",
-    "Teacher",
+    "teacher",
     "10.01.21"
   ),
   createData(
@@ -89,7 +89,7 @@ export const rows = [
     "Ismene Melaina",
     "emailaddress@myschoolworx.com",
     "available",
-    "Teacher",
+    "director",
     "10.01.21"
   ),
   createData(
@@ -97,7 +97,7 @@ export const rows = [
     "Zeus Aristaios",
     "emailaddress@myschoolworx.com",
     "available",
-    "Teacher",
+    "teacher",
     "10.01.21"
   ),
   createData(
@@ -105,7 +105,7 @@ export const rows = [
     "Deimos Rheie",
     "emailaddress@myschoolworx.com",
     "schedule",
-    "Teacher",
+    "teacher",
     "10.01.21"
   ),
   createData(
@@ -113,7 +113,7 @@ export const rows = [
     "Mnemosyne Andromeda",
     "emailaddress@myschoolworx.com",
     "schedule",
-    "Teacher",
+    "counselor",
     "10.01.21"
   ),
   createData(
@@ -121,7 +121,7 @@ export const rows = [
     "Pythios Phoibos",
     "emailaddress@myschoolworx.com",
     "schedule",
-    "Teacher",
+    "teacher",
     "10.01.21"
   ),
   createData(
@@ -129,7 +129,7 @@ export const rows = [
     "Pontus Crius",
     "emailaddress@myschoolworx.com",
     "unavailable",
-    "Teacher",
+    "teacher",
     "10.01.21"
   ),
   createData(
@@ -137,7 +137,7 @@ export const rows = [
     "Poseidon Apollo",
     "emailaddress@myschoolworx.com",
     "available",
-    "Teacher",
+    "counselor",
     "10.01.21"
   ),
   createData(
@@ -145,7 +145,7 @@ export const rows = [
     "Deianeira Zeus",
     "emailaddress@myschoolworx.com",
     "unavailable",
-    "Teacher",
+    "teacher",
     "10.01.21"
   ),
 ];
