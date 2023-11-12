@@ -115,8 +115,17 @@ const UsersScreen: FC = () => {
     setDrawerState({ viewMode: null, isOpen: false });
   };
 
+  const filteredRows: Record<string, string>[] = useMemo(() => {
+    return rows.filter((row) => {
+      const formattedName = row.name.toLowerCase();
+      const formattedSearch = searchTerm.toLowerCase();
+
+      return formattedName.includes(formattedSearch);
+    });
+  }, [searchTerm]);
+
   const customRows: RowProps[] = useMemo(() => {
-    return rows.map((row) => {
+    return filteredRows.map((row) => {
       const { id, name, email, status, role, lastLogin } = row;
 
       return {
@@ -148,7 +157,7 @@ const UsersScreen: FC = () => {
         },
       };
     });
-  }, [editRow, viewRow]);
+  }, [filteredRows, editRow, viewRow]);
 
   return (
     <Box>
