@@ -1,10 +1,9 @@
 "use client";
 
-import type { FC } from "react";
 import type { RowProps } from "@concepta/react-material-ui/dist/components/Table/types";
 import type { IChangeEvent } from "@rjsf/core";
 
-import { useState, useCallback, useMemo } from "react";
+import { type FC, useState, useCallback, useMemo } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
@@ -206,46 +205,44 @@ const UsersScreen: FC = () => {
       </Table.Root>
 
       <Drawer open={drawerState.isOpen} anchor="right">
-        <Box padding={4}>
-          <Box mb={2}>
-            <SchemaForm.Form
-              schema={schema}
-              advancedProperties={advancedProperties}
-              uiSchema={uiSchema}
-              validator={validator}
-              onSubmit={handleFormSubmit}
-              widgets={widgets}
-              customValidate={validate}
-              noHtml5Validate={true}
-              showErrorList={false}
-              formData={currentRow}
-              readonly={drawerState.viewMode === DRAWER_VIEW_MODE.DETAILS}
+        <Box padding={4} mb={2}>
+          <SchemaForm.Form
+            schema={schema}
+            advancedProperties={advancedProperties}
+            uiSchema={uiSchema}
+            validator={validator}
+            onSubmit={handleFormSubmit}
+            widgets={widgets}
+            customValidate={validate}
+            noHtml5Validate={true}
+            showErrorList={false}
+            formData={currentRow}
+            readonly={drawerState.viewMode === DRAWER_VIEW_MODE.DETAILS}
+          >
+            <Box
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              justifyContent="space-between"
+              mt={4}
             >
-              <Box
-                display="flex"
-                flexDirection="row"
-                alignItems="center"
-                justifyContent="space-between"
-                mt={4}
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={drawerState.viewMode === DRAWER_VIEW_MODE.DETAILS}
+                sx={{ flex: 1, mr: 1 }}
               >
-                <Button
-                  type="submit"
-                  variant="contained"
-                  disabled={drawerState.viewMode === DRAWER_VIEW_MODE.DETAILS}
-                  sx={{ flex: 1, mr: 1 }}
-                >
-                  Save
-                </Button>
-                <Button
-                  variant="outlined"
-                  onClick={resetDrawerState}
-                  sx={{ flex: 1, ml: 1 }}
-                >
-                  Close
-                </Button>
-              </Box>
-            </SchemaForm.Form>
-          </Box>
+                Save
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={resetDrawerState}
+                sx={{ flex: 1, ml: 1 }}
+              >
+                Close
+              </Button>
+            </Box>
+          </SchemaForm.Form>
         </Box>
       </Drawer>
     </Box>
