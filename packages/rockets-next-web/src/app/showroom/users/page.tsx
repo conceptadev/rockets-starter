@@ -7,6 +7,7 @@ import type { IChangeEvent } from "@rjsf/core";
 import { useState, useCallback, useMemo } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
 import Drawer from "@mui/material/Drawer";
 import { SchemaForm } from "@concepta/react-material-ui";
 import { Table, Text, createTableStyles } from "@concepta/react-material-ui";
@@ -14,6 +15,7 @@ import { TextField } from "@concepta/react-material-ui";
 import { TableContainer, TableHead, TableBody, TableRow } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 import validator from "@rjsf/validator-ajv6";
+import EditIcon from "@mui/icons-material/Edit";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 import {
@@ -77,14 +79,25 @@ const UsersScreen: FC = () => {
     },
   });
 
-  const handleSelectRow = useCallback((rowId: FormData["id"]) => {
-    const rowData = rows.find((item) => item.id === rowId);
+  const getRowDataById = (rowId: FormData["id"]) => {
+    return rows.find((item) => item.id === rowId);
+  };
 
-    if (!rowData) {
+  const editRow = useCallback((rowId: FormData["id"]) => {
+    if (!getRowDataById(rowId)) {
       return;
     }
 
-    setCurrentRow(rowData as FormData);
+    setCurrentRow(getRowDataById(rowId) as FormData);
+    setDrawerState({ viewMode: DRAWER_VIEW_MODE.EDIT, isOpen: true });
+  }, []);
+
+  const viewRow = useCallback((rowId: FormData["id"]) => {
+    if (!getRowDataById(rowId)) {
+      return;
+    }
+
+    setCurrentRow(getRowDataById(rowId) as FormData);
     setDrawerState({ viewMode: DRAWER_VIEW_MODE.DETAILS, isOpen: true });
   }, []);
 
@@ -124,14 +137,19 @@ const UsersScreen: FC = () => {
         lastLogin,
         actions: {
           component: (
-            <Button onClick={() => handleSelectRow(row.id)}>
-              <ChevronRightIcon />
-            </Button>
+            <Box>
+              <IconButton onClick={() => editRow(row.id)}>
+                <EditIcon />
+              </IconButton>
+              <IconButton onClick={() => viewRow(row.id)}>
+                <ChevronRightIcon />
+              </IconButton>
+            </Box>
           ),
         },
       };
     });
-  }, [handleSelectRow]);
+  }, [editRow, viewRow]);
 
   return (
     <Box>
