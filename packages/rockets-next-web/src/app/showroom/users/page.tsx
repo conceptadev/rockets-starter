@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Drawer from "@mui/material/Drawer";
+import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import { SchemaForm } from "@concepta/react-material-ui";
 import { Table, Text, createTableStyles } from "@concepta/react-material-ui";
 import { TextField } from "@concepta/react-material-ui";
@@ -16,20 +17,15 @@ import useTheme from "@mui/material/styles/useTheme";
 import validator from "@rjsf/validator-ajv6";
 import EditIcon from "@mui/icons-material/Edit";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-import {
-  CustomNameCell,
-  CustomRoleCell,
-  CustomStatusCell,
-} from "./CustomCells";
-import { rows, headers } from "./fakeData";
+import { headers } from "./tableConfig";
 import {
   type FormData,
   schema,
   uiSchema,
   widgets,
   validate,
-  advancedProperties,
 } from "./formConfig";
 
 enum DRAWER_VIEW_MODE {
@@ -52,6 +48,46 @@ const UsersScreen: FC = () => {
   const [currentRow, setCurrentRow] = useState<FormData>();
 
   const theme = useTheme();
+
+  const { get, post, patch, del } = useDataProvider();
+
+  const getUsers = () =>
+    get({
+      uri: `/user`,
+    });
+
+  const { data, execute: fetchUsers } = useQuery(getUsers, true, {
+    onError: (error) => console.error(error),
+  });
+
+  const createUser = (data: FormData) =>
+    post({
+      uri: `/user`,
+      body: data,
+    });
+
+  const { execute: createNewUser } = useQuery(createUser, false, {
+    onError: (error) => console.error(error),
+  });
+
+  const editUser = (data: FormData) =>
+    patch({
+      uri: `/user/${data.id}`,
+      body: data,
+    });
+
+  const { execute: editExistingUser } = useQuery(editUser, false, {
+    onError: (error) => console.error(error),
+  });
+
+  const deleteUser = (id: FormData["id"]) =>
+    del({
+      uri: `/user/${id}`,
+    });
+
+  const { execute: deleteExistingUser } = useQuery(deleteUser, false, {
+    onError: (error) => console.error(error),
+  });
 
   const tableTheme = createTableStyles({
     table: {
@@ -78,36 +114,63 @@ const UsersScreen: FC = () => {
     },
   });
 
-  const getRowDataById = (rowId: FormData["id"]) => {
-    return rows.find((item) => item.id === rowId);
-  };
+  const getRowDataById = useCallback(
+    (rowId: FormData["id"]) => {
+      return data.find((item: FormData) => item.id === rowId);
+    },
+    [data]
+  );
 
-  const editRow = useCallback((rowId: FormData["id"]) => {
-    if (!getRowDataById(rowId)) {
-      return;
-    }
+  const editRow = useCallback(
+    (rowId: FormData["id"]) => {
+      if (!getRowDataById(rowId)) {
+        return;
+      }
 
-    setCurrentRow(getRowDataById(rowId) as FormData);
-    setDrawerState({ viewMode: DRAWER_VIEW_MODE.EDIT, isOpen: true });
-  }, []);
+      setCurrentRow(getRowDataById(rowId) as FormData);
+      setDrawerState({ viewMode: DRAWER_VIEW_MODE.EDIT, isOpen: true });
+    },
+    [getRowDataById]
+  );
 
-  const viewRow = useCallback((rowId: FormData["id"]) => {
-    if (!getRowDataById(rowId)) {
-      return;
-    }
+  const viewRow = useCallback(
+    (rowId: FormData["id"]) => {
+      if (!getRowDataById(rowId)) {
+        return;
+      }
 
-    setCurrentRow(getRowDataById(rowId) as FormData);
-    setDrawerState({ viewMode: DRAWER_VIEW_MODE.DETAILS, isOpen: true });
-  }, []);
+      setCurrentRow(getRowDataById(rowId) as FormData);
+      setDrawerState({ viewMode: DRAWER_VIEW_MODE.DETAILS, isOpen: true });
+    },
+    [getRowDataById]
+  );
 
-  const handleFormSubmit = (values: IChangeEvent<FormData>) => {
+  const deleteRow = useCallback(
+    async (rowId: FormData["id"]) => {
+      await deleteExistingUser(rowId);
+      fetchUsers();
+      resetDrawerState();
+    },
+    [deleteExistingUser, fetchUsers]
+  );
+
+  const handleFormSubmit = async (values: IChangeEvent<FormData>) => {
     const fields = values.formData;
 
     if (!fields) {
       return;
     }
 
-    setDrawerState({ viewMode: null, isOpen: false });
+    if (drawerState.viewMode === DRAWER_VIEW_MODE.CREATION) {
+      await createNewUser(fields);
+    }
+
+    if (drawerState.viewMode === DRAWER_VIEW_MODE.EDIT) {
+      await editExistingUser(fields);
+    }
+
+    await fetchUsers();
+    resetDrawerState();
   };
 
   const resetDrawerState = () => {
@@ -116,38 +179,34 @@ const UsersScreen: FC = () => {
   };
 
   const filteredRows: Record<string, string>[] = useMemo(() => {
-    return rows.filter((row) => {
-      const formattedName = row.name.toLowerCase();
+    if (!data) {
+      return [];
+    }
+
+    return data.filter((row: FormData) => {
+      const formattedName = row.username.toLowerCase();
       const formattedSearch = searchTerm.toLowerCase();
 
       return formattedName.includes(formattedSearch);
     });
-  }, [searchTerm]);
+  }, [data, searchTerm]);
 
   const customRows: RowProps[] = useMemo(() => {
     return filteredRows.map((row) => {
-      const { id, name, email, status, role, lastLogin } = row;
+      const { id, email, username } = row;
 
       return {
         id,
-        name: {
-          sortableValue: name,
-          component: <CustomNameCell name={name} email={email} />,
-        },
-        status: {
-          sortableValue: status,
-          component: <CustomStatusCell status={status} />,
-        },
-        role: {
-          sortableValue: role,
-          component: <CustomRoleCell role={role} />,
-        },
-        lastLogin,
+        email,
+        username,
         actions: {
           component: (
             <Box>
               <IconButton onClick={() => editRow(row.id)}>
                 <EditIcon />
+              </IconButton>
+              <IconButton onClick={() => deleteRow(row.id)}>
+                <DeleteIcon />
               </IconButton>
               <IconButton onClick={() => viewRow(row.id)}>
                 <ChevronRightIcon />
@@ -157,12 +216,12 @@ const UsersScreen: FC = () => {
         },
       };
     });
-  }, [filteredRows, editRow, viewRow]);
+  }, [filteredRows, editRow, viewRow, deleteRow]);
 
   return (
     <Box>
       <Text fontFamily="Inter" fontSize={20} fontWeight={800} mt={4} mb={4}>
-        Users table with CRUD operations
+        Users
       </Text>
 
       <Box
@@ -217,7 +276,6 @@ const UsersScreen: FC = () => {
         <Box padding={4} mb={2}>
           <SchemaForm.Form
             schema={schema}
-            advancedProperties={advancedProperties}
             uiSchema={uiSchema}
             validator={validator}
             onSubmit={handleFormSubmit}

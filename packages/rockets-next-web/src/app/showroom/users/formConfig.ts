@@ -1,5 +1,4 @@
 import type { RJSFSchema, UiSchema, FormValidation } from "@rjsf/utils";
-import type { AdvancedProperty } from "@concepta/react-material-ui/dist/components/SchemaForm/types";
 
 import {
   CustomTextFieldWidget,
@@ -10,11 +9,8 @@ import emailValidation from "@/utils/emailValidation/emailValidation";
 
 export type FormData = {
   id?: string;
-  name: string;
   email: string;
-  status: string;
-  role: string;
-  lastLogin: string;
+  username: string;
 };
 
 export const widgets = {
@@ -25,45 +21,16 @@ export const widgets = {
 
 export const schema: RJSFSchema = {
   type: "object",
-  required: ["name", "email", "status", "role"],
+  required: ["email", "username"],
   properties: {
-    name: { type: "string", title: "Name", minLength: 3 },
     email: { type: "string", title: "Email", minLength: 3 },
-    status: {
-      type: "string",
-      title: "Status",
-      oneOf: [
-        { const: "schedule", title: "Schedule" },
-        { const: "available", title: "Available" },
-        { const: "unavailable", title: "Unavailable" },
-      ],
-    },
-    role: {
-      type: "string",
-      title: "Role",
-      oneOf: [
-        { const: "teacher", title: "Teacher" },
-        { const: "director", title: "Director" },
-        { const: "counselor", title: "Counselor" },
-      ],
-    },
-  },
-};
-
-export const advancedProperties: Record<string, AdvancedProperty> = {
-  status: {
-    type: "select",
-  },
-  role: {
-    type: "select",
+    username: { type: "string", title: "Username", minLength: 3 },
   },
 };
 
 export const uiSchema: UiSchema = {
-  name: { "ui:widget": CustomTextFieldWidget },
   email: { "ui:widget": CustomEmailFieldWidget },
-  status: { "ui:widget": CustomSelectWidget },
-  role: { "ui:widget": CustomSelectWidget },
+  username: { "ui:widget": CustomTextFieldWidget },
 };
 
 export const validate = (formData: FormData, errors: FormValidation) => {
