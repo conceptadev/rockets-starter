@@ -2,7 +2,6 @@
 
 import type { RowProps } from "@concepta/react-material-ui/dist/components/Table/types";
 import type { IChangeEvent } from "@rjsf/core";
-
 import { type FC, useState, useCallback, useMemo } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -18,7 +17,6 @@ import validator from "@rjsf/validator-ajv6";
 import EditIcon from "@mui/icons-material/Edit";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import DeleteIcon from "@mui/icons-material/Delete";
-
 import { headers } from "./tableConfig";
 import {
   type FormData,
@@ -178,21 +176,12 @@ const UsersScreen: FC = () => {
     setDrawerState({ viewMode: null, isOpen: false });
   };
 
-  const filteredRows: Record<string, string>[] = useMemo(() => {
+  const customRows: RowProps[] = useMemo(() => {
     if (!data) {
       return [];
     }
 
-    return data.filter((row: FormData) => {
-      const formattedName = row.username.toLowerCase();
-      const formattedSearch = searchTerm.toLowerCase();
-
-      return formattedName.includes(formattedSearch);
-    });
-  }, [data, searchTerm]);
-
-  const customRows: RowProps[] = useMemo(() => {
-    return filteredRows.map((row) => {
+    return data.map((row: FormData) => {
       const { id, email, username } = row;
 
       return {
@@ -216,7 +205,7 @@ const UsersScreen: FC = () => {
         },
       };
     });
-  }, [filteredRows, editRow, viewRow, deleteRow]);
+  }, [data, editRow, viewRow, deleteRow]);
 
   return (
     <Box>
