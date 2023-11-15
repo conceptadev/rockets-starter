@@ -7,6 +7,7 @@ import Drawer from "@mui/material/Drawer";
 import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import { Text } from "@concepta/react-material-ui";
 import { TextField } from "@concepta/react-material-ui";
+import { toast } from "react-toastify";
 import UsersTable from "./UsersTable";
 import UserForm from "./UserForm";
 import type { FormData, ActionType } from "./types";
@@ -33,7 +34,7 @@ const UsersScreen: FC = () => {
       }),
     true,
     {
-      onError: (error) => console.error(error),
+      onError: () => toast.error("Failed to fetch users."),
     }
   );
 
@@ -44,8 +45,11 @@ const UsersScreen: FC = () => {
       }),
     false,
     {
-      onSuccess: () => fetchUsers(),
-      onError: (error) => console.error(error),
+      onSuccess: () => {
+        toast.success("User successfully deleted.");
+        fetchUsers();
+      },
+      onError: () => toast.error("Failed to delete user."),
     }
   );
 

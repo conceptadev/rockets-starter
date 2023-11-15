@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import { SchemaForm } from "@concepta/react-material-ui";
 import validator from "@rjsf/validator-ajv6";
+import { toast } from "react-toastify";
 import { schema, widgets, getUiSchemaByViewMode } from "./formConfig";
 import type { FormData, ActionType } from "./types";
 
@@ -33,8 +34,11 @@ const UserForm: FC<UserFormProps> = ({
       }),
     false,
     {
-      onSuccess: onSubmitSuccess,
-      onError: (error) => console.error(error),
+      onSuccess: () => {
+        toast.success("User successfully created.");
+        onSubmitSuccess();
+      },
+      onError: () => toast.error("Failed to create user."),
     }
   );
 
@@ -46,8 +50,11 @@ const UserForm: FC<UserFormProps> = ({
       }),
     false,
     {
-      onSuccess: () => onSubmitSuccess,
-      onError: (error) => console.error(error),
+      onSuccess: () => {
+        toast.success("User successfully updated.");
+        onSubmitSuccess();
+      },
+      onError: () => toast.error("Failed to edit user."),
     }
   );
 
