@@ -1,6 +1,6 @@
 "use client";
 
-import { type FC, useState, useCallback } from "react";
+import { type FC, useState, useCallback, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
@@ -28,11 +28,13 @@ const UsersScreen: FC = () => {
   const { get, del } = useDataProvider();
 
   const { data, execute: fetchUsers } = useQuery(
-    () =>
+    (search?: string) =>
       get({
-        uri: `/user`,
+        uri: search
+          ? `/user?or=email||$contL||${search}&or=username||$contL||${search}`
+          : "/user",
       }),
-    true,
+    false,
     {
       onError: () => toast.error("Failed to fetch users."),
     }
@@ -86,6 +88,10 @@ const UsersScreen: FC = () => {
     fetchUsers();
     resetDrawerState();
   };
+
+  useEffect(() => {
+    fetchUsers(searchTerm);
+  }, [searchTerm]);
 
   return (
     <Box>
