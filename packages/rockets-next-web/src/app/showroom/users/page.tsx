@@ -7,9 +7,9 @@ import Drawer from "@mui/material/Drawer";
 import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import { Text } from "@concepta/react-material-ui";
 import { TextField } from "@concepta/react-material-ui";
-import UsersTable, { type ActionType } from "./UsersTable";
+import UsersTable from "./UsersTable";
 import UserForm from "./UserForm";
-import { type FormData } from "./formConfig";
+import type { FormData, ActionType } from "./types";
 
 interface DrawerState {
   isOpen: boolean;

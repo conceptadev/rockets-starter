@@ -1,4 +1,5 @@
 import type { RJSFSchema, UiSchema, FormValidation } from "@rjsf/utils";
+import type { FormData } from "./types";
 
 import {
   CustomTextFieldWidget,
@@ -6,12 +7,6 @@ import {
   CustomSelectWidget,
 } from "@concepta/react-material-ui/dist/styles/CustomWidgets";
 import emailValidation from "@/utils/emailValidation/emailValidation";
-
-export type FormData = {
-  id?: string;
-  email: string;
-  username: string;
-};
 
 export const widgets = {
   TextWidget: CustomTextFieldWidget,

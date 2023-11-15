@@ -11,9 +11,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { headers } from "./tableConfig";
-import { type FormData } from "./formConfig";
-
-export type ActionType = "creation" | "edit" | "details" | "delete" | null;
+import type { FormData, ActionType } from "./types";
 
 interface UsersTableProps {
   data: FormData[];
@@ -80,11 +78,11 @@ const UsersTable: FC<UsersTableProps> = ({ data, onActionClick }) => {
       return [];
     }
 
-    return (data as RowProps[]).map((row) => {
+    return data.map((row) => {
       const { id, email, username } = row;
 
       return {
-        id,
+        id: id || "",
         email,
         username,
         actions: {

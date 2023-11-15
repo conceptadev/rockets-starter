@@ -7,14 +7,8 @@ import Button from "@mui/material/Button";
 import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import { SchemaForm } from "@concepta/react-material-ui";
 import validator from "@rjsf/validator-ajv6";
-import { type ActionType } from "./UsersTable";
-import {
-  type FormData,
-  schema,
-  uiSchema,
-  widgets,
-  validate,
-} from "./formConfig";
+import { schema, uiSchema, widgets, validate } from "./formConfig";
+import type { FormData, ActionType } from "./types";
 
 interface UserFormProps {
   selectedRow?: FormData | null;
