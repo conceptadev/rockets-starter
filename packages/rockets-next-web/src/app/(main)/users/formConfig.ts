@@ -1,12 +1,11 @@
-import type { RJSFSchema, UiSchema, FormValidation } from "@rjsf/utils";
-import type { FormData } from "./types";
+import type { RJSFSchema, UiSchema } from "@rjsf/utils";
+import type { ActionType } from "./types";
 
 import {
   CustomTextFieldWidget,
   CustomEmailFieldWidget,
   CustomSelectWidget,
 } from "@concepta/react-material-ui/dist/styles/CustomWidgets";
-import emailValidation from "@/utils/emailValidation/emailValidation";
 
 export const widgets = {
   TextWidget: CustomTextFieldWidget,
@@ -23,15 +22,13 @@ export const schema: RJSFSchema = {
   },
 };
 
-export const uiSchema: UiSchema = {
-  email: { "ui:widget": CustomEmailFieldWidget },
-  username: { "ui:widget": CustomTextFieldWidget },
-};
-
-export const validate = (formData: FormData, errors: FormValidation) => {
-  if (!emailValidation(formData.email)) {
-    errors?.email?.addError("please enter a valid email");
-  }
-
-  return errors;
-};
+export const getUiSchemaByViewMode = (viewMode: ActionType): UiSchema => ({
+  email: {
+    "ui:widget": CustomEmailFieldWidget,
+    "ui:disabled": viewMode === "details",
+  },
+  username: {
+    "ui:widget": CustomTextFieldWidget,
+    "ui:disabled": viewMode === "edit" || viewMode === "details",
+  },
+});

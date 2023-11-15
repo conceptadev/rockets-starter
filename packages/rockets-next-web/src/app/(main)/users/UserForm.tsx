@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import { SchemaForm } from "@concepta/react-material-ui";
 import validator from "@rjsf/validator-ajv6";
-import { schema, uiSchema, widgets } from "./formConfig";
+import { schema, widgets, getUiSchemaByViewMode } from "./formConfig";
 import type { FormData, ActionType } from "./types";
 
 interface UserFormProps {
@@ -70,7 +70,7 @@ const UserForm: FC<UserFormProps> = ({
   return (
     <SchemaForm.Form
       schema={schema}
-      uiSchema={uiSchema}
+      uiSchema={getUiSchemaByViewMode(viewMode)}
       validator={validator}
       onSubmit={handleFormSubmit}
       widgets={widgets}
