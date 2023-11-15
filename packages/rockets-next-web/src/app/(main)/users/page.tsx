@@ -8,6 +8,7 @@ import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import { Text } from "@concepta/react-material-ui";
 import { TextField } from "@concepta/react-material-ui";
 import { toast } from "react-toastify";
+import { useDebounce } from "use-debounce";
 import UsersTable from "./UsersTable";
 import UserForm from "./UserForm";
 import type { FormData, ActionType } from "./types";
@@ -24,6 +25,8 @@ const UsersScreen: FC = () => {
     viewMode: null,
   });
   const [selectedRow, setSelectedRow] = useState<FormData | null>();
+
+  const [debouncedSearch] = useDebounce(searchTerm, 1000);
 
   const { get, del } = useDataProvider();
 
@@ -90,8 +93,8 @@ const UsersScreen: FC = () => {
   };
 
   useEffect(() => {
-    fetchUsers(searchTerm);
-  }, [searchTerm]);
+    fetchUsers(debouncedSearch);
+  }, [debouncedSearch]);
 
   return (
     <Box>
