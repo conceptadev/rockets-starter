@@ -1,23 +1,15 @@
 "use client";
 
-import type { IChangeEvent } from "@rjsf/core";
 import { type FC, useState, useCallback } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
 import useDataProvider, { useQuery } from "@concepta/react-data-provider";
-import { SchemaForm } from "@concepta/react-material-ui";
 import { Text } from "@concepta/react-material-ui";
 import { TextField } from "@concepta/react-material-ui";
-import validator from "@rjsf/validator-ajv6";
 import UsersTable, { type ActionType } from "./UsersTable";
-import {
-  type FormData,
-  schema,
-  uiSchema,
-  widgets,
-  validate,
-} from "./formConfig";
+import UserForm from "./UserForm";
+import { type FormData } from "./formConfig";
 
 interface DrawerState {
   isOpen: boolean;
@@ -32,7 +24,7 @@ const UsersScreen: FC = () => {
   });
   const [selectedRow, setSelectedRow] = useState<FormData | null>();
 
-  const { get, post, patch, del } = useDataProvider();
+  const { get, del } = useDataProvider();
 
   const { data, execute: fetchUsers } = useQuery(
     () =>
@@ -41,32 +33,6 @@ const UsersScreen: FC = () => {
       }),
     true,
     {
-      onError: (error) => console.error(error),
-    }
-  );
-
-  const { execute: createUser } = useQuery(
-    (data: FormData) =>
-      post({
-        uri: `/user`,
-        body: data,
-      }),
-    false,
-    {
-      onSuccess: () => fetchUsers(),
-      onError: (error) => console.error(error),
-    }
-  );
-
-  const { execute: editUser } = useQuery(
-    (data: FormData) =>
-      patch({
-        uri: `/user/${data.id}`,
-        body: data,
-      }),
-    false,
-    {
-      onSuccess: () => fetchUsers(),
       onError: (error) => console.error(error),
     }
   );
@@ -107,27 +73,14 @@ const UsersScreen: FC = () => {
     setDrawerState({ viewMode: action, isOpen: true });
   };
 
-  const handleFormSubmit = async (values: IChangeEvent<FormData>) => {
-    const fields = values.formData;
-
-    if (!fields) {
-      return;
-    }
-
-    if (drawerState.viewMode === "creation") {
-      await createUser(fields);
-    }
-
-    if (drawerState.viewMode === "edit") {
-      await editUser(fields);
-    }
-
-    resetDrawerState();
-  };
-
   const resetDrawerState = () => {
     setSelectedRow(null);
     setDrawerState({ viewMode: null, isOpen: false });
+  };
+
+  const handleFormSubmitSuccess = () => {
+    fetchUsers();
+    resetDrawerState();
   };
 
   return (
@@ -166,42 +119,12 @@ const UsersScreen: FC = () => {
 
       <Drawer open={drawerState.isOpen} anchor="right">
         <Box padding={4} mb={2}>
-          <SchemaForm.Form
-            schema={schema}
-            uiSchema={uiSchema}
-            validator={validator}
-            onSubmit={handleFormSubmit}
-            widgets={widgets}
-            customValidate={validate}
-            noHtml5Validate={true}
-            showErrorList={false}
-            formData={selectedRow}
-            readonly={drawerState.viewMode === "details"}
-          >
-            <Box
-              display="flex"
-              flexDirection="row"
-              alignItems="center"
-              justifyContent="space-between"
-              mt={4}
-            >
-              <Button
-                type="submit"
-                variant="contained"
-                disabled={drawerState.viewMode === "details"}
-                sx={{ flex: 1, mr: 1 }}
-              >
-                Save
-              </Button>
-              <Button
-                variant="outlined"
-                onClick={resetDrawerState}
-                sx={{ flex: 1, ml: 1 }}
-              >
-                Close
-              </Button>
-            </Box>
-          </SchemaForm.Form>
+          <UserForm
+            selectedRow={selectedRow}
+            viewMode={drawerState.viewMode}
+            onSubmitSuccess={handleFormSubmitSuccess}
+            onCancel={resetDrawerState}
+          />
         </Box>
       </Drawer>
     </Box>
