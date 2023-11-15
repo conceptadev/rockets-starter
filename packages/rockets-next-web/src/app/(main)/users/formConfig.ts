@@ -18,7 +18,7 @@ export const schema: RJSFSchema = {
   type: "object",
   required: ["email", "username"],
   properties: {
-    email: { type: "string", title: "Email", minLength: 3 },
+    email: { type: "string", title: "Email", minLength: 3, format: "email" },
     username: { type: "string", title: "Username", minLength: 3 },
   },
 };

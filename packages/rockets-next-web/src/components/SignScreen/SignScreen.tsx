@@ -45,7 +45,7 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
 
   React.useEffect(() => {
     if (user) {
-      router.push("/showroom/home");
+      router.push("/home");
     }
   }, [user, router]);
 

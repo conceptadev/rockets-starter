@@ -10,7 +10,7 @@ const Home = () => {
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
-    router.replace(accessToken ? "/showroom/home" : "/login");
+    router.replace(accessToken ? "/home" : "/login");
   }, []);
 
   return (

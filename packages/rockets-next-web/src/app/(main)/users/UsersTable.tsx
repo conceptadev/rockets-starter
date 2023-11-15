@@ -120,13 +120,7 @@ const UsersTable: FC<UsersTableProps> = ({ data, onActionClick }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <Table.BodyRows
-              renderRow={(row) => (
-                <Table.BodyRow row={row}>
-                  <Table.BodyCell row={row} />
-                </Table.BodyRow>
-              )}
-            />
+            <Table.BodyRows />
           </TableBody>
         </Table.Table>
       </TableContainer>

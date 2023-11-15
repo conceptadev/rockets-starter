@@ -5,16 +5,16 @@ import { usePathname, useRouter } from "next/navigation";
 import { ContainerWithDrawer } from "@concepta/react-material-ui";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 
-export default function Showroom({ children }: { children: ReactNode }) {
+export default function Main({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
 
   const drawerMenuItems = [
     {
-      id: "/showroom/users",
+      id: "/users",
       icon: <GroupsOutlinedIcon />,
       text: "Users",
-      onClick: () => router.push("/showroom/users"),
+      onClick: () => router.push("/users"),
     },
   ];
 
