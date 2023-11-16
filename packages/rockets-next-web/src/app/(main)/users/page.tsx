@@ -31,7 +31,11 @@ const UsersScreen: FC = () => {
 
   const { get, del } = useDataProvider();
 
-  const { data, execute: fetchUsers } = useQuery(
+  const {
+    isPending: isLoadingUsers,
+    data,
+    execute: fetchUsers,
+  } = useQuery(
     (search?: string) =>
       get({
         uri: search
@@ -129,7 +133,11 @@ const UsersScreen: FC = () => {
         </Button>
       </Box>
 
-      <UsersTable data={data} onActionClick={handleTableRowAction} />
+      <UsersTable
+        isLoading={isLoadingUsers}
+        data={data}
+        onActionClick={handleTableRowAction}
+      />
 
       <Drawer open={drawerState.isOpen} anchor="right">
         <Box padding={4} mb={2}>

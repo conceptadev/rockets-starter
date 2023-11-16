@@ -681,24 +681,24 @@
   resolved "https://registry.yarnpkg.com/@concepta/prettier-config/-/prettier-config-1.1.2.tgz#fd2ea20aadf52b538b0b1d634be40ddc514c13a1"
   integrity sha512-mFoT12ED9vv6eZiuxDJumKtAsvU4Oa2DToiJibLGGy2EbseL23A9joTCVdb7//J7BKLx95FG9y9x6ofdCXuhVw==
 
-"@concepta/react-auth-provider@^1.0.0-alpha.13":
-  version "1.0.0-alpha.13"
-  resolved "https://registry.yarnpkg.com/@concepta/react-auth-provider/-/react-auth-provider-1.0.0-alpha.13.tgz#ddf982c0c1a6f4e4e5709e0dd81d4d44f947d334"
-  integrity sha512-ihzGz1k/1OC7uZrvJe0dLr9SM01JIPyx3Z90L83gyp+ENcDptOmXJ74gsIfQ20fObfvgXPfjEBgr/tIhbqQc0g==
+"@concepta/react-auth-provider@^1.0.0-alpha.15":
+  version "1.0.0-alpha.15"
+  resolved "https://registry.yarnpkg.com/@concepta/react-auth-provider/-/react-auth-provider-1.0.0-alpha.15.tgz#36a9e0ddda43b25c9381b1d5f551fc3709749078"
+  integrity sha512-d+qB5LrgJMtm2ZwjYgvb/VgTErW+xmHD4eBRNdqKCwUVTZJHNmcOigLIxQ2FjLvzv5X/Hgl8aT1/RoMtEpN74g==
   dependencies:
-    "@concepta/react-data-provider" "^1.0.0-alpha.13"
+    "@concepta/react-data-provider" "^1.0.0-alpha.15"
 
-"@concepta/react-data-provider@^1.0.0-alpha.13":
-  version "1.0.0-alpha.13"
-  resolved "https://registry.yarnpkg.com/@concepta/react-data-provider/-/react-data-provider-1.0.0-alpha.13.tgz#029157ac604cc4179f4d2f47cd1a02bc46fe09f3"
-  integrity sha512-KwSq7XodUaKeGGtJe8jTqtxEgUDoPgZdbf1foJNcqiPxld6dq2pOv5MNHeaK8ubyl+WqxE3ozFLAExVKfu6/Zw==
+"@concepta/react-data-provider@^1.0.0-alpha.15":
+  version "1.0.0-alpha.15"
+  resolved "https://registry.yarnpkg.com/@concepta/react-data-provider/-/react-data-provider-1.0.0-alpha.15.tgz#be42b157aa4c6cfffbb7449f3e1f664c035236ba"
+  integrity sha512-2AD4exvdPHE9ThBFJqr2OGAGO/xgWVM91SrmH1WW+yLwRk607HT1+pv5PjpcMLWtF7dLceA8qIzaqyG7g0/+DQ==
   dependencies:
     axios "^0.24.0"
 
-"@concepta/react-material-ui@^1.0.0-alpha.13":
-  version "1.0.0-alpha.13"
-  resolved "https://registry.yarnpkg.com/@concepta/react-material-ui/-/react-material-ui-1.0.0-alpha.13.tgz#e40f73760144627799ef7bf47fa9ef90096a65df"
-  integrity sha512-dO9npVUAkfACGx+yGTx9hOyMnjF5nWf70bZc5ex/reQY2M6aWpX8IX4HziOGEzeeUThneF+3aHYoV+IxKo5LGw==
+"@concepta/react-material-ui@^1.0.0-alpha.15":
+  version "1.0.0-alpha.15"
+  resolved "https://registry.yarnpkg.com/@concepta/react-material-ui/-/react-material-ui-1.0.0-alpha.15.tgz#988ece1eb19907466702ac740af0a6962b57d99a"
+  integrity sha512-GftcowyKkH3/XbiZ5h0D3I4L/GtGpoQkOaU2fO1RDL28EfE6yAhIciPBS/2csxVq0+PDagQTBtrCWolCCMVRWQ==
   dependencies:
     "@emotion/react" "^11.10.4"
     "@emotion/styled" "^11.10.4"

@@ -15,6 +15,7 @@ import { headers } from "./tableConfig";
 import type { FormData, ActionType } from "./types";
 
 interface UsersTableProps {
+  isLoading?: boolean;
   data: FormData[];
   onActionClick: ({
     rowData,
@@ -25,7 +26,11 @@ interface UsersTableProps {
   }) => void;
 }
 
-const UsersTable: FC<UsersTableProps> = ({ data, onActionClick }) => {
+const UsersTable: FC<UsersTableProps> = ({
+  isLoading,
+  data,
+  onActionClick,
+}) => {
   const theme = useTheme();
 
   const tableTheme = createTableStyles({
@@ -121,7 +126,7 @@ const UsersTable: FC<UsersTableProps> = ({ data, onActionClick }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <Table.BodyRows />
+            <Table.BodyRows isLoading={isLoading} />
           </TableBody>
         </Table.Table>
       </TableContainer>
