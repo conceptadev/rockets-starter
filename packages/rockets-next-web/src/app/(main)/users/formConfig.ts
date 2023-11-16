@@ -1,16 +1,10 @@
 import type { RJSFSchema, UiSchema } from "@rjsf/utils";
-import type { ActionType } from "./types";
+import { CustomTextFieldWidget } from "@concepta/react-material-ui/dist/styles/CustomWidgets";
 
-import {
-  CustomTextFieldWidget,
-  CustomEmailFieldWidget,
-  CustomSelectWidget,
-} from "@concepta/react-material-ui/dist/styles/CustomWidgets";
+import type { ActionType } from "./types";
 
 export const widgets = {
   TextWidget: CustomTextFieldWidget,
-  EmailWidget: CustomEmailFieldWidget,
-  SelectWidget: CustomSelectWidget,
 };
 
 export const schema: RJSFSchema = {
@@ -24,7 +18,7 @@ export const schema: RJSFSchema = {
 
 export const getUiSchemaByViewMode = (viewMode: ActionType): UiSchema => ({
   email: {
-    "ui:widget": CustomEmailFieldWidget,
+    "ui:widget": CustomTextFieldWidget,
     "ui:disabled": viewMode === "details",
   },
   username: {

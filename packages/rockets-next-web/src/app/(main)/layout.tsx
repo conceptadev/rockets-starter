@@ -24,12 +24,6 @@ export default function Main({ children }: { children: ReactNode }) {
       drawerItems={drawerMenuItems}
       currentId={pathname}
       logo="/logo.svg"
-      showNotifications
-      notificationsNumber={6}
-      notificationsOnClick={() =>
-        // eslint-disable-next-line no-console
-        console.log("click")
-      }
       headerAvatar="https://source.unsplash.com/random"
       headerText="John Smith"
       headerSubText="Amazing Inc."

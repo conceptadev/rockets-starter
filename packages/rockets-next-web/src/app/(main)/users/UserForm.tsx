@@ -8,6 +8,7 @@ import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import { SchemaForm } from "@concepta/react-material-ui";
 import validator from "@rjsf/validator-ajv6";
 import { toast } from "react-toastify";
+
 import { schema, widgets, getUiSchemaByViewMode } from "./formConfig";
 import type { FormData, ActionType } from "./types";
 
@@ -60,10 +61,6 @@ const UserForm: FC<UserFormProps> = ({
 
   const handleFormSubmit = async (values: IChangeEvent<FormData>) => {
     const fields = values.formData;
-
-    if (!fields) {
-      return;
-    }
 
     if (viewMode === "creation") {
       await createUser(fields);
