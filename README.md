@@ -181,6 +181,19 @@ A Super Admin account will be created as follows:
 Username: `superadmin`
 Password: `Test1234`
 
+If you get an `ECONNREFUSED` error in this step, change the `rockets-starter-ppostgres` config on the `docker-compose.yml` with the following:
+
+```
+rockets-starter-postgres:
+  image: postgres
+  ports:
+    - 5432:5432
+  environment:
+    POSTGRES_DB: rockets-starter
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+```
+
 ### Start the API
 
 To start the API, run this command:
