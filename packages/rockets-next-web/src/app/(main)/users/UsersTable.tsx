@@ -4,18 +4,11 @@ import type { RowProps } from "@concepta/react-material-ui/dist/components/Table
 import { type FC, useCallback, useMemo } from "react";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
-import { Table, createTableStyles } from "@concepta/react-material-ui";
-import {
-  TableContainer,
-  TableHead,
-  TableBody,
-  TableRow,
-  TableCell,
-} from "@mui/material";
-import useTheme from "@mui/material/styles/useTheme";
 import EditIcon from "@mui/icons-material/Edit";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import DeleteIcon from "@mui/icons-material/Delete";
+
+import Table from "@/components/Table/Table";
 
 import { headers } from "./tableConfig";
 import type { FormData, ActionType } from "./types";
@@ -39,33 +32,6 @@ const UsersTable: FC<UsersTableProps> = ({
   data,
   onActionClick,
 }) => {
-  const theme = useTheme();
-
-  const tableTheme = createTableStyles({
-    table: {
-      height: "100%",
-    },
-    root: {
-      display: "flex",
-      flexDirection: "column",
-      flex: 1,
-      overflow: "auto",
-    },
-    tableHeader: {
-      ...theme.typography.caption,
-      lineHeight: 1,
-      fontWeight: 500,
-      color: theme.palette.grey[500],
-    },
-    tableRow: {
-      backgroundColor: "#F9FAFB",
-      textTransform: "uppercase",
-    },
-    tableContainer: {
-      flex: 1,
-    },
-  });
-
   const getRowDataById = useCallback(
     (rowId: FormData["id"]) => {
       return data.find((item: FormData) => item.id === rowId);
@@ -125,33 +91,12 @@ const UsersTable: FC<UsersTableProps> = ({
   }, [data, handleActionButtonClick]);
 
   return (
-    <Table.Root rows={customRows} headers={headers} sx={tableTheme.root}>
-      <TableContainer sx={tableTheme.tableContainer}>
-        <Table.Table stickyHeader variant="outlined" sx={tableTheme.table}>
-          <TableHead>
-            <TableRow sx={tableTheme.tableRow}>
-              <Table.HeaderCells />
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {isEmptyStateVisible && (
-              <TableRow>
-                <TableCell
-                  colSpan={headers.length}
-                  sx={{
-                    textAlign: "center",
-                  }}
-                >
-                  No records found.
-                </TableCell>
-              </TableRow>
-            )}
-            <Table.BodyRows isLoading={isLoading} />
-          </TableBody>
-        </Table.Table>
-      </TableContainer>
-      <Table.Pagination variant="outlined" />
-    </Table.Root>
+    <Table
+      rows={customRows}
+      headers={headers}
+      isEmptyStateVisible={isEmptyStateVisible}
+      isLoading={isLoading}
+    />
   );
 };
 
