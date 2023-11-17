@@ -135,6 +135,7 @@ const UsersScreen: FC = () => {
 
       <UsersTable
         isLoading={isLoadingUsers}
+        isEmptyStateVisible={Boolean(searchTerm && !data?.length)}
         data={data}
         onActionClick={handleTableRowAction}
       />

@@ -5,7 +5,13 @@ import { type FC, useCallback, useMemo } from "react";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import { Table, createTableStyles } from "@concepta/react-material-ui";
-import { TableContainer, TableHead, TableBody, TableRow } from "@mui/material";
+import {
+  TableContainer,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+} from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 import EditIcon from "@mui/icons-material/Edit";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -16,6 +22,7 @@ import type { FormData, ActionType } from "./types";
 
 interface UsersTableProps {
   isLoading?: boolean;
+  isEmptyStateVisible?: boolean;
   data: FormData[];
   onActionClick: ({
     rowData,
@@ -28,6 +35,7 @@ interface UsersTableProps {
 
 const UsersTable: FC<UsersTableProps> = ({
   isLoading,
+  isEmptyStateVisible,
   data,
   onActionClick,
 }) => {
@@ -126,6 +134,18 @@ const UsersTable: FC<UsersTableProps> = ({
             </TableRow>
           </TableHead>
           <TableBody>
+            {isEmptyStateVisible && (
+              <TableRow>
+                <TableCell
+                  colSpan={headers.length}
+                  sx={{
+                    textAlign: "center",
+                  }}
+                >
+                  No records found.
+                </TableCell>
+              </TableRow>
+            )}
             <Table.BodyRows isLoading={isLoading} />
           </TableBody>
         </Table.Table>
