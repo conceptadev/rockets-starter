@@ -1,15 +1,13 @@
 "use client";
 
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { useAuth } from "@concepta/react-auth-provider";
-import { useRouter } from "next/navigation";
 import { SimpleForm } from "@concepta/react-material-ui/dist";
 import { FormType } from "@concepta/react-material-ui/dist/components/SimpleForm";
 import { Image, Text, Link } from "@concepta/react-material-ui";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
-import { FormValidation } from "@rjsf/utils";
 import { IChangeEvent } from "@rjsf/core";
 
 interface FormData {
@@ -22,8 +20,6 @@ interface Props {
 }
 
 const SignScreen: FC<Props> = ({ isSignUp }) => {
-  const router = useRouter();
-
   const form: FormType = {
     title: "Simplest form ever",
     submitButtonLabel: "Send",
@@ -41,24 +37,7 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
     },
   };
 
-  const { doLogin, accessToken } = useAuth() || {};
-
-  useEffect(() => {
-    if (accessToken) {
-      router.push("/users");
-    }
-  }, [accessToken, router]);
-
-  const validate = (formData: FormData, errors: FormValidation) => {
-    if (!formData.username) {
-      errors?.switch?.addError("Username is required");
-    }
-    if (!formData.password) {
-      errors?.switch?.addError("Password is required");
-    }
-
-    return errors;
-  };
+  const { doLogin } = useAuth();
 
   const handleSubmit = async (values: IChangeEvent<FormData>) => {
     const { username, password } = values.formData || {};
@@ -88,7 +67,7 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
 
       <Card sx={{ marginTop: "26px", padding: "24px" }}>
         <Box>
-          <SimpleForm form={form} onSubmit={handleSubmit} validate={validate} />
+          <SimpleForm form={form} onSubmit={handleSubmit} />
         </Box>
 
         <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>

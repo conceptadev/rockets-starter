@@ -29,6 +29,8 @@ const App = ({ children }: { children: React.ReactNode }) => {
 
   const handleRefreshTokenError = () => router.replace("/login");
 
+  const handleSuccess = () => router.replace("/users");
+
   const handleError = (error: unknown) =>
     toast.error(
       (error as NetworkError)?.response?.data?.message ||
@@ -41,7 +43,7 @@ const App = ({ children }: { children: React.ReactNode }) => {
       onRefreshTokenError={handleRefreshTokenError}
     >
       <ThemeProvider theme={darkMode ? themeDark : themeLight}>
-        <AuthProvider onError={handleError}>
+        <AuthProvider onSuccess={handleSuccess} onError={handleError}>
           <html lang="en">
             <body className={inter.className}>{children}</body>
           </html>
