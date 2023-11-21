@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC } from "react";
+import { FC, useEffect } from "react";
 import { useAuth } from "@concepta/react-auth-provider";
 import { useRouter } from "next/navigation";
 import { SimpleForm } from "@concepta/react-material-ui/dist";
@@ -41,13 +41,13 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
     },
   };
 
-  const { doLogin, user } = useAuth() || {};
+  const { doLogin, accessToken } = useAuth() || {};
 
-  React.useEffect(() => {
-    if (user) {
+  useEffect(() => {
+    if (accessToken) {
       router.push("/users");
     }
-  }, [user, router]);
+  }, [accessToken, router]);
 
   const validate = (formData: FormData, errors: FormValidation) => {
     if (!formData.username) {
@@ -62,7 +62,9 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
 
   const handleSubmit = async (values: IChangeEvent<FormData>) => {
     const { username, password } = values.formData || {};
-    username && password && doLogin?.({ username, password });
+    username &&
+      password &&
+      doLogin?.({ username, password, loginPath: "/auth/login" });
   };
 
   return (
