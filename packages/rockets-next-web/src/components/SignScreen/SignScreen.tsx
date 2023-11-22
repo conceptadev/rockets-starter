@@ -2,13 +2,17 @@
 
 import { FC } from "react";
 import { useAuth } from "@concepta/react-auth-provider";
-import { SimpleForm } from "@concepta/react-material-ui/dist";
-import { FormType } from "@concepta/react-material-ui/dist/components/SimpleForm";
+import { SchemaForm } from "@concepta/react-material-ui/dist";
 import { Image, Text, Link } from "@concepta/react-material-ui";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 import { IChangeEvent } from "@rjsf/core";
+import validator from "@rjsf/validator-ajv6";
+
+import { schema, widgets, advancedProperties } from "./formConfig";
 
 interface FormData {
   username: string;
@@ -20,24 +24,7 @@ interface Props {
 }
 
 const SignScreen: FC<Props> = ({ isSignUp }) => {
-  const form: FormType = {
-    title: "Simplest form ever",
-    submitButtonLabel: "Send",
-    fields: {
-      username: {
-        type: "string",
-        title: "Username",
-        required: true,
-      },
-      password: {
-        type: "password",
-        title: "Password",
-        required: true,
-      },
-    },
-  };
-
-  const { doLogin } = useAuth();
+  const { doLogin, isPending } = useAuth();
 
   const handleSubmit = async (values: IChangeEvent<FormData>) => {
     const { username, password } = values.formData || {};
@@ -67,7 +54,41 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
 
       <Card sx={{ marginTop: "26px", padding: "24px" }}>
         <Box>
-          <SimpleForm form={form} onSubmit={handleSubmit} />
+          <Text
+            variant="h4"
+            fontFamily="Inter"
+            fontSize={30}
+            fontWeight={800}
+            mt={1}
+            gutterBottom
+          >
+            {isSignUp ? "Sign up" : "Sign in"}
+          </Text>
+          <SchemaForm.Form
+            schema={schema}
+            validator={validator}
+            onSubmit={handleSubmit}
+            widgets={widgets}
+            noHtml5Validate={true}
+            showErrorList={false}
+            advancedProperties={advancedProperties}
+          >
+            <Box
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              justifyContent="space-between"
+              mt={2}
+            >
+              <Button type="submit" variant="contained" sx={{ flex: 1 }}>
+                {isPending ? (
+                  <CircularProgress sx={{ color: "white" }} size={24} />
+                ) : (
+                  "Send"
+                )}
+              </Button>
+            </Box>
+          </SchemaForm.Form>
         </Box>
 
         <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>
