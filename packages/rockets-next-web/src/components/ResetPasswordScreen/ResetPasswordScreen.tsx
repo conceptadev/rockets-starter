@@ -3,7 +3,7 @@
 import { FC } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SchemaForm } from "@concepta/react-material-ui/dist";
-import { Image, Text } from "@concepta/react-material-ui";
+import { Image, Text, Link } from "@concepta/react-material-ui";
 import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -87,6 +87,12 @@ const ResetPasswordScreen: FC = () => {
             </Box>
           </SchemaForm.Form>
         </Box>
+
+        <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>
+          <Link href="/login" color="primary.dark">
+            Remember your password? Sign in
+          </Link>
+        </Text>
       </Card>
     </Container>
   );
