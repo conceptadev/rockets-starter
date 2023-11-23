@@ -1,9 +1,9 @@
 "use client";
 
 import { FC } from "react";
-import { useAuth } from "@concepta/react-auth-provider";
 import { SchemaForm } from "@concepta/react-material-ui/dist";
-import { Image, Text, Link } from "@concepta/react-material-ui";
+import { Image, Text } from "@concepta/react-material-ui";
+import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
@@ -11,46 +11,46 @@ import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import { IChangeEvent } from "@rjsf/core";
 import validator from "@rjsf/validator-ajv6";
+import { toast } from "react-toastify";
 
-import { schema, widgets, advancedProperties } from "./formConfig";
+import { schema, widgets, uiSchema } from "./formConfig";
 
 interface FormData {
-  username: string;
-  password: string;
+  email: string;
 }
 
-interface Props {
-  isSignUp?: boolean;
-}
+const ForgotPasswordScreen: FC = () => {
+  const { post } = useDataProvider();
 
-const SignScreen: FC<Props> = ({ isSignUp }) => {
-  const { doLogin, isPending } = useAuth();
+  const { execute: sendRecoveryPasswordLink, isPending } = useQuery(
+    (body: FormData) =>
+      post({
+        uri: "/auth/recovery/password",
+        body: { email: body.email },
+      }),
+    false,
+    {
+      onSuccess() {
+        toast.success("Reset password link successfully sent to your e-mail.");
+      },
+      onError: (error) => {
+        toast.error(
+          // @ts-expect-error TODO: needs to fix types in rockets-react
+          error?.response?.data?.message ??
+            "An error has occurred. Please try again later or contact support for assistance."
+        );
+      },
+    }
+  );
 
   const handleSubmit = async (values: IChangeEvent<FormData>) => {
-    const { username, password } = values.formData || {};
-    username &&
-      password &&
-      doLogin?.({ username, password, loginPath: "/auth/login" });
+    const { email } = values.formData || {};
+    await sendRecoveryPasswordLink({ email });
   };
 
   return (
     <Container maxWidth="xs" sx={{ textAlign: "center", padding: "48px 0" }}>
       <Image src="/logo.svg" alt="Logo" />
-
-      <Text
-        variant="h4"
-        fontFamily="Inter"
-        fontSize={30}
-        fontWeight={800}
-        mt={1}
-        gutterBottom
-      >
-        Welcome
-      </Text>
-
-      <Text fontSize={14} fontWeight={500} color="primary.dark">
-        {isSignUp ? "Sign up" : "Sign in"} to continue!
-      </Text>
 
       <Card sx={{ marginTop: "26px", padding: "24px" }}>
         <Box>
@@ -62,23 +62,17 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
             mt={1}
             gutterBottom
           >
-            {isSignUp ? "Sign up" : "Sign in"}
+            Recover Password
           </Text>
           <SchemaForm.Form
             schema={schema}
+            uiSchema={uiSchema}
             validator={validator}
             onSubmit={handleSubmit}
             widgets={widgets}
             noHtml5Validate={true}
             showErrorList={false}
-            advancedProperties={advancedProperties}
           >
-            <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 2 }}>
-              <Link href="/forgot-password" color="primary.dark">
-                Forgot your password?
-              </Link>
-            </Text>
-
             <Box
               display="flex"
               flexDirection="row"
@@ -90,23 +84,15 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
                 {isPending ? (
                   <CircularProgress sx={{ color: "white" }} size={24} />
                 ) : (
-                  "Send"
+                  "Email me a recovery link"
                 )}
               </Button>
             </Box>
           </SchemaForm.Form>
         </Box>
-
-        <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>
-          <Link href={isSignUp ? "/login" : "/sign-up"} color="primary.dark">
-            {isSignUp
-              ? "Already have an account? Sign in"
-              : "No account? Sign up"}
-          </Link>
-        </Text>
       </Card>
     </Container>
   );
 };
 
-export default SignScreen;
+export default ForgotPasswordScreen;

@@ -1,9 +1,10 @@
 "use client";
 
 import { FC } from "react";
-import { useAuth } from "@concepta/react-auth-provider";
+import { useRouter, useSearchParams } from "next/navigation";
 import { SchemaForm } from "@concepta/react-material-ui/dist";
-import { Image, Text, Link } from "@concepta/react-material-ui";
+import { Image, Text } from "@concepta/react-material-ui";
+import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
@@ -11,46 +12,42 @@ import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import { IChangeEvent } from "@rjsf/core";
 import validator from "@rjsf/validator-ajv6";
+import { toast } from "react-toastify";
 
-import { schema, widgets, advancedProperties } from "./formConfig";
+import { schema, widgets, uiSchema, FormData } from "./formConfig";
 
-interface FormData {
-  username: string;
-  password: string;
-}
+const ResetPasswordScreen: FC = () => {
+  const { patch } = useDataProvider();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
 
-interface Props {
-  isSignUp?: boolean;
-}
-
-const SignScreen: FC<Props> = ({ isSignUp }) => {
-  const { doLogin, isPending } = useAuth();
+  const { execute: resetPassword, isPending } = useQuery(
+    (body: FormData) =>
+      patch({
+        uri: "/auth/recovery/password",
+        body: { passcode: token, newPassword: body.newPassword },
+      }),
+    false,
+    {
+      onSuccess() {
+        toast.success("New password successfully saved.");
+        router.push("/login");
+      },
+      // TODO: BE message is not friendly
+      onError: () => {
+        toast.error("Failed to reset password. Please try again later.");
+      },
+    }
+  );
 
   const handleSubmit = async (values: IChangeEvent<FormData>) => {
-    const { username, password } = values.formData || {};
-    username &&
-      password &&
-      doLogin?.({ username, password, loginPath: "/auth/login" });
+    await resetPassword(values.formData || {});
   };
 
   return (
     <Container maxWidth="xs" sx={{ textAlign: "center", padding: "48px 0" }}>
       <Image src="/logo.svg" alt="Logo" />
-
-      <Text
-        variant="h4"
-        fontFamily="Inter"
-        fontSize={30}
-        fontWeight={800}
-        mt={1}
-        gutterBottom
-      >
-        Welcome
-      </Text>
-
-      <Text fontSize={14} fontWeight={500} color="primary.dark">
-        {isSignUp ? "Sign up" : "Sign in"} to continue!
-      </Text>
 
       <Card sx={{ marginTop: "26px", padding: "24px" }}>
         <Box>
@@ -62,23 +59,17 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
             mt={1}
             gutterBottom
           >
-            {isSignUp ? "Sign up" : "Sign in"}
+            Reset Password
           </Text>
           <SchemaForm.Form
             schema={schema}
             validator={validator}
             onSubmit={handleSubmit}
             widgets={widgets}
+            uiSchema={uiSchema}
             noHtml5Validate={true}
             showErrorList={false}
-            advancedProperties={advancedProperties}
           >
-            <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 2 }}>
-              <Link href="/forgot-password" color="primary.dark">
-                Forgot your password?
-              </Link>
-            </Text>
-
             <Box
               display="flex"
               flexDirection="row"
@@ -90,23 +81,15 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
                 {isPending ? (
                   <CircularProgress sx={{ color: "white" }} size={24} />
                 ) : (
-                  "Send"
+                  "Email me a recovery link"
                 )}
               </Button>
             </Box>
           </SchemaForm.Form>
         </Box>
-
-        <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>
-          <Link href={isSignUp ? "/login" : "/sign-up"} color="primary.dark">
-            {isSignUp
-              ? "Already have an account? Sign in"
-              : "No account? Sign up"}
-          </Link>
-        </Text>
       </Card>
     </Container>
   );
 };
 
-export default SignScreen;
+export default ResetPasswordScreen;
