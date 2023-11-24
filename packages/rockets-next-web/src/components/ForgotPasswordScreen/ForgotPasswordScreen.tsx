@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { type FC, useState } from "react";
 import { SchemaForm } from "@concepta/react-material-ui/dist";
 import { Image, Text, Link } from "@concepta/react-material-ui";
 import useDataProvider, { useQuery } from "@concepta/react-data-provider";
@@ -20,6 +20,8 @@ interface FormData {
 }
 
 const ForgotPasswordScreen: FC = () => {
+  const [formData, setFormData] = useState<FormData>({ email: "" });
+
   const { post } = useDataProvider();
 
   const { execute: sendRecoveryPasswordLink, isPending } = useQuery(
@@ -67,6 +69,10 @@ const ForgotPasswordScreen: FC = () => {
           <SchemaForm.Form
             schema={schema}
             validator={validator}
+            formData={formData}
+            onChange={({ formData }) => {
+              setFormData(formData);
+            }}
             onSubmit={handleSubmit}
             widgets={widgets}
             noHtml5Validate={true}

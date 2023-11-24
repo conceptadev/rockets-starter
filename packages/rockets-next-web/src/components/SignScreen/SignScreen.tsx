@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { type FC, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@concepta/react-auth-provider";
 import { SchemaForm } from "@concepta/react-material-ui/dist";
@@ -29,6 +29,12 @@ interface Props {
 }
 
 const SignScreen: FC<Props> = ({ isSignUp }) => {
+  const [formData, setFormData] = useState<SignUpFormData>({
+    email: "",
+    username: "",
+    password: "",
+  });
+
   const router = useRouter();
   const { doLogin, isPending: isLoadingSignIn } = useAuth();
   const { post } = useDataProvider();
@@ -95,6 +101,10 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
           <SchemaForm.Form
             schema={isSignUp ? signUpFormSchema : signInFormSchema}
             validator={validator}
+            formData={formData}
+            onChange={({ formData }) => {
+              setFormData(formData);
+            }}
             onSubmit={({
               formData,
             }: IChangeEvent<SignInFormData | SignUpFormData>) =>

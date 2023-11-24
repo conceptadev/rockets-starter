@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { type FC, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SchemaForm } from "@concepta/react-material-ui/dist";
 import { Image, Text, Link } from "@concepta/react-material-ui";
@@ -18,6 +18,11 @@ import { schema, uiSchema, FormData, validationRules } from "./formConfig";
 import { validateForm } from "@/utils/formValidation/formValidation";
 
 const ResetPasswordScreen: FC = () => {
+  const [formData, setFormData] = useState<FormData>({
+    newPassword: "",
+    confirmNewPassword: "",
+  });
+
   const { patch } = useDataProvider();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -66,6 +71,10 @@ const ResetPasswordScreen: FC = () => {
           <SchemaForm.Form
             schema={schema}
             validator={validator}
+            formData={formData}
+            onChange={({ formData }) => {
+              setFormData(formData);
+            }}
             onSubmit={handleSubmit}
             uiSchema={uiSchema}
             noHtml5Validate={true}
