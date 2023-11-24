@@ -1,12 +1,8 @@
-import { AdvancedProperty } from "@concepta/react-material-ui/dist/components/SchemaForm/types";
 import type { RJSFSchema, UiSchema } from "@rjsf/utils";
-import { CustomTextFieldWidget } from "@concepta/react-material-ui/dist/styles/CustomWidgets";
+import { AdvancedProperty } from "@concepta/react-material-ui/dist/components/SchemaForm/types";
+import { CustomPasswordFieldWidget } from "@concepta/react-material-ui/dist/styles/CustomWidgets";
 
-export type ValidationRule<T> = {
-  field: keyof T;
-  test: (value: T[keyof T] | undefined | null, formData: T) => boolean;
-  message: string;
-};
+import { ValidationRule } from "@/utils/formValidation/formValidation";
 
 export interface FormData {
   newPassword: string;
@@ -37,30 +33,16 @@ export const advancedProperties: Record<string, AdvancedProperty> = {
   },
 };
 
-export const widgets = {
-  TextField: CustomTextFieldWidget,
-};
-
 export const uiSchema: UiSchema = {
   newPassword: {
-    "ui:widget": CustomTextFieldWidget,
+    "ui:widget": CustomPasswordFieldWidget,
   },
   confirmNewPassword: {
-    "ui:widget": CustomTextFieldWidget,
+    "ui:widget": CustomPasswordFieldWidget,
   },
 };
 
 export const validationRules: ValidationRule<FormData>[] = [
-  {
-    field: "newPassword",
-    test: (value) => !value,
-    message: "Password is required",
-  },
-  {
-    field: "confirmNewPassword",
-    test: (value) => !value,
-    message: "Password confirmation is required",
-  },
   {
     field: "confirmNewPassword",
     test: (value, formData) => value !== formData.newPassword,

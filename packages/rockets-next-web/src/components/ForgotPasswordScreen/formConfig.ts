@@ -1,4 +1,4 @@
-import type { RJSFSchema, UiSchema } from "@rjsf/utils";
+import type { RJSFSchema } from "@rjsf/utils";
 import {
   CustomTextFieldWidget,
   CustomEmailFieldWidget,
@@ -15,10 +15,4 @@ export const schema: RJSFSchema = {
 export const widgets = {
   TextWidget: CustomTextFieldWidget,
   EmailWidget: CustomEmailFieldWidget,
-};
-
-export const uiSchema: UiSchema = {
-  email: {
-    "ui:widget": CustomEmailFieldWidget,
-  },
 };

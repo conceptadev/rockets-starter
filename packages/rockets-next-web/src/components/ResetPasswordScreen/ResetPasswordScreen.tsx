@@ -14,7 +14,8 @@ import { IChangeEvent } from "@rjsf/core";
 import validator from "@rjsf/validator-ajv6";
 import { toast } from "react-toastify";
 
-import { schema, widgets, uiSchema, FormData } from "./formConfig";
+import { schema, uiSchema, FormData, validationRules } from "./formConfig";
+import { validateForm } from "@/utils/formValidation/formValidation";
 
 const ResetPasswordScreen: FC = () => {
   const { patch } = useDataProvider();
@@ -61,14 +62,17 @@ const ResetPasswordScreen: FC = () => {
           >
             Reset Password
           </Text>
+
           <SchemaForm.Form
             schema={schema}
             validator={validator}
             onSubmit={handleSubmit}
-            widgets={widgets}
             uiSchema={uiSchema}
             noHtml5Validate={true}
             showErrorList={false}
+            customValidate={(formData, errors) =>
+              validateForm(formData, errors, validationRules)
+            }
           >
             <Box
               display="flex"
@@ -81,7 +85,7 @@ const ResetPasswordScreen: FC = () => {
                 {isPending ? (
                   <CircularProgress sx={{ color: "white" }} size={24} />
                 ) : (
-                  "Email me a recovery link"
+                  "Send"
                 )}
               </Button>
             </Box>

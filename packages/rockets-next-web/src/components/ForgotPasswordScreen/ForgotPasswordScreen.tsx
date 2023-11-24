@@ -13,7 +13,7 @@ import { IChangeEvent } from "@rjsf/core";
 import validator from "@rjsf/validator-ajv6";
 import { toast } from "react-toastify";
 
-import { schema, widgets, uiSchema } from "./formConfig";
+import { schema, widgets } from "./formConfig";
 
 interface FormData {
   email: string;
@@ -66,7 +66,6 @@ const ForgotPasswordScreen: FC = () => {
           </Text>
           <SchemaForm.Form
             schema={schema}
-            uiSchema={uiSchema}
             validator={validator}
             onSubmit={handleSubmit}
             widgets={widgets}
