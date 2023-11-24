@@ -132,7 +132,12 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
               justifyContent="space-between"
               mt={2}
             >
-              <Button type="submit" variant="contained" sx={{ flex: 1 }}>
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={Boolean(isLoadingSignIn || isLoadingSignUp)}
+                sx={{ flex: 1 }}
+              >
                 {isLoadingSignIn || isLoadingSignUp ? (
                   <CircularProgress sx={{ color: "white" }} size={24} />
                 ) : (

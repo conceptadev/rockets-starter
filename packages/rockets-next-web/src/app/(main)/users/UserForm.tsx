@@ -4,6 +4,7 @@ import type { IChangeEvent } from "@rjsf/core";
 import { type FC } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import { SchemaForm } from "@concepta/react-material-ui";
 import validator from "@rjsf/validator-ajv6";
@@ -27,7 +28,7 @@ const UserForm: FC<UserFormProps> = ({
 }) => {
   const { post, patch } = useDataProvider();
 
-  const { execute: createUser } = useQuery(
+  const { execute: createUser, isPending: isLoadingUserCreation } = useQuery(
     (data: FormData) =>
       post({
         uri: `/user`,
@@ -43,7 +44,7 @@ const UserForm: FC<UserFormProps> = ({
     }
   );
 
-  const { execute: editUser } = useQuery(
+  const { execute: editUser, isPending: isLoadingUserEdit } = useQuery(
     (data: FormData) =>
       patch({
         uri: `/user/${data.id}`,
@@ -93,10 +94,16 @@ const UserForm: FC<UserFormProps> = ({
         <Button
           type="submit"
           variant="contained"
-          disabled={viewMode === "details"}
+          disabled={
+            viewMode === "details" || isLoadingUserCreation || isLoadingUserEdit
+          }
           sx={{ flex: 1, mr: 1 }}
         >
-          Save
+          {isLoadingUserCreation || isLoadingUserEdit ? (
+            <CircularProgress sx={{ color: "white" }} size={24} />
+          ) : (
+            "Save"
+          )}
         </Button>
         <Button variant="outlined" onClick={onCancel} sx={{ flex: 1, ml: 1 }}>
           Close

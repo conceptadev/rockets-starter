@@ -85,7 +85,12 @@ const ForgotPasswordScreen: FC = () => {
               justifyContent="space-between"
               mt={2}
             >
-              <Button type="submit" variant="contained" sx={{ flex: 1 }}>
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={isPending}
+                sx={{ flex: 1 }}
+              >
                 {isPending ? (
                   <CircularProgress sx={{ color: "white" }} size={24} />
                 ) : (
