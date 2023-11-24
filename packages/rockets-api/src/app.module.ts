@@ -142,7 +142,7 @@ import { InvitationEntity } from './entities/invitation.entity';
     }),
     OtpModule.forRoot({
       entities: {
-        'user-otp': {
+        userOtp: {
           entity: UserOtpEntity,
         },
       },
