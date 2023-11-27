@@ -58,12 +58,12 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
   );
 
   const handleLogin = (values: SignInFormData) => {
-    const { username, password } = values || {};
+    const { username, password } = values;
     doLogin({ username, password, loginPath: "/auth/login" });
   };
 
   const handleSignUp = async (values: SignUpFormData) => {
-    const { email, username, password } = values || {};
+    const { email, username, password } = values;
     createAccount({ email, username, password });
   };
 

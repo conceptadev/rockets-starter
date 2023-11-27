@@ -32,25 +32,10 @@ const UsersTable: FC<UsersTableProps> = ({
   data,
   onActionClick,
 }) => {
-  const getRowDataById = useCallback(
-    (rowId: FormData["id"]) => {
-      return data.find((item: FormData) => item.id === rowId);
-    },
-    [data]
-  );
-
   const handleActionButtonClick = useCallback(
-    (rowId: FormData["id"], action: ActionType) => {
-      if (!getRowDataById(rowId)) {
-        return;
-      }
-
-      onActionClick({
-        rowData: getRowDataById(rowId) as FormData,
-        action,
-      });
-    },
-    [getRowDataById, onActionClick]
+    (rowData: FormData, action: ActionType) =>
+      onActionClick({ rowData: rowData, action }),
+    [onActionClick]
   );
 
   const customRows: RowProps[] = useMemo(() => {
@@ -68,18 +53,16 @@ const UsersTable: FC<UsersTableProps> = ({
         actions: {
           component: (
             <Box>
-              <IconButton
-                onClick={() => handleActionButtonClick(row.id, "edit")}
-              >
+              <IconButton onClick={() => handleActionButtonClick(row, "edit")}>
                 <EditIcon />
               </IconButton>
               <IconButton
-                onClick={() => handleActionButtonClick(row.id, "delete")}
+                onClick={() => handleActionButtonClick(row, "delete")}
               >
                 <DeleteIcon />
               </IconButton>
               <IconButton
-                onClick={() => handleActionButtonClick(row.id, "details")}
+                onClick={() => handleActionButtonClick(row, "details")}
               >
                 <ChevronRightIcon />
               </IconButton>
