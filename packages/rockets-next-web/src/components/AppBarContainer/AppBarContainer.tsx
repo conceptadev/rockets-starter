@@ -6,6 +6,7 @@ import { AppBar } from "@concepta/react-material-ui";
 import { useAuth } from "@concepta/react-auth-provider";
 import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 
 type HandleCloseMenu = () => void;
@@ -28,6 +29,12 @@ export default function AppBarContainer({ children }: { children: ReactNode }) {
       icon: <GroupsOutlinedIcon />,
       text: "Users",
       onClick: () => router.push("/users"),
+    },
+    {
+      id: "/profile",
+      icon: <PersonOutlinedIcon />,
+      text: "Profile",
+      onClick: () => router.push("/profile"),
     },
   ];
 
