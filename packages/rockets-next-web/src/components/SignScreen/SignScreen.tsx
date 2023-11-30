@@ -1,68 +1,70 @@
 "use client";
 
-import React, { FC } from "react";
-import { useAuth } from "@concepta/react-auth-provider";
+import { type FC, useState } from "react";
 import { useRouter } from "next/navigation";
-import { SimpleForm } from "@concepta/react-material-ui/dist";
-import { FormType } from "@concepta/react-material-ui/dist/components/SimpleForm";
+import { useAuth } from "@concepta/react-auth-provider";
+import { SchemaForm } from "@concepta/react-material-ui/dist";
 import { Image, Text, Link } from "@concepta/react-material-ui";
+import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
-import { FormValidation } from "@rjsf/utils";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 import { IChangeEvent } from "@rjsf/core";
+import validator from "@rjsf/validator-ajv6";
+import { toast } from "react-toastify";
 
-interface FormData {
-  username: string;
-  password: string;
-}
+import {
+  type SignInFormData,
+  type SignUpFormData,
+  signInFormSchema,
+  signUpFormSchema,
+  widgets,
+  advancedProperties,
+} from "./formConfig";
 
 interface Props {
   isSignUp?: boolean;
 }
 
 const SignScreen: FC<Props> = ({ isSignUp }) => {
+  const [formData, setFormData] = useState<SignUpFormData>({
+    email: "",
+    username: "",
+    password: "",
+  });
+
   const router = useRouter();
+  const { doLogin, isPending: isLoadingSignIn } = useAuth();
+  const { post } = useDataProvider();
 
-  const form: FormType = {
-    title: "Simplest form ever",
-    submitButtonLabel: "Send",
-    fields: {
-      username: {
-        type: "string",
-        title: "Username",
-        required: true,
+  const { execute: createAccount, isPending: isLoadingSignUp } = useQuery(
+    (body: SignUpFormData) => post({ uri: "/user", body }),
+    false,
+    {
+      onSuccess() {
+        toast.success("Account successfully created.");
+        router.push("/login");
       },
-      password: {
-        type: "password",
-        title: "Password",
-        required: true,
+      onError: (error) => {
+        toast.error(
+          // @ts-expect-error TODO: needs to fix types in rockets-react
+          error?.response?.data?.message ??
+            "An error has occurred. Please try again later or contact support for assistance."
+        );
       },
-    },
+    }
+  );
+
+  const handleLogin = (values: SignInFormData) => {
+    const { username, password } = values;
+    doLogin({ username, password, loginPath: "/auth/login" });
   };
 
-  const { doLogin, user } = useAuth() || {};
-
-  React.useEffect(() => {
-    if (user) {
-      router.push("/showroom/home");
-    }
-  }, [user, router]);
-
-  const validate = (formData: FormData, errors: FormValidation) => {
-    if (!formData.username) {
-      errors?.switch?.addError("Username is required");
-    }
-    if (!formData.password) {
-      errors?.switch?.addError("Password is required");
-    }
-
-    return errors;
-  };
-
-  const handleSubmit = async (values: IChangeEvent<FormData>) => {
-    const { username, password } = values.formData || {};
-    username && password && doLogin?.({ username, password });
+  const handleSignUp = async (values: SignUpFormData) => {
+    const { email, username, password } = values;
+    createAccount({ email, username, password });
   };
 
   return (
@@ -86,7 +88,64 @@ const SignScreen: FC<Props> = ({ isSignUp }) => {
 
       <Card sx={{ marginTop: "26px", padding: "24px" }}>
         <Box>
-          <SimpleForm form={form} onSubmit={handleSubmit} validate={validate} />
+          <Text
+            variant="h4"
+            fontFamily="Inter"
+            fontSize={30}
+            fontWeight={800}
+            mt={1}
+            gutterBottom
+          >
+            {isSignUp ? "Sign up" : "Sign in"}
+          </Text>
+          <SchemaForm.Form
+            schema={isSignUp ? signUpFormSchema : signInFormSchema}
+            validator={validator}
+            formData={formData}
+            onChange={({ formData }) => {
+              setFormData(formData);
+            }}
+            onSubmit={({
+              formData,
+            }: IChangeEvent<SignInFormData | SignUpFormData>) =>
+              isSignUp
+                ? handleSignUp(formData as SignUpFormData)
+                : handleLogin(formData as SignInFormData)
+            }
+            widgets={widgets}
+            noHtml5Validate={true}
+            showErrorList={false}
+            advancedProperties={advancedProperties}
+          >
+            {!isSignUp && (
+              <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 2 }}>
+                <Link href="/forgot-password" color="primary.dark">
+                  Forgot your password?
+                </Link>
+              </Text>
+            )}
+
+            <Box
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              justifyContent="space-between"
+              mt={2}
+            >
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={Boolean(isLoadingSignIn || isLoadingSignUp)}
+                sx={{ flex: 1 }}
+              >
+                {isLoadingSignIn || isLoadingSignUp ? (
+                  <CircularProgress sx={{ color: "white" }} size={24} />
+                ) : (
+                  "Send"
+                )}
+              </Button>
+            </Box>
+          </SchemaForm.Form>
         </Box>
 
         <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>
