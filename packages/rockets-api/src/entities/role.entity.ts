@@ -1,5 +1,5 @@
 import { Entity, OneToMany } from 'typeorm';
-import { RolePostgresEntity } from '@concepta/nestjs-role/dist/entities/role-postgres.entity';
+import { RolePostgresEntity } from '@concepta/nestjs-role';
 import { UserRoleEntity } from './user-role.entity';
 
 @Entity('role')

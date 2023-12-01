@@ -21,7 +21,7 @@ import { RoleModule } from '@concepta/nestjs-role';
 import { AuthRecoveryModule } from '@concepta/nestjs-auth-recovery';
 import { OtpModule, OtpService } from '@concepta/nestjs-otp';
 import { EmailModule, EmailService } from '@concepta/nestjs-email';
-import { EmailSendOptionsInterface } from '@concepta/ts-common/dist/email/interfaces/email-send-options.interface';
+import { EmailSendOptionsInterface } from '@concepta/ts-common';
 import {
   InvitationAcceptedEventAsync,
   InvitationModule,
@@ -36,6 +36,7 @@ import { RoleEntity } from './entities/role.entity';
 import { UserRoleEntity } from './entities/user-role.entity';
 import { UserOtpEntity } from './entities/user-otp.entity';
 import { InvitationEntity } from './entities/invitation.entity';
+import { OrgMemberEntity } from './entities/org-member.entity';
 
 @Module({
   imports: [
@@ -56,7 +57,7 @@ import { InvitationEntity } from './entities/invitation.entity';
     JwtModule.forRoot({}),
     PasswordModule.forRoot({}),
     CrudModule.forRoot({}),
-    //TODO OrgModule will only work if imported before UserModule
+    // TODO OrgModule will only work if imported before UserModule
     OrgModule.registerAsync({
       inject: [UserLookupService],
       useFactory: (userLookupService: UserLookupService) => ({
@@ -64,9 +65,10 @@ import { InvitationEntity } from './entities/invitation.entity';
       }),
       entities: {
         org: { entity: OrgEntity },
+        orgMember: { entity: OrgMemberEntity },
       },
     }),
-    //TODO FederatedModule will only work if imported before UserModule
+    // TODO FederatedModule will only work if imported before UserModule
     FederatedModule.forRootAsync({
       inject: [UserLookupService, UserMutateService],
       useFactory: (userLookupService, userMutateService) => ({
@@ -96,7 +98,7 @@ import { InvitationEntity } from './entities/invitation.entity';
         },
       },
     }),
-    //TODO FederatedModule will only work if imported before UserModule and Email modules
+    // TODO FederatedModule will only work if imported before UserModule and Email modules
     AuthRecoveryModule.registerAsync({
       inject: [UserLookupService, UserMutateService, OtpService, EmailService],
       useFactory: (

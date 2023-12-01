@@ -7,6 +7,7 @@ import { DataSourceOptions } from 'typeorm';
 import { registerAs } from '@nestjs/config';
 import { UserEntity } from '../entities/user.entity';
 import { OrgEntity } from '../entities/org.entity';
+import { OrgMemberEntity } from '../entities/org-member.entity';
 import { FederatedEntity } from '../entities/federated-entity';
 import { RoleEntity } from '../entities/role.entity';
 import { UserRoleEntity } from '../entities/user-role.entity';
@@ -24,6 +25,7 @@ export const ormConfigFactory = (): DataSourceOptions => {
     entities: [
       UserEntity,
       OrgEntity,
+      OrgMemberEntity,
       FederatedEntity,
       RoleEntity,
       UserRoleEntity,
