@@ -4,7 +4,7 @@ import { CustomPasswordFieldWidget } from "@concepta/react-material-ui/dist/styl
 
 import { ValidationRule } from "@/utils/formValidation/formValidation";
 
-export interface FormData {
+export interface ResetPasswordFormData {
   newPassword: string;
   confirmNewPassword: string;
 }
@@ -42,7 +42,7 @@ export const uiSchema: UiSchema = {
   },
 };
 
-export const validationRules: ValidationRule<FormData>[] = [
+export const validationRules: ValidationRule<ResetPasswordFormData>[] = [
   {
     field: "confirmNewPassword",
     test: (value, formData) => value !== formData.newPassword,

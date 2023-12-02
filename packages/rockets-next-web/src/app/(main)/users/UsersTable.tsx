@@ -11,17 +11,19 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Table from "@/components/Table/Table";
 
 import { headers } from "./tableConfig";
-import type { FormData, ActionType } from "./types";
+import type { ActionType } from "./types";
+
+import type { User } from "@/types/User";
 
 interface UsersTableProps {
   isLoading?: boolean;
   isEmptyStateVisible?: boolean;
-  data: FormData[];
+  data: User[];
   onActionClick: ({
     rowData,
     action,
   }: {
-    rowData: FormData;
+    rowData: User;
     action: ActionType;
   }) => void;
 }
@@ -33,7 +35,7 @@ const UsersTable: FC<UsersTableProps> = ({
   onActionClick,
 }) => {
   const handleActionButtonClick = useCallback(
-    (rowData: FormData, action: ActionType) =>
+    (rowData: User, action: ActionType) =>
       onActionClick({ rowData: rowData, action }),
     [onActionClick]
   );
@@ -77,8 +79,9 @@ const UsersTable: FC<UsersTableProps> = ({
     <Table
       rows={customRows}
       headers={headers}
+      data={data}
       isEmptyStateVisible={isEmptyStateVisible}
-      isLoading={isLoading}
+      isPending={Boolean(isLoading)}
     />
   );
 };

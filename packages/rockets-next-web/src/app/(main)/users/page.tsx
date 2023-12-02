@@ -12,7 +12,9 @@ import { useDebounce } from "use-debounce";
 
 import UsersTable from "./UsersTable";
 import UserForm from "./UserForm";
-import type { FormData, ActionType } from "./types";
+import type { ActionType } from "./types";
+
+import type { User } from "@/types/User";
 
 interface DrawerState {
   isOpen: boolean;
@@ -25,7 +27,7 @@ const UsersScreen: FC = () => {
     isOpen: false,
     viewMode: null,
   });
-  const [selectedRow, setSelectedRow] = useState<FormData | null>();
+  const [selectedRow, setSelectedRow] = useState<User | null>();
 
   const [debouncedSearch] = useDebounce(searchTerm, 1000);
 
@@ -49,7 +51,7 @@ const UsersScreen: FC = () => {
   );
 
   const { execute: deleteUser } = useQuery(
-    (id: FormData["id"]) =>
+    (id: User["id"]) =>
       del({
         uri: `/user/${id}`,
       }),
@@ -64,7 +66,7 @@ const UsersScreen: FC = () => {
   );
 
   const deleteRow = useCallback(
-    async (rowId: FormData["id"]) => {
+    async (rowId: User["id"]) => {
       await deleteUser(rowId);
       resetDrawerState();
     },
@@ -75,7 +77,7 @@ const UsersScreen: FC = () => {
     rowData,
     action,
   }: {
-    rowData: FormData;
+    rowData: User;
     action: ActionType;
   }) => {
     if (action === "delete") {

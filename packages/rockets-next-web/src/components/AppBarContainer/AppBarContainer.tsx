@@ -9,13 +9,9 @@ import MenuItem from "@mui/material/MenuItem";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 
-type HandleCloseMenu = () => void;
+import type { User } from "@/types/User";
 
-interface UserData {
-  id: string;
-  username: string;
-  email: string;
-}
+type HandleCloseMenu = () => void;
 
 export default function AppBarContainer({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -55,7 +51,7 @@ export default function AppBarContainer({ children }: { children: ReactNode }) {
       />
       <AppBar.Main>
         <AppBar.Nav
-          text={(user as UserData)?.username || ""}
+          text={(user as User)?.username || ""}
           avatar="https://source.unsplash.com/random"
           headerMenuOptions={(handleClose) => (
             <MenuItem onClick={() => onLogoutClick(handleClose)}>

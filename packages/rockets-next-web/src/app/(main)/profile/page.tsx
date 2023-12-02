@@ -9,7 +9,8 @@ import useTheme from "@mui/material/styles/useTheme";
 
 import ChangePasswordForm from "./ChangePasswordForm";
 import ConfirmationModal from "./ConfirmationModal";
-import { UserData } from "./types";
+
+import type { User } from "@/types/User";
 
 const ProfileScreen: FC = () => {
   const theme = useTheme();
@@ -61,7 +62,7 @@ const ProfileScreen: FC = () => {
       </Box>
 
       <Box mb={3} sx={{ maxWidth: "406px" }}>
-        <TextField label="Email" value={(user as UserData)?.email} disabled />
+        <TextField label="Email" value={(user as User)?.email} disabled />
       </Box>
 
       <Button
