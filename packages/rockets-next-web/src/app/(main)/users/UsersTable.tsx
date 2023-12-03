@@ -14,8 +14,9 @@ import { headers } from "./tableConfig";
 import type { ActionType } from "./types";
 
 import type { User } from "@/types/User";
+import type { TableRootProps } from "@/types/Table";
 
-interface UsersTableProps {
+type UsersTableProps = {
   isLoading?: boolean;
   isEmptyStateVisible?: boolean;
   data: User[];
@@ -26,13 +27,14 @@ interface UsersTableProps {
     rowData: User;
     action: ActionType;
   }) => void;
-}
+} & Omit<TableRootProps, "rows" | "headers">;
 
 const UsersTable: FC<UsersTableProps> = ({
   isLoading,
   isEmptyStateVisible,
   data,
   onActionClick,
+  ...tableRootProps
 }) => {
   const handleActionButtonClick = useCallback(
     (rowData: User, action: ActionType) =>
@@ -82,6 +84,7 @@ const UsersTable: FC<UsersTableProps> = ({
       data={data}
       isEmptyStateVisible={isEmptyStateVisible}
       isPending={Boolean(isLoading)}
+      {...tableRootProps}
     />
   );
 };

@@ -9,6 +9,7 @@ import { Text } from "@concepta/react-material-ui";
 import { TextField } from "@concepta/react-material-ui";
 import { toast } from "react-toastify";
 import { useDebounce } from "use-debounce";
+import useTable from "@concepta/react-material-ui/dist/components/Table/useTable";
 
 import UsersTable from "./UsersTable";
 import UserForm from "./UserForm";
@@ -31,24 +32,25 @@ const UsersScreen: FC = () => {
 
   const [debouncedSearch] = useDebounce(searchTerm, 1000);
 
-  const { get, del } = useDataProvider();
+  const { del } = useDataProvider();
 
   const {
-    isPending: isLoadingUsers,
     data,
+    total,
+    isPending: isLoadingUsers,
+    pageCount,
+    tableQueryState,
+    setTableQueryState,
     execute: fetchUsers,
-  } = useQuery(
-    (search?: string) =>
-      get({
-        uri: search
-          ? `/user?or=email||$contL||${search}&or=username||$contL||${search}`
-          : "/user",
-      }),
-    false,
-    {
+    search: innerSearch,
+  } = useTable("user", {
+    search: JSON.stringify({
+      email: { $contL: debouncedSearch.toLowerCase() },
+    }),
+    callbacks: {
       onError: () => toast.error("Failed to fetch users."),
-    }
-  );
+    },
+  });
 
   const { execute: deleteUser } = useQuery(
     (id: User["id"]) =>
@@ -100,8 +102,8 @@ const UsersScreen: FC = () => {
   };
 
   useEffect(() => {
-    fetchUsers(debouncedSearch);
-  }, [debouncedSearch]);
+    fetchUsers();
+  }, [innerSearch]);
 
   return (
     <Box>
@@ -138,7 +140,11 @@ const UsersScreen: FC = () => {
       <UsersTable
         isLoading={isLoadingUsers}
         isEmptyStateVisible={Boolean(searchTerm && !data?.length)}
-        data={data}
+        data={data as User[]}
+        tableQueryState={tableQueryState}
+        updateTableQueryState={setTableQueryState}
+        total={total}
+        pageCount={pageCount}
         onActionClick={handleTableRowAction}
       />
 

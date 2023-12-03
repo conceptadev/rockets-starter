@@ -6,11 +6,6 @@ import {
   createTableStyles,
 } from "@concepta/react-material-ui/";
 import {
-  HeaderProps,
-  RowProps,
-  TableQueryStateProps,
-} from "@concepta/react-material-ui/dist/components/Table/types";
-import {
   TableBody,
   TableCell,
   TableContainer,
@@ -19,25 +14,7 @@ import {
   useTheme,
 } from "@mui/material";
 
-type TableRootProps =
-  | {
-      rows: RowProps[];
-      headers: HeaderProps[];
-      total?: number;
-      pageCount?: never;
-      tableQueryState?: never;
-      updateTableQueryState?: never;
-    }
-  | {
-      rows: RowProps[];
-      headers: HeaderProps[];
-      total: number;
-      pageCount: number;
-      tableQueryState: TableQueryStateProps;
-      updateTableQueryState: React.Dispatch<
-        React.SetStateAction<TableQueryStateProps>
-      >;
-    };
+import { TableRootProps } from "@/types/Table";
 
 type TableProps = {
   isPending: boolean;
@@ -50,6 +27,7 @@ const Table: FC<TableProps> = ({
   headers,
   isPending,
   isEmptyStateVisible,
+  ...tableRootProps
 }) => {
   const theme = useTheme();
 
@@ -79,7 +57,12 @@ const Table: FC<TableProps> = ({
   });
 
   return (
-    <RocketsTable.Root rows={rows} headers={headers} sx={tableTheme.root}>
+    <RocketsTable.Root
+      rows={rows}
+      headers={headers}
+      sx={tableTheme.root}
+      {...tableRootProps}
+    >
       <TableContainer sx={tableTheme.tableContainer}>
         <RocketsTable.Table
           stickyHeader
