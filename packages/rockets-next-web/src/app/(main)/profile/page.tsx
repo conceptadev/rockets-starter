@@ -5,7 +5,9 @@ import { Dialog, TextField, Text } from "@concepta/react-material-ui";
 import { useAuth } from "@concepta/react-auth-provider";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 import useTheme from "@mui/material/styles/useTheme";
+import { toast } from "react-toastify";
 
 import ChangePasswordForm from "./ChangePasswordForm";
 import ConfirmationModal from "./ConfirmationModal";
@@ -24,6 +26,7 @@ const ProfileScreen: FC = () => {
     firstName: "John",
     lastName: "Smith",
   });
+  const [isLoadingSubmit, setLoadingSubmit] = useState(false);
 
   const openPasswordChangeModal = () => {
     setPasswordChangeModalOpen(true);
@@ -48,7 +51,15 @@ const ProfileScreen: FC = () => {
     });
   };
 
-  const handleFormSubmit = () => {};
+  /* TODO: Implement BE call on form submit */
+  const handleFormSubmit = () => {
+    setLoadingSubmit(true);
+
+    setTimeout(() => {
+      setLoadingSubmit(false);
+      toast.success("Profile successfully updated");
+    }, 2000);
+  };
 
   return (
     <>
@@ -96,8 +107,18 @@ const ProfileScreen: FC = () => {
         </Box>
       </Box>
 
-      <Button variant="contained" onClick={handleFormSubmit}>
-        Save
+      <Button
+        type="submit"
+        variant="contained"
+        disabled={isLoadingSubmit}
+        sx={{ flex: 1 }}
+        onClick={handleFormSubmit}
+      >
+        {isLoadingSubmit ? (
+          <CircularProgress sx={{ color: "white" }} size={24} />
+        ) : (
+          "Save"
+        )}
       </Button>
 
       <Dialog
