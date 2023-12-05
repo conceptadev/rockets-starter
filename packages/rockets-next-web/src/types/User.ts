@@ -4,7 +4,7 @@ export interface User {
   dateUpdated: string;
   dateDeleted: string | null;
   version: number;
-  email: number;
+  email: string;
   username: string;
   active: boolean;
 }

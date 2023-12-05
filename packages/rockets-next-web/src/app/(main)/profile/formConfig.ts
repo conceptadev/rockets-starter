@@ -13,6 +13,7 @@ export const profileFormSchema: RJSFSchema = {
   type: "object",
   required: ["firstName", "lastName"],
   properties: {
+    email: { type: "string", title: "Email", minLength: 3, readOnly: true },
     firstName: { type: "string", title: "First name", minLength: 3 },
     lastName: { type: "string", title: "Last name", minLength: 3 },
   },

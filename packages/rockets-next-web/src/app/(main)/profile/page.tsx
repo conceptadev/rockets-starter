@@ -1,21 +1,27 @@
 "use client";
 
-import React, { FC, useState } from "react";
-import { Dialog, TextField, Text } from "@concepta/react-material-ui";
+import { FC, useState, useEffect } from "react";
+import type { IChangeEvent } from "@rjsf/core";
+import { Dialog, Text } from "@concepta/react-material-ui";
 import { useAuth } from "@concepta/react-auth-provider";
+import { SchemaForm } from "@concepta/react-material-ui";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import useTheme from "@mui/material/styles/useTheme";
 import { toast } from "react-toastify";
+import validator from "@rjsf/validator-ajv6";
 
 import ChangePasswordForm from "./ChangePasswordForm";
 import ConfirmationModal from "./ConfirmationModal";
+import { profileFormSchema, widgets } from "./formConfig";
+import type { ProfileFormData } from "./types";
 
 import type { User } from "@/types/User";
 
 const ProfileScreen: FC = () => {
   const theme = useTheme();
+
   const { user } = useAuth();
 
   const [isPasswordChangeModalOpen, setPasswordChangeModalOpen] =
@@ -23,6 +29,7 @@ const ProfileScreen: FC = () => {
   const [isConfirmationModalOpen, setConfirmationModalOpen] =
     useState<boolean>(false);
   const [formData, setFormData] = useState({
+    email: "",
     firstName: "John",
     lastName: "Smith",
   });
@@ -44,15 +51,10 @@ const ProfileScreen: FC = () => {
     setConfirmationModalOpen(false);
   };
 
-  const handleFormChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [evt.target.name]: evt.target.value,
-    });
-  };
-
   /* TODO: Implement BE call on form submit */
-  const handleFormSubmit = () => {
+  const handleFormSubmit = async (values: IChangeEvent<ProfileFormData>) => {
+    console.log(values);
+
     setLoadingSubmit(true);
 
     setTimeout(() => {
@@ -61,9 +63,15 @@ const ProfileScreen: FC = () => {
     }, 2000);
   };
 
+  useEffect(() => {
+    if (user && !formData.email) {
+      setFormData({ ...formData, email: (user as User).email });
+    }
+  }, [user, formData]);
+
   return (
-    <>
-      <Box sx={{ mb: 3 }}>
+    <Box>
+      <Box sx={{ mb: 2 }}>
         <Text fontFamily="Inter" fontSize={20} fontWeight={800} mt={4}>
           Profile
         </Text>
@@ -72,8 +80,39 @@ const ProfileScreen: FC = () => {
         </Text>
       </Box>
 
-      <Box mb={3} sx={{ maxWidth: "406px" }}>
-        <TextField label="Email" value={(user as User)?.email} disabled />
+      <Box display="flex" mb={4}>
+        <SchemaForm.Form
+          schema={profileFormSchema}
+          validator={validator}
+          onSubmit={handleFormSubmit}
+          widgets={widgets}
+          noHtml5Validate={true}
+          showErrorList={false}
+          formData={formData}
+          onChange={({ formData }) => {
+            setFormData(formData);
+          }}
+        >
+          <Box
+            display="flex"
+            flexDirection="row"
+            alignItems="center"
+            justifyContent="space-between"
+            mt={3}
+          >
+            <Button
+              type="submit"
+              variant="contained"
+              disabled={isLoadingSubmit}
+            >
+              {isLoadingSubmit ? (
+                <CircularProgress sx={{ color: "white" }} size={24} />
+              ) : (
+                "Save"
+              )}
+            </Button>
+          </Box>
+        </SchemaForm.Form>
       </Box>
 
       <Button
@@ -86,39 +125,6 @@ const ProfileScreen: FC = () => {
         onClick={openPasswordChangeModal}
       >
         Update Password
-      </Button>
-
-      <Box display="flex" mb={3}>
-        <Box sx={{ mr: 2 }}>
-          <TextField
-            name="firstName"
-            label="First name"
-            value={formData.firstName}
-            onChange={handleFormChange}
-          />
-        </Box>
-        <Box>
-          <TextField
-            name="lastName"
-            label="Last name"
-            value={formData.lastName}
-            onChange={handleFormChange}
-          />
-        </Box>
-      </Box>
-
-      <Button
-        type="submit"
-        variant="contained"
-        disabled={isLoadingSubmit}
-        sx={{ flex: 1 }}
-        onClick={handleFormSubmit}
-      >
-        {isLoadingSubmit ? (
-          <CircularProgress sx={{ color: "white" }} size={24} />
-        ) : (
-          "Save"
-        )}
       </Button>
 
       <Dialog
@@ -138,7 +144,7 @@ const ProfileScreen: FC = () => {
       >
         <ConfirmationModal handleClose={closeConfirmationModal} />
       </Dialog>
-    </>
+    </Box>
   );
 };
 
