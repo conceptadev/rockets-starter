@@ -13,6 +13,7 @@ export const profileFormSchema: RJSFSchema = {
   type: "object",
   required: ["firstName", "lastName"],
   properties: {
+    email: { type: "string", title: "Email", minLength: 3, readOnly: true },
     firstName: { type: "string", title: "First name", minLength: 3 },
     lastName: { type: "string", title: "Last name", minLength: 3 },
   },
@@ -41,6 +42,21 @@ export const advancedProperties: Record<string, AdvancedProperty> = {
 };
 
 export const validationRules: ValidationRule<PasswordChangeFormData>[] = [
+  {
+    field: "oldPassword",
+    test: (value) => !value,
+    message: "Required field",
+  },
+  {
+    field: "newPassword",
+    test: (value) => !value,
+    message: "Required field",
+  },
+  {
+    field: "confirmNewPassword",
+    test: (value) => !value,
+    message: "Required field",
+  },
   {
     field: "confirmNewPassword",
     test: (value, formData) => value !== formData.newPassword,

@@ -11,10 +11,12 @@ import validator from "@rjsf/validator-ajv6";
 import { toast } from "react-toastify";
 
 import { schema, widgets, getUiSchemaByViewMode } from "./formConfig";
-import type { FormData, ActionType } from "./types";
+import type { ActionType } from "./types";
+
+import type { User } from "@/types/User";
 
 interface UserFormProps {
-  selectedRow?: FormData | null;
+  selectedRow?: User | null;
   viewMode: ActionType;
   onSubmitSuccess: () => void;
   onCancel: () => void;
@@ -29,7 +31,7 @@ const UserForm: FC<UserFormProps> = ({
   const { post, patch } = useDataProvider();
 
   const { execute: createUser, isPending: isLoadingUserCreation } = useQuery(
-    (data: FormData) =>
+    (data: User) =>
       post({
         uri: `/user`,
         body: data,
@@ -45,7 +47,7 @@ const UserForm: FC<UserFormProps> = ({
   );
 
   const { execute: editUser, isPending: isLoadingUserEdit } = useQuery(
-    (data: FormData) =>
+    (data: User) =>
       patch({
         uri: `/user/${data.id}`,
         body: data,
@@ -60,7 +62,7 @@ const UserForm: FC<UserFormProps> = ({
     }
   );
 
-  const handleFormSubmit = async (values: IChangeEvent<FormData>) => {
+  const handleFormSubmit = async (values: IChangeEvent<User>) => {
     const fields = values.formData;
 
     if (viewMode === "creation") {

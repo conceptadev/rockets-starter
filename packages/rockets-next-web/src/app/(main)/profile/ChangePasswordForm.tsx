@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import type { IChangeEvent } from "@rjsf/core";
 import { SchemaForm } from "@concepta/react-material-ui";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -28,7 +29,11 @@ const ChangePasswordForm: FC<ChangePasswordFormProps> = ({
     confirmNewPassword: "",
   });
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = async (
+    values: IChangeEvent<PasswordChangeFormData>
+  ) => {
+    console.log(values);
+
     closePasswordChangeModal();
     openConfirmationModal();
   };

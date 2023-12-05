@@ -1,35 +1,33 @@
 "use client";
 
-import type {
-  HeaderProps,
-  RowProps,
-} from "@concepta/react-material-ui/dist/components/Table/types";
 import type { FC } from "react";
 import {
   Table as RocketsTable,
   createTableStyles,
-} from "@concepta/react-material-ui";
+} from "@concepta/react-material-ui/";
 import {
+  TableBody,
+  TableCell,
   TableContainer,
   TableHead,
-  TableBody,
   TableRow,
-  TableCell,
   useTheme,
 } from "@mui/material";
 
-interface TableProps {
-  rows: RowProps[];
-  headers: HeaderProps[];
-  isLoading?: boolean;
+import { TableRootProps } from "@/types/Table";
+
+type TableProps = {
+  isPending: boolean;
+  data: unknown[];
   isEmptyStateVisible?: boolean;
-}
+} & TableRootProps;
 
 const Table: FC<TableProps> = ({
   rows,
   headers,
-  isLoading,
+  isPending,
   isEmptyStateVisible,
+  ...tableRootProps
 }) => {
   const theme = useTheme();
 
@@ -59,7 +57,12 @@ const Table: FC<TableProps> = ({
   });
 
   return (
-    <RocketsTable.Root rows={rows} headers={headers} sx={tableTheme.root}>
+    <RocketsTable.Root
+      rows={rows}
+      headers={headers}
+      sx={tableTheme.root}
+      {...tableRootProps}
+    >
       <TableContainer sx={tableTheme.tableContainer}>
         <RocketsTable.Table
           stickyHeader
@@ -84,7 +87,7 @@ const Table: FC<TableProps> = ({
                 </TableCell>
               </TableRow>
             )}
-            <RocketsTable.BodyRows isLoading={isLoading} />
+            <RocketsTable.BodyRows isLoading={isPending} />
           </TableBody>
         </RocketsTable.Table>
       </TableContainer>

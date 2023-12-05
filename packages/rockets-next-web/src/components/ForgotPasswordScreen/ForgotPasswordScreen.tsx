@@ -15,17 +15,19 @@ import { toast } from "react-toastify";
 
 import { schema, widgets } from "./formConfig";
 
-interface FormData {
+interface ForgotPasswordFormData {
   email: string;
 }
 
 const ForgotPasswordScreen: FC = () => {
-  const [formData, setFormData] = useState<FormData>({ email: "" });
+  const [formData, setFormData] = useState<ForgotPasswordFormData>({
+    email: "",
+  });
 
   const { post } = useDataProvider();
 
   const { execute: sendRecoveryPasswordLink, isPending } = useQuery(
-    (body: FormData) =>
+    (body: ForgotPasswordFormData) =>
       post({
         uri: "/auth/recovery/password",
         body: { email: body.email },
@@ -45,7 +47,7 @@ const ForgotPasswordScreen: FC = () => {
     }
   );
 
-  const handleSubmit = async (values: IChangeEvent<FormData>) => {
+  const handleSubmit = async (values: IChangeEvent<ForgotPasswordFormData>) => {
     const { email } = values.formData || {};
     await sendRecoveryPasswordLink({ email });
   };

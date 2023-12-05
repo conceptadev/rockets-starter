@@ -14,11 +14,17 @@ import { IChangeEvent } from "@rjsf/core";
 import validator from "@rjsf/validator-ajv6";
 import { toast } from "react-toastify";
 
-import { schema, uiSchema, FormData, validationRules } from "./formConfig";
+import {
+  schema,
+  uiSchema,
+  ResetPasswordFormData,
+  validationRules,
+} from "./formConfig";
+
 import { validateForm } from "@/utils/formValidation/formValidation";
 
 const ResetPasswordScreen: FC = () => {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<ResetPasswordFormData>({
     newPassword: "",
     confirmNewPassword: "",
   });
@@ -29,7 +35,7 @@ const ResetPasswordScreen: FC = () => {
   const token = searchParams.get("token");
 
   const { execute: resetPassword, isPending } = useQuery(
-    (body: FormData) =>
+    (body: ResetPasswordFormData) =>
       patch({
         uri: "/auth/recovery/password",
         body: { passcode: token, newPassword: body.newPassword },
@@ -47,7 +53,7 @@ const ResetPasswordScreen: FC = () => {
     }
   );
 
-  const handleSubmit = async (values: IChangeEvent<FormData>) => {
+  const handleSubmit = async (values: IChangeEvent<ResetPasswordFormData>) => {
     await resetPassword(values.formData || {});
   };
 

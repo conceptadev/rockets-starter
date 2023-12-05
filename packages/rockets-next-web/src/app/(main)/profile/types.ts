@@ -1,7 +1,7 @@
-export interface UserData {
-  id: string;
-  username: string;
+export interface ProfileFormData {
   email: string;
+  firstName: string;
+  lastName: string;
 }
 
 export interface PasswordChangeFormData {
