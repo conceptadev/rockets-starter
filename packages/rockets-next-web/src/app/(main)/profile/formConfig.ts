@@ -43,6 +43,21 @@ export const advancedProperties: Record<string, AdvancedProperty> = {
 
 export const validationRules: ValidationRule<PasswordChangeFormData>[] = [
   {
+    field: "oldPassword",
+    test: (value) => !value,
+    message: "Required field",
+  },
+  {
+    field: "newPassword",
+    test: (value) => !value,
+    message: "Required field",
+  },
+  {
+    field: "confirmNewPassword",
+    test: (value) => !value,
+    message: "Required field",
+  },
+  {
     field: "confirmNewPassword",
     test: (value, formData) => value !== formData.newPassword,
     message: "Your passwords don't match. Please try again",
