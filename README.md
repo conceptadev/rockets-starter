@@ -181,6 +181,19 @@ A Super Admin account will be created as follows:
 Username: `superadmin`
 Password: `Test1234`
 
+If you get an `ECONNREFUSED` error in this step, change the `rockets-starter-ppostgres` config on the `docker-compose.yml` with the following:
+
+```
+rockets-starter-postgres:
+  image: postgres
+  ports:
+    - 5432:5432
+  environment:
+    POSTGRES_DB: rockets-starter
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+```
+
 ### Start the API
 
 To start the API, run this command:
@@ -193,6 +206,8 @@ The api should now be running at http://localhost:3001
 
 You can view the endpoint documentation and interact with the API in realtime at http://localhost:3001/api
 
+If you get an `EADDRINUSE` error in this step, go to Docker Desktop, click `Containers` and search for the `rockets-starter` app. In the app's containers list, stop the `rockets-starter-rockets-starter-1` instance. You should be able to run the API start command now.
+
 ### Start the Web Server
 
 To start the web server, run this command:
@@ -202,6 +217,8 @@ yarn start:web
 ```
 
 The web should now be running at http://localhost:3000/login
+
+If you get `Unknown workspace "rockets-web"` in this step, run the `yarn dev` command inside the `packages/rockets-next-web` folder.
 
 ### Rebuilding the Sandbox
 
