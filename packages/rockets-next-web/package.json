@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@concepta/react-auth-provider": "^1.0.0-alpha.16",
-    "@concepta/react-data-provider": "^1.0.0-alpha.16",
-    "@concepta/react-material-ui": "^1.0.0-alpha.16",
+    "@concepta/react-auth-provider": "^1.0.0-alpha.19",
+    "@concepta/react-data-provider": "^1.0.0-alpha.19",
+    "@concepta/react-material-ui": "^1.0.0-alpha.19",
     "@types/node": "20.5.9",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",

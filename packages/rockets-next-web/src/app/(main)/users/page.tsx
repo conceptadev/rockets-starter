@@ -5,11 +5,10 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
 import useDataProvider, { useQuery } from "@concepta/react-data-provider";
-import { Text } from "@concepta/react-material-ui";
-import { TextField } from "@concepta/react-material-ui";
+import { Text, Filter } from "@concepta/react-material-ui";
 import { toast } from "react-toastify";
-import { useDebounce } from "use-debounce";
 import useTable from "@concepta/react-material-ui/dist/components/Table/useTable";
+import { FilterType } from "@concepta/react-material-ui/dist/components/Filter/Filter";
 
 import UsersTable from "./UsersTable";
 import UserForm from "./UserForm";
@@ -30,8 +29,6 @@ const UsersScreen: FC = () => {
   });
   const [selectedRow, setSelectedRow] = useState<User | null>();
 
-  const [debouncedSearch] = useDebounce(searchTerm, 1000);
-
   const { del } = useDataProvider();
 
   const {
@@ -42,11 +39,9 @@ const UsersScreen: FC = () => {
     tableQueryState,
     setTableQueryState,
     execute: fetchUsers,
-    search: innerSearch,
+    simpleFilter,
+    updateSimpleFilter,
   } = useTable("user", {
-    search: JSON.stringify({
-      email: { $contL: debouncedSearch.toLowerCase() },
-    }),
     callbacks: {
       onError: () => toast.error("Failed to fetch users."),
     },
@@ -66,6 +61,15 @@ const UsersScreen: FC = () => {
       onError: () => toast.error("Failed to delete user."),
     }
   );
+
+  const handleSimpleFilterUpdate = (term: string) => {
+    setSearchTerm(term);
+
+    updateSimpleFilter({
+      email: term ? `||$contL||${term}` : null,
+      // username: term ? `||$contL||${term}` : null,
+    });
+  };
 
   const deleteRow = useCallback(
     async (rowId: User["id"]) => {
@@ -103,7 +107,7 @@ const UsersScreen: FC = () => {
 
   useEffect(() => {
     fetchUsers();
-  }, [innerSearch]);
+  }, [simpleFilter]);
 
   return (
     <Box>
@@ -118,12 +122,18 @@ const UsersScreen: FC = () => {
         justifyContent="space-between"
         mb={2}
       >
-        <TextField
-          variant="outlined"
-          placeholder="Search user"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        <Box sx={{ width: "60%" }}>
+          <Filter
+            filters={[
+              {
+                type: FilterType.Text,
+                defaultValue: searchTerm,
+                placeholder: "Search user",
+                onChange: handleSimpleFilterUpdate,
+              },
+            ]}
+          />
+        </Box>
         <Button
           variant="contained"
           onClick={() =>

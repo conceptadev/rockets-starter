@@ -8,10 +8,10 @@ export type TableRootProps =
   | {
       rows: RowProps[];
       headers: HeaderProps[];
-      total?: number;
-      pageCount?: never;
-      tableQueryState?: never;
-      updateTableQueryState?: never;
+      total: never;
+      pageCount: never;
+      tableQueryState: never;
+      updateTableQueryState: never;
     }
   | {
       rows: RowProps[];
