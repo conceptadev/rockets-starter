@@ -39,8 +39,8 @@ const UsersScreen: FC = () => {
     tableQueryState,
     setTableQueryState,
     execute: fetchUsers,
-    simpleFilter,
-    updateSimpleFilter,
+    search,
+    updateSearch,
   } = useTable("user", {
     callbacks: {
       onError: () => toast.error("Failed to fetch users."),
@@ -62,13 +62,20 @@ const UsersScreen: FC = () => {
     }
   );
 
-  const handleSimpleFilterUpdate = (term: string) => {
+  const handleSearchChange = (term: string) => {
     setSearchTerm(term);
 
-    updateSimpleFilter({
-      email: term ? `||$contL||${term}` : null,
-      // username: term ? `||$contL||${term}` : null,
-    });
+    if (!term) {
+      updateSearch({ $or: null });
+
+      return;
+    }
+
+    const search = {
+      $or: [{ email: { $contL: term } }, { username: { $contL: term } }],
+    };
+
+    updateSearch(search);
   };
 
   const deleteRow = useCallback(
@@ -107,7 +114,7 @@ const UsersScreen: FC = () => {
 
   useEffect(() => {
     fetchUsers();
-  }, [simpleFilter]);
+  }, [search]);
 
   return (
     <Box>
@@ -129,7 +136,7 @@ const UsersScreen: FC = () => {
                 type: FilterType.Text,
                 defaultValue: searchTerm,
                 placeholder: "Search user",
-                onChange: handleSimpleFilterUpdate,
+                onChange: handleSearchChange,
               },
             ]}
           />
