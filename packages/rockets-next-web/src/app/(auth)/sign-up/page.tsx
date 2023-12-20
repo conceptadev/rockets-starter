@@ -1,9 +1,8 @@
 "use client";
 
-import { FC } from "react";
 import SignScreen from "@/components/SignScreen/SignScreen";
 
-const SignUp: FC = () => {
+const SignUp = () => {
   return <SignScreen isSignUp />;
 };
 

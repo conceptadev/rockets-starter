@@ -1,10 +1,8 @@
 "use client";
 
-import { FC } from "react";
-
 import ResetPasswordScreen from "@/components/ResetPasswordScreen/ResetPasswordScreen";
 
-const ResetPassword: FC = () => {
+const ResetPassword = () => {
   return <ResetPasswordScreen />;
 };
 

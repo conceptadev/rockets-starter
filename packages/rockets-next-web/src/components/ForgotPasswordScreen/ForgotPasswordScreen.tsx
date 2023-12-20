@@ -1,6 +1,6 @@
 "use client";
 
-import { type FC, useState } from "react";
+import { useState } from "react";
 import { SchemaForm } from "@concepta/react-material-ui/dist";
 import { Image, Text, Link } from "@concepta/react-material-ui";
 import useDataProvider, { useQuery } from "@concepta/react-data-provider";
@@ -19,7 +19,7 @@ interface ForgotPasswordFormData {
   email: string;
 }
 
-const ForgotPasswordScreen: FC = () => {
+const ForgotPasswordScreen = () => {
   const [formData, setFormData] = useState<ForgotPasswordFormData>({
     email: "",
   });

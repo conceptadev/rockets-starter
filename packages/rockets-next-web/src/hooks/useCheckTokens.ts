@@ -6,7 +6,7 @@ const useCheckTokens = () => {
   const [isPending, setIsPending] = useState(true);
   const hasAccessToken = useRef(false);
 
-  // Only run in the browswer
+  // Only run in the browser
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
 

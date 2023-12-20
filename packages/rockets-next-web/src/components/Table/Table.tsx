@@ -1,6 +1,5 @@
 "use client";
 
-import type { FC } from "react";
 import {
   Table as RocketsTable,
   createTableStyles,
@@ -22,13 +21,13 @@ type TableProps = {
   isEmptyStateVisible?: boolean;
 } & TableRootProps;
 
-const Table: FC<TableProps> = ({
+const Table = ({
   rows,
   headers,
   isPending,
   isEmptyStateVisible,
   ...tableRootProps
-}) => {
+}: TableProps) => {
   const theme = useTheme();
 
   const tableTheme = createTableStyles({

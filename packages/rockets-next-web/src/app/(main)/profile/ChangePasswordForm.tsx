@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { useState } from "react";
 import type { IChangeEvent } from "@rjsf/core";
 import { SchemaForm } from "@concepta/react-material-ui";
 import Box from "@mui/material/Box";
@@ -19,21 +19,17 @@ interface ChangePasswordFormProps {
   openConfirmationModal: () => void;
 }
 
-const ChangePasswordForm: FC<ChangePasswordFormProps> = ({
+const ChangePasswordForm = ({
   closePasswordChangeModal,
   openConfirmationModal,
-}) => {
+}: ChangePasswordFormProps) => {
   const [formData, setFormData] = useState<PasswordChangeFormData>({
     oldPassword: "",
     newPassword: "",
     confirmNewPassword: "",
   });
 
-  const handleFormSubmit = async (
-    values: IChangeEvent<PasswordChangeFormData>
-  ) => {
-    console.log(values);
-
+  const handleFormSubmit = async (_: IChangeEvent<PasswordChangeFormData>) => {
     closePasswordChangeModal();
     openConfirmationModal();
   };

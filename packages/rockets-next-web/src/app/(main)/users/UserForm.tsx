@@ -1,7 +1,6 @@
 "use client";
 
 import type { IChangeEvent } from "@rjsf/core";
-import { type FC } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -22,12 +21,12 @@ interface UserFormProps {
   onCancel: () => void;
 }
 
-const UserForm: FC<UserFormProps> = ({
+const UserForm = ({
   selectedRow,
   viewMode,
   onSubmitSuccess,
   onCancel,
-}) => {
+}: UserFormProps) => {
   const { post, patch } = useDataProvider();
 
   const { execute: createUser, isPending: isLoadingUserCreation } = useQuery(

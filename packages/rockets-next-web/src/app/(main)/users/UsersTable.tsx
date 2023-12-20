@@ -1,7 +1,7 @@
 "use client";
 
 import type { RowProps } from "@concepta/react-material-ui/dist/components/Table/types";
-import { type FC, useCallback, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
@@ -29,13 +29,13 @@ type UsersTableProps = {
   }) => void;
 } & Omit<TableRootProps, "rows" | "headers">;
 
-const UsersTable: FC<UsersTableProps> = ({
+const UsersTable = ({
   isLoading,
   isEmptyStateVisible,
   data,
   onActionClick,
   ...tableRootProps
-}) => {
+}: UsersTableProps) => {
   const handleActionButtonClick = useCallback(
     (rowData: User, action: ActionType) =>
       onActionClick({ rowData: rowData, action }),

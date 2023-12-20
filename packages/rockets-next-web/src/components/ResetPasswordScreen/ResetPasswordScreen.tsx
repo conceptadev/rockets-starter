@@ -1,6 +1,6 @@
 "use client";
 
-import { type FC, useState } from "react";
+import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SchemaForm } from "@concepta/react-material-ui/dist";
 import { Image, Text, Link } from "@concepta/react-material-ui";
@@ -23,7 +23,7 @@ import {
 
 import { validateForm } from "@/utils/formValidation/formValidation";
 
-const ResetPasswordScreen: FC = () => {
+const ResetPasswordScreen = () => {
   const [formData, setFormData] = useState<ResetPasswordFormData>({
     newPassword: "",
     confirmNewPassword: "",

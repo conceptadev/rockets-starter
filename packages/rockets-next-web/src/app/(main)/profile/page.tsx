@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import type { IChangeEvent } from "@rjsf/core";
 import { Dialog, Text } from "@concepta/react-material-ui";
 import { useAuth } from "@concepta/react-auth-provider";
@@ -19,7 +19,7 @@ import type { ProfileFormData } from "./types";
 
 import type { User } from "@/types/User";
 
-const ProfileScreen: FC = () => {
+const ProfileScreen = () => {
   const theme = useTheme();
 
   const { user } = useAuth();
@@ -51,10 +51,7 @@ const ProfileScreen: FC = () => {
     setConfirmationModalOpen(false);
   };
 
-  /* TODO: Implement BE call on form submit */
-  const handleFormSubmit = async (values: IChangeEvent<ProfileFormData>) => {
-    console.log(values);
-
+  const handleFormSubmit = async (_: IChangeEvent<ProfileFormData>) => {
     setLoadingSubmit(true);
 
     setTimeout(() => {

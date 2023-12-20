@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { Text } from "@concepta/react-material-ui";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -8,7 +7,7 @@ interface Props {
   handleClose: () => void;
 }
 
-const ConfirmationModal: FC<Props> = ({ handleClose }) => {
+const ConfirmationModal = ({ handleClose }: Props) => {
   return (
     <Box display="flex" flexDirection="column" alignItems="center" padding={2}>
       <Box

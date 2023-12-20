@@ -1,10 +1,10 @@
 "use client";
 
-import { FC, useContext } from "react";
+import { useContext } from "react";
 import { Switch } from "@concepta/react-material-ui";
 import { ThemeContext, ThemeContextType } from "@/context/ThemeContextProvider";
 
-const Theme: FC = () => {
+const Theme = () => {
   const { darkMode, setDarkMode } =
     (useContext?.(ThemeContext) as ThemeContextType) || {};
 

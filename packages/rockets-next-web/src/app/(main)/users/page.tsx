@@ -1,6 +1,6 @@
 "use client";
 
-import { type FC, useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
@@ -21,7 +21,7 @@ interface DrawerState {
   viewMode: ActionType;
 }
 
-const UsersScreen: FC = () => {
+const UsersScreen = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [drawerState, setDrawerState] = useState<DrawerState>({
     isOpen: false,

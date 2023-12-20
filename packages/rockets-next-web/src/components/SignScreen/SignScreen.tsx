@@ -1,6 +1,6 @@
 "use client";
 
-import { type FC, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@concepta/react-auth-provider";
 import { SchemaForm } from "@concepta/react-material-ui/dist";
@@ -28,7 +28,7 @@ interface Props {
   isSignUp?: boolean;
 }
 
-const SignScreen: FC<Props> = ({ isSignUp }) => {
+const SignScreen = ({ isSignUp }: Props) => {
   const [formData, setFormData] = useState<SignUpFormData>({
     email: "",
     username: "",
