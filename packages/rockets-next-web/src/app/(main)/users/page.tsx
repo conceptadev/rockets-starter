@@ -12,14 +12,13 @@ import { FilterType } from "@concepta/react-material-ui/dist/components/Filter/F
 
 import UsersTable from "./UsersTable";
 import UserForm from "./UserForm";
-import type { ActionType } from "./types";
 
-import type { User } from "@/types/User";
+import type { User, ActionType } from "@/types/User";
 
-interface DrawerState {
+type DrawerState = {
   isOpen: boolean;
   viewMode: ActionType;
-}
+};
 
 const UsersScreen = () => {
   const [searchTerm, setSearchTerm] = useState("");

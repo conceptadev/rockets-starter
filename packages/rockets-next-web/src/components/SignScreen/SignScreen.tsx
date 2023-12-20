@@ -22,7 +22,7 @@ import {
   signUpFormSchema,
   widgets,
   advancedProperties,
-} from "./formConfig";
+} from "@/forms/auth";
 
 interface Props {
   isSignUp?: boolean;

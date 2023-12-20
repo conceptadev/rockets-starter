@@ -8,3 +8,5 @@ export interface User {
   username: string;
   active: boolean;
 }
+
+export type ActionType = "creation" | "edit" | "details" | "delete" | null;

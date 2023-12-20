@@ -14,9 +14,10 @@ import validator from "@rjsf/validator-ajv6";
 
 import ChangePasswordForm from "./ChangePasswordForm";
 import ConfirmationModal from "./ConfirmationModal";
-import { profileFormSchema, widgets } from "./formConfig";
-import type { ProfileFormData } from "./types";
 
+import { profileFormSchema, widgets } from "@/forms/profile";
+
+import type { ProfileFormData } from "@/types/Profile";
 import type { User } from "@/types/User";
 
 const ProfileScreen = () => {

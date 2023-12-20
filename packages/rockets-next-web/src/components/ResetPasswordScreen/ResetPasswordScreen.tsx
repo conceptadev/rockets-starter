@@ -15,12 +15,11 @@ import validator from "@rjsf/validator-ajv6";
 import { toast } from "react-toastify";
 
 import {
-  schema,
+  resetPasswordFormSchema,
   uiSchema,
   ResetPasswordFormData,
   validationRules,
-} from "./formConfig";
-
+} from "@/forms/auth";
 import { validateForm } from "@/utils/formValidation/formValidation";
 
 const ResetPasswordScreen = () => {
@@ -75,7 +74,7 @@ const ResetPasswordScreen = () => {
           </Text>
 
           <SchemaForm.Form
-            schema={schema}
+            schema={resetPasswordFormSchema}
             validator={validator}
             formData={formData}
             onChange={({ formData }) => {

@@ -13,7 +13,7 @@ import { IChangeEvent } from "@rjsf/core";
 import validator from "@rjsf/validator-ajv6";
 import { toast } from "react-toastify";
 
-import { schema, widgets } from "./formConfig";
+import { forgotPasswordFormSchema, widgets } from "@/forms/auth";
 
 interface ForgotPasswordFormData {
   email: string;
@@ -69,7 +69,7 @@ const ForgotPasswordScreen = () => {
             Recover Password
           </Text>
           <SchemaForm.Form
-            schema={schema}
+            schema={forgotPasswordFormSchema}
             validator={validator}
             formData={formData}
             onChange={({ formData }) => {

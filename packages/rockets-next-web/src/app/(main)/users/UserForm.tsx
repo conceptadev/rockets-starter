@@ -9,10 +9,9 @@ import { SchemaForm } from "@concepta/react-material-ui";
 import validator from "@rjsf/validator-ajv6";
 import { toast } from "react-toastify";
 
-import { schema, widgets, getUiSchemaByViewMode } from "./formConfig";
-import type { ActionType } from "./types";
+import { schema, widgets, getUiSchemaByViewMode } from "@/forms/user";
 
-import type { User } from "@/types/User";
+import type { User, ActionType } from "@/types/User";
 
 interface UserFormProps {
   selectedRow?: User | null;

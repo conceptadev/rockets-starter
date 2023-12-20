@@ -11,9 +11,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Table from "@/components/Table/Table";
 
 import { headers } from "./tableConfig";
-import type { ActionType } from "./types";
 
-import type { User } from "@/types/User";
+import type { User, ActionType } from "@/types/User";
 import type { TableRootProps } from "@/types/Table";
 
 type UsersTableProps = {

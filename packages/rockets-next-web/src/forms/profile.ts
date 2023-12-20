@@ -3,7 +3,7 @@ import { CustomTextFieldWidget } from "@concepta/react-material-ui/dist/styles/C
 import { AdvancedProperty } from "@concepta/react-material-ui/dist/components/SchemaForm/types";
 
 import { ValidationRule } from "@/utils/formValidation/formValidation";
-import { PasswordChangeFormData } from "./types";
+import { PasswordChangeFormData } from "@/types/Profile";
 
 export const widgets = {
   TextWidget: CustomTextFieldWidget,

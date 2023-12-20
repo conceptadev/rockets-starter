@@ -5,13 +5,13 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import validator from "@rjsf/validator-ajv6";
 
-import { type PasswordChangeFormData } from "./types";
+import { type PasswordChangeFormData } from "@/types/Profile";
 import {
   passwordChangeFormSchema,
   widgets,
   advancedProperties,
   validationRules,
-} from "./formConfig";
+} from "@/forms/profile";
 import { validateForm } from "@/utils/formValidation/formValidation";
 
 interface ChangePasswordFormProps {

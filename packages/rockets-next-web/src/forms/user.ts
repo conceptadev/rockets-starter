@@ -1,7 +1,7 @@
 import type { RJSFSchema, UiSchema } from "@rjsf/utils";
 import { CustomTextFieldWidget } from "@concepta/react-material-ui/dist/styles/CustomWidgets";
 
-import type { ActionType } from "./types";
+import type { ActionType } from "@/types/User";
 
 export const widgets = {
   TextWidget: CustomTextFieldWidget,
