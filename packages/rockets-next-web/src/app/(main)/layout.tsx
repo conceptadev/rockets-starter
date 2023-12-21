@@ -5,8 +5,8 @@ import { jwtDecode } from "jwt-decode";
 import { useAuth } from "@concepta/react-auth-provider";
 import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 
-import AppBarContainer from "@/components/AppBarContainer/AppBarContainer";
-import Loading from "@/components/Loading/Loading";
+import AppBarContainer from "@/components/main/AppBarContainer";
+import Loading from "@/components/shared/Loading";
 
 export default function Main({ children }: { children: ReactNode }) {
   const { accessToken: authToken, setUser } = useAuth();

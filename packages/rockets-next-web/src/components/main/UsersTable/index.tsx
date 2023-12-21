@@ -8,9 +8,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import Table from "@/components/Table/Table";
+import Table from "@/components/shared/Table";
 
-import { headers } from "./tableConfig";
+import { headers } from "./constants";
 
 import type { User, ActionType } from "@/types/User";
 import type { TableRootProps } from "@/types/Table";

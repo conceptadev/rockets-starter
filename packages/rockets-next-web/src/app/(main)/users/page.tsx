@@ -10,8 +10,8 @@ import { toast } from "react-toastify";
 import useTable from "@concepta/react-material-ui/dist/components/Table/useTable";
 import { FilterType } from "@concepta/react-material-ui/dist/components/Filter/Filter";
 
-import UsersTable from "./UsersTable";
-import UserForm from "./UserForm";
+import UsersTable from "@/components/main/UsersTable";
+import UserForm from "@/components/main/UserForm";
 
 import type { User, ActionType } from "@/types/User";
 

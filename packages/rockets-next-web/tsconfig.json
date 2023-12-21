@@ -33,7 +33,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/components/Table"
+    "src/components/shared/Table"
   ],
   "exclude": [
     "node_modules"

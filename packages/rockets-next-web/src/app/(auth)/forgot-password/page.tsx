@@ -1,6 +1,6 @@
 "use client";
 
-import ForgotPasswordScreen from "@/components/ForgotPasswordScreen/ForgotPasswordScreen";
+import ForgotPasswordScreen from "@/components/auth/ForgotPasswordScreen";
 
 const ForgotPassword = () => {
   return <ForgotPasswordScreen />;

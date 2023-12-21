@@ -1,6 +1,6 @@
 "use client";
 
-import SignScreen from "@/components/SignScreen/SignScreen";
+import SignScreen from "@/components/auth/SignScreen";
 
 const SignUp = () => {
   return <SignScreen isSignUp />;

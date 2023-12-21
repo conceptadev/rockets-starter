@@ -1,6 +1,6 @@
 "use client";
 
-import ResetPasswordScreen from "@/components/ResetPasswordScreen/ResetPasswordScreen";
+import ResetPasswordScreen from "@/components/auth/ResetPasswordScreen";
 
 const ResetPassword = () => {
   return <ResetPasswordScreen />;
