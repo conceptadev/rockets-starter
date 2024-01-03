@@ -24,7 +24,7 @@ const ChangePasswordForm = ({
   openConfirmationModal,
 }: ChangePasswordFormProps) => {
   const [formData, setFormData] = useState<PasswordChangeFormData>({
-    oldPassword: "",
+    currentPassword: "",
     newPassword: "",
     confirmNewPassword: "",
   });
