@@ -1,53 +1,116 @@
 "use client";
 
-import type { RowProps } from "@concepta/react-material-ui/dist/components/Table/types";
-import { useCallback, useMemo } from "react";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import EditIcon from "@mui/icons-material/Edit";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import DeleteIcon from "@mui/icons-material/Delete";
+import type {
+  RowProps,
+  HeaderProps,
+  TableQueryStateProps,
+} from "@concepta/react-material-ui/dist/components/Table/types";
+
+import { useEffect, useMemo, useState } from "react";
+import { Box, Button, IconButton } from "@mui/material";
+import {
+  Edit as EditIcon,
+  ChevronRight as ChevronRightIcon,
+  Delete as DeleteIcon,
+} from "@mui/icons-material";
+import { Filter } from "@concepta/react-material-ui";
+import { FilterType } from "@concepta/react-material-ui/dist/components/Filter/Filter";
+import useDataProvider, { useQuery } from "@concepta/react-data-provider";
+import { toast } from "react-toastify";
 
 import Table from "@/components/shared/Table";
 
-import { headers } from "./constants";
-
 import type { User, ActionType } from "@/types/User";
-import type { TableRootProps } from "@/types/Table";
+
+type BasicType = string | number | boolean;
+
+type SimpleFilter = Record<string, BasicType | BasicType[] | null>;
+
+type TableRootProps = {
+  data: unknown[];
+  isPending: boolean;
+  error: unknown;
+  total: number;
+  pageCount: number;
+  execute: () => void;
+  refresh: () => void;
+  simpleFilter: SimpleFilter;
+  updateSimpleFilter: (
+    simpleFilter: SimpleFilter | null,
+    resetPage?: boolean
+  ) => void;
+  tableQueryState: TableQueryStateProps;
+  setTableQueryState: React.Dispatch<
+    React.SetStateAction<TableQueryStateProps>
+  >;
+};
 
 type UsersTableProps = {
-  isLoading?: boolean;
-  isEmptyStateVisible?: boolean;
-  data: User[];
+  headers: HeaderProps[];
+  rows?: RowProps[];
   onActionClick: ({
-    rowData,
+    row,
     action,
   }: {
-    rowData: User;
+    row: User | null;
     action: ActionType;
   }) => void;
-} & Omit<TableRootProps, "rows" | "headers">;
+  tableProps: TableRootProps;
+};
 
 const UsersTable = ({
-  isLoading,
-  isEmptyStateVisible,
-  data,
+  headers,
+  rows,
   onActionClick,
-  ...tableRootProps
+  tableProps,
 }: UsersTableProps) => {
-  const handleActionButtonClick = useCallback(
-    (rowData: User, action: ActionType) =>
-      onActionClick({ rowData: rowData, action }),
-    [onActionClick]
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const { del } = useDataProvider();
+
+  const { execute: deleteUser } = useQuery(
+    (id: User["id"]) =>
+      del({
+        uri: `/user/${id}`,
+      }),
+    false,
+    {
+      onSuccess: () => {
+        tableProps.refresh();
+        toast.success("User successfully deleted.");
+      },
+      onError: () => toast.error("Failed to delete user."),
+    }
   );
 
-  const customRows: RowProps[] = useMemo(() => {
-    if (!data) {
-      return [];
+  const handleSearchChange = (term: string) => {
+    setSearchTerm(term);
+
+    if (!term) {
+      tableProps.updateSimpleFilter({
+        email: null,
+      });
+
+      return;
     }
 
-    return data.map((row) => {
-      const { id, email, username } = row;
+    const filter = {
+      email: `||$contL||${term}||$or||username||$contL||${term}`,
+    };
+
+    tableProps.updateSimpleFilter(filter);
+  };
+
+  useEffect(() => {
+    tableProps.refresh();
+  }, [tableProps.simpleFilter]);
+
+  const defaultRows: RowProps[] = useMemo(() => {
+    const data = tableProps.data || [];
+
+    return (data || []).map((row) => {
+      const rowData = row as User;
+      const { id, email, username } = rowData;
 
       return {
         id: id || "",
@@ -56,16 +119,18 @@ const UsersTable = ({
         actions: {
           component: (
             <Box>
-              <IconButton onClick={() => handleActionButtonClick(row, "edit")}>
+              <IconButton
+                onClick={() => onActionClick({ row: rowData, action: "edit" })}
+              >
                 <EditIcon />
               </IconButton>
-              <IconButton
-                onClick={() => handleActionButtonClick(row, "delete")}
-              >
+              <IconButton onClick={() => deleteUser(rowData.id)}>
                 <DeleteIcon />
               </IconButton>
               <IconButton
-                onClick={() => handleActionButtonClick(row, "details")}
+                onClick={() =>
+                  onActionClick({ row: rowData, action: "details" })
+                }
               >
                 <ChevronRightIcon />
               </IconButton>
@@ -74,17 +139,49 @@ const UsersTable = ({
         },
       };
     });
-  }, [data, handleActionButtonClick]);
+  }, [tableProps.data, onActionClick, deleteUser]);
 
   return (
-    <Table
-      rows={customRows}
-      headers={headers}
-      data={data}
-      isEmptyStateVisible={isEmptyStateVisible}
-      isPending={Boolean(isLoading)}
-      {...tableRootProps}
-    />
+    <>
+      <Box
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="space-between"
+        mb={2}
+      >
+        <Box sx={{ width: "60%" }}>
+          <Filter
+            filters={[
+              {
+                type: FilterType.Text,
+                defaultValue: searchTerm,
+                placeholder: "Search user",
+                onChange: handleSearchChange,
+              },
+            ]}
+          />
+        </Box>
+        <Button
+          variant="contained"
+          onClick={() => onActionClick({ row: null, action: "creation" })}
+        >
+          Add new user
+        </Button>
+      </Box>
+
+      <Table
+        isPending={tableProps.isPending}
+        isEmptyStateVisible={Boolean(searchTerm && !tableProps.data?.length)}
+        headers={headers}
+        rows={rows ?? defaultRows}
+        data={tableProps.data}
+        tableQueryState={tableProps.tableQueryState}
+        updateTableQueryState={tableProps.setTableQueryState}
+        total={tableProps.total}
+        pageCount={tableProps.pageCount}
+      />
+    </>
   );
 };
 

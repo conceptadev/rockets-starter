@@ -1,19 +1,24 @@
 "use client";
 
 import type { IChangeEvent } from "@rjsf/core";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
+import type { RJSFSchema } from "@rjsf/utils";
+
+import { Box, Button, CircularProgress } from "@mui/material";
 import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import { SchemaForm } from "@concepta/react-material-ui";
 import validator from "@rjsf/validator-ajv6";
 import { toast } from "react-toastify";
 
-import { schema, widgets, getUiSchemaByViewMode } from "@/forms/user";
+import {
+  schema as defaultSchema,
+  widgets,
+  getUiSchemaByViewMode,
+} from "@/forms/user";
 
 import type { User, ActionType } from "@/types/User";
 
 interface UserFormProps {
+  formSchema?: RJSFSchema;
   selectedRow?: User | null;
   viewMode: ActionType;
   onSubmitSuccess: () => void;
@@ -21,6 +26,7 @@ interface UserFormProps {
 }
 
 const UserForm = ({
+  formSchema,
   selectedRow,
   viewMode,
   onSubmitSuccess,
@@ -74,7 +80,7 @@ const UserForm = ({
 
   return (
     <SchemaForm.Form
-      schema={schema}
+      schema={formSchema || defaultSchema}
       uiSchema={getUiSchemaByViewMode(viewMode)}
       validator={validator}
       onSubmit={handleFormSubmit}
