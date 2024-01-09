@@ -1,9 +1,61 @@
 "use client";
 
-import UsersModule from "@/modules/users";
+import { Box } from "@mui/material";
+import { Text } from "@concepta/react-material-ui";
+
+import Module from "@/components/shared/Module";
 
 const UsersScreen = () => {
-  return <UsersModule />;
+  return (
+    <Box>
+      <Text fontFamily="Inter" fontSize={20} fontWeight={800} mt={4} mb={4}>
+        Users
+      </Text>
+
+      <Module
+        resource="user"
+        tableSchema={[
+          {
+            id: "id",
+            numeric: false,
+            disablePadding: false,
+            label: "ID",
+          },
+          {
+            id: "email",
+            numeric: false,
+            disablePadding: false,
+            label: "Email",
+          },
+          {
+            id: "username",
+            numeric: false,
+            disablePadding: false,
+            label: "Username",
+          },
+          {
+            id: "actions",
+            numeric: false,
+            disablePadding: false,
+            label: "",
+          },
+        ]}
+        formSchema={{
+          type: "object",
+          required: ["email", "username"],
+          properties: {
+            email: {
+              type: "string",
+              title: "Email",
+              minLength: 3,
+              format: "email",
+            },
+            username: { type: "string", title: "Username", minLength: 3 },
+          },
+        }}
+      />
+    </Box>
+  );
 };
 
 export default UsersScreen;
