@@ -12,7 +12,7 @@ interface SignInSubmoduleProps {
   formUiSchema?: UiSchema;
   advancedProperties?: Record<string, AdvancedProperty>;
   formData?: Record<string, unknown> | null;
-  loginPath?: string;
+  signInRequestPath?: string;
   signUpPath?: string;
   forgotPasswordPath?: string;
 }
@@ -22,7 +22,7 @@ const SignInSubmodule = (props: SignInSubmoduleProps) => {
 
   const handleLogin = (values: IChangeEvent<Record<string, string>>) => {
     const { username, password } = values.formData || {};
-    doLogin({ username, password, loginPath: props.loginPath });
+    doLogin({ username, password, loginPath: props.signInRequestPath });
   };
 
   return (
@@ -80,7 +80,7 @@ const SignInSubmodule = (props: SignInSubmoduleProps) => {
 
         {props.signUpPath ? (
           <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>
-            <Link href="/sign-up" color="primary.dark">
+            <Link href={props.signUpPath} color="primary.dark">
               No account? Sign up
             </Link>
           </Text>

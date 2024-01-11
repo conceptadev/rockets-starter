@@ -13,7 +13,7 @@ interface ForgotPasswordSubmoduleProps {
   formUiSchema?: UiSchema;
   advancedProperties?: Record<string, AdvancedProperty>;
   formData?: Record<string, unknown> | null;
-  loginPath?: string;
+  signInPath?: string;
   signUpPath?: string;
 }
 
@@ -24,7 +24,7 @@ const ForgotPasswordSubmodule = (props: ForgotPasswordSubmoduleProps) => {
     (body: Record<string, unknown>) =>
       post({
         uri: "/auth/recovery/password",
-        body: { email: body.email },
+        body,
       }),
     false,
     {
@@ -42,8 +42,7 @@ const ForgotPasswordSubmodule = (props: ForgotPasswordSubmoduleProps) => {
   );
 
   const handleSubmit = async (values: IChangeEvent<Record<string, string>>) => {
-    const { email } = values.formData || {};
-    await sendRecoveryPasswordLink({ email });
+    await sendRecoveryPasswordLink(values.formData || {});
   };
 
   return (
@@ -91,11 +90,13 @@ const ForgotPasswordSubmodule = (props: ForgotPasswordSubmoduleProps) => {
           </Box>
         </SchemaForm.Form>
 
-        <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>
-          <Link href="/sign-in" color="primary.dark">
-            Remember your password? Sign in
-          </Link>
-        </Text>
+        {props.signInPath ? (
+          <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>
+            <Link href={props.signInPath} color="primary.dark">
+              Remember your password? Sign in
+            </Link>
+          </Text>
+        ) : null}
       </Card>
     </Container>
   );

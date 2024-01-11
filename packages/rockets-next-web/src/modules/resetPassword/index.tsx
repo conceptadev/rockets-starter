@@ -8,27 +8,32 @@ const ResetPasswordModule = () => {
   return (
     <AuthModule
       route="resetPassword"
-      formSchema={{
-        type: "object",
-        required: ["newPassword", "confirmNewPassword"],
-        properties: {
+      formProps={{
+        formSchema: {
+          type: "object",
+          required: ["newPassword", "confirmNewPassword"],
+          properties: {
+            newPassword: {
+              type: "string",
+              title: "New password",
+            },
+            confirmNewPassword: {
+              type: "string",
+              title: "Re-enter your new password",
+            },
+          },
+        },
+        formUiSchema: {
           newPassword: {
-            type: "string",
-            title: "New password",
+            "ui:widget": CustomPasswordFieldWidget,
           },
           confirmNewPassword: {
-            type: "string",
-            title: "Re-enter your new password",
+            "ui:widget": CustomPasswordFieldWidget,
           },
         },
       }}
-      formUiSchema={{
-        newPassword: {
-          "ui:widget": CustomPasswordFieldWidget,
-        },
-        confirmNewPassword: {
-          "ui:widget": CustomPasswordFieldWidget,
-        },
+      moduleProps={{
+        signInPath: "/sign-in",
       }}
     />
   );

@@ -44,8 +44,7 @@ const SignUpSubmodule = (props: SignUpSubmoduleProps) => {
   );
 
   const handleSignUp = async (values: IChangeEvent<Record<string, string>>) => {
-    const { email, username, password } = values.formData || {};
-    createAccount({ email, username, password });
+    createAccount(values.formData || {});
   };
 
   return (

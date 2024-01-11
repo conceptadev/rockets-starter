@@ -9,40 +9,33 @@ import ResetPasswordSubmodule from "../Submodules/ResetPassword";
 
 type Route = "signIn" | "signUp" | "forgotPassword" | "resetPassword";
 
-interface ModuleProps {
-  route: Route;
+interface FormProps {
   formSchema: RJSFSchema;
   formUiSchema?: UiSchema;
 }
 
-const AuthModule = (props: ModuleProps) => {
+interface ModuleProps {
+  signInRequestPath?: string;
+  forgotPasswordPath?: string;
+  signUpPath?: string;
+  signInPath?: string;
+}
+
+interface AuthModuleProps {
+  route: Route;
+  formProps: FormProps;
+  moduleProps?: ModuleProps;
+}
+
+const AuthModule = (props: AuthModuleProps) => {
   return {
-    signIn: (
-      <SignInSubmodule
-        formSchema={props.formSchema}
-        formUiSchema={props.formUiSchema}
-        forgotPasswordPath="/forgot-password"
-        signUpPath="/sign-up"
-      />
-    ),
-    signUp: (
-      <SignUpSubmodule
-        formSchema={props.formSchema}
-        formUiSchema={props.formUiSchema}
-        signInPath="/sign-in"
-      />
-    ),
+    signIn: <SignInSubmodule {...props.formProps} {...props.moduleProps} />,
+    signUp: <SignUpSubmodule {...props.formProps} {...props.moduleProps} />,
     forgotPassword: (
-      <ForgotPasswordSubmodule
-        formSchema={props.formSchema}
-        formUiSchema={props.formUiSchema}
-      />
+      <ForgotPasswordSubmodule {...props.formProps} {...props.moduleProps} />
     ),
     resetPassword: (
-      <ResetPasswordSubmodule
-        formSchema={props.formSchema}
-        formUiSchema={props.formUiSchema}
-      />
+      <ResetPasswordSubmodule {...props.formProps} {...props.moduleProps} />
     ),
   }[props.route];
 };

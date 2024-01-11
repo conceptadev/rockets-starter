@@ -8,22 +8,27 @@ const ForgotPasswordModule = () => {
   return (
     <AuthModule
       route="forgotPassword"
-      formSchema={{
-        type: "object",
-        required: ["email"],
-        properties: {
-          email: {
-            type: "string",
-            title: "Email",
-            minLength: 3,
-            format: "email",
+      formProps={{
+        formSchema: {
+          type: "object",
+          required: ["email"],
+          properties: {
+            email: {
+              type: "string",
+              title: "Email",
+              minLength: 3,
+              format: "email",
+            },
+          },
+          formUiSchema: {
+            email: {
+              "ui:widget": CustomTextFieldWidget,
+            },
           },
         },
       }}
-      formUiSchema={{
-        email: {
-          "ui:widget": CustomTextFieldWidget,
-        },
+      moduleProps={{
+        signInPath: "/sign-in",
       }}
     />
   );

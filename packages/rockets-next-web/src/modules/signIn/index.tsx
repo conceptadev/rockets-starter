@@ -11,21 +11,28 @@ const SignInModule = () => {
   return (
     <AuthModule
       route="signIn"
-      formSchema={{
-        type: "object",
-        required: ["username", "password"],
-        properties: {
-          username: { type: "string", title: "Username", minLength: 3 },
-          password: { type: "string", title: "Password" },
+      formProps={{
+        formSchema: {
+          type: "object",
+          required: ["username", "password"],
+          properties: {
+            username: { type: "string", title: "Username", minLength: 3 },
+            password: { type: "string", title: "Password" },
+          },
+        },
+        formUiSchema: {
+          username: {
+            "ui:widget": CustomTextFieldWidget,
+          },
+          password: {
+            "ui:widget": CustomPasswordFieldWidget,
+          },
         },
       }}
-      formUiSchema={{
-        username: {
-          "ui:widget": CustomTextFieldWidget,
-        },
-        password: {
-          "ui:widget": CustomPasswordFieldWidget,
-        },
+      moduleProps={{
+        signInRequestPath: "/auth/login",
+        forgotPasswordPath: "/forgot-password",
+        signUpPath: "/sign-up",
       }}
     />
   );

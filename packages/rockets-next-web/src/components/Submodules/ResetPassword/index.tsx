@@ -16,7 +16,7 @@ interface ResetPasswordSubmoduleProps {
   formUiSchema?: UiSchema;
   advancedProperties?: Record<string, AdvancedProperty>;
   formData?: Record<string, unknown> | null;
-  loginPath?: string;
+  signInPath?: string;
   signUpPath?: string;
 }
 
@@ -25,19 +25,22 @@ const ResetPasswordSubmodule = (props: ResetPasswordSubmoduleProps) => {
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  const token = searchParams.get("token");
+  const passcode = searchParams.get("token");
 
   const { execute: resetPassword, isPending } = useQuery(
     (body: Record<string, unknown>) =>
       patch({
         uri: "/auth/recovery/password",
-        body: { passcode: token, newPassword: body.newPassword },
+        body: { ...body, passcode },
       }),
     false,
     {
       onSuccess() {
         toast.success("New password successfully saved.");
-        router.push("/sign-in");
+
+        if (props.signInPath) {
+          router.push(props.signInPath);
+        }
       },
       // TODO: BE message is not friendly
       onError: () => {
@@ -104,11 +107,13 @@ const ResetPasswordSubmodule = (props: ResetPasswordSubmoduleProps) => {
           </Box>
         </SchemaForm.Form>
 
-        <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>
-          <Link href="/sign-in" color="primary.dark">
-            Remember your password? Sign in
-          </Link>
-        </Text>
+        {props.signInPath ? (
+          <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>
+            <Link href={props.signInPath} color="primary.dark">
+              Remember your password? Sign in
+            </Link>
+          </Text>
+        ) : null}
       </Card>
     </Container>
   );
