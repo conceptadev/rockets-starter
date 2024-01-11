@@ -216,7 +216,7 @@ To start the web server, run this command:
 yarn start:web
 ```
 
-The web should now be running at http://localhost:3000/login
+The web should now be running at http://localhost:3000/sign-in
 
 If you get `Unknown workspace "rockets-web"` in this step, run the `yarn dev` command inside the `packages/rockets-next-web` folder.
 

@@ -3,7 +3,7 @@
 import { Box } from "@mui/material";
 import { Text } from "@concepta/react-material-ui";
 
-import Module from "@/components/shared/Module";
+import CrudModule from "@/components/shared/CrudModule";
 
 const UsersModule = () => {
   return (
@@ -12,7 +12,7 @@ const UsersModule = () => {
         Users
       </Text>
 
-      <Module
+      <CrudModule
         resource="user"
         tableProps={{
           tableSchema: [

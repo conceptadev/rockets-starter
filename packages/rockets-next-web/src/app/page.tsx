@@ -10,7 +10,7 @@ const Home = () => {
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
-    router.replace(accessToken ? "/users" : "/login");
+    router.replace(accessToken ? "/users" : "/sign-in");
   }, []);
 
   return (

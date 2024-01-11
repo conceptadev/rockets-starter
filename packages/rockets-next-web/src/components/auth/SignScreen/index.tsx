@@ -45,7 +45,7 @@ const SignScreen = ({ isSignUp }: Props) => {
     {
       onSuccess() {
         toast.success("Account successfully created.");
-        router.push("/login");
+        router.push("/sign-in");
       },
       onError: (error) => {
         toast.error(
@@ -59,7 +59,7 @@ const SignScreen = ({ isSignUp }: Props) => {
 
   const handleLogin = (values: SignInFormData) => {
     const { username, password } = values;
-    doLogin({ username, password, loginPath: "/auth/login" });
+    doLogin({ username, password, loginPath: "/auth/sign-in" });
   };
 
   const handleSignUp = async (values: SignUpFormData) => {
@@ -149,7 +149,7 @@ const SignScreen = ({ isSignUp }: Props) => {
         </Box>
 
         <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>
-          <Link href={isSignUp ? "/login" : "/sign-up"} color="primary.dark">
+          <Link href={isSignUp ? "/sign-in" : "/sign-up"} color="primary.dark">
             {isSignUp
               ? "Already have an account? Sign in"
               : "No account? Sign up"}

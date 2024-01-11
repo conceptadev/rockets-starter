@@ -37,7 +37,7 @@ export default function AppBarContainer({ children }: { children: ReactNode }) {
   const onLogoutClick = (handleCloseMenu: HandleCloseMenu) => {
     handleCloseMenu();
     doLogout();
-    startTransition(() => router.replace("/login"));
+    startTransition(() => router.replace("/sign-in"));
   };
 
   return (

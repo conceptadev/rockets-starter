@@ -104,7 +104,7 @@ const ForgotPasswordScreen = () => {
         </Box>
 
         <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>
-          <Link href="/login" color="primary.dark">
+          <Link href="/sign-in" color="primary.dark">
             Remember your password? Sign in
           </Link>
         </Text>

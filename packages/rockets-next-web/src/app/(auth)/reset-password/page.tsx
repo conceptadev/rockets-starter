@@ -1,9 +1,5 @@
 "use client";
 
-import ResetPasswordScreen from "@/components/auth/ResetPasswordScreen";
+import ResetPasswordModule from "@/modules/resetPassword";
 
-const ResetPassword = () => {
-  return <ResetPasswordScreen />;
-};
-
-export default ResetPassword;
+export default ResetPasswordModule;

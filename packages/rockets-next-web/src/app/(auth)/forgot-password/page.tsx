@@ -1,9 +1,5 @@
 "use client";
 
-import ForgotPasswordScreen from "@/components/auth/ForgotPasswordScreen";
+import ForgotPasswordModule from "@/modules/forgotPassword";
 
-const ForgotPassword = () => {
-  return <ForgotPasswordScreen />;
-};
-
-export default ForgotPassword;
+export default ForgotPasswordModule;

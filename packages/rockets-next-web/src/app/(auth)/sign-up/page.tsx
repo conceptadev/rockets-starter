@@ -1,9 +1,5 @@
 "use client";
 
-import SignScreen from "@/components/auth/SignScreen";
+import SignUpModule from "@/modules/signUp";
 
-const SignUp = () => {
-  return <SignScreen isSignUp />;
-};
-
-export default SignUp;
+export default SignUpModule;

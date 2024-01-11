@@ -27,7 +27,7 @@ const App = ({ children }: { children: React.ReactNode }) => {
 
   const { darkMode } = (useContext?.(ThemeContext) as ThemeContextType) || {};
 
-  const handleRefreshTokenError = () => router.replace("/login");
+  const handleRefreshTokenError = () => router.replace("/sign-in");
 
   const handleSuccess = () => router.replace("/users");
 

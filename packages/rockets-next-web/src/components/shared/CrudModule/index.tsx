@@ -6,8 +6,8 @@ import { Box } from "@mui/material";
 import useTable from "@concepta/react-material-ui/dist/components/Table/useTable";
 import { toast } from "react-toastify";
 
-import TableSubmodule from "@/components/shared/Submodule/Table";
-import DrawerFormSubmodule from "@/components/shared/Submodule/DrawerForm";
+import TableSubmodule from "@/components/shared/Submodules/Table";
+import DrawerFormSubmodule from "@/components/shared/Submodules/DrawerForm";
 
 type Action = "creation" | "edit" | "details" | null;
 
@@ -28,7 +28,7 @@ interface ModuleProps {
   drawerFormProps: DrawerFormProps;
 }
 
-const Module = (props: ModuleProps) => {
+const CrudModule = (props: ModuleProps) => {
   const [drawerViewMode, setDrawerViewMode] = useState<Action>(null);
   const [selectedRow, setSelectedRow] = useState<SelectedRow>(null);
 
@@ -73,4 +73,4 @@ const Module = (props: ModuleProps) => {
   );
 };
 
-export default Module;
+export default CrudModule;

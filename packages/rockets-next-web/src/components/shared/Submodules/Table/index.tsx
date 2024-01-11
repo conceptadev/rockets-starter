@@ -1,39 +1,44 @@
-"use client";
-
 import type {
-  RowProps,
   HeaderProps,
+  RowProps,
   TableQueryStateProps,
 } from "@concepta/react-material-ui/dist/components/Table/types";
 
-import { useEffect, useMemo, useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Box, Button, IconButton } from "@mui/material";
 import {
   Edit as EditIcon,
-  ChevronRight as ChevronRightIcon,
   Delete as DeleteIcon,
+  ChevronRight as ChevronRightIcon,
 } from "@mui/icons-material";
 import { Filter } from "@concepta/react-material-ui";
 import { FilterType } from "@concepta/react-material-ui/dist/components/Filter/Filter";
 import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import { toast } from "react-toastify";
 
-import Table from "@/components/shared/Table";
+import Table from "@/components/Table";
 
-import type { User, ActionType } from "@/types/User";
+type Action = "creation" | "edit" | "details" | null;
 
 type BasicType = string | number | boolean;
 
 type SimpleFilter = Record<string, BasicType | BasicType[] | null>;
 
-type TableRootProps = {
+type ActionCallbackPayload = {
+  action: Action;
+  row: Record<string, unknown>;
+};
+
+interface TableSubmoduleProps {
+  queryResource: string;
+  tableSchema: HeaderProps[];
+  onAction: ({ action, row }: ActionCallbackPayload) => void;
+  onAddNew: () => void;
+  refresh: () => void;
   data: unknown[];
   isPending: boolean;
-  error: unknown;
   total: number;
   pageCount: number;
-  execute: () => void;
-  refresh: () => void;
   simpleFilter: SimpleFilter;
   updateSimpleFilter: (
     simpleFilter: SimpleFilter | null,
@@ -43,43 +48,25 @@ type TableRootProps = {
   setTableQueryState: React.Dispatch<
     React.SetStateAction<TableQueryStateProps>
   >;
-};
+}
 
-type UsersTableProps = {
-  headers: HeaderProps[];
-  rows?: RowProps[];
-  onActionClick: ({
-    row,
-    action,
-  }: {
-    row: User | null;
-    action: ActionType;
-  }) => void;
-  tableProps: TableRootProps;
-};
-
-const UsersTable = ({
-  headers,
-  rows,
-  onActionClick,
-  tableProps,
-}: UsersTableProps) => {
+const TableSubmodule = (props: TableSubmoduleProps) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const { del } = useDataProvider();
 
-  const { execute: deleteUser } = useQuery(
-    (id: User["id"]) =>
+  const { execute: deleteItem } = useQuery(
+    (id: string | number) =>
       del({
-        uri: `/user/${id}`,
+        uri: `/${props.queryResource}/${id}`,
       }),
     false,
     {
       onSuccess: () => {
-        tableProps.refresh();
-        toast.success("User successfully deleted.");
+        toast.success("Data successfully deleted.");
+        props.refresh();
       },
-      onError: () => toast.error("Failed to delete user."),
+      onError: () => toast.error("Failed to delete data."),
     }
   );
 
@@ -87,7 +74,7 @@ const UsersTable = ({
     setSearchTerm(term);
 
     if (!term) {
-      tableProps.updateSimpleFilter({
+      props.updateSimpleFilter({
         email: null,
       });
 
@@ -98,38 +85,32 @@ const UsersTable = ({
       email: `||$contL||${term}||$or||username||$contL||${term}`,
     };
 
-    tableProps.updateSimpleFilter(filter);
+    props.updateSimpleFilter(filter);
   };
 
-  useEffect(() => {
-    tableProps.refresh();
-  }, [tableProps.simpleFilter]);
+  const tableRows: RowProps[] = useMemo(() => {
+    const data = props.data || [];
 
-  const defaultRows: RowProps[] = useMemo(() => {
-    const data = tableProps.data || [];
-
-    return (data || []).map((row) => {
-      const rowData = row as User;
-      const { id, email, username } = rowData;
+    return data.map((row) => {
+      const rowData = row as Record<string, unknown>;
 
       return {
-        id: id || "",
-        email,
-        username,
+        ...rowData,
+        id: String(rowData.id),
         actions: {
           component: (
             <Box>
               <IconButton
-                onClick={() => onActionClick({ row: rowData, action: "edit" })}
+                onClick={() => props.onAction({ action: "edit", row: rowData })}
               >
                 <EditIcon />
               </IconButton>
-              <IconButton onClick={() => deleteUser(rowData.id)}>
+              <IconButton onClick={() => deleteItem(rowData.id)}>
                 <DeleteIcon />
               </IconButton>
               <IconButton
                 onClick={() =>
-                  onActionClick({ row: rowData, action: "details" })
+                  props.onAction({ action: "details", row: rowData })
                 }
               >
                 <ChevronRightIcon />
@@ -139,10 +120,14 @@ const UsersTable = ({
         },
       };
     });
-  }, [tableProps.data, onActionClick, deleteUser]);
+  }, [props, deleteItem]);
+
+  useEffect(() => {
+    props.refresh();
+  }, [props.simpleFilter]);
 
   return (
-    <>
+    <Box>
       <Box
         display="flex"
         flexDirection="row"
@@ -156,33 +141,30 @@ const UsersTable = ({
               {
                 type: FilterType.Text,
                 defaultValue: searchTerm,
-                placeholder: "Search user",
+                placeholder: "Search",
                 onChange: handleSearchChange,
               },
             ]}
           />
         </Box>
-        <Button
-          variant="contained"
-          onClick={() => onActionClick({ row: null, action: "creation" })}
-        >
-          Add new user
+        <Button variant="contained" onClick={props.onAddNew}>
+          Add new
         </Button>
       </Box>
 
       <Table
-        isPending={tableProps.isPending}
-        isEmptyStateVisible={Boolean(searchTerm && !tableProps.data?.length)}
-        headers={headers}
-        rows={rows ?? defaultRows}
-        data={tableProps.data}
-        tableQueryState={tableProps.tableQueryState}
-        updateTableQueryState={tableProps.setTableQueryState}
-        total={tableProps.total}
-        pageCount={tableProps.pageCount}
+        isPending={props.isPending}
+        isEmptyStateVisible={Boolean(searchTerm && !props.data?.length)}
+        headers={props.tableSchema}
+        rows={tableRows}
+        data={props.data}
+        tableQueryState={props.tableQueryState}
+        updateTableQueryState={props.setTableQueryState}
+        total={props.total}
+        pageCount={props.pageCount}
       />
-    </>
+    </Box>
   );
 };
 
-export default UsersTable;
+export default TableSubmodule;
