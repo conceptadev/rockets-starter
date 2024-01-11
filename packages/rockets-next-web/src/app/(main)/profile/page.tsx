@@ -12,8 +12,8 @@ import useTheme from "@mui/material/styles/useTheme";
 import { toast } from "react-toastify";
 import validator from "@rjsf/validator-ajv6";
 
-import ChangePasswordForm from "@/components/main/ChangePasswordForm";
-import ConfirmationModal from "@/components/main/PasswordChangeConfirmationModal";
+import ChangePasswordForm from "@/components/ChangePasswordForm";
+import ConfirmationModal from "@/components/PasswordChangeConfirmationModal";
 
 import { profileFormSchema, widgets } from "@/forms/profile";
 

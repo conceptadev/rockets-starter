@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 
 type Action = "creation" | "edit" | "details" | null;
 
-interface DrawerFormProps {
+interface DrawerFormSubmoduleProps {
   queryResource: string;
   formSchema: RJSFSchema;
   viewMode: Action | null;
@@ -19,7 +19,7 @@ interface DrawerFormProps {
   onSubmitSuccess: () => void;
 }
 
-const DrawerFormSubmodule = (props: DrawerFormProps) => {
+const DrawerFormSubmodule = (props: DrawerFormSubmoduleProps) => {
   const { post, patch } = useDataProvider();
 
   const { execute: createItem, isPending: isLoadingCreation } = useQuery(

@@ -3,7 +3,9 @@
 import { Box } from "@mui/material";
 import { Text } from "@concepta/react-material-ui";
 
-import CrudModule from "@/components/shared/CrudModule";
+import { CustomTextFieldWidget } from "@concepta/react-material-ui/dist/styles/CustomWidgets";
+
+import CrudModule from "@/components/CrudModule";
 
 const UsersModule = () => {
   return (
@@ -48,6 +50,14 @@ const UsersModule = () => {
                 format: "email",
               },
               username: { type: "string", title: "Username", minLength: 3 },
+            },
+          },
+          formUiSchema: {
+            email: {
+              "ui:widget": CustomTextFieldWidget,
+            },
+            username: {
+              "ui:widget": CustomTextFieldWidget,
             },
           },
         }}
