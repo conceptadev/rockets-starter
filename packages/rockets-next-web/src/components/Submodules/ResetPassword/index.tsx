@@ -1,6 +1,7 @@
 import type { RJSFSchema, UiSchema } from "@rjsf/utils";
 import type { IChangeEvent } from "@rjsf/core";
 import type { AdvancedProperty } from "@concepta/react-material-ui/dist/components/SchemaForm/types";
+import type { ValidationRule } from "@/utils/formValidation/formValidation";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { Box, Button, Container, Card, CircularProgress } from "@mui/material";
@@ -12,12 +13,14 @@ import { toast } from "react-toastify";
 import { validateForm } from "@/utils/formValidation/formValidation";
 
 interface ResetPasswordSubmoduleProps {
+  queryUri?: string;
   formSchema: RJSFSchema;
   formUiSchema?: UiSchema;
   advancedProperties?: Record<string, AdvancedProperty>;
   formData?: Record<string, unknown> | null;
   signInPath?: string;
   signUpPath?: string;
+  customValidation?: ValidationRule<Record<string, string>>[];
 }
 
 const ResetPasswordSubmodule = (props: ResetPasswordSubmoduleProps) => {
@@ -30,7 +33,7 @@ const ResetPasswordSubmodule = (props: ResetPasswordSubmoduleProps) => {
   const { execute: resetPassword, isPending } = useQuery(
     (body: Record<string, unknown>) =>
       patch({
-        uri: "/auth/recovery/password",
+        uri: props.queryUri || "/auth/recovery/password",
         body: { ...body, passcode },
       }),
     false,
@@ -42,9 +45,10 @@ const ResetPasswordSubmodule = (props: ResetPasswordSubmoduleProps) => {
           router.push(props.signInPath);
         }
       },
-      // TODO: BE message is not friendly
-      onError: () => {
-        toast.error("Failed to reset password. Please try again later.");
+      onError: (error) => {
+        // @ts-expect-error TODO: needs to fix types in rockets-react
+        error?.response?.data?.message ??
+          toast.error("Failed to reset password. Please try again later.");
       },
     }
   );
@@ -76,13 +80,7 @@ const ResetPasswordSubmodule = (props: ResetPasswordSubmoduleProps) => {
           showErrorList={false}
           advancedProperties={props.advancedProperties}
           customValidate={(formData, errors) =>
-            validateForm(formData, errors, [
-              {
-                field: "confirmNewPassword",
-                test: (value, formData) => value !== formData.newPassword,
-                message: "Your passwords don't match. Please try again",
-              },
-            ])
+            validateForm(formData, errors, props.customValidation || [])
           }
         >
           <Box

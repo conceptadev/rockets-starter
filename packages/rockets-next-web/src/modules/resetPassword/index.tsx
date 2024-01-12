@@ -31,6 +31,13 @@ const ResetPasswordModule = () => {
             "ui:widget": CustomPasswordFieldWidget,
           },
         },
+        customValidation: [
+          {
+            field: "confirmNewPassword",
+            test: (value, formData) => value !== formData.newPassword,
+            message: "Your passwords don't match. Please try again",
+          },
+        ],
       }}
       moduleProps={{
         signInPath: "/sign-in",

@@ -1,6 +1,7 @@
 "use client";
 
 import type { RJSFSchema, UiSchema } from "@rjsf/utils";
+import type { ValidationRule } from "@/utils/formValidation/formValidation";
 
 import SignInSubmodule from "../Submodules/SignIn";
 import SignUpSubmodule from "../Submodules/SignUp";
@@ -12,6 +13,7 @@ type Route = "signIn" | "signUp" | "forgotPassword" | "resetPassword";
 interface FormProps {
   formSchema: RJSFSchema;
   formUiSchema?: UiSchema;
+  customValidation?: ValidationRule<Record<string, string>>[];
 }
 
 interface ModuleProps {
@@ -19,6 +21,7 @@ interface ModuleProps {
   forgotPasswordPath?: string;
   signUpPath?: string;
   signInPath?: string;
+  queryUri?: string;
 }
 
 interface AuthModuleProps {

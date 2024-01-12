@@ -1,6 +1,7 @@
 import type { RJSFSchema, UiSchema } from "@rjsf/utils";
 import type { IChangeEvent } from "@rjsf/core";
 import type { AdvancedProperty } from "@concepta/react-material-ui/dist/components/SchemaForm/types";
+import type { ValidationRule } from "@/utils/formValidation/formValidation";
 
 import { useRouter } from "next/navigation";
 import { Box, Button, Container, Card, CircularProgress } from "@mui/material";
@@ -9,13 +10,17 @@ import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import validator from "@rjsf/validator-ajv6";
 import { toast } from "react-toastify";
 
+import { validateForm } from "@/utils/formValidation/formValidation";
+
 interface SignUpSubmoduleProps {
+  queryUri?: string;
   formSchema: RJSFSchema;
   formUiSchema?: UiSchema;
   advancedProperties?: Record<string, AdvancedProperty>;
   formData?: Record<string, unknown> | null;
   forgotPasswordPath?: string;
   signInPath?: string;
+  customValidation?: ValidationRule<Record<string, string>>[];
 }
 
 const SignUpSubmodule = (props: SignUpSubmoduleProps) => {
@@ -23,7 +28,11 @@ const SignUpSubmodule = (props: SignUpSubmoduleProps) => {
   const { post } = useDataProvider();
 
   const { execute: createAccount, isPending: isLoadingSignUp } = useQuery(
-    (body: Record<string, unknown>) => post({ uri: "/user", body }),
+    (body: Record<string, unknown>) =>
+      post({
+        uri: props.queryUri || "/user",
+        body,
+      }),
     false,
     {
       onSuccess() {
@@ -69,6 +78,9 @@ const SignUpSubmodule = (props: SignUpSubmoduleProps) => {
           noHtml5Validate={true}
           showErrorList={false}
           advancedProperties={props.advancedProperties}
+          customValidate={(formData, errors) =>
+            validateForm(formData, errors, props.customValidation || [])
+          }
         >
           <Box
             display="flex"

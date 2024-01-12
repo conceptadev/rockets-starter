@@ -1,11 +1,14 @@
 import type { RJSFSchema, UiSchema } from "@rjsf/utils";
 import type { IChangeEvent } from "@rjsf/core";
 import type { AdvancedProperty } from "@concepta/react-material-ui/dist/components/SchemaForm/types";
+import type { ValidationRule } from "@/utils/formValidation/formValidation";
 
 import { Box, Button, Container, Card, CircularProgress } from "@mui/material";
 import { Text, Link, SchemaForm } from "@concepta/react-material-ui";
 import { useAuth } from "@concepta/react-auth-provider";
 import validator from "@rjsf/validator-ajv6";
+
+import { validateForm } from "@/utils/formValidation/formValidation";
 
 interface SignInSubmoduleProps {
   formSchema: RJSFSchema;
@@ -15,6 +18,7 @@ interface SignInSubmoduleProps {
   signInRequestPath?: string;
   signUpPath?: string;
   forgotPasswordPath?: string;
+  customValidation?: ValidationRule<Record<string, string>>[];
 }
 
 const SignInSubmodule = (props: SignInSubmoduleProps) => {
@@ -47,6 +51,9 @@ const SignInSubmodule = (props: SignInSubmoduleProps) => {
           noHtml5Validate={true}
           showErrorList={false}
           advancedProperties={props.advancedProperties}
+          customValidate={(formData, errors) =>
+            validateForm(formData, errors, props.customValidation || [])
+          }
         >
           {props.forgotPasswordPath ? (
             <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 2 }}>
