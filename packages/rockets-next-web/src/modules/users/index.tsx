@@ -37,6 +37,7 @@ const UsersModule = () => {
               label: "",
             },
           ],
+          searchParam: "email",
         }}
         drawerFormProps={{
           formSchema: {

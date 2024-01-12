@@ -15,6 +15,7 @@ type SelectedRow = Record<string, unknown> | null;
 
 interface TableProps {
   tableSchema: HeaderProps[];
+  searchParam: string;
 }
 
 interface DrawerFormProps {

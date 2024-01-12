@@ -48,6 +48,7 @@ interface TableSubmoduleProps {
   setTableQueryState: React.Dispatch<
     React.SetStateAction<TableQueryStateProps>
   >;
+  searchParam: string;
 }
 
 const TableSubmodule = (props: TableSubmoduleProps) => {
@@ -75,14 +76,14 @@ const TableSubmodule = (props: TableSubmoduleProps) => {
 
     if (!term) {
       props.updateSimpleFilter({
-        email: null,
+        [props.searchParam]: null,
       });
 
       return;
     }
 
     const filter = {
-      email: `||$contL||${term}||$or||username||$contL||${term}`,
+      [props.searchParam]: `||$contL||${term}`,
     };
 
     props.updateSimpleFilter(filter);
