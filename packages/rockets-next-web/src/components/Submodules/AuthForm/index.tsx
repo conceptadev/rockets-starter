@@ -3,31 +3,92 @@ import type { IChangeEvent } from "@rjsf/core";
 import type { AdvancedProperty } from "@concepta/react-material-ui/dist/components/SchemaForm/types";
 import type { ValidationRule } from "@/utils/formValidation/formValidation";
 
+import { useRouter, useSearchParams } from "next/navigation";
 import { Box, Button, Container, Card, CircularProgress } from "@mui/material";
 import { Text, Link, SchemaForm } from "@concepta/react-material-ui";
+import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import { useAuth } from "@concepta/react-auth-provider";
 import validator from "@rjsf/validator-ajv6";
+import { toast } from "react-toastify";
 
 import { validateForm } from "@/utils/formValidation/formValidation";
 
-interface SignInSubmoduleProps {
+interface AuthFormSubmoduleProps {
+  route: string;
+  queryUri: string;
+  queryMethod: string;
+  title?: string;
   formSchema: RJSFSchema;
   formUiSchema?: UiSchema;
   advancedProperties?: Record<string, AdvancedProperty>;
   formData?: Record<string, unknown> | null;
   signInRequestPath?: string;
+  signInPath?: string;
   signUpPath?: string;
   forgotPasswordPath?: string;
   customValidation?: ValidationRule<Record<string, string>>[];
 }
 
-const SignInSubmodule = (props: SignInSubmoduleProps) => {
+const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const passcode = searchParams.get("token");
+
+  const { post, patch, put } = useDataProvider();
   const { doLogin, isPending: isLoadingSignIn } = useAuth();
 
-  const handleLogin = (values: IChangeEvent<Record<string, string>>) => {
-    const { username, password } = values.formData || {};
-    doLogin({ username, password, loginPath: props.signInRequestPath });
+  const query =
+    {
+      post: post,
+      patch: patch,
+      put: put,
+    }[props.queryMethod] || post;
+
+  const { execute: performRequest, isPending: isLoadingRequest } = useQuery(
+    (body: Record<string, unknown>) =>
+      query({
+        uri: props.queryUri,
+        body,
+      }),
+    false,
+    {
+      onSuccess() {
+        toast.success("Success.");
+
+        if (props.signInPath) {
+          router.push(props.signInPath);
+        }
+      },
+      onError: (error) => {
+        toast.error(
+          // @ts-expect-error TODO: needs to fix types in rockets-react
+          error?.response?.data?.message ??
+            "An error has occurred. Please try again later or contact support for assistance."
+        );
+      },
+    }
+  );
+
+  const handleSubmit = async (values: IChangeEvent<Record<string, string>>) => {
+    const fields = values.formData || {};
+
+    if (props.route === "signIn") {
+      const { username, password } = fields;
+      doLogin({ username, password, loginPath: props.signInRequestPath });
+
+      return;
+    }
+
+    if (props.route === "resetPassword") {
+      await performRequest({ ...fields, passcode });
+
+      return;
+    }
+
+    performRequest(fields);
   };
+
+  const isLoading = isLoadingSignIn || isLoadingRequest;
 
   return (
     <Container maxWidth="xs" sx={{ textAlign: "center", padding: "48px 0" }}>
@@ -40,14 +101,14 @@ const SignInSubmodule = (props: SignInSubmoduleProps) => {
           mt={1}
           gutterBottom
         >
-          Sign in
+          {props.title}
         </Text>
         <SchemaForm.Form
           schema={props.formSchema}
           uiSchema={props.formUiSchema}
           validator={validator}
           formData={props.formData}
-          onSubmit={handleLogin}
+          onSubmit={handleSubmit}
           noHtml5Validate={true}
           showErrorList={false}
           advancedProperties={props.advancedProperties}
@@ -73,10 +134,10 @@ const SignInSubmodule = (props: SignInSubmoduleProps) => {
             <Button
               type="submit"
               variant="contained"
-              disabled={Boolean(isLoadingSignIn)}
+              disabled={Boolean(isLoading)}
               sx={{ flex: 1 }}
             >
-              {isLoadingSignIn ? (
+              {isLoading ? (
                 <CircularProgress sx={{ color: "white" }} size={24} />
               ) : (
                 "Send"
@@ -84,6 +145,14 @@ const SignInSubmodule = (props: SignInSubmoduleProps) => {
             </Button>
           </Box>
         </SchemaForm.Form>
+
+        {props.signInPath ? (
+          <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>
+            <Link href={props.signInPath} color="primary.dark">
+              Already have an account? Sign in
+            </Link>
+          </Text>
+        ) : null}
 
         {props.signUpPath ? (
           <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 3 }}>
@@ -97,4 +166,4 @@ const SignInSubmodule = (props: SignInSubmoduleProps) => {
   );
 };
 
-export default SignInSubmodule;
+export default AuthFormSubmodule;

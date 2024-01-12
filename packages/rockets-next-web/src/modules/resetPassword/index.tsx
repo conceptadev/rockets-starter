@@ -41,6 +41,8 @@ const ResetPasswordModule = () => {
       }}
       moduleProps={{
         signInPath: "/sign-in",
+        queryMethod: "patch",
+        queryUri: "/auth/recovery/password",
       }}
     />
   );

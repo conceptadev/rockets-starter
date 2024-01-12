@@ -33,6 +33,8 @@ const SignInModule = () => {
         signInRequestPath: "/auth/login",
         forgotPasswordPath: "/forgot-password",
         signUpPath: "/sign-up",
+        queryMethod: "",
+        queryUri: "",
       }}
     />
   );

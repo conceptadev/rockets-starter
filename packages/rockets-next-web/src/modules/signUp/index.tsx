@@ -40,6 +40,8 @@ const SignUpModule = () => {
       }}
       moduleProps={{
         signInPath: "/sign-in",
+        queryMethod: "post",
+        queryUri: "/user",
       }}
     />
   );

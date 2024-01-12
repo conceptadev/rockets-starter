@@ -3,10 +3,7 @@
 import type { RJSFSchema, UiSchema } from "@rjsf/utils";
 import type { ValidationRule } from "@/utils/formValidation/formValidation";
 
-import SignInSubmodule from "../Submodules/SignIn";
-import SignUpSubmodule from "../Submodules/SignUp";
-import ForgotPasswordSubmodule from "../Submodules/ForgotPassword";
-import ResetPasswordSubmodule from "../Submodules/ResetPassword";
+import AuthFormSubmodule from "../Submodules/AuthForm";
 
 type Route = "signIn" | "signUp" | "forgotPassword" | "resetPassword";
 
@@ -21,26 +18,32 @@ interface ModuleProps {
   forgotPasswordPath?: string;
   signUpPath?: string;
   signInPath?: string;
-  queryUri?: string;
+  queryUri: string;
+  queryMethod: string;
 }
 
 interface AuthModuleProps {
   route: Route;
   formProps: FormProps;
-  moduleProps?: ModuleProps;
+  moduleProps: ModuleProps;
 }
 
 const AuthModule = (props: AuthModuleProps) => {
-  return {
-    signIn: <SignInSubmodule {...props.formProps} {...props.moduleProps} />,
-    signUp: <SignUpSubmodule {...props.formProps} {...props.moduleProps} />,
-    forgotPassword: (
-      <ForgotPasswordSubmodule {...props.formProps} {...props.moduleProps} />
-    ),
-    resetPassword: (
-      <ResetPasswordSubmodule {...props.formProps} {...props.moduleProps} />
-    ),
+  const routeTitle = {
+    signIn: "Sign in",
+    signUp: "Sign up",
+    forgotPassword: "Recover password",
+    resetPassword: "Reset password",
   }[props.route];
+
+  return (
+    <AuthFormSubmodule
+      route={props.route}
+      title={routeTitle}
+      {...props.formProps}
+      {...props.moduleProps}
+    />
+  );
 };
 
 export default AuthModule;

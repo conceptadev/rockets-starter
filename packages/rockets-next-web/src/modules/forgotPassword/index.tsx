@@ -29,6 +29,8 @@ const ForgotPasswordModule = () => {
       }}
       moduleProps={{
         signInPath: "/sign-in",
+        queryMethod: "post",
+        queryUri: "/auth/recovery/password",
       }}
     />
   );
