@@ -11,14 +11,22 @@ import { useAuth } from "@concepta/react-auth-provider";
 import validator from "@rjsf/validator-ajv6";
 import { toast } from "react-toastify";
 
+import {
+  defaultAuthUiSchema,
+  signInFormSchema,
+  signUpFormSchema,
+  forgotPasswordFormSchema,
+  resetPasswordFormSchema,
+} from "./constants";
+
 import { validateForm } from "@/utils/formValidation/formValidation";
 
 interface AuthFormSubmoduleProps {
   route: string;
-  queryUri: string;
-  queryMethod: string;
+  queryUri?: string;
+  queryMethod?: string;
   title?: string;
-  formSchema: RJSFSchema;
+  formSchema?: RJSFSchema;
   formUiSchema?: UiSchema;
   advancedProperties?: Record<string, AdvancedProperty>;
   formData?: Record<string, unknown> | null;
@@ -27,6 +35,7 @@ interface AuthFormSubmoduleProps {
   signUpPath?: string;
   forgotPasswordPath?: string;
   customValidation?: ValidationRule<Record<string, string>>[];
+  submitButtonTitle?: string;
 }
 
 const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
@@ -42,12 +51,12 @@ const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
       post: post,
       patch: patch,
       put: put,
-    }[props.queryMethod] || post;
+    }[props.queryMethod || "post"] || post;
 
   const { execute: performRequest, isPending: isLoadingRequest } = useQuery(
     (body: Record<string, unknown>) =>
       query({
-        uri: props.queryUri,
+        uri: props.queryUri || "",
         body,
       }),
     false,
@@ -90,6 +99,21 @@ const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
 
   const isLoading = isLoadingSignIn || isLoadingRequest;
 
+  const defaultRouteTitle = {
+    signIn: "Sign in",
+    signUp: "Sign up",
+    forgotPassword: "Recover password",
+    resetPassword: "Reset password",
+  }[props.route];
+
+  const defaultFormSchema =
+    {
+      signIn: signInFormSchema,
+      signUp: signUpFormSchema,
+      forgotPassword: forgotPasswordFormSchema,
+      resetPassword: resetPasswordFormSchema,
+    }[props.route] || {};
+
   return (
     <Container maxWidth="xs" sx={{ textAlign: "center", padding: "48px 0" }}>
       <Card sx={{ padding: "24px", marginTop: "32px" }}>
@@ -101,11 +125,12 @@ const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
           mt={1}
           gutterBottom
         >
-          {props.title}
+          {props.title || defaultRouteTitle}
         </Text>
+
         <SchemaForm.Form
-          schema={props.formSchema}
-          uiSchema={props.formUiSchema}
+          schema={props.formSchema || defaultFormSchema}
+          uiSchema={props.formUiSchema || defaultAuthUiSchema}
           validator={validator}
           formData={props.formData}
           onSubmit={handleSubmit}
@@ -140,7 +165,7 @@ const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
               {isLoading ? (
                 <CircularProgress sx={{ color: "white" }} size={24} />
               ) : (
-                "Send"
+                props.submitButtonTitle || "Send"
               )}
             </Button>
           </Box>
