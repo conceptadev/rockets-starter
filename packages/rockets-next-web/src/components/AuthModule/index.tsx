@@ -50,8 +50,8 @@ const AuthModule = (props: AuthModuleProps) => {
     <AuthFormSubmodule
       route={props.route}
       {...props.formProps}
-      {...props.moduleProps}
       {...defaultModuleProps}
+      {...props.moduleProps}
     />
   );
 };

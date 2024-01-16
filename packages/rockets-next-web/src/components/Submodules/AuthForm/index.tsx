@@ -3,6 +3,7 @@ import type { IChangeEvent } from "@rjsf/core";
 import type { AdvancedProperty } from "@concepta/react-material-ui/dist/components/SchemaForm/types";
 import type { ValidationRule } from "@/utils/formValidation/formValidation";
 
+import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Box, Button, Container, Card, CircularProgress } from "@mui/material";
 import { Text, Link, SchemaForm, Image } from "@concepta/react-material-ui";
@@ -40,6 +41,8 @@ interface AuthFormSubmoduleProps {
 }
 
 const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
+  const [formData, setFormData] = useState<Record<string, unknown>>({});
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const passcode = searchParams.get("token");
@@ -117,7 +120,7 @@ const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
 
   return (
     <Container maxWidth="xs" sx={{ textAlign: "center", padding: "48px 0" }}>
-      {props.logoSrc ? <Image src={props.logoSrc} alt="logo" /> : null}
+      <Image src={props.logoSrc || "/logo.svg"} alt="logo" />
 
       <Card sx={{ padding: "24px", marginTop: "32px" }}>
         <Text
@@ -135,7 +138,8 @@ const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
           schema={props.formSchema || defaultFormSchema}
           uiSchema={props.formUiSchema || defaultAuthUiSchema}
           validator={validator}
-          formData={props.formData}
+          formData={props.formData || formData}
+          onChange={({ formData }) => setFormData(formData)}
           onSubmit={handleSubmit}
           noHtml5Validate={true}
           showErrorList={false}

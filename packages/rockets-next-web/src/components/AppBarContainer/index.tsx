@@ -9,15 +9,13 @@ import MenuItem from "@mui/material/MenuItem";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 
-import type { User } from "@/types/User";
-
 type HandleCloseMenu = () => void;
 
 export default function AppBarContainer({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
 
-  const { user, doLogout } = useAuth();
+  const { doLogout } = useAuth();
 
   const drawerMenuItems = [
     {
@@ -51,7 +49,7 @@ export default function AppBarContainer({ children }: { children: ReactNode }) {
       />
       <AppBar.Main>
         <AppBar.Nav
-          text={(user as User)?.username || ""}
+          text="John Smith"
           avatar="https://source.unsplash.com/random"
           headerMenuOptions={(handleClose) => (
             <MenuItem onClick={() => onLogoutClick(handleClose)}>
