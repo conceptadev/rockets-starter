@@ -5,7 +5,7 @@ import type { ValidationRule } from "@/utils/formValidation/formValidation";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { Box, Button, Container, Card, CircularProgress } from "@mui/material";
-import { Text, Link, SchemaForm } from "@concepta/react-material-ui";
+import { Text, Link, SchemaForm, Image } from "@concepta/react-material-ui";
 import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import { useAuth } from "@concepta/react-auth-provider";
 import validator from "@rjsf/validator-ajv6";
@@ -36,6 +36,7 @@ interface AuthFormSubmoduleProps {
   forgotPasswordPath?: string;
   customValidation?: ValidationRule<Record<string, string>>[];
   submitButtonTitle?: string;
+  logoSrc?: string;
 }
 
 const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
@@ -116,6 +117,8 @@ const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
 
   return (
     <Container maxWidth="xs" sx={{ textAlign: "center", padding: "48px 0" }}>
+      {props.logoSrc ? <Image src={props.logoSrc} alt="logo" /> : null}
+
       <Card sx={{ padding: "24px", marginTop: "32px" }}>
         <Text
           variant="h4"

@@ -29,6 +29,7 @@ interface ModuleProps {
   queryUri?: string;
   queryMethod?: string;
   submitButtonTitle?: string;
+  logoSrc?: string;
 }
 
 interface AuthModuleProps {

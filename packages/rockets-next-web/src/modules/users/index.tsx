@@ -19,21 +19,19 @@ const UsersModule = () => {
         tableProps={{
           tableSchema: [
             {
+              id: "id",
+              label: "ID",
+            },
+            {
               id: "email",
-              numeric: false,
-              disablePadding: false,
               label: "Email",
             },
             {
               id: "username",
-              numeric: false,
-              disablePadding: false,
               label: "Username",
             },
             {
               id: "actions",
-              numeric: false,
-              disablePadding: false,
               label: "",
             },
           ],
