@@ -1,5 +1,5 @@
 "use client";
 
-import SignUpModule from "@/modules/signUp";
+const Page = () => <div>Sign up</div>;
 
-export default SignUpModule;
+export default Page;

@@ -1,5 +1,5 @@
 "use client";
 
-import ResetPasswordModule from "@/modules/resetPassword";
+const Page = () => <div>Reset password</div>;
 
-export default ResetPasswordModule;
+export default Page;

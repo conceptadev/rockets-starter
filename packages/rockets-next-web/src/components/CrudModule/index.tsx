@@ -9,8 +9,6 @@ import { toast } from "react-toastify";
 import TableSubmodule from "@/components/Submodules/Table";
 import DrawerFormSubmodule from "@/components/Submodules/DrawerForm";
 
-import { defaultTableProps, defaultDrawerFormProps } from "./constants";
-
 type Action = "creation" | "edit" | "details" | null;
 
 type SelectedRow = Record<string, unknown> | null;
@@ -18,6 +16,7 @@ type SelectedRow = Record<string, unknown> | null;
 interface TableProps {
   tableSchema?: HeaderProps[];
   searchParam?: string;
+  isActionsVisible?: boolean;
 }
 
 interface DrawerFormProps {
@@ -54,7 +53,6 @@ const CrudModule = (props: ModuleProps) => {
           setDrawerViewMode("creation");
         }}
         {...tableProps}
-        {...defaultTableProps}
         {...props.tableProps}
       />
 
@@ -71,7 +69,6 @@ const CrudModule = (props: ModuleProps) => {
           setSelectedRow(null);
           setDrawerViewMode(null);
         }}
-        {...defaultDrawerFormProps}
         {...props.drawerFormProps}
       />
     </Box>

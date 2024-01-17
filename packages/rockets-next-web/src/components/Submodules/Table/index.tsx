@@ -18,6 +18,8 @@ import { toast } from "react-toastify";
 
 import Table from "@/components/Table";
 
+import { defaultTableProps } from "@/components/CrudModule/constants";
+
 type Action = "creation" | "edit" | "details" | null;
 
 type BasicType = string | number | boolean;
@@ -31,24 +33,25 @@ type ActionCallbackPayload = {
 
 interface TableSubmoduleProps {
   queryResource: string;
-  tableSchema: HeaderProps[];
-  onAction: ({ action, row }: ActionCallbackPayload) => void;
-  onAddNew: () => void;
-  refresh: () => void;
-  data: unknown[];
-  isPending: boolean;
-  total: number;
-  pageCount: number;
-  simpleFilter: SimpleFilter;
-  updateSimpleFilter: (
+  tableSchema?: HeaderProps[];
+  onAction?: ({ action, row }: ActionCallbackPayload) => void;
+  onAddNew?: () => void;
+  refresh?: () => void;
+  data?: unknown[];
+  isPending?: boolean;
+  total?: number;
+  pageCount?: number;
+  simpleFilter?: SimpleFilter;
+  updateSimpleFilter?: (
     simpleFilter: SimpleFilter | null,
     resetPage?: boolean
   ) => void;
-  tableQueryState: TableQueryStateProps;
-  setTableQueryState: React.Dispatch<
+  tableQueryState?: TableQueryStateProps;
+  setTableQueryState?: React.Dispatch<
     React.SetStateAction<TableQueryStateProps>
   >;
-  searchParam: string;
+  searchParam?: string;
+  isActionsVisible?: boolean;
 }
 
 const TableSubmodule = (props: TableSubmoduleProps) => {
@@ -65,7 +68,10 @@ const TableSubmodule = (props: TableSubmoduleProps) => {
     {
       onSuccess: () => {
         toast.success("Data successfully deleted.");
-        props.refresh();
+
+        if (props.refresh) {
+          props.refresh();
+        }
       },
       onError: () => toast.error("Failed to delete data."),
     }
@@ -74,16 +80,20 @@ const TableSubmodule = (props: TableSubmoduleProps) => {
   const handleSearchChange = (term: string) => {
     setSearchTerm(term);
 
+    if (!props.updateSimpleFilter) {
+      return;
+    }
+
     if (!term) {
       props.updateSimpleFilter({
-        [props.searchParam]: null,
+        [props.searchParam || defaultTableProps.searchParam]: null,
       });
 
       return;
     }
 
     const filter = {
-      [props.searchParam]: `||$contL||${term}`,
+      [props.searchParam || defaultTableProps.searchParam]: `||$contL||${term}`,
     };
 
     props.updateSimpleFilter(filter);
@@ -102,7 +112,11 @@ const TableSubmodule = (props: TableSubmoduleProps) => {
           component: (
             <Box>
               <IconButton
-                onClick={() => props.onAction({ action: "edit", row: rowData })}
+                onClick={() => {
+                  if (props.onAction) {
+                    props.onAction({ action: "edit", row: rowData });
+                  }
+                }}
               >
                 <EditIcon />
               </IconButton>
@@ -110,9 +124,11 @@ const TableSubmodule = (props: TableSubmoduleProps) => {
                 <DeleteIcon />
               </IconButton>
               <IconButton
-                onClick={() =>
-                  props.onAction({ action: "details", row: rowData })
-                }
+                onClick={() => {
+                  if (props.onAction) {
+                    props.onAction({ action: "details", row: rowData });
+                  }
+                }}
               >
                 <ChevronRightIcon />
               </IconButton>
@@ -124,7 +140,9 @@ const TableSubmodule = (props: TableSubmoduleProps) => {
   }, [props, deleteItem]);
 
   useEffect(() => {
-    props.refresh();
+    if (props.refresh) {
+      props.refresh();
+    }
   }, [props.simpleFilter]);
 
   return (
@@ -154,15 +172,19 @@ const TableSubmodule = (props: TableSubmoduleProps) => {
       </Box>
 
       <Table
-        isPending={props.isPending}
+        isPending={props.isPending || false}
         isEmptyStateVisible={Boolean(searchTerm && !props.data?.length)}
-        headers={props.tableSchema}
+        headers={[
+          ...defaultTableProps.tableSchema,
+          ...(props.tableSchema || []),
+          { id: "actions", label: "" },
+        ]}
         rows={tableRows}
-        data={props.data}
-        tableQueryState={props.tableQueryState}
-        updateTableQueryState={props.setTableQueryState}
-        total={props.total}
-        pageCount={props.pageCount}
+        data={props.data || []}
+        tableQueryState={props.tableQueryState || {}}
+        updateTableQueryState={() => props.setTableQueryState || null}
+        total={props.total || 0}
+        pageCount={props.pageCount || 0}
       />
     </Box>
   );

@@ -11,6 +11,7 @@ import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import { useAuth } from "@concepta/react-auth-provider";
 import validator from "@rjsf/validator-ajv6";
 import { toast } from "react-toastify";
+import { CustomTextFieldWidget } from "@concepta/react-material-ui/dist/styles/CustomWidgets";
 
 import {
   defaultAuthUiSchema,
@@ -21,6 +22,10 @@ import {
 } from "./constants";
 
 import { validateForm } from "@/utils/formValidation/formValidation";
+
+const widgets = {
+  TextWidget: CustomTextFieldWidget,
+};
 
 interface AuthFormSubmoduleProps {
   route: string;
@@ -66,7 +71,7 @@ const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
     false,
     {
       onSuccess() {
-        toast.success("Success.");
+        toast.success("Success!");
 
         if (props.signInPath) {
           router.push(props.signInPath);
@@ -135,8 +140,15 @@ const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
         </Text>
 
         <SchemaForm.Form
-          schema={props.formSchema || defaultFormSchema}
-          uiSchema={props.formUiSchema || defaultAuthUiSchema}
+          schema={{
+            ...defaultFormSchema,
+            ...props.formSchema,
+            properties: {
+              ...(defaultFormSchema.properties || {}),
+              ...(props.formSchema?.properties || {}),
+            },
+          }}
+          uiSchema={{ ...defaultAuthUiSchema, ...props.formUiSchema }}
           validator={validator}
           formData={props.formData || formData}
           onChange={({ formData }) => setFormData(formData)}
@@ -147,6 +159,7 @@ const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
           customValidate={(formData, errors) =>
             validateForm(formData, errors, props.customValidation || [])
           }
+          widgets={widgets}
         >
           {props.forgotPasswordPath ? (
             <Text fontSize={14} fontWeight={500} gutterBottom sx={{ mt: 2 }}>

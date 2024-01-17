@@ -6,17 +6,24 @@ import { SchemaForm } from "@concepta/react-material-ui";
 import validator from "@rjsf/validator-ajv6";
 import useDataProvider, { useQuery } from "@concepta/react-data-provider";
 import { toast } from "react-toastify";
+import { CustomTextFieldWidget } from "@concepta/react-material-ui/dist/styles/CustomWidgets";
+
+import { defaultDrawerFormProps } from "@/components/CrudModule/constants";
+
+const widgets = {
+  TextWidget: CustomTextFieldWidget,
+};
 
 type Action = "creation" | "edit" | "details" | null;
 
 interface DrawerFormSubmoduleProps {
   queryResource: string;
-  formSchema: RJSFSchema;
-  viewMode: Action | null;
+  formSchema?: RJSFSchema;
+  viewMode?: Action | null;
   formUiSchema?: UiSchema;
-  formData: Record<string, unknown> | null;
-  onClose: () => void;
-  onSubmitSuccess: () => void;
+  formData?: Record<string, unknown> | null;
+  onClose?: () => void;
+  onSubmitSuccess?: () => void;
 }
 
 const DrawerFormSubmodule = (props: DrawerFormSubmoduleProps) => {
@@ -32,7 +39,10 @@ const DrawerFormSubmodule = (props: DrawerFormSubmoduleProps) => {
     {
       onSuccess: () => {
         toast.success("Data successfully created.");
-        props.onSubmitSuccess();
+
+        if (props.onSubmitSuccess) {
+          props.onSubmitSuccess();
+        }
       },
       onError: () => toast.error("Failed to create data."),
     }
@@ -48,7 +58,10 @@ const DrawerFormSubmodule = (props: DrawerFormSubmoduleProps) => {
     {
       onSuccess: () => {
         toast.success("Data successfully updated.");
-        props.onSubmitSuccess();
+
+        if (props.onSubmitSuccess) {
+          props.onSubmitSuccess();
+        }
       },
       onError: () => toast.error("Failed to edit data."),
     }
@@ -72,14 +85,25 @@ const DrawerFormSubmodule = (props: DrawerFormSubmoduleProps) => {
     <Drawer open={props.viewMode !== null} anchor="right">
       <Box padding={4} mb={2}>
         <SchemaForm.Form
-          schema={props.formSchema}
-          uiSchema={props.formUiSchema}
+          schema={{
+            ...defaultDrawerFormProps.formSchema,
+            ...props.formSchema,
+            properties: {
+              ...(defaultDrawerFormProps.formSchema.properties || {}),
+              ...(props.formSchema?.properties || {}),
+            },
+          }}
+          uiSchema={{
+            ...defaultDrawerFormProps.formUiSchema,
+            ...props.formUiSchema,
+          }}
           validator={validator}
           onSubmit={handleFormSubmit}
           noHtml5Validate={true}
           showErrorList={false}
           formData={props.formData}
           readonly={props.viewMode === "details"}
+          widgets={widgets}
         >
           <Box
             display="flex"

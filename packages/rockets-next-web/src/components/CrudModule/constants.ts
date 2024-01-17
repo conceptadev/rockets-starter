@@ -16,12 +16,9 @@ export const defaultTableProps = {
       id: "username",
       label: "Username",
     },
-    {
-      id: "actions",
-      label: "",
-    },
   ],
   searchParam: "email",
+  isActionsVisible: true,
 };
 
 export const defaultDrawerFormProps: {
