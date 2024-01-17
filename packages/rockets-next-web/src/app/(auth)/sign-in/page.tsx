@@ -1,5 +1,5 @@
 "use client";
 
-import SignInModule from "@/modules/signIn";
+const Page = () => <div>Sign in</div>;
 
-export default SignInModule;
+export default Page;
