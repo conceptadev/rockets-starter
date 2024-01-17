@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Box } from "@mui/material";
 import useTable from "@concepta/react-material-ui/dist/components/Table/useTable";
 import { toast } from "react-toastify";
+import { Text } from "@concepta/react-material-ui";
 
 import TableSubmodule from "@/components/Submodules/Table";
 import DrawerFormSubmodule from "@/components/Submodules/DrawerForm";
@@ -25,6 +26,7 @@ interface DrawerFormProps {
 }
 
 interface ModuleProps {
+  title?: string;
   resource: string;
   tableProps?: TableProps;
   drawerFormProps?: DrawerFormProps;
@@ -42,6 +44,12 @@ const CrudModule = (props: ModuleProps) => {
 
   return (
     <Box>
+      {props.title ? (
+        <Text fontFamily="Inter" fontSize={20} fontWeight={800} mt={4} mb={4}>
+          {props.title}
+        </Text>
+      ) : null}
+
       <TableSubmodule
         queryResource={props.resource}
         onAction={(payload) => {

@@ -88,6 +88,10 @@ const DrawerFormSubmodule = (props: DrawerFormSubmoduleProps) => {
           schema={{
             ...defaultDrawerFormProps.formSchema,
             ...props.formSchema,
+            required: [
+              ...(defaultDrawerFormProps.formSchema.required || []),
+              ...(props.formSchema?.required || []),
+            ],
             properties: {
               ...(defaultDrawerFormProps.formSchema.properties || {}),
               ...(props.formSchema?.properties || {}),

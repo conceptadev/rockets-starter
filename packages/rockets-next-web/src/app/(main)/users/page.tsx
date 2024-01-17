@@ -1,5 +1,5 @@
 "use client";
 
-import UsersModule from "@/modules/users";
+const Page = () => <div>Users</div>;
 
-export default UsersModule;
+export default Page;

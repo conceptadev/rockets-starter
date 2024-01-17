@@ -143,6 +143,10 @@ const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
           schema={{
             ...defaultFormSchema,
             ...props.formSchema,
+            required: [
+              ...(defaultFormSchema.required || []),
+              ...(props.formSchema?.required || []),
+            ],
             properties: {
               ...(defaultFormSchema.properties || {}),
               ...(props.formSchema?.properties || {}),
