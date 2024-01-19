@@ -17,12 +17,16 @@ type SelectedRow = Record<string, unknown> | null;
 interface TableProps {
   tableSchema?: HeaderProps[];
   searchParam?: string;
-  isActionsVisible?: boolean;
+  hideActionsColumn?: boolean;
+  overrideDefaults?: boolean;
 }
 
 interface DrawerFormProps {
   formSchema?: RJSFSchema;
   formUiSchema?: UiSchema;
+  submitButtonTitle?: string;
+  cancelButtonTitle?: string;
+  overrideDefaults?: boolean;
 }
 
 interface ModuleProps {

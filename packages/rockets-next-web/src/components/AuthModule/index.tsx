@@ -18,6 +18,7 @@ interface FormProps {
   formSchema?: RJSFSchema;
   formUiSchema?: UiSchema;
   customValidation?: ValidationRule<Record<string, string>>[];
+  overrideDefaults?: boolean;
 }
 
 interface ModuleProps {

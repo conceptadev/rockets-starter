@@ -22,8 +22,11 @@ interface DrawerFormSubmoduleProps {
   viewMode?: Action | null;
   formUiSchema?: UiSchema;
   formData?: Record<string, unknown> | null;
+  submitButtonTitle?: string;
+  cancelButtonTitle?: string;
   onClose?: () => void;
   onSubmitSuccess?: () => void;
+  overrideDefaults?: boolean;
 }
 
 const DrawerFormSubmodule = (props: DrawerFormSubmoduleProps) => {
@@ -88,14 +91,18 @@ const DrawerFormSubmodule = (props: DrawerFormSubmoduleProps) => {
           schema={{
             ...defaultDrawerFormProps.formSchema,
             ...props.formSchema,
-            required: [
-              ...(defaultDrawerFormProps.formSchema.required || []),
-              ...(props.formSchema?.required || []),
-            ],
-            properties: {
-              ...(defaultDrawerFormProps.formSchema.properties || {}),
-              ...(props.formSchema?.properties || {}),
-            },
+            required: props.overrideDefaults
+              ? props.formSchema?.required || []
+              : [
+                  ...(defaultDrawerFormProps.formSchema.required || []),
+                  ...(props.formSchema?.required || []),
+                ],
+            properties: props.overrideDefaults
+              ? props.formSchema?.properties || {}
+              : {
+                  ...(defaultDrawerFormProps.formSchema.properties || {}),
+                  ...(props.formSchema?.properties || {}),
+                },
           }}
           uiSchema={{
             ...defaultDrawerFormProps.formUiSchema,
@@ -125,7 +132,7 @@ const DrawerFormSubmodule = (props: DrawerFormSubmoduleProps) => {
               {isLoadingCreation || isLoadingEdit ? (
                 <CircularProgress sx={{ color: "white" }} size={24} />
               ) : (
-                "Save"
+                props.submitButtonTitle || "Save"
               )}
             </Button>
             <Button
@@ -133,7 +140,7 @@ const DrawerFormSubmodule = (props: DrawerFormSubmoduleProps) => {
               onClick={props.onClose}
               sx={{ flex: 1, ml: 1 }}
             >
-              Close
+              {props.cancelButtonTitle || "Close"}
             </Button>
           </Box>
         </SchemaForm.Form>

@@ -18,7 +18,7 @@ export const defaultTableProps = {
     },
   ],
   searchParam: "email",
-  isActionsVisible: true,
+  hideActionsColumn: false,
 };
 
 export const defaultDrawerFormProps: {

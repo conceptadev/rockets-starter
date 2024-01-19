@@ -4,7 +4,7 @@ import type {
   TableQueryStateProps,
 } from "@concepta/react-material-ui/dist/components/Table/types";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { Box, Button, IconButton } from "@mui/material";
 import {
   Edit as EditIcon,
@@ -36,22 +36,23 @@ interface TableSubmoduleProps {
   tableSchema?: HeaderProps[];
   onAction?: ({ action, row }: ActionCallbackPayload) => void;
   onAddNew?: () => void;
-  refresh?: () => void;
-  data?: unknown[];
-  isPending?: boolean;
-  total?: number;
-  pageCount?: number;
-  simpleFilter?: SimpleFilter;
-  updateSimpleFilter?: (
+  refresh: () => void;
+  data: unknown[];
+  isPending: boolean;
+  total: number;
+  pageCount: number;
+  simpleFilter: SimpleFilter;
+  updateSimpleFilter: (
     simpleFilter: SimpleFilter | null,
     resetPage?: boolean
   ) => void;
-  tableQueryState?: TableQueryStateProps;
-  setTableQueryState?: React.Dispatch<
+  tableQueryState: TableQueryStateProps;
+  setTableQueryState: React.Dispatch<
     React.SetStateAction<TableQueryStateProps>
   >;
   searchParam?: string;
-  isActionsVisible?: boolean;
+  hideActionsColumn?: boolean;
+  overrideDefaults?: boolean;
 }
 
 const TableSubmodule = (props: TableSubmoduleProps) => {
@@ -85,9 +86,12 @@ const TableSubmodule = (props: TableSubmoduleProps) => {
     }
 
     if (!term) {
-      props.updateSimpleFilter({
-        [props.searchParam || defaultTableProps.searchParam]: null,
-      });
+      props.updateSimpleFilter(
+        {
+          [props.searchParam || defaultTableProps.searchParam]: null,
+        },
+        true
+      );
 
       return;
     }
@@ -96,7 +100,7 @@ const TableSubmodule = (props: TableSubmoduleProps) => {
       [props.searchParam || defaultTableProps.searchParam]: `||$contL||${term}`,
     };
 
-    props.updateSimpleFilter(filter);
+    props.updateSimpleFilter(filter, true);
   };
 
   const tableRows: RowProps[] = useMemo(() => {
@@ -139,12 +143,6 @@ const TableSubmodule = (props: TableSubmoduleProps) => {
     });
   }, [props, deleteItem]);
 
-  useEffect(() => {
-    if (props.refresh) {
-      props.refresh();
-    }
-  }, [props.simpleFilter]);
-
   return (
     <Box>
       <Box
@@ -174,17 +172,23 @@ const TableSubmodule = (props: TableSubmoduleProps) => {
       <Table
         isPending={props.isPending || false}
         isEmptyStateVisible={Boolean(searchTerm && !props.data?.length)}
-        headers={[
-          ...defaultTableProps.tableSchema,
-          ...(props.tableSchema || []),
-          { id: "actions", label: "" },
-        ]}
+        headers={
+          props.overrideDefaults
+            ? props.tableSchema || []
+            : !props.hideActionsColumn
+            ? [
+                ...defaultTableProps.tableSchema,
+                ...(props.tableSchema || []),
+                { id: "actions", label: "" },
+              ]
+            : [...defaultTableProps.tableSchema, ...(props.tableSchema || [])]
+        }
         rows={tableRows}
-        data={props.data || []}
-        tableQueryState={props.tableQueryState || {}}
-        updateTableQueryState={() => props.setTableQueryState || null}
-        total={props.total || 0}
-        pageCount={props.pageCount || 0}
+        data={props.data}
+        tableQueryState={props.tableQueryState}
+        updateTableQueryState={props.setTableQueryState}
+        total={props.total}
+        pageCount={props.pageCount}
       />
     </Box>
   );

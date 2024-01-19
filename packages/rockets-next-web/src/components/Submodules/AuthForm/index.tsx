@@ -43,6 +43,7 @@ interface AuthFormSubmoduleProps {
   customValidation?: ValidationRule<Record<string, string>>[];
   submitButtonTitle?: string;
   logoSrc?: string;
+  overrideDefaults?: boolean;
 }
 
 const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
@@ -143,14 +144,18 @@ const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
           schema={{
             ...defaultFormSchema,
             ...props.formSchema,
-            required: [
-              ...(defaultFormSchema.required || []),
-              ...(props.formSchema?.required || []),
-            ],
-            properties: {
-              ...(defaultFormSchema.properties || {}),
-              ...(props.formSchema?.properties || {}),
-            },
+            required: props.overrideDefaults
+              ? props.formSchema?.required || []
+              : [
+                  ...(defaultFormSchema.required || []),
+                  ...(props.formSchema?.required || []),
+                ],
+            properties: props.overrideDefaults
+              ? props.formSchema?.properties || {}
+              : {
+                  ...(defaultFormSchema.properties || {}),
+                  ...(props.formSchema?.properties || {}),
+                },
           }}
           uiSchema={{ ...defaultAuthUiSchema, ...props.formUiSchema }}
           validator={validator}
