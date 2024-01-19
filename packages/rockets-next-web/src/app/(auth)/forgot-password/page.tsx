@@ -1,5 +1,5 @@
 "use client";
 
-const Page = () => <div>Recover password</div>;
+import ForgotPasswordModule from "@/modules/forgotPassword";
 
-export default Page;
+export default ForgotPasswordModule;

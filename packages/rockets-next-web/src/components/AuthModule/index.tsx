@@ -3,7 +3,7 @@
 import type { RJSFSchema, UiSchema } from "@rjsf/utils";
 import type { ValidationRule } from "@/utils/formValidation/formValidation";
 
-import AuthFormSubmodule from "@/components/Submodules/AuthForm";
+import AuthFormSubmodule from "@/components/submodules/AuthForm";
 
 import {
   signInModuleProps,

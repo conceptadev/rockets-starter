@@ -7,8 +7,8 @@ import useTable from "@concepta/react-material-ui/dist/components/Table/useTable
 import { toast } from "react-toastify";
 import { Text } from "@concepta/react-material-ui";
 
-import TableSubmodule from "@/components/Submodules/Table";
-import DrawerFormSubmodule from "@/components/Submodules/DrawerForm";
+import TableSubmodule from "@/components/submodules/Table";
+import DrawerFormSubmodule from "@/components/submodules/DrawerForm";
 
 type Action = "creation" | "edit" | "details" | null;
 
