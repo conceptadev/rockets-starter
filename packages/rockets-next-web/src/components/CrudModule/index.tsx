@@ -14,8 +14,12 @@ type Action = "creation" | "edit" | "details" | null;
 
 type SelectedRow = Record<string, unknown> | null;
 
+type TableSchemaItem = HeaderProps & {
+  format?: (data: string | number) => string | number;
+};
+
 interface TableProps {
-  tableSchema?: HeaderProps[];
+  tableSchema?: TableSchemaItem[];
   searchParam?: string;
   hideActionsColumn?: boolean;
   overrideDefaults?: boolean;

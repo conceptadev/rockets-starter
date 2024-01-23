@@ -31,9 +31,13 @@ type ActionCallbackPayload = {
   row: Record<string, unknown>;
 };
 
+type TableSchemaItem = HeaderProps & {
+  format?: (data: string | number) => string | number;
+};
+
 interface TableSubmoduleProps {
   queryResource: string;
-  tableSchema?: HeaderProps[];
+  tableSchema?: TableSchemaItem[];
   onAction?: ({ action, row }: ActionCallbackPayload) => void;
   onAddNew?: () => void;
   refresh: () => void;
@@ -103,11 +107,44 @@ const TableSubmodule = (props: TableSubmoduleProps) => {
     props.updateSimpleFilter(filter, true);
   };
 
+  const tableHeaders: TableSchemaItem[] = useMemo(() => {
+    let headers: TableSchemaItem[] = [];
+
+    if (!props.overrideDefaults && !props.tableSchema) {
+      headers = defaultTableProps.tableSchema;
+    }
+
+    if (props.overrideDefaults && props.tableSchema) {
+      headers = props.tableSchema;
+    }
+
+    if (!props.overrideDefaults && props.tableSchema) {
+      headers = [...defaultTableProps.tableSchema, ...props.tableSchema];
+    }
+
+    return [
+      ...headers,
+      { id: !props.hideActionsColumn ? "actions" : "", label: "" },
+    ];
+  }, [props]);
+
   const tableRows: RowProps[] = useMemo(() => {
     const data = props.data || [];
 
     return data.map((row) => {
       const rowData = row as Record<string, unknown>;
+
+      Object.entries(rowData).forEach(([key, data]) => {
+        const schemaItem = tableHeaders.find((item) => item.id === key);
+
+        if (!schemaItem) {
+          return;
+        }
+
+        if (schemaItem.format) {
+          rowData[key] = schemaItem.format(String(data));
+        }
+      });
 
       return {
         ...rowData,
@@ -141,7 +178,7 @@ const TableSubmodule = (props: TableSubmoduleProps) => {
         },
       };
     });
-  }, [props, deleteItem]);
+  }, [props, tableHeaders, deleteItem]);
 
   return (
     <Box>
@@ -172,17 +209,7 @@ const TableSubmodule = (props: TableSubmoduleProps) => {
       <Table
         isPending={props.isPending || false}
         isEmptyStateVisible={Boolean(searchTerm && !props.data?.length)}
-        headers={
-          props.overrideDefaults
-            ? props.tableSchema || []
-            : !props.hideActionsColumn
-            ? [
-                ...defaultTableProps.tableSchema,
-                ...(props.tableSchema || []),
-                { id: "actions", label: "" },
-              ]
-            : [...defaultTableProps.tableSchema, ...(props.tableSchema || [])]
-        }
+        headers={tableHeaders}
         rows={tableRows}
         data={props.data}
         tableQueryState={props.tableQueryState}

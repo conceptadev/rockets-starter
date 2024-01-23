@@ -6,7 +6,9 @@ Props that modify the layout and/or functionality of the module Table.
 
 ### **tableSchema**
 
-Array of `HeaderProps` (imported from `@concepta/react-material-ui/dist/components/Table/types`) representing columns that should be rendered by the table. Each arary item can contain `id`, `label`, `disablePadding`, `width`, `numeric`, `textAlign` and `sortable` attributes, being `id` and `label` the only required ones.
+Array of union types containing `HeaderProps` (imported from `@concepta/react-material-ui/dist/components/Table/types`) and additional atributes representing columns that should be rendered by the table. Each arary item can contain `id`, `label`, `disablePadding`, `width`, `numeric`, `textAlign`, `sortable` and `format` attributes, being `id` and `label` the only required ones.
+
+Important to mention that `format` represents a custom format for the column data.
 
 ```js
 [
@@ -18,6 +20,7 @@ Array of `HeaderProps` (imported from `@concepta/react-material-ui/dist/componen
     numeric: false,
     textAlign: "left" | "center" | "right",
     sortable: true,
+    format: (value: string | number) => new Date(value).toString(),
   },
 ];
 ```
