@@ -43,6 +43,8 @@ interface AuthFormSubmoduleProps {
   customValidation?: ValidationRule<Record<string, string>>[];
   submitButtonTitle?: string;
   logoSrc?: string;
+  successFeedbackMessage?: string;
+  errorFeedbackMessage?: string;
   overrideDefaults?: boolean;
 }
 
@@ -72,7 +74,7 @@ const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
     false,
     {
       onSuccess() {
-        toast.success("Success!");
+        toast.success(props.successFeedbackMessage || "Success!");
 
         if (props.signInPath) {
           router.push(props.signInPath);
@@ -80,8 +82,9 @@ const AuthFormSubmodule = (props: AuthFormSubmoduleProps) => {
       },
       onError: (error) => {
         toast.error(
-          // @ts-expect-error TODO: needs to fix types in rockets-react
-          error?.response?.data?.message ??
+          props.errorFeedbackMessage ||
+            // @ts-expect-error TODO: fix types in rockets-react
+            error?.response?.data?.message ||
             "An error has occurred. Please try again later or contact support for assistance."
         );
       },
