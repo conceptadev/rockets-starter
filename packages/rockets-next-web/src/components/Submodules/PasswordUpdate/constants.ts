@@ -9,7 +9,7 @@ export const widgets = {
   TextWidget: CustomTextFieldWidget,
 };
 
-export const passwordChangeFormSchema: RJSFSchema = {
+export const defaultPasswordChangeFormSchema: RJSFSchema = {
   type: "object",
   required: ["currentPassword", "newPassword", "confirmNewPassword"],
   properties: {
@@ -19,7 +19,7 @@ export const passwordChangeFormSchema: RJSFSchema = {
   },
 };
 
-export const advancedProperties: Record<string, AdvancedProperty> = {
+export const defaultAdvancedProperties: Record<string, AdvancedProperty> = {
   currentPassword: {
     type: "password",
   },
@@ -31,25 +31,26 @@ export const advancedProperties: Record<string, AdvancedProperty> = {
   },
 };
 
-export const validationRules: ValidationRule<PasswordChangeFormData>[] = [
-  {
-    field: "currentPassword",
-    test: (value) => !value,
-    message: "Required field",
-  },
-  {
-    field: "newPassword",
-    test: (value) => !value,
-    message: "Required field",
-  },
-  {
-    field: "confirmNewPassword",
-    test: (value) => !value,
-    message: "Required field",
-  },
-  {
-    field: "confirmNewPassword",
-    test: (value, formData) => value !== formData.newPassword,
-    message: "Your passwords don't match. Please try again",
-  },
-];
+export const defaultValidationRules: ValidationRule<PasswordChangeFormData>[] =
+  [
+    {
+      field: "currentPassword",
+      test: (value) => !value,
+      message: "Required field",
+    },
+    {
+      field: "newPassword",
+      test: (value) => !value,
+      message: "Required field",
+    },
+    {
+      field: "confirmNewPassword",
+      test: (value) => !value,
+      message: "Required field",
+    },
+    {
+      field: "confirmNewPassword",
+      test: (value, formData) => value !== formData.newPassword,
+      message: "Your passwords don't match. Please try again",
+    },
+  ];

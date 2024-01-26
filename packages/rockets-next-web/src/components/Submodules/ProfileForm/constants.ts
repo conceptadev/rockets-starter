@@ -25,7 +25,7 @@ export const defaultProfileUiSchema: UiSchema = {
   },
 };
 
-export const profileFormSchema: RJSFSchema = {
+export const defaultProfileFormSchema: RJSFSchema = {
   type: "object",
   required: ["email", "firstName", "lastName"],
   properties: {
@@ -35,25 +35,26 @@ export const profileFormSchema: RJSFSchema = {
   },
 };
 
-export const validationRules: ValidationRule<Record<string, string>>[] = [
-  {
-    field: "currentPassword",
-    test: (value) => !value,
-    message: "Required field",
-  },
-  {
-    field: "newPassword",
-    test: (value) => !value,
-    message: "Required field",
-  },
-  {
-    field: "confirmNewPassword",
-    test: (value) => !value,
-    message: "Required field",
-  },
-  {
-    field: "confirmNewPassword",
-    test: (value, formData) => value !== formData.newPassword,
-    message: "Your passwords don't match. Please try again",
-  },
-];
+export const defaultValidationRules: ValidationRule<Record<string, string>>[] =
+  [
+    {
+      field: "currentPassword",
+      test: (value) => !value,
+      message: "Required field",
+    },
+    {
+      field: "newPassword",
+      test: (value) => !value,
+      message: "Required field",
+    },
+    {
+      field: "confirmNewPassword",
+      test: (value) => !value,
+      message: "Required field",
+    },
+    {
+      field: "confirmNewPassword",
+      test: (value, formData) => value !== formData.newPassword,
+      message: "Your passwords don't match. Please try again",
+    },
+  ];

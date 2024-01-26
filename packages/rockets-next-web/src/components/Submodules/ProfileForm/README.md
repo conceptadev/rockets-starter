@@ -1,18 +1,6 @@
-# AuthFormSubmodule
-
-# AuthFormSubmodule
+# ProfileFormSubmodule
 
 ## Props
-
-Set of props passed to the `AuthFormSubmodule` instance.
-
-### **route**
-
-Auth workflow that the module will perform. Can be `signIn`, `signUp`, `forgotPassword` or `resetPassword`.
-
-**type**: `string`\
-**default**: `signIn`\
-**required**: `true`
 
 ### **queryUri**
 
@@ -66,38 +54,6 @@ Passing an object to this prop automatically fills the fields related to the obj
 **type**: `Record<string, unknown> | null`\
 **required**: `false`
 
-### **signInRequestPath**
-
-Path for the sign in request. Passing a value here will mount the request as `{baseURL}{signInRequestPath}` on submitting the sign in form.
-
-**type**: `string`\
-**default**: `/auth/login`\
-**required**: `false`
-
-### **forgotPasswordPath**
-
-Route of the `Recover Password` page. Passing an empty string will hide the link for this page on the specific module.
-
-**type**: `string`\
-**default**: `/forgot-password`\
-**required**: `false`
-
-### **signUpPath**
-
-Route of the `Sign Up` page. Passing an empty string will hide the link for this page on the specific module.
-
-**type**: `string`\
-**default**: `/sign-up`\
-**required**: `false`
-
-### **signInPath**
-
-Route of the `Sign In` page. Passing an empty string will hide the link for this page on the specific module.
-
-**type**: `string`\
-**default**: `/sign-in`\
-**required**: `false`
-
 ### **customValidation**
 
 Array of rules to validate one or more fields in a more specific logic. Each array item must contain `field`, `test` and `message` attributes, as follows:
@@ -128,7 +84,7 @@ Text displayed in the form submit button.
 Message displayed when the query runs successfully.
 
 **type**: `string`\
-**default**: `Success!`\
+**default**: `Profile successfully updated`\
 **required**: `false`
 
 ### **errorFeedbackMessage**
@@ -136,15 +92,6 @@ Message displayed when the query runs successfully.
 Message displayed when the query returns an error.
 
 **type**: `string`\
-**default**: `An error has occurred. Please try again later or contact support for assistance.`\
-**required**: `false`
-
-### **logoSrc**
-
-Source of the logo image displayed above the form card.
-
-**type**: `string`\
-**default**: `/logo.svg`\
 **required**: `false`
 
 ### **overrideDefaults**

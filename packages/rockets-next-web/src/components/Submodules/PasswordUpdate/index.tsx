@@ -1,28 +1,52 @@
 "use client";
 
-import { useState } from "react";
+import type { RJSFSchema, UiSchema } from "@rjsf/utils";
 import type { IChangeEvent } from "@rjsf/core";
+import type { AdvancedProperty } from "@concepta/react-material-ui/dist/components/SchemaForm/types";
+import type { ValidationRule } from "@/utils/formValidation/formValidation";
+
+import { useState } from "react";
 import { SchemaForm, Dialog } from "@concepta/react-material-ui";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import { Box, Button } from "@mui/material";
 import validator from "@rjsf/validator-ajv6";
 import useTheme from "@mui/material/styles/useTheme";
 
-import { type PasswordChangeFormData } from "@/types/Profile";
 import {
-  passwordChangeFormSchema,
+  defaultPasswordChangeFormSchema,
   widgets,
-  advancedProperties,
-  validationRules,
+  defaultAdvancedProperties,
+  defaultValidationRules,
 } from "@/components/submodules/PasswordUpdate/constants";
-import { validateForm } from "@/utils/formValidation/formValidation";
-
 import ConfirmationModal from "@/components/PasswordChangeConfirmationModal";
 
-const PasswordUpdateSubmodule = () => {
+import { validateForm } from "@/utils/formValidation/formValidation";
+
+interface PasswordUpdateSubmoduleProps {
+  queryUri?: string;
+  queryMethod?: string;
+  title?: string;
+  dialogTitle?: string;
+  subtitle?: string;
+  formSchema?: RJSFSchema;
+  formUiSchema?: UiSchema;
+  advancedProperties?: Record<string, AdvancedProperty>;
+  formData?: Record<string, unknown> | null;
+  customValidation?: ValidationRule<Record<string, string>>[];
+  submitButtonTitle?: string;
+  successFeedbackMessage?: string;
+  errorFeedbackMessage?: string;
+  confirmationDialogProps?: {
+    title?: string;
+    subtitle?: string;
+    buttonTitle?: string;
+  };
+  overrideDefaults?: boolean;
+}
+
+const PasswordUpdateSubmodule = (props: PasswordUpdateSubmoduleProps) => {
   const theme = useTheme();
 
-  const [formData, setFormData] = useState<PasswordChangeFormData>({
+  const [formData, setFormData] = useState<Record<string, string>>({
     currentPassword: "",
     newPassword: "",
     confirmNewPassword: "",
@@ -49,7 +73,7 @@ const PasswordUpdateSubmodule = () => {
     setConfirmationModalOpen(false);
   };
 
-  const handleFormSubmit = async (_: IChangeEvent<PasswordChangeFormData>) => {
+  const handleFormSubmit = async (_: IChangeEvent<Record<string, string>>) => {
     closePasswordChangeModal();
     openConfirmationModal();
   };
@@ -65,28 +89,53 @@ const PasswordUpdateSubmodule = () => {
         }}
         onClick={openPasswordChangeModal}
       >
-        Update Password
+        {props.title || "Update Password"}
       </Button>
 
       <Dialog
         open={isPasswordChangeModalOpen}
         handleClose={closePasswordChangeModal}
-        title="Change password"
+        title={props.dialogTitle || "Change password"}
       >
         <SchemaForm.Form
-          schema={passwordChangeFormSchema}
-          advancedProperties={advancedProperties}
+          schema={{
+            ...defaultPasswordChangeFormSchema,
+            ...props.formSchema,
+            required: props.overrideDefaults
+              ? props.formSchema?.required || []
+              : [
+                  ...(defaultPasswordChangeFormSchema.required || []),
+                  ...(props.formSchema?.required || []),
+                ],
+            properties: props.overrideDefaults
+              ? props.formSchema?.properties || {}
+              : {
+                  ...(defaultPasswordChangeFormSchema.properties || {}),
+                  ...(props.formSchema?.properties || {}),
+                },
+          }}
           validator={validator}
           onSubmit={handleFormSubmit}
           widgets={widgets}
           noHtml5Validate={true}
           showErrorList={false}
           formData={formData}
+          advancedProperties={
+            props.overrideDefaults
+              ? props.advancedProperties
+              : { ...defaultAdvancedProperties, ...props.advancedProperties }
+          }
           onChange={({ formData }) => {
             setFormData(formData);
           }}
           customValidate={(formData, errors) =>
-            validateForm(formData, errors, validationRules)
+            validateForm(
+              formData,
+              errors,
+              props.overrideDefaults
+                ? props.customValidation || []
+                : [...defaultValidationRules, ...(props.customValidation || [])]
+            )
           }
         >
           <Box
@@ -97,7 +146,7 @@ const PasswordUpdateSubmodule = () => {
             mt={4}
           >
             <Button type="submit" variant="contained" sx={{ flex: 1, mr: 1 }}>
-              Save
+              {props.submitButtonTitle || "Save"}
             </Button>
           </Box>
         </SchemaForm.Form>
@@ -107,7 +156,10 @@ const PasswordUpdateSubmodule = () => {
         open={isConfirmationModalOpen}
         handleClose={closeConfirmationModal}
       >
-        <ConfirmationModal handleClose={closeConfirmationModal} />
+        <ConfirmationModal
+          {...props.confirmationDialogProps}
+          handleClose={closeConfirmationModal}
+        />
       </Dialog>
     </Box>
   );

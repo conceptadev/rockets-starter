@@ -7,16 +7,16 @@ import { useState, useEffect } from "react";
 import { Text } from "@concepta/react-material-ui";
 import { useAuth } from "@concepta/react-auth-provider";
 import { SchemaForm } from "@concepta/react-material-ui";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
+import { Box, Button, CircularProgress } from "@mui/material";
 import { toast } from "react-toastify";
 import validator from "@rjsf/validator-ajv6";
 import { CustomTextFieldWidget } from "@concepta/react-material-ui/dist/styles/CustomWidgets";
 
-import { profileFormSchema, defaultProfileUiSchema } from "./constants";
-
-import type { User } from "@/types/User";
+import {
+  defaultProfileFormSchema,
+  defaultProfileUiSchema,
+  defaultValidationRules,
+} from "./constants";
 
 import { validateForm } from "@/utils/formValidation/formValidation";
 
@@ -63,7 +63,10 @@ const ProfileFormSubmodule = (props: ProfileFormSubmoduleProps) => {
 
   useEffect(() => {
     if (user && !formData.email) {
-      setFormData({ ...formData, email: (user as User).email });
+      setFormData({
+        ...formData,
+        email: (user as Record<string, string>).email,
+      });
     }
   }, [user, formData]);
 
@@ -80,7 +83,22 @@ const ProfileFormSubmodule = (props: ProfileFormSubmoduleProps) => {
 
       <Box display="flex" mb={4}>
         <SchemaForm.Form
-          schema={profileFormSchema}
+          schema={{
+            ...defaultProfileFormSchema,
+            ...props.formSchema,
+            required: props.overrideDefaults
+              ? props.formSchema?.required || []
+              : [
+                  ...(defaultProfileFormSchema.required || []),
+                  ...(props.formSchema?.required || []),
+                ],
+            properties: props.overrideDefaults
+              ? props.formSchema?.properties || {}
+              : {
+                  ...(defaultProfileFormSchema.properties || {}),
+                  ...(props.formSchema?.properties || {}),
+                },
+          }}
           uiSchema={{ ...defaultProfileUiSchema, ...props.formUiSchema }}
           validator={validator}
           onSubmit={handleFormSubmit}
@@ -88,11 +106,18 @@ const ProfileFormSubmodule = (props: ProfileFormSubmoduleProps) => {
           noHtml5Validate={true}
           showErrorList={false}
           formData={formData}
+          advancedProperties={props.advancedProperties}
           onChange={({ formData }) => {
             setFormData(formData);
           }}
           customValidate={(formData, errors) =>
-            validateForm(formData, errors, props.customValidation || [])
+            validateForm(
+              formData,
+              errors,
+              props.overrideDefaults
+                ? props.customValidation || []
+                : [...defaultValidationRules, ...(props.customValidation || [])]
+            )
           }
         >
           <Box
@@ -110,7 +135,7 @@ const ProfileFormSubmodule = (props: ProfileFormSubmoduleProps) => {
               {isLoadingSubmit ? (
                 <CircularProgress sx={{ color: "white" }} size={24} />
               ) : (
-                "Save"
+                props.submitButtonTitle || "Save"
               )}
             </Button>
           </Box>

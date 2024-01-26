@@ -4,10 +4,13 @@ import Button from "@mui/material/Button";
 import CheckIcon from "@mui/icons-material/Check";
 
 interface Props {
+  title?: string;
+  subtitle?: string;
+  buttonTitle?: string;
   handleClose: () => void;
 }
 
-const ConfirmationModal = ({ handleClose }: Props) => {
+const ConfirmationModal = (props: Props) => {
   return (
     <Box display="flex" flexDirection="column" alignItems="center" padding={2}>
       <Box
@@ -22,7 +25,7 @@ const ConfirmationModal = ({ handleClose }: Props) => {
         <CheckIcon fontSize="small" />
       </Box>
       <Text fontSize={18} fontWeight={500} color="text.primary">
-        Password Changed
+        {props.title || "Password Changed"}
       </Text>
       <Text
         fontSize={14}
@@ -30,10 +33,10 @@ const ConfirmationModal = ({ handleClose }: Props) => {
         color="text.secondary"
         sx={{ mb: 3 }}
       >
-        Your Password has been changed successfully
+        {props.subtitle || "Your Password has been changed successfully"}
       </Text>
-      <Button variant="contained" onClick={handleClose} fullWidth>
-        Go back to profile
+      <Button variant="contained" onClick={props.handleClose} fullWidth>
+        {props.buttonTitle || "Go back to profile"}
       </Button>
     </Box>
   );

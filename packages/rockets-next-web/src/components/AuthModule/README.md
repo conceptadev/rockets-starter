@@ -111,6 +111,22 @@ Text displayed in the form submit button.
 **default**: `Send`\
 **required**: `false`
 
+### **successFeedbackMessage**
+
+Message displayed when the query runs successfully.
+
+**type**: `string`\
+**default**: `Success!`\
+**required**: `false`
+
+### **errorFeedbackMessage**
+
+Message displayed when the query returns an error.
+
+**type**: `string`\
+**default**: `An error has occurred. Please try again later or contact support for assistance.`\
+**required**: `false`
+
 ### **logoSrc**
 
 Source of the logo image displayed above the form card.
