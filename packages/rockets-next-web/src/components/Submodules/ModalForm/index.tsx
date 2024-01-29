@@ -1,7 +1,16 @@
 import type { RJSFSchema, UiSchema } from "@rjsf/utils";
 import type { IChangeEvent } from "@rjsf/core";
 
-import { Box, Drawer, Button, CircularProgress } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  IconButton,
+} from "@mui/material";
+import { Close as CloseIcon } from "@mui/icons-material";
 import { SchemaForm } from "@concepta/react-material-ui";
 import validator from "@rjsf/validator-ajv6";
 import useDataProvider, { useQuery } from "@concepta/react-data-provider";
@@ -9,6 +18,7 @@ import { toast } from "react-toastify";
 import { CustomTextFieldWidget } from "@concepta/react-material-ui/dist/styles/CustomWidgets";
 
 import { defaultFormProps } from "@/components/CrudModule/constants";
+import { useMemo } from "react";
 
 const widgets = {
   TextWidget: CustomTextFieldWidget,
@@ -16,7 +26,8 @@ const widgets = {
 
 type Action = "creation" | "edit" | "details" | null;
 
-interface DrawerFormSubmoduleProps {
+interface ModalFormSubmoduleProps {
+  title?: string;
   queryResource: string;
   formSchema?: RJSFSchema;
   viewMode?: Action | null;
@@ -29,7 +40,7 @@ interface DrawerFormSubmoduleProps {
   overrideDefaults?: boolean;
 }
 
-const DrawerFormSubmodule = (props: DrawerFormSubmoduleProps) => {
+const ModalFormSubmodule = (props: ModalFormSubmoduleProps) => {
   const { post, patch } = useDataProvider();
 
   const { execute: createItem, isPending: isLoadingCreation } = useQuery(
@@ -84,9 +95,52 @@ const DrawerFormSubmodule = (props: DrawerFormSubmoduleProps) => {
     }
   };
 
+  const formUiSchema = useMemo(() => {
+    if (props.overrideDefaults) {
+      return props.formUiSchema || {};
+    }
+
+    return Object.entries(defaultFormProps.formUiSchema).reduce(
+      (currentSchema, currentItem) => {
+        const itemKey = currentItem[0];
+
+        if (props.formUiSchema && props.formUiSchema[itemKey]) {
+          return {
+            ...currentSchema,
+            [itemKey]: { ...currentItem[1], ...props.formUiSchema[itemKey] },
+          };
+        }
+
+        return {
+          ...currentSchema,
+          [itemKey]: currentItem[1],
+        };
+      },
+      {}
+    );
+  }, [props.overrideDefaults, props.formUiSchema]);
+
   return (
-    <Drawer open={props.viewMode !== null} anchor="right">
-      <Box padding={4} mb={2}>
+    <Dialog
+      open={props.viewMode !== null}
+      maxWidth="lg"
+      fullWidth
+      onClose={props.onClose}
+    >
+      <DialogTitle>{props.title}</DialogTitle>
+      <IconButton
+        aria-label="close"
+        onClick={props.onClose}
+        sx={{
+          position: "absolute",
+          right: (theme) => theme.spacing(1),
+          top: (theme) => theme.spacing(1),
+          color: (theme) => theme.palette.grey[500],
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
+      <DialogContent>
         <SchemaForm.Form
           schema={{
             ...defaultFormProps.formSchema,
@@ -105,8 +159,7 @@ const DrawerFormSubmodule = (props: DrawerFormSubmoduleProps) => {
                 },
           }}
           uiSchema={{
-            ...defaultFormProps.formUiSchema,
-            ...props.formUiSchema,
+            ...formUiSchema,
           }}
           validator={validator}
           onSubmit={handleFormSubmit}
@@ -120,14 +173,14 @@ const DrawerFormSubmodule = (props: DrawerFormSubmoduleProps) => {
             display="flex"
             flexDirection="row"
             alignItems="center"
-            justifyContent="space-between"
+            justifyContent="flex-end"
             mt={4}
           >
             <Button
               type="submit"
               variant="contained"
               disabled={isLoadingCreation || isLoadingEdit}
-              sx={{ flex: 1, mr: 1 }}
+              sx={{ mr: 1 }}
             >
               {isLoadingCreation || isLoadingEdit ? (
                 <CircularProgress sx={{ color: "white" }} size={24} />
@@ -135,18 +188,14 @@ const DrawerFormSubmodule = (props: DrawerFormSubmoduleProps) => {
                 props.submitButtonTitle || "Save"
               )}
             </Button>
-            <Button
-              variant="outlined"
-              onClick={props.onClose}
-              sx={{ flex: 1, ml: 1 }}
-            >
+            <Button variant="outlined" onClick={props.onClose} sx={{ ml: 1 }}>
               {props.cancelButtonTitle || "Close"}
             </Button>
           </Box>
         </SchemaForm.Form>
-      </Box>
-    </Drawer>
+      </DialogContent>
+    </Dialog>
   );
 };
 
-export default DrawerFormSubmodule;
+export default ModalFormSubmodule;

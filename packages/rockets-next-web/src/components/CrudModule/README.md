@@ -124,7 +124,7 @@ Name of the API resource accessed by the module workflows. Directly implies how 
 **type**: `TableProps`\
 **required**: `false`
 
-### **drawerFormProps**
+### **formProps**
 
 **type**: `DrawerFormProps`\
 **required**: `false`

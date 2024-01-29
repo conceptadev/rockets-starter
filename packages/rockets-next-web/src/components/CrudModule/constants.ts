@@ -21,7 +21,7 @@ export const defaultTableProps = {
   hideActionsColumn: false,
 };
 
-export const defaultDrawerFormProps: {
+export const defaultFormProps: {
   formSchema: RJSFSchema;
   formUiSchema: UiSchema;
 } = {

@@ -9,6 +9,7 @@ import { Text } from "@concepta/react-material-ui";
 
 import TableSubmodule from "@/components/submodules/Table";
 import DrawerFormSubmodule from "@/components/submodules/DrawerForm";
+import ModalFormSubmodule from "@/components/submodules/ModalForm";
 
 type Action = "creation" | "edit" | "details" | null;
 
@@ -25,7 +26,7 @@ interface TableProps {
   overrideDefaults?: boolean;
 }
 
-interface DrawerFormProps {
+interface FormProps {
   formSchema?: RJSFSchema;
   formUiSchema?: UiSchema;
   submitButtonTitle?: string;
@@ -37,7 +38,8 @@ interface ModuleProps {
   title?: string;
   resource: string;
   tableProps?: TableProps;
-  drawerFormProps?: DrawerFormProps;
+  variation?: "drawer" | "modal";
+  formProps?: FormProps;
 }
 
 const CrudModule = (props: ModuleProps) => {
@@ -72,21 +74,50 @@ const CrudModule = (props: ModuleProps) => {
         {...props.tableProps}
       />
 
-      <DrawerFormSubmodule
-        queryResource={props.resource}
-        viewMode={drawerViewMode}
-        formData={selectedRow}
-        onSubmitSuccess={() => {
-          tableProps.refresh();
-          setSelectedRow(null);
-          setDrawerViewMode(null);
-        }}
-        onClose={() => {
-          setSelectedRow(null);
-          setDrawerViewMode(null);
-        }}
-        {...props.drawerFormProps}
-      />
+      {!props.variation || props.variation === "drawer" ? (
+        <DrawerFormSubmodule
+          queryResource={props.resource}
+          viewMode={drawerViewMode}
+          formData={selectedRow}
+          onSubmitSuccess={() => {
+            tableProps.refresh();
+            setSelectedRow(null);
+            setDrawerViewMode(null);
+          }}
+          onClose={() => {
+            setSelectedRow(null);
+            setDrawerViewMode(null);
+          }}
+          {...props.formProps}
+        />
+      ) : null}
+
+      {props.variation === "modal" ? (
+        <ModalFormSubmodule
+          title={
+            drawerViewMode === "creation"
+              ? "New user"
+              : drawerViewMode === "edit"
+              ? "Edit user"
+              : drawerViewMode === "details"
+              ? "User details"
+              : ""
+          }
+          queryResource={props.resource}
+          viewMode={drawerViewMode}
+          formData={selectedRow}
+          onSubmitSuccess={() => {
+            tableProps.refresh();
+            setSelectedRow(null);
+            setDrawerViewMode(null);
+          }}
+          onClose={() => {
+            setSelectedRow(null);
+            setDrawerViewMode(null);
+          }}
+          {...props.formProps}
+        />
+      ) : null}
     </Box>
   );
 };
