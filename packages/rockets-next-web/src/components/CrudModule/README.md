@@ -4,6 +4,14 @@
 
 Props that modify the layout and/or functionality of the module Table.
 
+### **formContainerVariation**
+
+String that identifies in which container the creation/edit/details form will be displayed. Can be `drawer` or `modal`.
+
+**type**: `string`\
+**default**: `drawer`\
+**required**: `false`
+
 ### **tableSchema**
 
 Array of union types containing `HeaderProps` (imported from `@concepta/react-material-ui/dist/components/Table/types`) and additional atributes representing columns that should be rendered by the table. Each arary item can contain `id`, `label`, `disablePadding`, `width`, `numeric`, `textAlign`, `sortable` and `format` attributes, being `id` and `label` the only required ones.

@@ -1,7 +1,7 @@
 import type { HeaderProps } from "@concepta/react-material-ui/dist/components/Table/types";
 import type { RJSFSchema, UiSchema } from "@rjsf/utils";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Box } from "@mui/material";
 import useTable from "@concepta/react-material-ui/dist/components/Table/useTable";
 import { toast } from "react-toastify";
@@ -38,7 +38,7 @@ interface ModuleProps {
   title?: string;
   resource: string;
   tableProps?: TableProps;
-  variation?: "drawer" | "modal";
+  formContainerVariation?: "drawer" | "modal";
   formProps?: FormProps;
 }
 
@@ -51,6 +51,17 @@ const CrudModule = (props: ModuleProps) => {
       onError: () => toast.error("Failed to fetch data."),
     },
   });
+
+  const FormComponent = useMemo(() => {
+    switch (props.formContainerVariation) {
+      case "drawer":
+        return DrawerFormSubmodule;
+      case "modal":
+        return ModalFormSubmodule;
+      default:
+        return DrawerFormSubmodule;
+    }
+  }, [props.formContainerVariation]);
 
   return (
     <Box>
@@ -74,50 +85,30 @@ const CrudModule = (props: ModuleProps) => {
         {...props.tableProps}
       />
 
-      {!props.variation || props.variation === "drawer" ? (
-        <DrawerFormSubmodule
-          queryResource={props.resource}
-          viewMode={drawerViewMode}
-          formData={selectedRow}
-          onSubmitSuccess={() => {
-            tableProps.refresh();
-            setSelectedRow(null);
-            setDrawerViewMode(null);
-          }}
-          onClose={() => {
-            setSelectedRow(null);
-            setDrawerViewMode(null);
-          }}
-          {...props.formProps}
-        />
-      ) : null}
-
-      {props.variation === "modal" ? (
-        <ModalFormSubmodule
-          title={
-            drawerViewMode === "creation"
-              ? "New user"
-              : drawerViewMode === "edit"
-              ? "Edit user"
-              : drawerViewMode === "details"
-              ? "User details"
-              : ""
-          }
-          queryResource={props.resource}
-          viewMode={drawerViewMode}
-          formData={selectedRow}
-          onSubmitSuccess={() => {
-            tableProps.refresh();
-            setSelectedRow(null);
-            setDrawerViewMode(null);
-          }}
-          onClose={() => {
-            setSelectedRow(null);
-            setDrawerViewMode(null);
-          }}
-          {...props.formProps}
-        />
-      ) : null}
+      <FormComponent
+        title={
+          drawerViewMode === "creation"
+            ? "New user"
+            : drawerViewMode === "edit"
+            ? "Edit user"
+            : drawerViewMode === "details"
+            ? "User details"
+            : ""
+        }
+        queryResource={props.resource}
+        viewMode={drawerViewMode}
+        formData={selectedRow}
+        onSubmitSuccess={() => {
+          tableProps.refresh();
+          setSelectedRow(null);
+          setDrawerViewMode(null);
+        }}
+        onClose={() => {
+          setSelectedRow(null);
+          setDrawerViewMode(null);
+        }}
+        {...props.formProps}
+      />
     </Box>
   );
 };
