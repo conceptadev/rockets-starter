@@ -1,11 +1,11 @@
 "use client";
 
-import { FC } from "react";
+import { AuthModule } from "@concepta/react-material-ui";
 
-import ForgotPasswordScreen from "@/components/ForgotPasswordScreen/ForgotPasswordScreen";
-
-const ForgotPassword: FC = () => {
-  return <ForgotPasswordScreen />;
+const ForgotPassword = () => {
+  return (
+    <AuthModule route="forgotPassword" moduleProps={{ signInPath: "/login" }} />
+  );
 };
 
 export default ForgotPassword;

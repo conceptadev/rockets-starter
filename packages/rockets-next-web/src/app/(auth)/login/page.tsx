@@ -1,10 +1,9 @@
 "use client";
 
-import { FC } from "react";
-import SignScreen from "@/components/SignScreen/SignScreen";
+import { AuthModule } from "@concepta/react-material-ui";
 
-const SignUp: FC = () => {
-  return <SignScreen />;
+const Login = () => {
+  return <AuthModule route="signIn" />;
 };
 
-export default SignUp;
+export default Login;
