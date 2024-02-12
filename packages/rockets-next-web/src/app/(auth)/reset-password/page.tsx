@@ -1,11 +1,31 @@
 "use client";
 
-import { FC } from "react";
+import { AuthModule } from "@concepta/react-material-ui";
+import { toast } from "react-toastify";
 
-import ResetPasswordScreen from "@/components/ResetPasswordScreen/ResetPasswordScreen";
+interface NetworkError {
+  response: {
+    data: {
+      message: string;
+    };
+  };
+}
 
-const ResetPassword: FC = () => {
-  return <ResetPasswordScreen />;
+const ResetPassword = () => {
+  return (
+    <AuthModule
+      route="resetPassword"
+      moduleProps={{
+        signInPath: "/login",
+        onSuccess: () => toast.success("Success!"),
+        onError: (error) =>
+          toast.error(
+            (error as NetworkError)?.response?.data?.message ||
+              "An error has occurred. Please try again later or contact support for assistance."
+          ),
+      }}
+    />
+  );
 };
 
 export default ResetPassword;
