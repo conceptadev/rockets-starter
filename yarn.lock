@@ -682,26 +682,29 @@
   resolved "https://registry.yarnpkg.com/@concepta/prettier-config/-/prettier-config-1.1.2.tgz#fd2ea20aadf52b538b0b1d634be40ddc514c13a1"
   integrity sha512-mFoT12ED9vv6eZiuxDJumKtAsvU4Oa2DToiJibLGGy2EbseL23A9joTCVdb7//J7BKLx95FG9y9x6ofdCXuhVw==
 
-"@concepta/react-auth-provider@^1.0.0-alpha.24":
-  version "1.0.0-alpha.24"
-  resolved "https://registry.yarnpkg.com/@concepta/react-auth-provider/-/react-auth-provider-1.0.0-alpha.24.tgz#2917a74c9856fdbd123b260e03d37eabe6f3a50b"
-  integrity sha512-FUlzoHil+pMKo3cHppI+kX0uaJaQSXHoTU7VzoK/+XzyjMIFeKh6fCDZB9a+8jSzFfAee5xnuysZ/0g5F+0iHQ==
+"@concepta/react-auth-provider@^1.0.0-alpha.25":
+  version "1.0.0-alpha.25"
+  resolved "https://registry.yarnpkg.com/@concepta/react-auth-provider/-/react-auth-provider-1.0.0-alpha.25.tgz#4154742a3277e0a9032ce1d9e0f1d57c7af4a1e4"
+  integrity sha512-dC/UG+k72TNe258tb8+8zYwkpBZMjxXZxjrM4Gqv5BAsuI7bcu9SD74BMXvaYdGMHR9VuuaM3akQZSPnm4PpYQ==
   dependencies:
-    "@concepta/react-data-provider" "^1.0.0-alpha.24"
+    "@concepta/react-data-provider" "^1.0.0-alpha.25"
 
-"@concepta/react-data-provider@^1.0.0-alpha.24":
-  version "1.0.0-alpha.24"
-  resolved "https://registry.yarnpkg.com/@concepta/react-data-provider/-/react-data-provider-1.0.0-alpha.24.tgz#d49f09ce9ccdf5539c501c6bdddf7a51e1eebd60"
-  integrity sha512-E2adx4K3363eVTgsmzRzFcP/nbnturH9UFk4oOSMPxq+ojFPcxoIGxOW1f12sjNExudPoqYvFza14oV8v6pbIQ==
+"@concepta/react-data-provider@^1.0.0-alpha.25":
+  version "1.0.0-alpha.25"
+  resolved "https://registry.yarnpkg.com/@concepta/react-data-provider/-/react-data-provider-1.0.0-alpha.25.tgz#9d3f799a9b51496ba3e87083946bf50e1d048cbb"
+  integrity sha512-9VvDSoUzTD8OF4SD5y58FXA8n43WCBGoLkxo1a7NTOUqKrQwJ/SIfi03s1bVZJ2OoYfanE6ly22r37hhOWGZHg==
   dependencies:
     axios "^0.24.0"
     memoizee "^0.4.15"
 
-"@concepta/react-material-ui@^1.0.0-alpha.24":
-  version "1.0.0-alpha.24"
-  resolved "https://registry.yarnpkg.com/@concepta/react-material-ui/-/react-material-ui-1.0.0-alpha.24.tgz#e943fc1f0e2b6151181069105ff4afb9076d2b3f"
-  integrity sha512-kxLZa2+6XhSyCebmIeljzemtoMqABxD2iMpbFFHYI1Ct0Hh9LlH2SpBmDmVXfn6L6lPr2aYL3aM+ZCaR4Z7/zQ==
+"@concepta/react-material-ui@^1.0.0-alpha.25":
+  version "1.0.0-alpha.25"
+  resolved "https://registry.yarnpkg.com/@concepta/react-material-ui/-/react-material-ui-1.0.0-alpha.25.tgz#e57cdafff97f0b9cca2526fb2a3fb680766f706d"
+  integrity sha512-vdWZcVx/nezmsT6iG8YwglMrW+4rgh3QwiKHFHv8dxw8ArswNmBxyv7o4yMOHLPRpax84BnOo2w/l61SKnY5Iw==
   dependencies:
+    "@dnd-kit/core" "^6.1.0"
+    "@dnd-kit/sortable" "^8.0.0"
+    "@dnd-kit/utilities" "^3.2.2"
     "@emotion/react" "^11.10.4"
     "@emotion/styled" "^11.10.4"
     "@mui/icons-material" "^5.10.6"
@@ -716,7 +719,6 @@
     next "^13.4.19"
     react "^18.2.0"
     react-dom "^18.2.0"
-    react-toastify "^10.0.4"
 
 "@concepta/ts-common@^4.0.0-alpha.35":
   version "4.0.0-alpha.35"
@@ -3057,11 +3059,6 @@ clsx@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-2.0.0.tgz#12658f3fd98fafe62075595a5c30e43d18f3d00b"
   integrity sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==
-
-clsx@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/clsx/-/clsx-2.1.0.tgz#e851283bcb5c80ee7608db18487433f7b23f77cb"
-  integrity sha512-m3iNNWpd9rl3jvvcBnu70ylMdrXt8Vlq4HYadnU5fwcOtvkSQWPmj7amUcDT2qYI7risszBjI5AUIUox9D16pg==
 
 co@^4.6.0:
   version "4.6.0"
@@ -6793,13 +6790,6 @@ react-is@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
-
-react-toastify@^10.0.4:
-  version "10.0.4"
-  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-10.0.4.tgz#6ecdbbf923a07fc45850e69b0566efc7bf733283"
-  integrity sha512-etR3RgueY8pe88SA67wLm8rJmL1h+CLqUGHuAoNsseW35oTGJEri6eBTyaXnFKNQ80v/eO10hBYLgz036XRGgA==
-  dependencies:
-    clsx "^2.1.0"
 
 react-toastify@^9.1.3:
   version "9.1.3"
