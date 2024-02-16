@@ -1,4 +1,4 @@
-import { Param } from '@nestjs/common';
+import { BadRequestException, Param } from '@nestjs/common';
 import {
   CrudBody,
   CrudCreateOne,
@@ -12,6 +12,7 @@ import {
   CrudReadMany,
   CrudRecoverOne,
 } from '@concepta/nestjs-crud';
+import { PasswordStorageInterface } from '@concepta/nestjs-password';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthenticatedUserInterface } from '@concepta/ts-common';
 import {
@@ -24,17 +25,19 @@ import {
   AccessControlRecoverOne,
   AccessControlUpdateOne,
 } from '@concepta/nestjs-access-control';
+
+import { UserDto } from './dtos/user.dto';
 import { AuthUser } from '@concepta/nestjs-common';
+import { UserPaginatedDto } from './dtos/user-paginated.dto';
 import {
   UserAccessQueryService,
-  UserController as _UserController,
   UserCreateDto,
   UserCreateManyDto,
+  UserCrudService,
+  UserPasswordService,
   UserResource,
   UserUpdateDto,
 } from '@concepta/nestjs-user';
-import { UserDto } from './dtos/user.dto';
-import { UserPaginatedDto } from './dtos/user-paginated.dto';
 
 /**
  * User controller.
@@ -55,7 +58,18 @@ import { UserPaginatedDto } from './dtos/user-paginated.dto';
   service: UserAccessQueryService,
 })
 @ApiTags('user')
-export class UserController extends _UserController {
+export class UserController {
+  /**
+   * Constructor.
+   *
+   * @param userCrudService instance of the user crud service
+   * @param userPasswordService instance of user password service
+   */
+  constructor(
+    private userCrudService: UserCrudService,
+    private userPasswordService: UserPasswordService,
+  ) {}
+
   /**
    * Get many
    *
@@ -64,7 +78,7 @@ export class UserController extends _UserController {
   @CrudReadMany()
   @AccessControlReadMany(UserResource.Many)
   async getMany(@CrudRequest() crudRequest: CrudRequestInterface) {
-    return super.getMany(crudRequest);
+    return this.userCrudService.getMany(crudRequest);
   }
 
   /**
@@ -75,7 +89,7 @@ export class UserController extends _UserController {
   @CrudReadOne()
   @AccessControlReadOne(UserResource.One)
   async getOne(@CrudRequest() crudRequest: CrudRequestInterface) {
-    return super.getOne(crudRequest);
+    return this.userCrudService.getOne(crudRequest);
   }
 
   /**
@@ -90,7 +104,17 @@ export class UserController extends _UserController {
     @CrudRequest() crudRequest: CrudRequestInterface,
     @CrudBody() userCreateManyDto: UserCreateManyDto,
   ) {
-    return super.createMany(crudRequest, userCreateManyDto);
+    // the final data
+    const hashed = [];
+
+    // loop all dtos
+    for (const userCreateDto of userCreateManyDto.bulk) {
+      // hash it
+      hashed.push(await this.userPasswordService.setPassword(userCreateDto));
+    }
+
+    // call crud service to create
+    return this.userCrudService.createMany(crudRequest, { bulk: hashed });
   }
 
   /**
@@ -105,7 +129,11 @@ export class UserController extends _UserController {
     @CrudRequest() crudRequest: CrudRequestInterface,
     @CrudBody() userCreateDto: UserCreateDto,
   ) {
-    return super.createOne(crudRequest, userCreateDto);
+    // call crud service to create
+    return this.userCrudService.createOne(
+      crudRequest,
+      await this.userPasswordService.setPassword(userCreateDto),
+    );
   }
 
   /**
@@ -122,12 +150,19 @@ export class UserController extends _UserController {
     @Param('id') userId?: string,
     @AuthUser() authorizededUser?: AuthenticatedUserInterface,
   ) {
-    return super.updateOne(
-      crudRequest,
-      userUpdateDto,
-      userId,
-      authorizededUser,
-    );
+    let hashedObject: Partial<PasswordStorageInterface>;
+
+    try {
+      hashedObject = await this.userPasswordService.setPassword(
+        userUpdateDto,
+        userId,
+        authorizededUser,
+      );
+    } catch (e) {
+      throw new BadRequestException(e);
+    }
+
+    return this.userCrudService.updateOne(crudRequest, hashedObject);
   }
 
   /**
@@ -138,7 +173,7 @@ export class UserController extends _UserController {
   @CrudDeleteOne()
   @AccessControlDeleteOne(UserResource.One)
   async deleteOne(@CrudRequest() crudRequest: CrudRequestInterface) {
-    return super.deleteOne(crudRequest);
+    return this.userCrudService.deleteOne(crudRequest);
   }
 
   /**
@@ -149,6 +184,6 @@ export class UserController extends _UserController {
   @CrudRecoverOne()
   @AccessControlRecoverOne(UserResource.One)
   async recoverOne(@CrudRequest() crudRequest: CrudRequestInterface) {
-    return super.recoverOne(crudRequest);
+    return this.userCrudService.recoverOne(crudRequest);
   }
 }
