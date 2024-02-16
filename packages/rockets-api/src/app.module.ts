@@ -1,4 +1,5 @@
 import { Logger, Module } from '@nestjs/common';
+import { DocumentBuilder } from '@nestjs/swagger';
 import { ConfigModule, ConfigType } from '@nestjs/config';
 import { AuthJwtModule } from '@concepta/nestjs-auth-jwt';
 import { AuthLocalModule } from '@concepta/nestjs-auth-local';
@@ -37,6 +38,8 @@ import { UserRoleEntity } from './entities/user-role.entity';
 import { UserOtpEntity } from './entities/user-otp.entity';
 import { InvitationEntity } from './entities/invitation.entity';
 import { OrgMemberEntity } from './entities/org-member.entity';
+import { PetModule } from './modules/pet/pet.module';
+import { UserController } from './modules/user/user.controller';
 
 @Module({
   imports: [
@@ -45,15 +48,26 @@ import { OrgMemberEntity } from './entities/org-member.entity';
       isGlobal: true,
       load: [ormConfig],
     }),
-    SwaggerUiModule.register({}),
+    SwaggerUiModule.registerAsync({
+      useFactory: () => {
+        const docBuilder = new DocumentBuilder().addBearerAuth();
+
+        return {
+          settings: {
+            path: 'api',
+          },
+          documentBuilder: docBuilder,
+        };
+      },
+    }),
     TypeOrmExtModule.forRootAsync({
       inject: [ormConfig.KEY],
       useFactory: async (config: ConfigType<typeof ormConfig>) => config,
     }),
+    AuthenticationModule.register({}),
     AuthLocalModule.registerAsync({ ...createUserOpts() }),
     AuthJwtModule.registerAsync({ ...createUserOpts() }),
     AuthRefreshModule.registerAsync({ ...createUserOpts() }),
-    AuthenticationModule.register({}),
     JwtModule.forRoot({}),
     PasswordModule.forRoot({}),
     CrudModule.forRoot({}),
@@ -156,7 +170,9 @@ import { OrgMemberEntity } from './entities/org-member.entity';
       entities: {
         user: { entity: UserEntity },
       },
+      controllers: [UserController],
     }),
+    PetModule,
   ],
 })
 export class AppModule {}
