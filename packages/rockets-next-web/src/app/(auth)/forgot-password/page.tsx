@@ -3,13 +3,7 @@
 import { AuthModule } from "@concepta/react-material-ui";
 import { toast } from "react-toastify";
 
-interface NetworkError {
-  response: {
-    data: {
-      message: string;
-    };
-  };
-}
+import { NetworkError } from "@/types/Network";
 
 const ForgotPassword = () => {
   return (
