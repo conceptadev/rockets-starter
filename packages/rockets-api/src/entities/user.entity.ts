@@ -5,6 +5,7 @@ import { UserOtpEntity } from './user-otp.entity';
 import { InvitationEntity } from './invitation.entity';
 import { OrgMemberEntity } from './org-member.entity';
 import { OrgEntity } from './org.entity';
+import { UserCacheEntity } from './user-cache.entity';
 
 @Entity('user')
 export class UserEntity extends UserPostgresEntity {
@@ -22,4 +23,7 @@ export class UserEntity extends UserPostgresEntity {
 
   @OneToMany(() => InvitationEntity, (invitation) => invitation.user)
   invitations?: InvitationEntity[];
+
+  @OneToMany(() => UserCacheEntity, (userCache) => userCache.assignee)
+  userCaches!: UserCacheEntity[];
 }

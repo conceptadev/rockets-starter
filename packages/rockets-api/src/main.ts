@@ -7,6 +7,7 @@ async function bootstrap() {
 
   // get the swagger ui service, and set it up
   const swaggerUiService = app.get(SwaggerUiService);
+  swaggerUiService.builder().addBearerAuth();
   swaggerUiService.setup(app);
 
   // set up cors
