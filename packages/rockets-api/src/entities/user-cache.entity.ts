@@ -5,6 +5,6 @@ import { UserEntity } from './user.entity';
 
 @Entity('user_cache')
 export class UserCacheEntity extends CachePostgresEntity {
-  @ManyToOne(() => UserEntity, (user) => user.userCaches)
+  @ManyToOne(() => UserEntity, (user) => user.userCaches, { nullable: false })
   assignee!: ReferenceIdInterface;
 }

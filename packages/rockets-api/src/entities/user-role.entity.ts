@@ -8,9 +8,9 @@ import { UserEntity } from './user.entity';
 
 @Entity('user_role')
 export class UserRoleEntity extends RoleAssignmentPostgresEntity {
-  @ManyToOne(() => RoleEntity, (role) => role.assignees)
+  @ManyToOne(() => RoleEntity, (role) => role.assignees, { nullable: false })
   role!: RoleInterface;
 
-  @ManyToOne(() => UserEntity, (user) => user.userRoles)
+  @ManyToOne(() => UserEntity, (user) => user.userRoles, { nullable: false })
   assignee!: ReferenceIdInterface;
 }
