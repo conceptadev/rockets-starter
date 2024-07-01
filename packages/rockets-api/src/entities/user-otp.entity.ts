@@ -6,6 +6,6 @@ import { UserEntity } from './user.entity';
 
 @Entity('user_otp')
 export class UserOtpEntity extends OtpPostgresEntity {
-  @ManyToOne(() => UserEntity, (user) => user.userOtps)
+  @ManyToOne(() => UserEntity, (user) => user.userOtps, { nullable: false })
   assignee!: ReferenceIdInterface;
 }

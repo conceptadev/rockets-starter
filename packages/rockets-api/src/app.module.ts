@@ -37,6 +37,8 @@ import { UserRoleEntity } from './entities/user-role.entity';
 import { UserOtpEntity } from './entities/user-otp.entity';
 import { InvitationEntity } from './entities/invitation.entity';
 import { OrgMemberEntity } from './entities/org-member.entity';
+import { CacheModule } from '@concepta/nestjs-cache';
+import { UserCacheEntity } from './entities/user-cache.entity';
 
 @Module({
   imports: [
@@ -155,6 +157,18 @@ import { OrgMemberEntity } from './entities/org-member.entity';
       },
       entities: {
         user: { entity: UserEntity },
+      },
+    }),
+    CacheModule.register({
+      entities: {
+        userCache: {
+          entity: UserCacheEntity,
+        },
+      },
+      settings: {
+        assignments: {
+          user: { entityKey: 'userCache' },
+        },
       },
     }),
   ],
