@@ -6,22 +6,19 @@ import { toast } from "react-toastify";
 const PageUsers = () => {
   return (
     <UsersModule
-      onEditError={() => {
+      onEditError={() =>
         toast.error(
           "We encountered an error while updating the user. Please try again later."
-        );
-      }}
-      onEditSuccess={() => {
-        toast.success("User successfully updated.");
-      }}
-      onCreateError={() => {
+        )
+      }
+      onEditSuccess={() => toast.success("User successfully updated.")}
+      onCreateError={() =>
         toast.error(
           "We encountered an error while creating the user. Please try again later."
-        );
-      }}
-      onCreateSuccess={() => {
-        toast.success("User successfully created.");
-      }}
+        )
+      }
+      onCreateSuccess={() => toast.success("User successfully created.")}
+      cacheApiPath="/cache/user"
     />
   );
 };
