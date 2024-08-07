@@ -1,7 +1,6 @@
 "use client";
 
 import { FC, useState, useEffect } from "react";
-import type { IChangeEvent } from "@rjsf/core";
 import { Dialog, Text } from "@concepta/react-material-ui";
 import { useAuth } from "@concepta/react-auth-provider";
 import { SchemaForm } from "@concepta/react-material-ui";
@@ -10,12 +9,10 @@ import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import useTheme from "@mui/material/styles/useTheme";
 import { toast } from "react-toastify";
-import validator from "@rjsf/validator-ajv6";
 
 import ChangePasswordForm from "./ChangePasswordForm";
 import ConfirmationModal from "./ConfirmationModal";
 import { profileFormSchema, widgets } from "./formConfig";
-import type { ProfileFormData } from "./types";
 
 import type { User } from "@/types/User";
 
@@ -52,9 +49,7 @@ const ProfileScreen: FC = () => {
   };
 
   /* TODO: Implement BE call on form submit */
-  const handleFormSubmit = async (values: IChangeEvent<ProfileFormData>) => {
-    console.log(values);
-
+  const handleFormSubmit = async () => {
     setLoadingSubmit(true);
 
     setTimeout(() => {
@@ -83,7 +78,6 @@ const ProfileScreen: FC = () => {
       <Box display="flex" mb={4}>
         <SchemaForm.Form
           schema={profileFormSchema}
-          validator={validator}
           onSubmit={handleFormSubmit}
           widgets={widgets}
           noHtml5Validate={true}

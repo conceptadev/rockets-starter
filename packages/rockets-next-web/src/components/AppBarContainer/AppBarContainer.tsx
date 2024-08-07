@@ -45,7 +45,7 @@ export default function AppBarContainer({ children }: { children: ReactNode }) {
       <AppBar.Drawer
         currentId={pathname}
         logo="/logo.svg"
-        collapsable
+        collapsible
         items={drawerMenuItems}
         expandedWidth={120}
       />
