@@ -755,10 +755,10 @@
     "@faker-js/faker" "^6.0.0-alpha.6"
     "@nestjs/common" "^9.0.0"
 
-"@concepta/typeorm-seeding@^4.0.0-beta.1":
-  version "4.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@concepta/typeorm-seeding/-/typeorm-seeding-4.0.0-beta.1.tgz#42d0dafe6f9d3117770a915c2e81dea5c2321481"
-  integrity sha512-BNM8KDAk1Jb/v9Rarjdx+Xh60J8Y/xWZnbuePafk+Isd4zZi2/J/SHmTfozNlvOcpwU/FPewed21qq9lhENIcA==
+"@concepta/typeorm-seeding@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@concepta/typeorm-seeding/-/typeorm-seeding-4.0.0.tgz#2a8dc309df92d1740878e06361d91f850a8c802f"
+  integrity sha512-Rq/vHBsPXCcTpDuPh9Dgxruz8WbzkwCKxO0a+50wxpOEPfjF+OIT2Mma221Zcqb0uHmDfTlzvM40jcXe+HK3/A==
   dependencies:
     chalk "^4"
     glob "^7.2.0"

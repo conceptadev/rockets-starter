@@ -60,7 +60,7 @@
     "@concepta/nestjs-user": "4.0.0",
     "@concepta/ts-core": "4.0.0",
     "@concepta/typeorm-common": "4.0.0",
-    "@concepta/typeorm-seeding": "^4.0.0-beta.1",
+    "@concepta/typeorm-seeding": "4.0.0",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
