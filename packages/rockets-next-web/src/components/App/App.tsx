@@ -3,9 +3,8 @@
 import { useContext } from "react";
 import { useRouter } from "next/navigation";
 import { Inter } from "next/font/google";
-import { AuthProvider } from "@concepta/react-auth-provider";
 import { ThemeProvider } from "@concepta/react-material-ui/dist/styles";
-import { ClientProvider } from "@concepta/react-data-provider";
+import { RocketsProvider } from "@concepta/react-material-ui";
 import { toast } from "react-toastify";
 
 import { ThemeContext, ThemeContextType } from "@/context/ThemeContextProvider";
@@ -38,18 +37,22 @@ const App = ({ children }: { children: React.ReactNode }) => {
     );
 
   return (
-    <ClientProvider
-      baseUrl={process.env.NEXT_PUBLIC_API_URL}
-      onRefreshTokenError={handleRefreshTokenError}
+    <RocketsProvider
+      auth={{
+        // useAuth: myAuthHook,
+        onAuthSuccess: handleSuccess,
+        onAuthError: handleError,
+        // onLogout: handleLogout,
+        handleRefreshTokenError: handleRefreshTokenError,
+      }}
+      dataProvider={{ apiUrl: process.env.NEXT_PUBLIC_API_URL }}
     >
       <ThemeProvider theme={darkMode ? themeDark : themeLight}>
-        <AuthProvider onSuccess={handleSuccess} onError={handleError}>
-          <html lang="en">
-            <body className={inter.className}>{children}</body>
-          </html>
-        </AuthProvider>
+        <html lang="en">
+          <body className={inter.className}>{children}</body>
+        </html>
       </ThemeProvider>
-    </ClientProvider>
+    </RocketsProvider>
   );
 };
 
