@@ -101,7 +101,6 @@ const App = () => {
               },
             ],
           },
-          formContainerVariation: "modal",
           createFormProps: {
             formSchema: schema,
             formUiSchema: uiSchema,
