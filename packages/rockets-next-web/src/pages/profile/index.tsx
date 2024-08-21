@@ -1,5 +1,3 @@
-"use client";
-
 import { FC, useState, useEffect } from "react";
 import { Dialog, Text } from "@concepta/react-material-ui";
 import { useAuth } from "@concepta/react-auth-provider";
