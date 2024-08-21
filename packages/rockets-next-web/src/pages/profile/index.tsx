@@ -12,7 +12,7 @@ import ChangePasswordForm from "./ChangePasswordForm";
 import ConfirmationModal from "./ConfirmationModal";
 import { profileFormSchema, widgets } from "./formConfig";
 
-import type { User } from "@/types/User";
+import type { User } from "../../types/User";
 
 const ProfileScreen: FC = () => {
   const theme = useTheme();

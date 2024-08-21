@@ -1,16 +1,12 @@
 import { PropsWithChildren } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
+import { RocketsProvider, createConfig } from "@concepta/react-material-ui";
+import { Router, Resource } from "@concepta/react-navigation";
 import { RJSFSchema, UiSchema } from "@rjsf/utils";
 import { CustomTextFieldWidget } from "@concepta/react-material-ui/dist/styles/CustomWidgets";
-
-import Router from "./components/Router";
-import Resource from "./components/Resource";
-import AppBarContainer from "./components/AppBarContainer";
-import RocketsProvider from "./components/RocketsProvider";
-import createConfig from "./components/RocketsProvider/utils";
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 
 import ProfileScreen from "./pages/profile";
 
@@ -69,14 +65,7 @@ const uiSchema: UiSchema = {
 
 const App = () => {
   return (
-    <Router
-      AdminProvider={AdminProvider}
-      renderAppBar={(menuItems, children) => {
-        return (
-          <AppBarContainer menuItems={menuItems}>{children}</AppBarContainer>
-        );
-      }}
-    >
+    <Router AdminProvider={AdminProvider}>
       <Resource
         id="/user"
         name="Users"
@@ -88,15 +77,42 @@ const App = () => {
               { id: "username", label: "Username" },
               { id: "email", label: "Email" },
             ],
+            filters: [
+              {
+                id: "id",
+                label: "ID",
+                operator: "eq",
+                type: "text",
+                columns: 3,
+              },
+              {
+                id: "username",
+                label: "Username",
+                operator: "contL",
+                type: "text",
+                columns: 3,
+              },
+              {
+                id: "email",
+                label: "Email",
+                operator: "contL",
+                type: "text",
+                columns: 3,
+              },
+            ],
           },
           formContainerVariation: "modal",
+          createFormProps: {
+            formSchema: schema,
+            formUiSchema: uiSchema,
+          },
           editFormProps: {
             formSchema: schema,
             formUiSchema: uiSchema,
-            // onError: onEditError,
-            // onSuccess: onEditSuccess,
-            // onDeleteSuccess: onDeleteSuccess,
-            // onDeleteError: onDeleteError,
+          },
+          detailsFormProps: {
+            formSchema: schema,
+            formUiSchema: uiSchema,
           },
         }}
       />

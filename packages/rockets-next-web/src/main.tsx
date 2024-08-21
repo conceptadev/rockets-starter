@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import { ToastContainer } from "react-toastify";
+import App from "./App";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
