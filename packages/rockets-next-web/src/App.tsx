@@ -33,7 +33,7 @@ function AdminProvider({
 
   const config = createConfig({
     dataProvider: {
-      apiUrl: "http://localhost:3002",
+      apiUrl: import.meta.env.VITE_PUBLIC_API_URL,
     },
     auth: {
       onAuthSuccess: () => navigate(home),
