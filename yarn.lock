@@ -697,25 +697,25 @@
   resolved "https://registry.yarnpkg.com/@concepta/prettier-config/-/prettier-config-1.1.4.tgz#c2c77efd3363073c438380164df6d5e90df39aab"
   integrity sha512-Q9+q4gx40ZtK4N3/FaycxVhobYB0p3oCAJ/htPwSOiIy+1QHSS8BhvO/vzYWgbCANBHgS3edulzSgVaJBJDKuA==
 
-"@concepta/react-auth-provider@^2.0.0-alpha.0":
-  version "2.0.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@concepta/react-auth-provider/-/react-auth-provider-2.0.0-alpha.0.tgz#6e52849caa52412245271b0454061755f109a1a8"
-  integrity sha512-biGVpTLqU1uhigk9SB2pLoKdKmm6ISNLDZMEmG6q3YisZnFxYwInwD+5YJgAd0V+/0GjrQ/zBTwXZ6uo6B6UGg==
+"@concepta/react-auth-provider@^2.0.0-alpha.1":
+  version "2.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@concepta/react-auth-provider/-/react-auth-provider-2.0.0-alpha.1.tgz#d3c57a96aa3f16044b97ded3c2306aeeaccaec27"
+  integrity sha512-V+T5hRGmLYx6aeQ6hLXYV9RMYE7Fh4CwDVtFAkyzaRTYXS2anvH5XQTLBcZMyYMef9avbgUa72q+0WCnOAQMrA==
   dependencies:
-    "@concepta/react-data-provider" "^2.0.0-alpha.0"
+    "@concepta/react-data-provider" "^2.0.0-alpha.1"
 
-"@concepta/react-data-provider@^2.0.0-alpha.0":
-  version "2.0.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@concepta/react-data-provider/-/react-data-provider-2.0.0-alpha.0.tgz#b28065c7bb28c9ab3e330b704c8e0543cc9eaa4c"
-  integrity sha512-n+B9BiTaSkX88XOfbqIiwZF9qfGboOOqY7zl1ksLw2ZGP7faHxrfkCDsmsXKo/s2GgHjA2bVTkilHixD6KJqAw==
+"@concepta/react-data-provider@^2.0.0-alpha.1":
+  version "2.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@concepta/react-data-provider/-/react-data-provider-2.0.0-alpha.1.tgz#106789bfcdf3aafe2389a77eded53788f36f6a91"
+  integrity sha512-2QZPy1fZiCLnL3bjpGdzHCH/W+mGauNhjdQry2dCOX+Y9JWiDBKyLRtdCmirDk7nIXnoQh5Mpm1qv8ZJvGbVxA==
   dependencies:
     axios "^0.24.0"
     memoizee "^0.4.15"
 
-"@concepta/react-material-ui@^2.0.0-alpha.0":
-  version "2.0.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@concepta/react-material-ui/-/react-material-ui-2.0.0-alpha.0.tgz#d51e28d6d76097b913991fee27c121d5f3895f55"
-  integrity sha512-NlrJu6YDPba3KuFzstfcb86pgcwiy7vvG0jw5svaghVcqfQOS2OEAJfmO0ES7+w/MQGjgD6ckNvQ667E+2Hhpg==
+"@concepta/react-material-ui@^2.0.0-alpha.1":
+  version "2.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@concepta/react-material-ui/-/react-material-ui-2.0.0-alpha.1.tgz#4e5c0ca9f6ba6853e4236cff240fa8c30b1a06ea"
+  integrity sha512-eSySdZ6cGv7kKf9onRawC0+v5+pkeCBxYeRGcGiAmN0xjEBZWdB5WweVChKi4ABM7T50Z+fzzVZ8BOdLK6DypA==
   dependencies:
     "@dnd-kit/core" "^6.1.0"
     "@dnd-kit/sortable" "^8.0.0"
@@ -736,14 +736,14 @@
     react-dom "^18.2.0"
     react-toastify "^10.0.5"
 
-"@concepta/react-navigation@^2.0.0-alpha.0":
-  version "2.0.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@concepta/react-navigation/-/react-navigation-2.0.0-alpha.0.tgz#298eb6f603081fb912430ca1fe75cc8803453ec4"
-  integrity sha512-J/r+cBp7DXcpeQp1P9Ng/8WSRa/kuFzHMJu4WjeDJs3XvSWGB5gmuoLhtQ2CuJzNerAiqjXt4w3duw/vkymnUg==
+"@concepta/react-navigation@^2.0.0-alpha.1":
+  version "2.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@concepta/react-navigation/-/react-navigation-2.0.0-alpha.1.tgz#3cbcc8dbb3d021552220a457fdf8c0512df85faa"
+  integrity sha512-ZJJAWxO+w517yKSB46GoJWR2O4X4iKBdBDrjO922EogHSIpfUy5nb7QHh02ZAP3Za7sc+YUOe0VZmwsB4JygIw==
   dependencies:
-    "@concepta/react-auth-provider" "^2.0.0-alpha.0"
-    "@concepta/react-data-provider" "^2.0.0-alpha.0"
-    "@concepta/react-material-ui" "^2.0.0-alpha.0"
+    "@concepta/react-auth-provider" "^2.0.0-alpha.1"
+    "@concepta/react-data-provider" "^2.0.0-alpha.1"
+    "@concepta/react-material-ui" "^2.0.0-alpha.1"
     "@mui/material" "^5.16.6"
     react "^18.2.0"
     react-dom "^18.2.0"
