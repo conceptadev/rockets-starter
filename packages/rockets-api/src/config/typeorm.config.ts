@@ -18,7 +18,7 @@ import { UserCacheEntity } from '../entities/user-cache.entity';
 export const ormConfigFactory = (): DataSourceOptions => {
   // return the configuration
   return {
-    logging: 'all',
+    // logging: 'all',
     type: 'postgres',
     url:
       process.env.DATABASE_URL ??

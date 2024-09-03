@@ -4,6 +4,17 @@ import { SwaggerUiService } from '@concepta/nestjs-swagger-ui';
 import { ExceptionsFilter } from '@concepta/nestjs-exception';
 
 async function bootstrap() {
+  console.log('================================');
+  console.log('APPLE_CLIENT_ID:', process.env.APPLE_CLIENT_ID);
+  console.log('APPLE_CALLBACK_URL:', process.env.APPLE_CALLBACK_URL);
+  console.log('APPLE_SCOPE:', process.env.APPLE_SCOPE);
+  console.log('APPLE_TEAM_ID:', process.env.APPLE_TEAM_ID);
+  console.log('APPLE_KEY_ID:', process.env.APPLE_KEY_ID);
+  console.log(
+    'APPLE_PRIVATE_KEY_LOCATION:',
+    process.env.APPLE_PRIVATE_KEY_LOCATION,
+  );
+  console.log('================================');
   const app = await NestFactory.create(AppModule);
 
   // get the swagger ui service, and set it up

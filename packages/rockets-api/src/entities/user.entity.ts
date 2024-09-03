@@ -6,6 +6,7 @@ import { InvitationEntity } from './invitation.entity';
 import { OrgMemberEntity } from './org-member.entity';
 import { OrgEntity } from './org.entity';
 import { UserCacheEntity } from './user-cache.entity';
+import { FederatedEntity } from './federated-entity';
 
 @Entity('user')
 export class UserEntity extends UserPostgresEntity {
@@ -26,4 +27,7 @@ export class UserEntity extends UserPostgresEntity {
 
   @OneToMany(() => UserCacheEntity, (userCache) => userCache.assignee)
   userCaches!: UserCacheEntity[];
+
+  @OneToMany(() => FederatedEntity, (userCache) => userCache.user)
+  federates!: FederatedEntity[];
 }
