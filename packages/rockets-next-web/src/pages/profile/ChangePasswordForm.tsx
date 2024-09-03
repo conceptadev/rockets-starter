@@ -10,7 +10,7 @@ import {
   advancedProperties,
   validationRules,
 } from "./formConfig";
-import { validateForm } from "@/utils/formValidation/formValidation";
+import { validateForm } from "../../utils/formValidation/formValidation";
 
 interface ChangePasswordFormProps {
   closePasswordChangeModal: () => void;

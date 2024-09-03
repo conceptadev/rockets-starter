@@ -2,7 +2,7 @@ import type { RJSFSchema } from "@rjsf/utils";
 import { CustomTextFieldWidget } from "@concepta/react-material-ui/dist/styles/CustomWidgets";
 import { AdvancedProperty } from "@concepta/react-material-ui/dist/components/SchemaForm/types";
 
-import { ValidationRule } from "@/utils/formValidation/formValidation";
+import { ValidationRule } from "../../utils/formValidation/formValidation";
 import { PasswordChangeFormData } from "./types";
 
 export const widgets = {
