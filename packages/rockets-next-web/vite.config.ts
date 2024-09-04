@@ -7,4 +7,14 @@ export default defineConfig({
   define: {
     "process.env": {},
   },
+  resolve: {
+    dedupe: [
+      "react",
+      "react-dom",
+      "@concepta/react-material-ui",
+      "@concepta/react-navigation",
+      "@concepta/react-auth-provider",
+      "@concepta/react-data-provider",
+    ],
+  },
 });
