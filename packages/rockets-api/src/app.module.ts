@@ -39,6 +39,8 @@ import { InvitationEntity } from './entities/invitation.entity';
 import { OrgMemberEntity } from './entities/org-member.entity';
 import { CacheModule } from '@concepta/nestjs-cache';
 import { UserCacheEntity } from './entities/user-cache.entity';
+import { AuthGoogleModule } from '@concepta/nestjs-auth-google';
+import { AuthAppleModule } from '@concepta/nestjs-auth-apple';
 
 @Module({
   imports: [
@@ -85,6 +87,8 @@ import { UserCacheEntity } from './entities/user-cache.entity';
       },
     }),
     AuthGithubModule.register({}),
+    AuthGoogleModule.register({}),
+    AuthAppleModule.register({}),
     RoleModule.register({
       settings: {
         assignments: {

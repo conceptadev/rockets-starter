@@ -55,6 +55,11 @@ export class Initial1718223354053 implements MigrationInterface {
     await queryRunner.query(
       `ALTER TABLE "user_cache" ADD CONSTRAINT "FK_b46638e3657328bb85d1eff1b0f" FOREIGN KEY ("assigneeId") REFERENCES "user"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`,
     );
+
+    await queryRunner.query(`ALTER TABLE "federated" ADD "userId" uuid`);
+    await queryRunner.query(
+      `ALTER TABLE "federated" ADD CONSTRAINT "FK_216af9ffcc64c2529a9db18b52c" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`,
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
@@ -82,6 +87,11 @@ export class Initial1718223354053 implements MigrationInterface {
     await queryRunner.query(
       `ALTER TABLE "user_role" DROP CONSTRAINT "FK_dba55ed826ef26b5b22bd39409b"`,
     );
+
+    await queryRunner.query(
+      `ALTER TABLE "federated" DROP CONSTRAINT "FK_216af9ffcc64c2529a9db18b52c"`,
+    );
+
     await queryRunner.query(`DROP TABLE "federated"`);
     await queryRunner.query(`DROP TABLE "user"`);
     await queryRunner.query(`DROP TABLE "user_cache"`);
