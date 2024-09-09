@@ -23,4 +23,4 @@ import { FileEntity } from '../entities/file.entity';
   exports: [AwsStorageService],
   controllers: [AwsController],
 })
-export class FileStorageModule {}
+export class AwsModule {}

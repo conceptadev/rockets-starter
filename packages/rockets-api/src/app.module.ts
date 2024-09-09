@@ -39,7 +39,7 @@ import { InvitationEntity } from './entities/invitation.entity';
 import { OrgMemberEntity } from './entities/org-member.entity';
 import { CacheModule } from '@concepta/nestjs-cache';
 import { UserCacheEntity } from './entities/user-cache.entity';
-import { FileStorageModule } from './aws/file-storage.module';
+import { AwsModule } from './aws/aws.module';
 import { awsConfig } from './config/aws.config';
 
 @Module({
@@ -173,7 +173,7 @@ import { awsConfig } from './config/aws.config';
         },
       },
     }),
-    FileStorageModule,
+    AwsModule,
   ],
 })
 export class AppModule {}
