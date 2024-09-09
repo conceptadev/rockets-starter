@@ -39,13 +39,15 @@ import { InvitationEntity } from './entities/invitation.entity';
 import { OrgMemberEntity } from './entities/org-member.entity';
 import { CacheModule } from '@concepta/nestjs-cache';
 import { UserCacheEntity } from './entities/user-cache.entity';
+import { FileStorageModule } from './aws/file-storage.module';
+import { awsConfig } from './config/aws.config';
 
 @Module({
   imports: [
     EventModule.forRoot({}),
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [ormConfig],
+      load: [ormConfig, awsConfig],
     }),
     SwaggerUiModule.register({}),
     TypeOrmExtModule.forRootAsync({
@@ -171,6 +173,7 @@ import { UserCacheEntity } from './entities/user-cache.entity';
         },
       },
     }),
+    FileStorageModule,
   ],
 })
 export class AppModule {}

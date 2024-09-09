@@ -14,6 +14,7 @@ import { UserRoleEntity } from '../entities/user-role.entity';
 import { UserOtpEntity } from '../entities/user-otp.entity';
 import { InvitationEntity } from '../entities/invitation.entity';
 import { UserCacheEntity } from '../entities/user-cache.entity';
+import { FileEntity } from '../entities/file.entity';
 
 export const ormConfigFactory = (): DataSourceOptions => {
   // return the configuration
@@ -33,6 +34,7 @@ export const ormConfigFactory = (): DataSourceOptions => {
       UserOtpEntity,
       InvitationEntity,
       UserCacheEntity,
+      FileEntity,
     ],
     subscribers: [__dirname + '/../**/*.subscriber.js'],
     migrations: [__dirname + '/../migrations/*.js'],
