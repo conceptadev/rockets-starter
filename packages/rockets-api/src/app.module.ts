@@ -41,6 +41,7 @@ import { CacheModule } from '@concepta/nestjs-cache';
 import { UserCacheEntity } from './entities/user-cache.entity';
 import { AwsModule } from './aws/aws.module';
 import { awsConfig } from './config/aws.config';
+import { DashboardReportModule } from './dashboard-report/dashboard-report.module';
 
 @Module({
   imports: [
@@ -174,6 +175,7 @@ import { awsConfig } from './config/aws.config';
       },
     }),
     AwsModule,
+    DashboardReportModule,
   ],
 })
 export class AppModule {}

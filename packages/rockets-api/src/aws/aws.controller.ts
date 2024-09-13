@@ -1,4 +1,4 @@
-import { FileCreateDto, FileService } from '@concepta/nestjs-file';
+import { FileCreateDto, FileEntityInterface, FileService } from '@concepta/nestjs-file';
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
@@ -11,7 +11,7 @@ export class AwsController {
   @ApiResponse({
     description: 'Create a file and return upload and download url',
   })
-  async create(@Body() fileDto: FileCreateDto) {
+  async create(@Body() fileDto: FileCreateDto): Promise<FileEntityInterface> {
     return this.fileService.push({
       ...fileDto,
       serviceKey: 'aws-storage',
@@ -22,7 +22,7 @@ export class AwsController {
   @ApiResponse({
     description: 'Get file created',
   })
-  async get(fileId: string) {
+  async get(fileId: string): Promise<FileEntityInterface> {
     return this.fileService.fetch({
       id: fileId,
     });
