@@ -3,6 +3,7 @@ import {
   ReportGeneratorResultInterface,
   ReportGeneratorServiceInterface,
 } from '@concepta/nestjs-report';
+import { ReportStatusEnum } from '@concepta/ts-common';
 import { Inject, Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { promises as fs } from 'fs';
@@ -10,7 +11,7 @@ import { ReportEntity } from '../entities/report.entity';
 import { REPORT_KEY_USER_REPORT } from './dashboard-report.constants';
 
 @Injectable()
-export class UserReportGeneratorService
+export class DashboardReportGeneratorService
   implements ReportGeneratorServiceInterface
 {
   readonly KEY: string = REPORT_KEY_USER_REPORT;
@@ -79,7 +80,7 @@ export class UserReportGeneratorService
   ): ReportGeneratorResultInterface {
     return {
       id: report.id,
-      status: "Complete",
+      status: ReportStatusEnum.Complete,
       file,
     };
   }
@@ -90,7 +91,7 @@ export class UserReportGeneratorService
   ): ReportGeneratorResultInterface {
     return {
       id: report.id,
-      status: "Error",
+      status: ReportStatusEnum.Error,
       file: null,
       errorMessage: error.message,
     };

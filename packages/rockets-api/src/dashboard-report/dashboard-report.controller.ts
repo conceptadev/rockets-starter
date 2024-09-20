@@ -1,31 +1,33 @@
-import { ReportCreateDto, ReportService } from '@concepta/nestjs-report';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { ReportService } from '@concepta/nestjs-report';
+import { ReportInterface } from '@concepta/ts-common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { REPORT_KEY_USER_REPORT } from './dashboard-report.constants';
+import { DashboardCreateDto } from './dto/dashboard.dto';
 
-@Controller('user-report')
-@ApiTags('user-report')
-export class UserReportController {
+@Controller('dashboard-report')
+@ApiTags('dashboard-report')
+export class DashboardController {
   constructor(private reportService: ReportService) {}
 
   @Post('')
   @ApiResponse({
     description: 'Create a report and return upload and download url',
   })
-  async create(@Body() reportDto: ReportCreateDto) {
+  async create(@Body() dto: DashboardCreateDto): Promise<ReportInterface> {
     return this.reportService.generate({
-      ...reportDto,
+      ...dto,
       serviceKey: REPORT_KEY_USER_REPORT,
     });
   }
 
-  @Get('')
+  @Get(':id')
   @ApiResponse({
     description: 'Get report created',
   })
-  async get(reportId: string) {
+  async get(@Param('id') id: string): Promise<ReportInterface> {
     return this.reportService.fetch({
-      id: reportId,
+      id,
     });
   }
 }

@@ -42,6 +42,12 @@ import { UserCacheEntity } from './entities/user-cache.entity';
 import { AwsModule } from './aws/aws.module';
 import { awsConfig } from './config/aws.config';
 import { DashboardReportModule } from './dashboard-report/dashboard-report.module';
+import { FileModule } from '@concepta/nestjs-file';
+import { AwsStorageService } from './aws/aws-storage.service';
+import { FileEntity } from './entities/file.entity';
+import { ReportModule } from '@concepta/nestjs-report';
+import { DashboardReportGeneratorService } from './dashboard-report/dashboard-report-generator.service';
+import { ReportEntity } from './entities/report.entity';
 
 @Module({
   imports: [
@@ -175,7 +181,31 @@ import { DashboardReportModule } from './dashboard-report/dashboard-report.modul
       },
     }),
     AwsModule,
+    FileModule.forRootAsync({
+      inject: [AwsStorageService],
+      useFactory: (awsStorageService: AwsStorageService) => ({
+        storageServices: [awsStorageService],
+      }),
+      entities: {
+        file: {
+          entity: FileEntity,
+        },
+      },
+    }),
     DashboardReportModule,
+    ReportModule.forRootAsync({
+      inject: [DashboardReportGeneratorService],
+      useFactory: (
+        userReportGeneratorService: DashboardReportGeneratorService,
+      ) => ({
+        reportGeneratorServices: [userReportGeneratorService],
+      }),
+      entities: {
+        report: {
+          entity: ReportEntity,
+        },
+      },
+    }),
   ],
 })
 export class AppModule {}
