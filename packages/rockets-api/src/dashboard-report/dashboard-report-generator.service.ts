@@ -8,13 +8,13 @@ import { Inject, Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { promises as fs } from 'fs';
 import { ReportEntity } from '../entities/report.entity';
-import { REPORT_KEY_USER_REPORT } from './dashboard-report.constants';
+import { REPORT_KEY_DASHBOARD_REPORT } from './dashboard-report.constants';
 
 @Injectable()
 export class DashboardReportGeneratorService
   implements ReportGeneratorServiceInterface
 {
-  readonly KEY: string = REPORT_KEY_USER_REPORT;
+  readonly KEY: string = REPORT_KEY_DASHBOARD_REPORT;
   readonly generateTimeout: number = 60000;
 
   constructor(

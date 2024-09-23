@@ -180,8 +180,8 @@ import { ReportEntity } from './entities/report.entity';
         },
       },
     }),
-    AwsModule,
     FileModule.forRootAsync({
+      imports: [AwsModule],
       inject: [AwsStorageService],
       useFactory: (awsStorageService: AwsStorageService) => ({
         storageServices: [awsStorageService],
@@ -192,8 +192,8 @@ import { ReportEntity } from './entities/report.entity';
         },
       },
     }),
-    DashboardReportModule,
     ReportModule.forRootAsync({
+      imports: [DashboardReportModule],
       inject: [DashboardReportGeneratorService],
       useFactory: (
         userReportGeneratorService: DashboardReportGeneratorService,
