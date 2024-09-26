@@ -82,7 +82,7 @@ export class DashboardReportGeneratorService
       id: report.id,
       status: ReportStatusEnum.Complete,
       file,
-    };
+    } as ReportGeneratorResultInterface;
   }
 
   private createErrorResult(
@@ -94,6 +94,6 @@ export class DashboardReportGeneratorService
       status: ReportStatusEnum.Error,
       file: null,
       errorMessage: error.message,
-    };
+    } as ReportGeneratorResultInterface;
   }
 }
