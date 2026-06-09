@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AuthPublic } from '@concepta/nestjs-authentication';
+import { AuthPublic } from '@bitwild/rockets';
 import { AppService } from './app.service';
 
 @Controller()

@@ -5,7 +5,7 @@
 
 import { config } from 'dotenv';
 import { DataSource } from 'typeorm';
-import { ormSettingsFactory } from './config/typeorm.settings';
+import { ormSettingsFactory } from './config/database.config';
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // !!! This config() call is for CLI ONLY         !!!

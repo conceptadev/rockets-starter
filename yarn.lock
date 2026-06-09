@@ -340,59 +340,78 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bitwild/rockets-auth@1.0.0-alpha.7":
+"@bitwild/rockets-access-control@file:../../rockets/packages/rockets-access-control", "@bitwild/rockets-access-control@workspace:^":
   version "1.0.0-alpha.7"
-  resolved "https://registry.yarnpkg.com/@bitwild/rockets-auth/-/rockets-auth-1.0.0-alpha.7.tgz#4376eeb9501629588d77665f3798a683ceb2e63e"
-  integrity sha512-UdyAv+Z++26vtDOycd277fPwbVv9sz2qwv0FcIipDKW12Aa9Ihf8IXtpdzOnCGtyVZNdZeNo+Ufvv/Gc/NiUng==
   dependencies:
+    "@bitwild/rockets-app" "workspace:^"
     "@concepta/nestjs-access-control" "7.0.0-alpha.10"
-    "@concepta/nestjs-auth-apple" "7.0.0-alpha.10"
-    "@concepta/nestjs-auth-github" "7.0.0-alpha.10"
-    "@concepta/nestjs-auth-google" "7.0.0-alpha.10"
-    "@concepta/nestjs-auth-jwt" "7.0.0-alpha.10"
-    "@concepta/nestjs-auth-local" "7.0.0-alpha.10"
-    "@concepta/nestjs-auth-recovery" "7.0.0-alpha.10"
-    "@concepta/nestjs-auth-refresh" "7.0.0-alpha.10"
-    "@concepta/nestjs-auth-router" "7.0.0-alpha.10"
-    "@concepta/nestjs-auth-verify" "7.0.0-alpha.10"
-    "@concepta/nestjs-authentication" "7.0.0-alpha.10"
-    "@concepta/nestjs-common" "7.0.0-alpha.10"
-    "@concepta/nestjs-crud" "7.0.0-alpha.10"
-    "@concepta/nestjs-email" "7.0.0-alpha.10"
-    "@concepta/nestjs-event" "7.0.0-alpha.10"
-    "@concepta/nestjs-federated" "7.0.0-alpha.10"
-    "@concepta/nestjs-invitation" "7.0.0-alpha.10"
-    "@concepta/nestjs-jwt" "7.0.0-alpha.10"
-    "@concepta/nestjs-otp" "7.0.0-alpha.10"
-    "@concepta/nestjs-password" "7.0.0-alpha.10"
-    "@concepta/nestjs-role" "7.0.0-alpha.10"
-    "@concepta/nestjs-swagger-ui" "7.0.0-alpha.10"
-    "@concepta/nestjs-user" "7.0.0-alpha.10"
-    "@nestjs/common" "^11.0.0"
-    "@nestjs/config" "^4.0.0"
-    "@nestjs/core" "^11.0.0"
-    "@nestjs/jwt" "^11.0.0"
-    "@nestjs/passport" "^11.0.0"
-    "@nestjs/swagger" "^11.0.0"
-    "@nestjs/throttler" "^6.0.0"
-    accesscontrol "^2.2.1"
-    jsonwebtoken "^9.0.2"
-    passport "^0.7.0"
-    passport-jwt "^4.0.1"
-    passport-strategy "^1.0.0"
 
-"@bitwild/rockets@1.0.0-alpha.7":
-  version "1.0.0-alpha.7"
-  resolved "https://registry.yarnpkg.com/@bitwild/rockets/-/rockets-1.0.0-alpha.7.tgz#1913106297a1e80bb63c940ed89a9af4b7d9ab3c"
-  integrity sha512-4ZemdEX144qXK96WfuA/TdtIXQi+9oETS0xmbntcIDqmacgAtF9dBQu/anDOrqXCciXIV+HCkgCAZXVFENmMig==
+"@bitwild/rockets-app@file:../../rockets/packages/rockets-app", "@bitwild/rockets-app@workspace:^":
+  version "0.0.1-alpha.0"
   dependencies:
-    "@concepta/nestjs-authentication" "7.0.0-alpha.10"
-    "@concepta/nestjs-common" "7.0.0-alpha.10"
-    "@concepta/nestjs-swagger-ui" "7.0.0-alpha.10"
-    "@nestjs/common" "^11.0.0"
+    "@nestjs/common" "^11.1.9"
+    "@nestjs/config" "^4.0.2"
+    "@nestjs/core" "^11.1.9"
+    "@nestjs/swagger" "^11.2.2"
+    ms "^2.1.3"
+    rxjs "^7.8.1"
+
+"@bitwild/rockets-core@file:../../rockets/packages/rockets-core", "@bitwild/rockets-core@workspace:^":
+  version "1.0.0-alpha.7"
+  dependencies:
+    "@bitwild/rockets-access-control" "workspace:^"
+    "@bitwild/rockets-app" "workspace:^"
+    "@bitwild/rockets-crud" "workspace:^"
+    "@bitwild/rockets-repository" "workspace:^"
+    "@concepta/nestjs-authentication" "8.0.0-alpha.5"
+    "@nestjs/common" "^11.1.18"
     "@nestjs/config" "^4.0.0"
-    "@nestjs/core" "^11.0.0"
+    "@nestjs/core" "^11.1.18"
+    "@nestjs/cqrs" "^11.0.0"
     "@nestjs/swagger" "^11.0.0"
+    pluralize "^8.0.0"
+
+"@bitwild/rockets-crud@file:../../rockets/packages/rockets-crud", "@bitwild/rockets-crud@workspace:^":
+  version "0.0.1-alpha.0"
+  dependencies:
+    "@bitwild/rockets-app" "workspace:^"
+    "@bitwild/rockets-repository" "0.0.1-alpha.0"
+    "@nestjs/common" "^11.1.9"
+    "@nestjs/config" "^4.0.2"
+    "@nestjs/core" "^11.1.9"
+    "@nestjs/swagger" "^11.2.2"
+    deepmerge "^3.2.0"
+    qs "^6.14.0"
+
+"@bitwild/rockets-repository-typeorm@file:../../rockets/packages/rockets-repository-typeorm", "@bitwild/rockets-repository-typeorm@workspace:^":
+  version "0.0.1-alpha.0"
+  dependencies:
+    "@bitwild/rockets-app" "workspace:^"
+    "@bitwild/rockets-repository" "0.0.1-alpha.0"
+    "@nestjs/common" "^11.1.9"
+    "@nestjs/typeorm" "^11.0.0"
+    "@tsyche/membrane" "^0.7.0"
+
+"@bitwild/rockets-repository@0.0.1-alpha.0", "@bitwild/rockets-repository@file:../../rockets/packages/rockets-repository", "@bitwild/rockets-repository@workspace:^":
+  version "0.0.1-alpha.0"
+  dependencies:
+    "@bitwild/rockets-app" "workspace:^"
+    "@nestjs/common" "^11.1.9"
+    "@nestjs/core" "^11.1.9"
+    "@tsyche/membrane" "^0.7.0"
+
+"@bitwild/rockets@file:../../rockets/packages/rockets-server":
+  version "1.0.0-alpha.7"
+  dependencies:
+    "@bitwild/rockets-app" "workspace:^"
+    "@bitwild/rockets-core" "workspace:^"
+    "@bitwild/rockets-repository-typeorm" "workspace:^"
+    "@nestjs/common" "^11.1.18"
+    "@nestjs/config" "^4.0.0"
+    "@nestjs/core" "^11.1.18"
+    "@nestjs/cqrs" "^11.0.0"
+    "@nestjs/swagger" "^11.0.0"
+    "@nestjs/typeorm" "^11.0.0"
 
 "@borewit/text-codec@^0.2.1":
   version "0.2.1"
@@ -404,7 +423,7 @@
   resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.5.0.tgz#bb504579c1cae923e6576a4f5da43d25f97bdbd9"
   integrity sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==
 
-"@concepta/nestjs-access-control@7.0.0-alpha.10", "@concepta/nestjs-access-control@^7.0.0-alpha.10":
+"@concepta/nestjs-access-control@7.0.0-alpha.10":
   version "7.0.0-alpha.10"
   resolved "https://registry.yarnpkg.com/@concepta/nestjs-access-control/-/nestjs-access-control-7.0.0-alpha.10.tgz#823aba55f45b14d711086c4cc1ad971d6313bb89"
   integrity sha512-XGkOROSpRbqAz2ZO35PwF24pn5rCr0Tbk+vRdTvkC0l14xB6ObYrGwtEXNZHIY4+q5jtoBh9l+OT8WYntu0gtw==
@@ -416,141 +435,38 @@
     accesscontrol "^2.2.1"
     rxjs "^7.8.1"
 
-"@concepta/nestjs-auth-apple@7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-apple/-/nestjs-auth-apple-7.0.0-alpha.10.tgz#9f9786f32d2e85dbac712620d34d597324bc2851"
-  integrity sha512-vk2iWDQwDfDjJZIhyM1NYhBMbUY1Ut+wFSHdDF2ZjVhqleXeH5UcZFbR7/OGSg3jurMlUT8Z43kdROTs292pYA==
+"@concepta/nestjs-authentication@8.0.0-alpha.5":
+  version "8.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-authentication/-/nestjs-authentication-8.0.0-alpha.5.tgz#4f97aba57c7b4865f19f2e3fcdc094372cbc811d"
+  integrity sha512-ILJg2oCyn4pSPpKRt+7lD9IG+s6VQ8svsGvchj+DLZuiWJOveNUGH2DbK6U5juagOJ93Jo2N0inEbQmxsum9sQ==
   dependencies:
-    "@concepta/nestjs-authentication" "^7.0.0-alpha.10"
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@concepta/nestjs-federated" "^7.0.0-alpha.10"
-    "@concepta/nestjs-jwt" "^7.0.0-alpha.10"
+    "@concepta/nestjs-common" "8.0.0-alpha.5"
+    "@concepta/nestjs-password" "8.0.0-alpha.5"
+    "@concepta/nestjs-user" "8.0.0-alpha.5"
     "@nestjs/common" "^11.1.9"
     "@nestjs/config" "^4.0.2"
     "@nestjs/core" "^11.1.9"
+    "@nestjs/cqrs" "^11.0.0"
+    "@nestjs/jwt" "^11.0.1"
     "@nestjs/passport" "^11.0.5"
     "@nestjs/swagger" "^11.2.2"
-    jwks-rsa "^3.1.0"
-    passport-apple "^2.0.2"
-
-"@concepta/nestjs-auth-github@7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-github/-/nestjs-auth-github-7.0.0-alpha.10.tgz#0e6260415b5ddd06c0436f6bc0fd656e5b44200d"
-  integrity sha512-ArK6BxqPFjKu26DVIE2RSQJxCMFo6m4giXM/AAVMpW645VfEWIN8cSmC7rhf8RsSeHykgjxIL+YNOvBG0UvtQg==
-  dependencies:
-    "@concepta/nestjs-authentication" "^7.0.0-alpha.10"
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@concepta/nestjs-federated" "^7.0.0-alpha.10"
-    "@nestjs/common" "^11.1.9"
-    "@nestjs/config" "^4.0.2"
-    "@nestjs/core" "^11.1.9"
-    "@nestjs/passport" "^11.0.5"
-    "@nestjs/swagger" "^11.2.2"
-    passport-github "^1.1.0"
-
-"@concepta/nestjs-auth-google@7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-google/-/nestjs-auth-google-7.0.0-alpha.10.tgz#6b084a63aab700054f679610d61e0ae89324d162"
-  integrity sha512-0V2Jj1NnQO7YbSqfhkiv96thwUv6jU/+3jZGrCRQc0S62RV0wLCiJM3rpzvLgVw9vcruSixh+UYvZBQ+kKf4qw==
-  dependencies:
-    "@concepta/nestjs-authentication" "^7.0.0-alpha.10"
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@concepta/nestjs-federated" "^7.0.0-alpha.10"
-    "@nestjs/common" "^11.1.9"
-    "@nestjs/config" "^4.0.2"
-    "@nestjs/core" "^11.1.9"
-    "@nestjs/passport" "^11.0.5"
-    "@nestjs/swagger" "^11.2.2"
-    passport-google-oauth20 "^2.0.0"
-
-"@concepta/nestjs-auth-jwt@7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-jwt/-/nestjs-auth-jwt-7.0.0-alpha.10.tgz#b7a95ab1ef755eb36574c17d8ab9ae45c58d7600"
-  integrity sha512-rT/8jX1Zhl/5obkHfTTuFWS63rBJT9lbwEm1vIOzJclkjn6wlf+yDpg29D2DzA+0AYyg4uYn5xxsuJvf1NlZlQ==
-  dependencies:
-    "@concepta/nestjs-authentication" "^7.0.0-alpha.10"
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@concepta/nestjs-jwt" "^7.0.0-alpha.10"
-    "@nestjs/common" "^11.1.9"
-    "@nestjs/config" "^4.0.2"
-    "@nestjs/core" "^11.1.9"
-
-"@concepta/nestjs-auth-local@7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-local/-/nestjs-auth-local-7.0.0-alpha.10.tgz#1fddcf22650970a58e21a1739a918bb4e91a4e33"
-  integrity sha512-/3dOMCpk2Mh8+FCbzVRwaGwiAC++CI3HuiAPKrh+J+25dAddC3sppdBxv7GtLRPilNNt7JJ8Gv/yObgbpkh3Xw==
-  dependencies:
-    "@concepta/nestjs-authentication" "^7.0.0-alpha.10"
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@concepta/nestjs-password" "^7.0.0-alpha.10"
-    "@nestjs/common" "^11.1.9"
-    "@nestjs/config" "^4.0.2"
-    "@nestjs/core" "^11.1.9"
-    "@nestjs/swagger" "^11.2.2"
-    passport-local "^1.0.0"
-
-"@concepta/nestjs-auth-recovery@7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-recovery/-/nestjs-auth-recovery-7.0.0-alpha.10.tgz#93fe8b77e96fb616975891a7651c199a33dbc6c7"
-  integrity sha512-JaxOxlWctqYoo/ZuXFi9XjoEwjU/YNQMtA3bsitfqoTrkPJhI4Mj10h/u7q7BYLpv1M9dDmzxXTGRZCxXBktJQ==
-  dependencies:
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@nestjs/common" "^11.1.9"
-    "@nestjs/config" "^4.0.2"
-    "@nestjs/core" "^11.1.9"
-    "@nestjs/swagger" "^11.2.2"
-
-"@concepta/nestjs-auth-refresh@7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-refresh/-/nestjs-auth-refresh-7.0.0-alpha.10.tgz#ebc6d852f90baf7489fadc74ec98c4e4f1ab9ca5"
-  integrity sha512-EL8MJQ20TX23ot60qhVuETElmlI7e/RimrrYqCIwmSlYk/HfxwKAXe97tAQopLye1aktpzjO/tViT2ryFRC4oA==
-  dependencies:
-    "@concepta/nestjs-authentication" "^7.0.0-alpha.10"
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@concepta/nestjs-jwt" "^7.0.0-alpha.10"
-    "@nestjs/common" "^11.1.9"
-    "@nestjs/config" "^4.0.2"
-    "@nestjs/core" "^11.1.9"
-    "@nestjs/swagger" "^11.2.2"
-
-"@concepta/nestjs-auth-router@7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-router/-/nestjs-auth-router-7.0.0-alpha.10.tgz#0a4bcd3b41d9bf967425a4769e4017d970fc0655"
-  integrity sha512-scSvVaBKW9lYYPeRRGYiafshKdpFvlamKlfueT9cPLFBlTvHRAL/Q6IOAbeo9vzV0aJmGc0mZrbaX67byFeoxA==
-  dependencies:
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@nestjs/common" "^11.1.9"
-    "@nestjs/config" "^4.0.2"
-    "@nestjs/core" "^11.1.9"
-    "@nestjs/swagger" "^11.2.2"
-
-"@concepta/nestjs-auth-verify@7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-auth-verify/-/nestjs-auth-verify-7.0.0-alpha.10.tgz#046d59a8f2dc883893cb634aae708cbad4bde6ef"
-  integrity sha512-VEFwz2JF4HdFqBk/PyMBEVcOy+bsts3ISfkJp2a+XZSn+RHcgZxMJ13ixjgpWDQVQSrxKqA4uN6Y6kvoaLspTw==
-  dependencies:
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@nestjs/common" "^11.1.9"
-    "@nestjs/config" "^4.0.2"
-    "@nestjs/core" "^11.1.9"
-    "@nestjs/swagger" "^11.2.2"
-
-"@concepta/nestjs-authentication@7.0.0-alpha.10", "@concepta/nestjs-authentication@^7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-authentication/-/nestjs-authentication-7.0.0-alpha.10.tgz#4e3a9534a88bfc3455af7d3835c26971856326b3"
-  integrity sha512-HSqatah+3XHzTz1blziQdpor4TL9fYfaDaA3F50CTWT+FYjCohr8Zp9sAEeY33naVO1msRYqMRfoF7JA+Fvm9A==
-  dependencies:
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@concepta/nestjs-jwt" "^7.0.0-alpha.10"
-    "@nestjs/common" "^11.1.9"
-    "@nestjs/config" "^4.0.2"
-    "@nestjs/core" "^11.1.9"
-    "@nestjs/passport" "^11.0.5"
-    "@nestjs/swagger" "^11.2.2"
+    jsonwebtoken "^9.0.0"
+    ms "^2.1.3"
     passport "^0.7.0"
+    passport-jwt "^4.0.1"
+    passport-local "^1.0.0"
     passport-strategy "^1.0.0"
 
-"@concepta/nestjs-common@7.0.0-alpha.10", "@concepta/nestjs-common@^7.0.0-alpha.10":
+"@concepta/nestjs-common@8.0.0-alpha.5":
+  version "8.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-common/-/nestjs-common-8.0.0-alpha.5.tgz#41690b320df122bed9aac041177ee0b31d977fe3"
+  integrity sha512-7tJu647jGvSGRlCoQLwq+wR5HfQx7l09skMIvDs/+ax71C6MIs0xvE5ShGOJ9SemjYqoxHapCSxRFZM+MKZevg==
+  dependencies:
+    "@nestjs/common" "^11.1.9"
+    "@nestjs/swagger" "^11.2.2"
+    ms "^2.1.3"
+
+"@concepta/nestjs-common@^7.0.0-alpha.10":
   version "7.0.0-alpha.10"
   resolved "https://registry.yarnpkg.com/@concepta/nestjs-common/-/nestjs-common-7.0.0-alpha.10.tgz#c424599f8b217a3a30bf9ebedf18a7d637d542f2"
   integrity sha512-dYyxrbqZQ8jQN9n3cLqUDZCW+kxlBqo6nBCOCmKrjt03MaHpoajRCKQSNZSMdE2lMbS223RqjPR0hxZXkG/Eug==
@@ -559,141 +475,62 @@
     "@nestjs/swagger" "^11.2.2"
     ms "^2.1.3"
 
-"@concepta/nestjs-crud@7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-crud/-/nestjs-crud-7.0.0-alpha.10.tgz#fc69f737c2f014beef2d3fbc09bbe2e0677f9056"
-  integrity sha512-2u7ZnwsvBnpme07Hy7phsAPytYD1nySbqDLSmqwyafWdDjRHAYGsQ0MG0nsYgM80RD1qeCyHIMZTQbpU1dTVpw==
+"@concepta/nestjs-common@^8.0.0-alpha.5":
+  version "8.0.0-alpha.6"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-common/-/nestjs-common-8.0.0-alpha.6.tgz#00555f36bd66c8251ae3bdc75c13b64388055bd7"
+  integrity sha512-LKrn4tcvkMoWNp9EOHoUafpwYCyY5NRHDWlOEz8WxbgsM2cd+cB90EE2MdTE2NEhkXaFDadYe+24ehZctet7QA==
   dependencies:
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
     "@nestjs/common" "^11.1.9"
-    "@nestjs/config" "^4.0.2"
-    "@nestjs/core" "^11.1.9"
     "@nestjs/swagger" "^11.2.2"
-    "@zmotivat0r/o0" "^1.0.2"
-    deepmerge "^3.2.0"
-    qs "^6.14.0"
+    ms "^2.1.3"
 
-"@concepta/nestjs-email@7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-email/-/nestjs-email-7.0.0-alpha.10.tgz#09fc3f3d22905208ba2a5f4a424d8874de9d28f2"
-  integrity sha512-9gHlGHCFGU4lXryR/hzhOPBXFLKblBO5zQwGdlHjdHU0x1GQkQphgU8rQXiDfCkHvLnc+ygXdxpG/fCNnNcvQQ==
+"@concepta/nestjs-hook@8.0.0-alpha.5":
+  version "8.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-hook/-/nestjs-hook-8.0.0-alpha.5.tgz#68f1c6853bf82cd9eb1ea6ba5077c71c58c0b42d"
+  integrity sha512-yMYBkt9c93ZfxfIrN2OMeHUn0fpg+tb2XvypTKPU2EnLDpUZ1bH7BTHCx1ZZOF1YbSLRlCuxlwxxYAc2YxU0Sw==
   dependencies:
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
+    "@concepta/nestjs-common" "^8.0.0-alpha.5"
+    "@nestjs/common" "^11.1.9"
+    "@nestjs/core" "^11.1.9"
+    rxjs "^7.8.1"
+
+"@concepta/nestjs-password@8.0.0-alpha.5":
+  version "8.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-password/-/nestjs-password-8.0.0-alpha.5.tgz#80237f296bf9de762e8c15bc679d919a40a729ff"
+  integrity sha512-yQtAA0DzxOgjBtVLgvjb0hoo5UgoTncZEnpZ44WhnTDYAk59payqDPKBqCU6ua+yScT63lSL4TBciYB4G/PtPQ==
+  dependencies:
+    "@concepta/nestjs-common" "^8.0.0-alpha.5"
     "@nestjs/common" "^11.1.9"
     "@nestjs/config" "^4.0.2"
     "@nestjs/core" "^11.1.9"
-
-"@concepta/nestjs-event@7.0.0-alpha.10", "@concepta/nestjs-event@^7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-event/-/nestjs-event-7.0.0-alpha.10.tgz#faeb1fd4aa6e3e0ac84f198fb91196a332b5cd26"
-  integrity sha512-CE/5/6Rvv6ExLKCWuaq0uB0p4PRcfbJ0ip/6Eg83mlIMG83vAmoPIdQOgCdigeddMWWCq1a0kWooEAlR8yZvFg==
-  dependencies:
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@nestjs/common" "^11.1.9"
-    "@nestjs/config" "^4.0.2"
-    "@nestjs/core" "^11.1.9"
-    eventemitter2 "^6.4.9"
-
-"@concepta/nestjs-federated@7.0.0-alpha.10", "@concepta/nestjs-federated@^7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-federated/-/nestjs-federated-7.0.0-alpha.10.tgz#3b516284d3a2dee64ea931f285156c08e29d2e3d"
-  integrity sha512-+igNSQ8z4nLhKk7BnVbEsNHeWGq7622rEQOLULhbLQZrzUIACSKUJta7wakecD+szN6wqjpEhgubb3JQjnX3kQ==
-  dependencies:
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@nestjs/common" "^11.1.9"
-    "@nestjs/config" "^4.0.2"
-    "@nestjs/swagger" "^11.2.2"
-
-"@concepta/nestjs-invitation@7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-invitation/-/nestjs-invitation-7.0.0-alpha.10.tgz#824879ff2c727ccb324e6772e2296d2c59b397b3"
-  integrity sha512-fVfhQoEt/c0MmSSoxwiNwxpo0xo2Uq0fflzhcPFCKlyvfRlvnMzkTDHngnLH64nYKsKug0MmPe8v2fT9KyNhHg==
-  dependencies:
-    "@concepta/nestjs-access-control" "^7.0.0-alpha.10"
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@concepta/nestjs-event" "^7.0.0-alpha.10"
-    "@nestjs/common" "^11.1.9"
-    "@nestjs/config" "^4.0.2"
-    "@nestjs/core" "^11.1.9"
-    "@nestjs/swagger" "^11.2.2"
-
-"@concepta/nestjs-jwt@7.0.0-alpha.10", "@concepta/nestjs-jwt@^7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-jwt/-/nestjs-jwt-7.0.0-alpha.10.tgz#7b894c0f3b7a4bfc1f8cb0968e168fe7004d3559"
-  integrity sha512-rRjjhFITWVBKd92siZW9hBPk6gYEMd2A+kNwEmMt1WHnOFD/p/tn0DCIZsSfrVR8ifFspOlzZLxkWGYDgog+qQ==
-  dependencies:
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@nestjs/common" "^11.1.9"
-    "@nestjs/config" "^4.0.2"
-    "@nestjs/jwt" "^11.0.1"
-    jsonwebtoken "^9.0.2"
-    passport-jwt "^4.0.1"
-    passport-strategy "^1.0.0"
-
-"@concepta/nestjs-otp@7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-otp/-/nestjs-otp-7.0.0-alpha.10.tgz#e6c34ddf4c7722d1f283c5a00228880d7593465b"
-  integrity sha512-bIge6CTHNZq4N6FceDceMnGd7kDRFWTUznhPEHuahur9bhg+eaZKttUhbHhTw9ZGvlwO9TQNDcE0Ier1IXhISA==
-  dependencies:
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@nestjs/common" "^11.1.9"
-    "@nestjs/config" "^4.0.2"
-
-"@concepta/nestjs-password@7.0.0-alpha.10", "@concepta/nestjs-password@^7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-password/-/nestjs-password-7.0.0-alpha.10.tgz#9abb3940b405c77440ed07f49cfdaa6cb858972f"
-  integrity sha512-iVaYxxLgIZQMABAQof2MG0fHFBKf6QdxjhUMRoaOQwdlDKZaydMJscfPmNO4esG2QljAtoKy/idriOuizHiowA==
-  dependencies:
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@nestjs/common" "^11.1.9"
-    "@nestjs/config" "^4.0.2"
-    "@nestjs/core" "^11.1.9"
+    "@nestjs/cqrs" "^11.0.0"
     "@types/zxcvbn" "^4.4.4"
     bcrypt "^5.1.1"
     zxcvbn "^4.4.2"
 
-"@concepta/nestjs-role@7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-role/-/nestjs-role-7.0.0-alpha.10.tgz#154a12ac3edcfbe78e6074c789a95361e59af05b"
-  integrity sha512-Xt/ghBnRQBgutT68ol6iPBu5tYXgniDvnKiSAOUskrCU1i7I145xyUpttCpMU2+6XbyfhZ/7yU/ZuBxrmYMHbA==
+"@concepta/nestjs-repository@8.0.0-alpha.5":
+  version "8.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-repository/-/nestjs-repository-8.0.0-alpha.5.tgz#482e32345fead4daaa8a0ceab88f48bc8a639067"
+  integrity sha512-DYHp8dxx9ClySEScFnFXRayRUYnAdqv5nw6Y74Ttc+OvWjoqe4x3h2QONQw2Pj9NEQrEVs61tMqA1llRyoZtaw==
   dependencies:
-    "@concepta/nestjs-access-control" "^7.0.0-alpha.10"
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
+    "@concepta/nestjs-common" "8.0.0-alpha.5"
+    "@concepta/nestjs-hook" "8.0.0-alpha.5"
     "@nestjs/common" "^11.1.9"
-    "@nestjs/config" "^4.0.2"
-    "@nestjs/swagger" "^11.2.2"
+    "@nestjs/core" "^11.1.9"
+    "@tsyche/membrane" "^0.7.0"
 
-"@concepta/nestjs-swagger-ui@7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-swagger-ui/-/nestjs-swagger-ui-7.0.0-alpha.10.tgz#9122dc43177208ce5d503b7a34dbf1196f8509f2"
-  integrity sha512-3SBnWwfmYWdVkEywm0dAmExd6LYTvVz9GBLchLVhfnFY1axzs4Wx92c5UJjbbC1jmTRoT1xf6rAUDpmE9uvmGg==
+"@concepta/nestjs-user@8.0.0-alpha.5":
+  version "8.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@concepta/nestjs-user/-/nestjs-user-8.0.0-alpha.5.tgz#2439f759fca2b5a24f53ba467183ec7ce4f10630"
+  integrity sha512-Jq7w353yANpz2F9a2gQ+NWlHy+v9EueNbzYzlO2GoMP/id+xjnTuAOi3svVxttVB5N2/D0Wl2kkZ0I2DZa1KQQ==
   dependencies:
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@nestjs/common" "^11.1.9"
-    "@nestjs/config" "^4.0.2"
-    "@nestjs/swagger" "^11.2.2"
-
-"@concepta/nestjs-typeorm-ext@7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-typeorm-ext/-/nestjs-typeorm-ext-7.0.0-alpha.10.tgz#b604924b99de920423a1c3a428ef6822472ade62"
-  integrity sha512-zI/M+VgGLqLE6VNc1cly09O7hVyYf5fKireuOP+v+dv25ogGSB9W2zAS8P5DnytDPjonS58RaL8UCzsAJmZflQ==
-  dependencies:
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@nestjs/common" "^11.1.9"
-    "@nestjs/typeorm" "^11.0.0"
-
-"@concepta/nestjs-user@7.0.0-alpha.10":
-  version "7.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@concepta/nestjs-user/-/nestjs-user-7.0.0-alpha.10.tgz#72e468afc3de8473f30eaead043bc2256232f776"
-  integrity sha512-hvvaEFFTRRk8dWF9Q/ithThz3mT3f7CNo5N2ZjiJMcQp1/qctiS3w3LNT62A7VxsAA1mp46U0Ch1s95HiYaV1A==
-  dependencies:
-    "@concepta/nestjs-access-control" "^7.0.0-alpha.10"
-    "@concepta/nestjs-common" "^7.0.0-alpha.10"
-    "@concepta/nestjs-event" "^7.0.0-alpha.10"
-    "@concepta/nestjs-password" "^7.0.0-alpha.10"
+    "@concepta/nestjs-common" "8.0.0-alpha.5"
+    "@concepta/nestjs-password" "8.0.0-alpha.5"
+    "@concepta/nestjs-repository" "8.0.0-alpha.5"
     "@nestjs/common" "^11.1.9"
     "@nestjs/config" "^4.0.2"
     "@nestjs/core" "^11.1.9"
+    "@nestjs/cqrs" "^11.0.3"
     "@nestjs/swagger" "^11.2.2"
 
 "@concepta/typeorm-seeding@4.0.0":
@@ -823,11 +660,6 @@
   dependencies:
     "@eslint/core" "^0.17.0"
     levn "^0.4.1"
-
-"@faker-js/faker@^9.3.0":
-  version "9.9.0"
-  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-9.9.0.tgz#3ad015fbbaaae7af3149555e0f22b4b30134c69d"
-  integrity sha512-OEl393iCOoo/z8bMezRlJu+GlRGlsKbUAN7jKB6LhnKoqKve5DXRpalbItIIcwnCjs1k/FOPjFzcA6Qn+H+YbA==
 
 "@gar/promisify@^1.0.1":
   version "1.1.3"
@@ -1535,13 +1367,13 @@
     webpack "5.104.1"
     webpack-node-externals "3.0.0"
 
-"@nestjs/common@11.1.11", "@nestjs/common@^11.0.0", "@nestjs/common@^11.1.9":
-  version "11.1.11"
-  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-11.1.11.tgz#7ab20a2c91c4c2c43794bfc92177121d0a946ce5"
-  integrity sha512-R/+A8XFqLgN8zNs2twhrOaE7dJbRQhdPX3g46am4RT/x8xGLqDphrXkUIno4cGUZHxbczChBAaAPTdPv73wDZA==
+"@nestjs/common@11.1.18", "@nestjs/common@^11.1.18", "@nestjs/common@^11.1.9":
+  version "11.1.18"
+  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-11.1.18.tgz#329b214aadea5a4a1b12b4eee61c32b9c5b5082c"
+  integrity sha512-0sLq8Z+TIjLnz1Tqp0C/x9BpLbqpt1qEu0VcH4/fkE0y3F5JxhfK1AdKQ/SPbKhKgwqVDoY4gS8GQr2G6ujaWg==
   dependencies:
     uid "2.0.2"
-    file-type "21.2.0"
+    file-type "21.3.4"
     iterare "1.2.1"
     load-esm "1.0.3"
     tslib "2.8.1"
@@ -1555,19 +1387,24 @@
     dotenv-expand "12.0.3"
     lodash "4.17.23"
 
-"@nestjs/core@11.1.11", "@nestjs/core@^11.0.0", "@nestjs/core@^11.1.9":
-  version "11.1.11"
-  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-11.1.11.tgz#9eae7e488c45a443685567c1555ae3cd739d12fe"
-  integrity sha512-H9i+zT3RvHi7tDc+lCmWHJ3ustXveABCr+Vcpl96dNOxgmrx4elQSTC4W93Mlav2opfLV+p0UTHY6L+bpUA4zA==
+"@nestjs/core@11.1.18", "@nestjs/core@^11.1.18", "@nestjs/core@^11.1.9":
+  version "11.1.18"
+  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-11.1.18.tgz#cf3585bc34fd5fd62d3903b89a5512c456b66eef"
+  integrity sha512-wR3DtGyk/LUAiPtbXDuWJJwVkWElKBY0sqnTzf9d4uM3+X18FRZhK7WFc47czsIGOdWuRsMeLYV+1Z9dO4zDEQ==
   dependencies:
     uid "2.0.2"
     "@nuxt/opencollective" "0.4.1"
     fast-safe-stringify "2.1.1"
     iterare "1.2.1"
-    path-to-regexp "8.3.0"
+    path-to-regexp "8.4.2"
     tslib "2.8.1"
 
-"@nestjs/jwt@^11.0.0", "@nestjs/jwt@^11.0.1":
+"@nestjs/cqrs@^11.0.0", "@nestjs/cqrs@^11.0.3":
+  version "11.0.3"
+  resolved "https://registry.yarnpkg.com/@nestjs/cqrs/-/cqrs-11.0.3.tgz#aa6c482c12e883689955b07e3b8c4eb2b417d03d"
+  integrity sha512-2ezBftiXqVfNTzjCrmhazohYhIQzgm8rvM0aKndv73IOOBcVlNuNiQ3HHiHdd4c2w/3MOQDtsGbQHgZUuW6DPw==
+
+"@nestjs/jwt@^11.0.1":
   version "11.0.2"
   resolved "https://registry.yarnpkg.com/@nestjs/jwt/-/jwt-11.0.2.tgz#bd574b2932de75e0d99017204eb08203cf373adf"
   integrity sha512-rK8aE/3/Ma45gAWfCksAXUNbOoSOUudU0Kn3rT39htPF7wsYXtKfjALKeKKJbFrIWbLjsbqfXX5bIJNvgBugGA==
@@ -1580,20 +1417,20 @@
   resolved "https://registry.yarnpkg.com/@nestjs/mapped-types/-/mapped-types-2.1.0.tgz#b9b536b7c3571567aa1d0223db8baa1a51505a19"
   integrity sha512-W+n+rM69XsFdwORF11UqJahn4J3xi4g/ZEOlJNL6KoW5ygWSmBB2p0S2BZ4FQeS/NDH72e6xIcu35SfJnE8bXw==
 
-"@nestjs/passport@^11.0.0", "@nestjs/passport@^11.0.5":
+"@nestjs/passport@^11.0.5":
   version "11.0.5"
   resolved "https://registry.yarnpkg.com/@nestjs/passport/-/passport-11.0.5.tgz#dd3e506c2fb7ddc80fd1321c01cc1a0ca6d6b609"
   integrity sha512-ulQX6mbjlws92PIM15Naes4F4p2JoxGnIJuUsdXQPT+Oo2sqQmENEZXM7eYuimocfHnKlcfZOuyzbA33LwUlOQ==
 
-"@nestjs/platform-express@11.1.11":
-  version "11.1.11"
-  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-11.1.11.tgz#dfb77659cbc45ef8903de5a48927a56cb7c7d1b2"
-  integrity sha512-kyABSskdMRIAMWL0SlbwtDy4yn59RL4HDdwHDz/fxWuv7/53YP8Y2DtV3/sHqY5Er0msMVTZrM38MjqXhYL7gw==
+"@nestjs/platform-express@11.1.18":
+  version "11.1.18"
+  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-11.1.18.tgz#2af7285227c3afd359ea9474681d2ca67039db63"
+  integrity sha512-s6GdHMTa3qx0fJewR74Xa30ysPHfBEqxIwZ7BGSTLoAEQ1vTP24urNl+b6+s49NFLEIOyeNho5fN/9/I17QlOw==
   dependencies:
-    cors "2.8.5"
+    cors "2.8.6"
     express "5.2.1"
-    multer "2.0.2"
-    path-to-regexp "8.3.0"
+    multer "2.1.1"
+    path-to-regexp "8.4.2"
     tslib "2.8.1"
 
 "@nestjs/schematics@^11.0.0", "@nestjs/schematics@^11.0.1":
@@ -1631,17 +1468,12 @@
     path-to-regexp "8.3.0"
     swagger-ui-dist "5.31.0"
 
-"@nestjs/testing@11.1.11":
-  version "11.1.11"
-  resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-11.1.11.tgz#eac6c6b14d7e2ab7d734b46abb47ffae216bb3a8"
-  integrity sha512-Po2aZKXlxuySDEh3Gi05LJ7/BtfTAPRZ3KPTrbpNrTmgGr3rFgEGYpQwN50wXYw0pywoICiFLZSZ/qXsplf6NA==
+"@nestjs/testing@11.1.18":
+  version "11.1.18"
+  resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-11.1.18.tgz#9130fed7ce92b913c5d1389a27e0c98f7695bff3"
+  integrity sha512-frzwNlpBgtAzI3hp/qo57DZoRO4RMTH1wST3QUYEhRTHyfPkLpzkWz3jV/mhApXjD0yT56Ptlzn6zuYPLh87Lw==
   dependencies:
     tslib "2.8.1"
-
-"@nestjs/throttler@^6.0.0", "@nestjs/throttler@^6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@nestjs/throttler/-/throttler-6.5.0.tgz#1ee550a258c4ae697d3978f2c8932adff927439e"
-  integrity sha512-9j0ZRfH0QE1qyrj9JjIRDz5gQLPqq9yVC2nHsrosDVAfI5HHw08/aUAWx9DZLSdQf4HDkmhTTEGLrRFHENvchQ==
 
 "@nestjs/typeorm@11.0.0", "@nestjs/typeorm@^11.0.0":
   version "11.0.0"
@@ -1976,6 +1808,11 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.4.tgz#0b92dcc0cc1c81f6f306a381f28e31b1a56536e9"
   integrity sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==
 
+"@tsyche/membrane@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@tsyche/membrane/-/membrane-0.7.0.tgz#22f32e6fa658badfd712c4ee00a4648600f7b62b"
+  integrity sha512-5nEwOARsF6xuYzrJgDtWWPYv2hN10sd4xRIBWtJrnFnREyzafiwVZH71T7Qrrqas1fs/mWLkBHAOjklRJ70pfw==
+
 "@turbo/gen@^1.10.7":
   version "1.13.4"
   resolved "https://registry.yarnpkg.com/@turbo/gen/-/gen-1.13.4.tgz#9bb634229906a7cf616b27245cde536d296fba46"
@@ -2176,7 +2013,7 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
-"@types/jsonwebtoken@9.0.10", "@types/jsonwebtoken@^9.0.3", "@types/jsonwebtoken@^9.0.4":
+"@types/jsonwebtoken@9.0.10", "@types/jsonwebtoken@^9.0.3":
   version "9.0.10"
   resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-9.0.10.tgz#a7932a47177dcd4283b6146f3bd5c26d82647f09"
   integrity sha512-asx5hIG9Qmf/1oStypjanR7iKTv0gXQ1Ov/jfrX6kS/EO0OFni8orbmGCn0672NHR3kXHwpAwR+B368ZGN/2rA==
@@ -2647,11 +2484,6 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-"@zmotivat0r/o0@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@zmotivat0r/o0/-/o0-1.0.2.tgz#5eb069a631678736234d4c34b07c3a2bae8f8e4b"
-  integrity sha512-wQ/sHqJEtYb+QtgxtWlBpGASFZ2avpoRWbvpginEuy7howZHTZTy3zYMRMaBKok4bZwIGU5bjmzE59+m1IWqKQ==
-
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -3084,11 +2916,6 @@ base64-js@^1.3.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
-
-base64url@3.x.x:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/base64url/-/base64url-3.0.1.tgz#6399d572e2bc3f90a9a8b22d5dbb0a32d33f788d"
-  integrity sha512-ir1UPr3dkwexU7FdV8qBBbNDRUhMmIekYMFZfi+C/sLNnRESKPl23nB9b2pltqfOQNnGzsDdId90AEtG5tCx4A==
 
 baseline-browser-mapping@^2.9.0:
   version "2.9.19"
@@ -3641,10 +3468,10 @@ core-util-is@^1.0.3:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.3.tgz#a6042d3634c2b27e9328f837b965fac83808db85"
   integrity sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==
 
-cors@2.8.5:
-  version "2.8.5"
-  resolved "https://registry.yarnpkg.com/cors/-/cors-2.8.5.tgz#eac11da51592dd86b9f06f6e7ac293b3df875d29"
-  integrity sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==
+cors@2.8.6:
+  version "2.8.6"
+  resolved "https://registry.yarnpkg.com/cors/-/cors-2.8.6.tgz#ff5dd69bd95e547503820d29aba4f8faf8dfec96"
+  integrity sha512-tJtZBBHA6vjIAaF6EnIaq6laBBP9aq/Y3ouVJjEfoHbRBcHBAHYcMh/w8LDrk2PvIMMq8gmopa5D4V8RmbrxGw==
   dependencies:
     object-assign "^4"
     vary "^1"
@@ -4500,11 +4327,6 @@ etag@^1.8.1:
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==
 
-eventemitter2@^6.4.9:
-  version "6.4.9"
-  resolved "https://registry.yarnpkg.com/eventemitter2/-/eventemitter2-6.4.9.tgz#41f2750781b4230ed58827bc119d293471ecb125"
-  integrity sha512-JEPTiaOt9f04oa6NOkc4aH+nVp5I3wEjpHbIPqfgCdD5v5bUzy7xQqwcVO2aDQgOWhI28da57HksMrzK9HlRxg==
-
 events@^3.2.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
@@ -4681,10 +4503,10 @@ file-entry-cache@^8.0.0:
   dependencies:
     flat-cache "^4.0.0"
 
-file-type@21.2.0:
-  version "21.2.0"
-  resolved "https://registry.yarnpkg.com/file-type/-/file-type-21.2.0.tgz#153f7d7d4279ba440f84ae80fd99cdd27fba788c"
-  integrity sha512-vCYBgFOrJQLoTzDyAXAL/RFfKnXXpUYt4+tipVy26nJJhT7ftgGETf2tAQF59EEL61i3MrorV/PG6tf7LJK7eg==
+file-type@21.3.4:
+  version "21.3.4"
+  resolved "https://registry.yarnpkg.com/file-type/-/file-type-21.3.4.tgz#e3f902faee8ec4aa152909fc902a7a77f9c06725"
+  integrity sha512-Ievi/yy8DS3ygGvT47PjSfdFoX+2isQueoYP1cntFW1JLYAuS4GD7NUPGg4zv2iZfV52uDyk5w5Z0TdpRS6Q1g==
   dependencies:
     "@tokenizer/inflate" "^0.4.1"
     strtok3 "^10.3.4"
@@ -6088,11 +5910,6 @@ jiti@^2.6.1:
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-2.6.1.tgz#178ef2fc9a1a594248c20627cd820187a4d78d92"
   integrity sha512-ekilCSN1jwRvIbgeg/57YFh8qQDNbwDb9xT/qu2DAHbFFZUicIl4ygVaAvzveMhMVr3LnpSKTNnwt8PoOfmKhQ==
 
-jose@^4.15.4:
-  version "4.15.9"
-  resolved "https://registry.yarnpkg.com/jose/-/jose-4.15.9.tgz#9b68eda29e9a0614c042fa29387196c7dd800100"
-  integrity sha512-1vUQX+IdDMVPj4k8kOxgUqlcK518yluMuGZwqlr44FS1ppZB/5GWh4rZG89erpOBOJjU/OBsnCVFfapsRz6nEA==
-
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -6195,17 +6012,6 @@ jwa@^2.0.1:
     buffer-equal-constant-time "^1.0.1"
     ecdsa-sig-formatter "1.0.11"
     safe-buffer "^5.0.1"
-
-jwks-rsa@^3.1.0:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/jwks-rsa/-/jwks-rsa-3.2.2.tgz#f6d528306befacdbc62c8c0272761faac55ffbb3"
-  integrity sha512-BqTyEDV+lS8F2trk3A+qJnxV5Q9EqKCBJOPti3W97r7qTympCZjb7h2X6f2kc+0K3rsSTY1/6YG2eaXKoj497w==
-  dependencies:
-    "@types/jsonwebtoken" "^9.0.4"
-    debug "^4.3.4"
-    jose "^4.15.4"
-    limiter "^1.1.5"
-    lru-memoizer "^2.2.0"
 
 jws@^4.0.1:
   version "4.0.1"
@@ -6339,11 +6145,6 @@ lightningcss@1.30.2:
     lightningcss-win32-arm64-msvc "1.30.2"
     lightningcss-win32-x64-msvc "1.30.2"
 
-limiter@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/limiter/-/limiter-1.1.5.tgz#8f92a25b3b16c6131293a0cc834b4a838a2aa7c2"
-  integrity sha512-FWWMIEOxz3GwUI4Ts/IvgVy6LPvoMPgjMdQ185nN6psJyBJ4yOpzqm695/h5umdLJg2vW3GR5iG11MAkR2AzJA==
-
 lines-and-columns@^1.1.6:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.2.4.tgz#eca284f75d2965079309dc0ad9255abb2ebc1632"
@@ -6372,11 +6173,6 @@ locate-path@^6.0.0:
   integrity sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==
   dependencies:
     p-locate "^5.0.0"
-
-lodash.clonedeep@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
-  integrity sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==
 
 lodash.get@^4.4.2:
   version "4.4.2"
@@ -6472,13 +6268,6 @@ lower-case@^1.1.0, lower-case@^1.1.1, lower-case@^1.1.2:
   resolved "https://registry.yarnpkg.com/lower-case/-/lower-case-1.1.4.tgz#9a2cabd1b9e8e0ae993a4bf7d5875c39c42e8eac"
   integrity sha512-2Fgx1Ycm599x+WGpIYwJOvsjmXFzTSc34IwDWALRA/8AopUKAVPwfJ+h5+f85BCp0PWmmJcWzEpxOpoXycMpdA==
 
-lru-cache@6.0.0, lru-cache@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-6.0.0.tgz#6d6fe6570ebd96aaf90fcad1dafa3b2566db3a94"
-  integrity sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==
-  dependencies:
-    yallist "^4.0.0"
-
 lru-cache@^10.2.0:
   version "10.4.3"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-10.4.3.tgz#410fc8a17b70e598013df257c2446b7f3383f119"
@@ -6491,18 +6280,17 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
+lru-cache@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-6.0.0.tgz#6d6fe6570ebd96aaf90fcad1dafa3b2566db3a94"
+  integrity sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==
+  dependencies:
+    yallist "^4.0.0"
+
 lru-cache@^7.14.1:
   version "7.18.3"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.18.3.tgz#f793896e0fd0e954a59dfdd82f0773808df6aa89"
   integrity sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==
-
-lru-memoizer@^2.2.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/lru-memoizer/-/lru-memoizer-2.3.0.tgz#ef0fbc021bceb666794b145eefac6be49dc47f31"
-  integrity sha512-GXn7gyHAMhO13WSKrIiNfztwxodVsP8IoZ3XfrJV4yH2x0/OeTO/FIaAHTY5YekdGgW94njfuKmyyt1E0mR6Ug==
-  dependencies:
-    lodash.clonedeep "^4.5.0"
-    lru-cache "6.0.0"
 
 magic-string@0.30.17:
   version "0.30.17"
@@ -6752,7 +6540,7 @@ mkdirp-classic@^0.5.2, mkdirp-classic@^0.5.3:
   resolved "https://registry.yarnpkg.com/mkdirp-classic/-/mkdirp-classic-0.5.3.tgz#fa10c9115cc6d8865be221ba47ee9bed78601113"
   integrity sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==
 
-mkdirp@^0.5.1, mkdirp@^0.5.6:
+mkdirp@^0.5.1:
   version "0.5.6"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.6.tgz#7def03d2432dcae4ba1d611445c48396062255f6"
   integrity sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==
@@ -6774,18 +6562,15 @@ ms@^2.0.0, ms@^2.1.1, ms@^2.1.3:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
 
-multer@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/multer/-/multer-2.0.2.tgz#08a8aa8255865388c387aaf041426b0c87bf58dd"
-  integrity sha512-u7f2xaZ/UG8oLXHvtF/oWTRvT44p9ecwBBqTwgJVq0+4BW1g8OW01TyMEGWBHbyMOYVHXslaut7qEQ1meATXgw==
+multer@2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/multer/-/multer-2.1.1.tgz#122d819244fbdfee1efddd9147426691014385b7"
+  integrity sha512-mo+QTzKlx8R7E5ylSXxWzGoXoZbOsRMpyitcht8By2KHvMbf3tjwosZ/Mu/XYU6UuJ3VZnODIrak5ZrPiPyB6A==
   dependencies:
     append-field "^1.0.0"
     busboy "^1.6.0"
     concat-stream "^2.0.0"
-    mkdirp "^0.5.6"
-    object-assign "^4.1.1"
     type-is "^1.6.18"
-    xtend "^4.0.2"
 
 mute-stream@0.0.8:
   version "0.0.8"
@@ -6996,11 +6781,6 @@ npmlog@^6.0.0:
     console-control-strings "^1.1.0"
     gauge "^4.0.3"
     set-blocking "^2.0.0"
-
-oauth@0.10.x:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/oauth/-/oauth-0.10.2.tgz#fd7139b0ce1a1037bd11fa4e236afc588132418c"
-  integrity sha512-JtFnB+8nxDEXgNyniwz573xxbKSOu3R8D40xQKqcjwJ2CDkYqUDI53o6IuzDJBx60Z8VKCm271+t8iFjakrl8Q==
 
 object-assign@^4, object-assign@^4.0.1, object-assign@^4.1.1:
   version "4.1.1"
@@ -7267,28 +7047,6 @@ pascal-case@^2.0.0:
     camel-case "^3.0.0"
     upper-case-first "^1.1.0"
 
-passport-apple@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/passport-apple/-/passport-apple-2.0.2.tgz#a9238d09da120a0ee43c2745232d43a81e6b6469"
-  integrity sha512-JRXomYvirWeIq11pa/SwhXXxekFWoukMcQu45BDl3Kw5WobtWF0iw99vpkBwPEpdaou0DDSq4udxR34T6eZkdw==
-  dependencies:
-    jsonwebtoken "^9.0.0"
-    passport-oauth2 "^1.6.1"
-
-passport-github@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/passport-github/-/passport-github-1.1.0.tgz#8ce1e3fcd61ad7578eb1df595839e4aea12355d4"
-  integrity sha512-XARXJycE6fFh/dxF+Uut8OjlwbFEXgbPVj/+V+K7cvriRK7VcAOm+NgBmbiLM9Qv3SSxEAV+V6fIk89nYHXa8A==
-  dependencies:
-    passport-oauth2 "1.x.x"
-
-passport-google-oauth20@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/passport-google-oauth20/-/passport-google-oauth20-2.0.0.tgz#0d241b2d21ebd3dc7f2b60669ec4d587e3a674ef"
-  integrity sha512-KSk6IJ15RoxuGq7D1UKK/8qKhNfzbLeLrG3gkLZ7p4A6DBCcv7xpyQwuXtWdpyR0+E0mwkpjY1VfPOhxQrKzdQ==
-  dependencies:
-    passport-oauth2 "1.x.x"
-
 passport-jwt@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/passport-jwt/-/passport-jwt-4.0.1.tgz#c443795eff322c38d173faa0a3c481479646ec3d"
@@ -7303,17 +7061,6 @@ passport-local@^1.0.0:
   integrity sha512-9wCE6qKznvf9mQYYbgJ3sVOHmCWoUNMVFoZzNoznmISbhnNNPhN9xfY3sLmScHMetEJeoY7CXwfhCe7argfQow==
   dependencies:
     passport-strategy "1.x.x"
-
-passport-oauth2@1.x.x, passport-oauth2@^1.6.1:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/passport-oauth2/-/passport-oauth2-1.8.0.tgz#55725771d160f09bbb191828d5e3d559eee079c8"
-  integrity sha512-cjsQbOrXIDE4P8nNb3FQRCCmJJ/utnFKEz2NX209f7KOHPoX18gF7gBzBbLLsj2/je4KrgiwLLGjf0lm9rtTBA==
-  dependencies:
-    base64url "3.x.x"
-    oauth "0.10.x"
-    passport-strategy "1.x.x"
-    uid2 "0.0.x"
-    utils-merge "1.x.x"
 
 passport-strategy@1.x.x, passport-strategy@^1.0.0:
   version "1.0.0"
@@ -7363,6 +7110,11 @@ path-to-regexp@8.3.0, path-to-regexp@^8.0.0:
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-8.3.0.tgz#aa818a6981f99321003a08987d3cec9c3474cd1f"
   integrity sha512-7jdwVIRtsP8MYpdXSwOS0YdD0Du+qOoF/AEPIt88PcCFrZCzx41oxku1jD88hZBwbNUIEfpqvuhjFaMAqMTWnA==
+
+path-to-regexp@8.4.2:
+  version "8.4.2"
+  resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-8.4.2.tgz#795c420c4f7ca45c5b887366f622ee0c9852cccd"
+  integrity sha512-qRcuIdP69NPm4qbACK+aDogI5CBDMi1jKe0ry5rSQJz8JVLsC7jV8XpiJjGRLLol3N+R5ihGYcrPLTno6pAdBA==
 
 path-type@^4.0.0:
   version "4.0.0"
@@ -7462,7 +7214,7 @@ pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-pluralize@8.0.0:
+pluralize@8.0.0, pluralize@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-8.0.0.tgz#1a6fa16a38d12a1901e0320fa017051c539ce3b1"
   integrity sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==
@@ -8320,7 +8072,6 @@ string-length@^4.0.1:
     strip-ansi "^6.0.0"
 
 "string-width-cjs@npm:string-width@^4.2.0", string-width@4.2.3, "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3, string-width@^5.1.2:
-  name string-width-cjs
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -8405,7 +8156,6 @@ string_decoder@^1.1.1:
     safe-buffer "~5.2.0"
 
 "strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@6.0.1, strip-ansi@^6.0.0, strip-ansi@^6.0.1, strip-ansi@^7.0.1:
-  name strip-ansi-cjs
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -8971,11 +8721,6 @@ uglify-js@^3.1.4:
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.19.3.tgz#82315e9bbc6f2b25888858acd1fff8441035b77f"
   integrity sha512-v3Xu+yuwBXisp6QYTcH4UbH+xYJXqnq2m/LtQVWKWzYc1iehYnLixoQDN9FH6/j9/oybfd6W9Ghwkl8+UMKTKQ==
 
-uid2@0.0.x:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/uid2/-/uid2-0.0.4.tgz#033f3b1d5d32505f5ce5f888b9f3b667123c0a44"
-  integrity sha512-IevTus0SbGwQzYh3+fRsAMTVVPOoIVufzacXcHPmdlle1jUpq7BRL+mw3dgeLanvGZdwwbWhRV6XrcFNdBmjWA==
-
 uid@2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/uid/-/uid-2.0.2.tgz#4b5782abf0f2feeefc00fa88006b2b3b7af3e3b9"
@@ -9099,7 +8844,7 @@ util-deprecate@^1.0.1:
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
 
-utils-merge@1.x.x, utils-merge@^1.0.1:
+utils-merge@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==
@@ -9292,7 +9037,6 @@ wordwrap@^1.0.0:
   integrity sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==
 
 "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@7.0.0, wrap-ansi@^6.0.1, wrap-ansi@^6.2.0, wrap-ansi@^7.0.0, wrap-ansi@^8.1.0:
-  name wrap-ansi-cjs
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
@@ -9314,7 +9058,7 @@ write-file-atomic@^4.0.2:
     imurmurhash "^0.1.4"
     signal-exit "^3.0.7"
 
-xtend@^4.0.0, xtend@^4.0.2:
+xtend@^4.0.0:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.2.tgz#bb72779f5fa465186b1f438f674fa347fdb5db54"
   integrity sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==
