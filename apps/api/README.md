@@ -1,6 +1,6 @@
 # Rockets Starter — API
 
-NestJS 11 backend for **Rockets Starter**: TypeORM, PostgreSQL, Rockets Auth and Concepta (CRUD, access control). Runs on port **3001**.
+NestJS 11 backend using **@bitwild/rockets** (v2 DSL), TypeORM, and SQLite. Runs on port **3001**.
 
 ## Quick start
 
@@ -8,7 +8,6 @@ From repo root:
 
 ```bash
 cp apps/api/.env.example apps/api/.env
-# Edit apps/api/.env (DATABASE_URL, etc.)
 yarn dev:api
 ```
 
@@ -16,30 +15,39 @@ Or from this folder:
 
 ```bash
 cp .env.example .env
-yarn install
 yarn dev
 ```
+
+Swagger UI: http://localhost:3001/api
 
 ## Stack
 
 - **NestJS 11** — API framework
-- **TypeORM** — PostgreSQL, migrations
-- **Rockets Auth** — Auth, user/role, invitations, OTP
-- **Concepta** — CRUD, typeorm-ext, access-control (ACL in `src/app.acl.ts`)
+- **@bitwild/rockets** — `defineResource`, `defineModuleResource`, CRUD, hooks, auth guard
+- **TypeORM** — SQLite (dev), migrations for CLI/seeding
+- **Fake auth** — static dev user; no login endpoint (replace with a real adapter for production)
+
+## Auth behaviour
+
+| Resource | Guard | Notes |
+|----------|-------|-------|
+| `announcement` | skipped (`@AuthPublic()`) | truly public |
+| `category`, `task`, `report`, `/me` | `AuthServerGuard` runs | fake adapter always matches — any request gets the dev user |
+
+Replace `defineFakeAuth()` when you need real token validation.
 
 ## Database
 
-- **PostgreSQL** (see [Database Setup](#database-setup) below).
-- Migrations: `yarn migration:run`, `yarn migration:generate ./src/migrations/Name`
-- Seeding: `yarn seed:run`, `yarn sandbox:init` (migrations + seed)
+- **SQLite** file: `DATABASE_PATH` (default `rockets-starter.sqlite` under `apps/api`)
+- Dev: `synchronize: true` via `src/config/database.config.ts`
+- CLI: `yarn sandbox:init` (migrations + seed)
 
-## Database setup
-
-1. Create DB: `createdb rockets-starter` (or `CREATE DATABASE "rockets-starter";` in psql).
-2. Copy `.env.example` to `.env` and set `DATABASE_URL=postgresql://user:pass@localhost:5432/rockets-starter`.
-3. Run `yarn sandbox:init` (or `yarn migration:run` then `yarn seed:run`).
-
-Config: `src/config/typeorm.settings.ts`, `src/config/rockets-auth.settings.ts`, `src/config/rockets.settings.ts`.
+```bash
+yarn migration:run
+yarn migration:generate ./src/migrations/MigrationName
+yarn seed:run
+yarn sandbox:init
+```
 
 ## Scripts
 
@@ -56,12 +64,30 @@ Config: `src/config/typeorm.settings.ts`, `src/config/rockets-auth.settings.ts`,
 
 ## Project layout
 
-- `src/app.module.ts` — Root module (RocketsAuthModule, RocketsModule, ACL)
-- `src/app.acl.ts` — Roles and resources (AppRole, AppResource, acRules)
-- `src/access-control.service.ts` — User/roles for ACL guard
-- `src/modules/` — User, role, invitation (SDK-managed); add new feature modules here (see root [AGENTS.md](../../AGENTS.md) and [btwld/skills](https://github.com/btwld/skills))
+```
+src/
+├── app.module.ts              # composition root — RocketsModule.forRoot only
+├── auth/                      # fake auth bootstrap
+├── config/database.config.ts  # SQLite + entity list for CLI
+├── shared/domain/             # shared enums (AppUserRole)
+└── modules/                   # bounded contexts (DDD)
+    ├── announcement/          # public CRUD (defineResource)
+    ├── category/              # owned CRUD + soft delete
+    ├── task/                  # owned CRUD + soft delete
+    ├── report/                # custom endpoint (defineModuleResource)
+    ├── user-metadata/         # Rockets userMetadata wiring
+    └── user/                  # UserEntity for seeder
+```
+
+Each module:
+
+- `domain/` — enums, domain types
+- `application/` — DTOs, controllers, services
+- `infrastructure/` — TypeORM entities
+- `{name}.resource.ts` or `{name}.feature.ts` — Rockets registration
+- `index.ts` — public export
 
 ## Docs
 
-- Monorepo: [README](../../README.md), [AGENTS.md](../../AGENTS.md)
-- Guides and generation: [btwld/skills](https://github.com/btwld/skills)
+- Monorepo: [README](../../README.md)
+- Rockets patterns: [btwld/skills](https://github.com/btwld/skills)

@@ -1,8 +1,8 @@
 import { Seeder } from '@concepta/typeorm-seeding';
 import { FAKE_AUTH_USER_ID } from './auth/fake-auth.constants';
-import { UserEntity } from './entities/user.entity';
-import { UserMetadataEntity } from './entities/user-metadata.entity';
-import { AppUserRole } from './interfaces/user.interface';
+import { AppUserRole } from './shared/domain/user-role.enum';
+import { UserEntity } from './modules/user';
+import { UserMetadataEntity } from './modules/user-metadata/infrastructure/user-metadata.entity';
 
 export class AppSeeder extends Seeder {
   async run(): Promise<void> {

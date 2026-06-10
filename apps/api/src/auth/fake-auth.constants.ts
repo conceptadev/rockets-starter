@@ -1,5 +1,5 @@
 import type { AuthorizedUser } from '@bitwild/rockets';
-import { AppUserRole } from '../interfaces/user.interface';
+import { AppUserRole } from '../shared/domain/user-role.enum';
 
 export const FAKE_AUTH_USER_ID = '00000000-0000-0000-0000-000000000001';
 

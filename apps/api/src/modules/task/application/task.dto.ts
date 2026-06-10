@@ -14,7 +14,60 @@ import {
   PartialType,
   PickType,
 } from '@nestjs/swagger';
-import { TaskStatus } from '../../interfaces/task.interface';
+import { TaskStatus } from '../domain/task-status.enum';
+
+@Exclude()
+class TaskFields {
+  @Expose()
+  @ApiProperty({ format: 'uuid' })
+  @IsUUID()
+  id!: string;
+
+  @Expose()
+  @ApiProperty({ example: 'Write docs' })
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(255)
+  title!: string;
+
+  @Expose()
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  @Expose()
+  @ApiProperty({ enum: TaskStatus })
+  @IsEnum(TaskStatus)
+  status!: TaskStatus;
+
+  @Expose()
+  @ApiPropertyOptional({ format: 'uuid' })
+  @IsOptional()
+  @IsUUID()
+  categoryId?: string;
+
+  @Expose()
+  @ApiProperty({ format: 'uuid' })
+  @IsUUID()
+  userId!: string;
+
+  @Expose()
+  @ApiProperty({ type: String, format: 'date-time' })
+  dateCreated!: Date;
+
+  @Expose()
+  @ApiProperty({ type: String, format: 'date-time' })
+  dateUpdated!: Date;
+
+  @Expose()
+  @ApiPropertyOptional({ type: String, format: 'date-time', nullable: true })
+  dateDeleted!: Date | null;
+
+  @Expose()
+  @ApiProperty()
+  version!: number;
+}
 
 @Exclude()
 class TaskCreateFields {
@@ -50,6 +103,8 @@ class TaskUpdateFields extends PartialType(TaskCreateFields) {
   @IsUUID()
   id!: string;
 }
+
+export class TaskDto extends TaskFields {}
 
 export class TaskCreateDto extends TaskCreateFields {}
 

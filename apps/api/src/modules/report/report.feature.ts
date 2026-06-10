@@ -1,6 +1,6 @@
 import { defineModuleResource } from '@bitwild/rockets';
-import { ReportController } from './report.controller';
-import { ReportService } from './report.service';
+import { ReportController } from './application/report.controller';
+import { ReportService } from './application/report.service';
 
 export const reportFeature = defineModuleResource({
   controllers: [ReportController],

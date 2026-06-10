@@ -1,131 +1,54 @@
 # Rockets Starter
 
-A full-stack monorepo boilerplate built with Turborepo, featuring NestJS 11 backend and Next.js frontend.
+Monorepo boilerplate: NestJS 11 API (`@bitwild/rockets` v2 DSL) + Next.js frontend, managed with Turborepo.
 
-## 🚀 Quick Start
+## Quick start
 
 ```bash
-# Install dependencies
 yarn install
-
-# Configure environment
 cp apps/api/.env.example apps/api/.env
-
-# Run development servers
 yarn dev
-
-# Build all applications
-yarn build
 ```
 
-## 📦 What's Inside
+| App | URL |
+|-----|-----|
+| Web | http://localhost:3000 |
+| API | http://localhost:3001 |
+| Swagger | http://localhost:3001/api |
 
-This monorepo includes the following packages and applications:
+## What's inside
 
-### Applications
-- `api`: NestJS 11 backend server with TypeORM and PostgreSQL (runs on port 3001)
-- `web`: Next.js frontend application with TypeScript and Tailwind CSS (runs on port 3000)
+- **`apps/api`** — NestJS backend, SQLite, fake auth, module-based DDD layout
+- **`apps/web`** — Next.js + Tailwind
+- **`packages/`** — shared ESLint and TypeScript configs
 
-### Packages
-- `typescript-config`: Shared TypeScript configurations for different environments
-- `eslint-config`: Shared ESLint configurations for Next.js and NestJS
+## API architecture (v2)
 
-## 🏗️ Project Structure
+Single dependency: **`@bitwild/rockets`**. No `@bitwild/rockets-auth`, no manual CRUD controllers.
 
-```
-rockets-starter/
-├── apps/
-│   ├── api/          # NestJS backend
-│   └── web/          # Next.js frontend
-├── development-guides/     # README only — guides, skills, agents: btwld/skills
-├── packages/
-│   ├── typescript-config/  # Shared TypeScript configs
-│   └── eslint-config/      # Shared ESLint configs
-├── package.json
-└── turbo.json
-```
+- **CRUD resources** — `defineResource()` in `src/modules/{name}/{name}.resource.ts`
+- **Custom features** — `defineModuleResource()` (e.g. `modules/report/`)
+- **Owned data** — `OwnerStampHook` + `OwnerScopeHook` on category/task
+- **Public data** — `announcement` with `@AuthPublic()`
+- **Auth** — `defineFakeAuth()` returns a static dev user (swap for production)
 
-## 🛠️ Available Scripts
+See [apps/api/README.md](apps/api/README.md) for layout and scripts.
 
-- `yarn dev` - Start all applications in development mode
-- `yarn dev:api` - Start only the API
-- `yarn dev:web` - Start only the Web app
-- `yarn build` - Build all applications for production
-- `yarn lint` - Lint all applications
-- `yarn type-check` - Run TypeScript type checking
-- `yarn clean` - Clean all build artifacts
+## Scripts
 
-## 🔧 Technology Stack
+- `yarn dev` — all apps
+- `yarn dev:api` / `yarn dev:web` — single app
+- `yarn build` — production build
+- `yarn type-check` — TypeScript
+- `yarn lint` — ESLint
 
-### Backend (API)
-- **NestJS 11**: Progressive Node.js framework
-- **TypeORM**: Object-relational mapping
-- **PostgreSQL**: Relational database for development
-- **Swagger**: API documentation
+## development-guides/
 
-### Frontend (Web)
-- **Next.js 16**: React framework with App Router
-- **TypeScript**: Type safety
-- **Tailwind CSS**: Utility-first CSS framework
-- **ESLint**: Code linting
+Markdown guides in this folder describe **legacy v7 patterns** (manual CRUD adapters, Postgres, rockets-auth). For the current v2 DSL, use [btwld/skills](https://github.com/btwld/skills) instead.
 
-### Development Tools
-- **Turborepo**: Monorepo build system
-- **Yarn Workspaces**: Package management
-- **TypeScript**: Shared type definitions
-- **ESLint**: Code quality
+## Next steps
 
-## AI & programmability
-
-For better AI-assisted development (Claude Code, Cursor), we recommend:
-
-| Type | Tool | Purpose |
-|------|------|---------|
-| **MCP** | [Context7](https://context7.com/) | Up-to-date framework docs (NestJS, Next.js, TypeORM) in context |
-| **Plugin** | [Frontend Design](https://claude.com/plugins/frontend-design) | Production-grade UI generation for `apps/web` |
-| **Plugin** | Code Review, GitHub | PR review and repo management (Claude Code marketplace) |
-
-Full setup: see **AI_PLUGINS_AND_MCP.md** in [btwld/skills](https://github.com/btwld/skills). For AI task routing, see [AGENTS.md](AGENTS.md). **Guides, skills, commands and agents** live in [btwld/skills](https://github.com/btwld/skills) — install the plugin or clone and copy; [development-guides/README.md](development-guides/README.md) in this repo has the link and copy instructions.
-
-## 🚀 Getting Started
-
-1. **Clone and install**
-   ```bash
-   git clone <repository-url>
-   cd rockets-starter
-   yarn install
-   ```
-
-2. **Start development**
-   ```bash
-   yarn dev
-   ```
-
-3. **Access applications**
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:3001
-
-## 🏭 Production Build
-
-```bash
-# Build all applications
-yarn build
-
-# Start production servers
-cd apps/api && yarn start:prod
-cd apps/web && yarn start
-```
-
-## 📝 Next Steps
-
-Rockets Starter already includes authentication (Rockets Auth), ACL, and user/role modules. Consider:
-
-- Adding new feature modules (see [AGENTS.md](AGENTS.md) and [btwld/skills](https://github.com/btwld/skills) for guides and generation)
-- Database configuration for production (see `apps/api/README.md`)
-- Frontend pages and components in `apps/web`
-- Tests: `cd apps/api && yarn test` (unit), `yarn test:e2e` (e2e)
-- CI/CD and Docker for your environment
-
-## 🤝 Contributing
-
-Customize this baseline for your project. For Rockets SDK patterns and AI tooling, see [btwld/skills](https://github.com/btwld/skills).
+- Replace fake auth with a real adapter
+- Add modules under `apps/api/src/modules/`
+- Extend `apps/web`
+- Tests: `cd apps/api && yarn test && yarn test:e2e`

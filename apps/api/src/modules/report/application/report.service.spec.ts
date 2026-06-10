@@ -1,7 +1,7 @@
 import { Where } from '@bitwild/rockets';
-import { CategoryEntity } from '../../entities/category.entity';
-import { TaskEntity } from '../../entities/task.entity';
-import { TaskStatus } from '../../interfaces/task.interface';
+import { CategoryEntity } from '../../category/infrastructure/category.entity';
+import { TaskEntity } from '../../task/infrastructure/task.entity';
+import { TaskStatus } from '../../task/domain/task-status.enum';
 import { ReportService } from './report.service';
 import type { RepositoryInterface } from '@bitwild/rockets';
 

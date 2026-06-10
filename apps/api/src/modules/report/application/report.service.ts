@@ -4,10 +4,10 @@ import {
   Where,
   type RepositoryInterface,
 } from '@bitwild/rockets';
+import { CategoryEntity } from '../../category/infrastructure/category.entity';
+import { TaskEntity } from '../../task/infrastructure/task.entity';
+import { TaskStatus } from '../../task/domain/task-status.enum';
 import { ReportSummaryDto } from './report.dto';
-import { CategoryEntity } from '../../entities/category.entity';
-import { TaskEntity } from '../../entities/task.entity';
-import { TaskStatus } from '../../interfaces/task.interface';
 
 @Injectable()
 export class ReportService {

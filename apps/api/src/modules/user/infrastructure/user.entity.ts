@@ -4,7 +4,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { AppUserRole } from '../interfaces/user.interface';
+import { AppUserRole } from '../../../shared/domain/user-role.enum';
 
 @Entity('users')
 export class UserEntity {
