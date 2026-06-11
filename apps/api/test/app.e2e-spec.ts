@@ -2,14 +2,29 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
+import { MicrosoftTokenVerifierService } from '../src/auth-microsoft';
+import { AppUserRole } from '../src/shared/domain/user-role.enum';
 
-describe('AppController (e2e)', () => {
+describe('App (e2e)', () => {
   let app: INestApplication;
+
+  const verifierStub = {
+    isMicrosoftToken: () => true,
+    verify: async () => ({
+      oid: '00000000-0000-0000-0000-000000000001',
+      sub: '00000000-0000-0000-0000-000000000001',
+      preferred_username: 'jane@company.com',
+      roles: [AppUserRole.ADMIN],
+    }),
+  };
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
-    }).compile();
+    })
+      .overrideProvider(MicrosoftTokenVerifierService)
+      .useValue(verifierStub)
+      .compile();
 
     app = moduleFixture.createNestApplication();
     app.useGlobalPipes(
@@ -25,28 +40,29 @@ describe('AppController (e2e)', () => {
     await app.close();
   });
 
-  it('GET / returns welcome message without auth', () => {
+  it('GET /me rejects requests without a bearer token', () => {
+    return request(app.getHttpServer()).get('/me').expect(401);
+  });
+
+  it('GET /me accepts a verified Microsoft token', () => {
     return request(app.getHttpServer())
-      .get('/')
+      .get('/me')
+      .set('Authorization', 'Bearer stubbed-microsoft-token')
       .expect(200)
-      .expect('Hello World!');
+      .expect((res) => {
+        expect(res.body.email).toBe('jane@company.com');
+      });
   });
 
-  it('GET /categories works without a bearer token (fake auth)', () => {
-    return request(app.getHttpServer()).get('/categories').expect(200);
-  });
-
-  it('GET /announcements is public (guard skipped)', () => {
-    return request(app.getHttpServer()).get('/announcements').expect(200);
-  });
-
-  it('POST /announcements is public (no actor / owner hook required)', () => {
+  it('PATCH /me updates user metadata', () => {
     return request(app.getHttpServer())
-      .post('/announcements')
-      .send({
-        title: 'Welcome',
-        body: 'Public announcements do not require authentication.',
-      })
-      .expect(201);
+      .patch('/me')
+      .set('Authorization', 'Bearer stubbed-microsoft-token')
+      .send({ userMetadata: { firstName: 'Jane', lastName: 'Doe' } })
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.userMetadata.firstName).toBe('Jane');
+        expect(res.body.userMetadata.lastName).toBe('Doe');
+      });
   });
 });

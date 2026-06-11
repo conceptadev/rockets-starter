@@ -1,18 +1,8 @@
 import type { DataSourceOptions } from 'typeorm';
 import type { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { AnnouncementEntity } from '../modules/announcement/infrastructure/announcement.entity';
-import { CategoryEntity } from '../modules/category/infrastructure/category.entity';
-import { TaskEntity } from '../modules/task/infrastructure/task.entity';
-import { UserEntity } from '../modules/user';
 import { UserMetadataEntity } from '../modules/user-metadata/infrastructure/user-metadata.entity';
 
-const ENTITIES = [
-  UserEntity,
-  UserMetadataEntity,
-  AnnouncementEntity,
-  CategoryEntity,
-  TaskEntity,
-];
+const ENTITIES = [UserMetadataEntity];
 
 export function getSqliteDatabasePath(): string {
   return process.env.DATABASE_PATH ?? 'rockets-starter.sqlite';

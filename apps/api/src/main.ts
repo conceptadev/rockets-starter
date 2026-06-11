@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule } from '@nestjs/swagger';
@@ -21,7 +22,7 @@ async function bootstrap() {
   swaggerUiService
     .builder()
     .setTitle('Rockets Starter API')
-    .setDescription('Rockets SDK starter with fake auth adapter')
+    .setDescription('Rockets SDK starter with Microsoft 365 (Entra ID) auth')
     .setVersion('1.0')
     .addBearerAuth();
 

@@ -192,6 +192,9 @@ local/
 *.backup
 *~
 
+.playwright-mcp/
+.rockets/
+
 # Lock files (uncomment if you don't want to commit)
 # package-lock.json
 # yarn.lock
