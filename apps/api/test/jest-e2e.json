@@ -26,6 +26,10 @@
     "/node_modules/(?!@nestjs/)"
   ],
   "moduleNameMapper": {
+    "^@nestjs/swagger$": "<rootDir>/swagger.shim.js",
+    "^@stargate/server$": "<rootDir>/stargate-server.shim.js",
+    "^@stargate/server/nest$": "<rootDir>/stargate-server-nest.shim.js",
+    "^@stargate/engine$": "<rootDir>/stargate-engine.shim.js",
     "load-package\\.util\\.js$": "<rootDir>/load-package.shim.js"
   }
 }

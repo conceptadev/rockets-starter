@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { initAuth, signIn } from "@/lib/auth";
+import { getAccount, signIn } from "@/lib/auth";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,7 +11,7 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    initAuth().then((account) => {
+    getAccount().then((account) => {
       if (account) {
         router.replace("/profile");
       } else {

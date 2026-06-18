@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { initAuth, signOut } from "@/lib/auth";
+import { getAccount, signOut } from "@/lib/auth";
 
 const NAV_ITEMS = [
   { href: "/profile", label: "Profile" },
@@ -16,7 +16,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    initAuth().then((account) => {
+    getAccount().then((account) => {
       if (account) {
         setReady(true);
       } else {

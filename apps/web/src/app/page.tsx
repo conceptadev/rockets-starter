@@ -9,6 +9,10 @@ export default function Home() {
 
   useEffect(() => {
     initAuth().then((account) => {
+      if (window.self !== window.top) {
+        return;
+      }
+
       router.replace(account ? "/profile" : "/login");
     });
   }, [router]);

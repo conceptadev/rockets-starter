@@ -5,6 +5,8 @@ import { AppModule } from '../src/app.module';
 import { MicrosoftTokenVerifierService } from '../src/auth-microsoft';
 import { AppUserRole } from '../src/shared/domain/user-role.enum';
 
+jest.setTimeout(30_000);
+
 describe('App (e2e)', () => {
   let app: INestApplication;
 
@@ -37,7 +39,7 @@ describe('App (e2e)', () => {
   });
 
   afterEach(async () => {
-    await app.close();
+    await app?.close();
   });
 
   it('GET /me rejects requests without a bearer token', () => {

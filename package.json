@@ -22,14 +22,23 @@
   },
   "packageManager": "yarn@1.22.19",
   "resolutions": {
+    "@bitwild/rockets-access-control": "file:../../rockets/packages/rockets-access-control",
     "@bitwild/rockets-core": "file:../../rockets/packages/rockets-core",
     "@bitwild/rockets-app": "file:../../rockets/packages/rockets-app",
     "@bitwild/rockets-crud": "file:../../rockets/packages/rockets-crud",
+    "@bitwild/rockets-repository": "file:../../rockets/packages/rockets-repository",
     "@bitwild/rockets-repository-typeorm": "file:../../rockets/packages/rockets-repository-typeorm",
+    "@stargate/ai_sdk": "file:../../stargate/packages/ai_sdk",
+    "@stargate/components": "file:../../stargate/packages/components",
+    "@stargate/core": "file:../../stargate/packages/core",
+    "@stargate/engine": "file:../../stargate/packages/engine",
+    "@stargate/server": "file:../../stargate/packages/server",
     "@nestjs/common": "12.0.0-alpha.5",
     "@nestjs/core": "12.0.0-alpha.5",
+    "@nestjs/swagger": "12.0.0-alpha.2",
     "@bitwild/rockets/@nestjs/common": "12.0.0-alpha.5",
     "@bitwild/rockets/@nestjs/core": "12.0.0-alpha.5",
+    "@bitwild/rockets/@nestjs/swagger": "12.0.0-alpha.2",
     "typeorm": "0.3.20",
     "@concepta/typeorm-seeding/typeorm": "0.3.20",
     "glob": "10.5.0",
@@ -39,8 +48,5 @@
     "string-width": "4.2.3",
     "strip-ansi": "6.0.1",
     "wrap-ansi": "7.0.0"
-  },
-  "dependencies": {
-    "load-esm": "^1.0.3"
   }
 }
