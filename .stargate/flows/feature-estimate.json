@@ -1,0 +1,21 @@
+{
+  "id": "feature-estimate",
+  "name": "Feature Estimate",
+  "description": "Simulated code analysis and effort estimate workflow. Rockets passes the requested feature and latest budget context; Stargate returns a normalized delivery estimate.",
+  "nodes": [
+    {
+      "id": "format",
+      "label": "Simulate feature estimate",
+      "componentName": "data.transform",
+      "position": {
+        "x": 240,
+        "y": 160
+      },
+      "parameters": {
+        "expression": "{ output: { featureTitle: featureTitle, estimatedHours: '42', confidence: 'medium', canFitBudget: 'true', budgetAvailableHours: budgetAvailableHours, codeAnalysis: { touchedAreas: ['apps/api/src/modules', 'apps/web/src/app/(app)/dashboard', '.stargate/flows'], riskLevel: 'medium', notes: ['Requires API workflow orchestration', 'Requires persisted budget snapshot', 'Requires dashboard wiring'] }, recommendation: 'Fits the current budget if scope stays focused on API, persistence, and dashboard reporting.' } }"
+      },
+      "disabled": false
+    }
+  ],
+  "connections": []
+}

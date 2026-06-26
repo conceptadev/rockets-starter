@@ -1,0 +1,1 @@
+export const STARGATE_WORKFLOWS = Symbol('STARGATE_WORKFLOWS');

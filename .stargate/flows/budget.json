@@ -1,0 +1,21 @@
+{
+  "id": "budget",
+  "name": "Budget Tracker Intake",
+  "description": "Fake Stargate workflow for the Budget Tracker POC. Simulates Smartsheet baseline budget plus Zoho Sprints logged actuals.",
+  "nodes": [
+    {
+      "id": "format",
+      "label": "Simulate budget tracker snapshot",
+      "componentName": "data.transform",
+      "position": {
+        "x": 240,
+        "y": 160
+      },
+      "parameters": {
+        "expression": "{ output: {snapshotId:'budget-snapshot-2026-06-15T08:00:00Z',capturedAt:'2026-06-15T08:00:00Z',source:{app:'concepta-budget-tracker',report:'Account_Budget_Report',owner:'conceptatech'},syncAgeHours:'12',stale:'false',alerts:[{id:'alert-vatos-95',accountName:'Vatos (Paul Johnson)',severity:'warning',message:'Vatos is at 96% utilization. Review new work before approval.'},{id:'alert-heller-over',accountName:'Heller',severity:'critical',message:'Heller is over budget. Pause non-approved work and notify DM.'},{id:'alert-unclassified',accountName:'Vatos (Paul Johnson)',bucketKey:'unclassified',severity:'warning',message:'Unclassified hours are above target. Reconcile service buckets.'}],accounts:[{projectId:'anago',sprintId:'anago-sp27',name:'Anago',cycle:'Maint SP27 - Jun 1 to 30 (2026) - 4wk',startDate:'2026-06-01',endDate:'2026-06-30',durationWeeks:'4',totalBudgetHours:'519',loggedHours:'311',remainingHours:'208',utilizationPct:'60',unclassifiedHours:'18',unclassifiedPct:'3',health:'green',buckets:[{key:'planning_ops',label:'Planning / Ops',budgetHours:'52',loggedHours:'56',remainingHours:'-4',utilizationPct:'108',health:'red'},{key:'production',label:'Production Support',budgetHours:'45',loggedHours:'37',remainingHours:'8',utilizationPct:'82',health:'green'},{key:'maintenance',label:'Maintenance / Dev',budgetHours:'207',loggedHours:'146',remainingHours:'61',utilizationPct:'71',health:'green'},{key:'deployments',label:'Deployments',budgetHours:'83',loggedHours:'40',remainingHours:'43',utilizationPct:'48',health:'green'},{key:'buffer',label:'Buffer',budgetHours:'132',loggedHours:'31',remainingHours:'101',utilizationPct:'23',health:'green'}]},{projectId:'vatos-paul-johnson',sprintId:'vatos-sp27',name:'Vatos (Paul Johnson)',cycle:'Maint SP27 - Jun 1 to 30 (2026) - 4wk',startDate:'2026-06-01',endDate:'2026-06-30',durationWeeks:'4',totalBudgetHours:'519',loggedHours:'497',remainingHours:'22',utilizationPct:'96',unclassifiedHours:'42',unclassifiedPct:'8',health:'amber',buckets:[{key:'planning_ops',label:'Planning / Ops',budgetHours:'52',loggedHours:'89',remainingHours:'-37',utilizationPct:'171',health:'red'},{key:'production',label:'Production Support',budgetHours:'45',loggedHours:'60',remainingHours:'-15',utilizationPct:'133',health:'red'},{key:'maintenance',label:'Maintenance / Dev',budgetHours:'207',loggedHours:'234',remainingHours:'-27',utilizationPct:'113',health:'red'},{key:'deployments',label:'Deployments',budgetHours:'83',loggedHours:'65',remainingHours:'18',utilizationPct:'78',health:'green'},{key:'buffer',label:'Buffer',budgetHours:'132',loggedHours:'50',remainingHours:'82',utilizationPct:'38',health:'green'}]},{projectId:'heller',sprintId:'heller-sp27',name:'Heller',cycle:'Maint SP27 - Jun 1 to 30 (2026) - 4wk',startDate:'2026-06-01',endDate:'2026-06-30',durationWeeks:'4',totalBudgetHours:'519',loggedHours:'544',remainingHours:'-25',utilizationPct:'105',unclassifiedHours:'31',unclassifiedPct:'6',health:'red',buckets:[{key:'planning_ops',label:'Planning / Ops',budgetHours:'52',loggedHours:'98',remainingHours:'-46',utilizationPct:'188',health:'red'},{key:'production',label:'Production Support',budgetHours:'45',loggedHours:'65',remainingHours:'-20',utilizationPct:'144',health:'red'},{key:'maintenance',label:'Maintenance / Dev',budgetHours:'207',loggedHours:'256',remainingHours:'-49',utilizationPct:'124',health:'red'},{key:'deployments',label:'Deployments',budgetHours:'83',loggedHours:'71',remainingHours:'12',utilizationPct:'86',health:'amber'},{key:'buffer',label:'Buffer',budgetHours:'132',loggedHours:'54',remainingHours:'78',utilizationPct:'41',health:'green'}]}]} }"
+      },
+      "disabled": false
+    }
+  ],
+  "connections": []
+}

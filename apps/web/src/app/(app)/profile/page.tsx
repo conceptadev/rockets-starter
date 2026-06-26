@@ -69,7 +69,7 @@ export default function ProfilePage() {
       {me && (
         <div className="rise">
           <div className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent">
-            // crew profile
+            {"// crew profile"}
           </div>
 
           <div className="mt-5 flex items-center gap-5">

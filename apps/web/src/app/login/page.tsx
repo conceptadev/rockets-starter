@@ -53,7 +53,7 @@ export default function LoginPage() {
             className="rise font-mono text-[11px] uppercase tracking-[0.25em] text-accent"
             style={{ animationDelay: "80ms" }}
           >
-            // access control
+            {"// access control"}
           </div>
 
           <h1

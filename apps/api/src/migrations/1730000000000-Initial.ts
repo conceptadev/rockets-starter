@@ -16,7 +16,6 @@ export class Initial1730000000000 implements MigrationInterface {
         "lastName" varchar(100)
       )
     `);
-
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

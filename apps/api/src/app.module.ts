@@ -1,20 +1,18 @@
 import { Module } from '@nestjs/common';
-import {
-  RocketsModule,
-  defineTypeOrmRepository,
-} from '@bitwild/rockets';
+import { RocketsModule, defineTypeOrmRepository } from '@bitwild/rockets';
 import { defineMicrosoftAuth } from './auth-microsoft';
 import { getDatabaseConfig } from './config/database.config';
+import { BudgetModule, budgetResource } from './modules/budget';
 import {
   UserMetadataCreateDto,
   UserMetadataEntity,
   UserMetadataUpdateDto,
 } from './modules/user-metadata';
-import { WorkflowsModule } from './modules/workflows/workflows.module';
+import { workflowsResource } from './modules/workflows/workflows.resource';
 
 @Module({
   imports: [
-    WorkflowsModule,
+    BudgetModule,
     RocketsModule.forRoot({
       auth: defineMicrosoftAuth(),
       userMetadata: {
@@ -23,7 +21,7 @@ import { WorkflowsModule } from './modules/workflows/workflows.module';
         updateDto: UserMetadataUpdateDto,
       },
       repository: defineTypeOrmRepository(getDatabaseConfig()),
-      resources: [],
+      resources: [budgetResource, workflowsResource],
       enableGlobalGuard: true,
     }),
   ],

@@ -55,4 +55,17 @@ describe('Workflows (e2e)', () => {
       .send({ text: 'valid', injected: true })
       .expect(400);
   });
+
+  it('POST /workflows/budget/run runs the raw budget workflow and returns the mapped result', async () => {
+    await request(app.getHttpServer())
+      .post('/workflows/budget/run')
+      .send({ budgetId: 'budget-1' })
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.snapshotId).toBe(
+          '51447000000377349-2026-06-15T08:00:00Z',
+        );
+        expect(res.body.accounts).toHaveLength(1);
+      });
+  });
 });

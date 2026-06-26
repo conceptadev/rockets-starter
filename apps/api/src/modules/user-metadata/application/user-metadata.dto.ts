@@ -6,11 +6,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import {
-  ApiProperty,
-  PartialType,
-  PickType,
-} from '@nestjs/swagger';
+import { ApiProperty, PartialType, PickType } from '@nestjs/swagger';
 import {
   BaseUserMetadataDto,
   type UserMetadataCreatableInterface,
@@ -47,7 +43,9 @@ export class UserMetadataCreateDto
 }
 
 export class UserMetadataUpdateDto
-  extends PartialType(PickType(UserMetadataFields, ['firstName', 'lastName'] as const))
+  extends PartialType(
+    PickType(UserMetadataFields, ['firstName', 'lastName'] as const),
+  )
   implements UserMetadataModelUpdatableInterface
 {
   @ApiProperty({ example: 'userMetadata-123' })
