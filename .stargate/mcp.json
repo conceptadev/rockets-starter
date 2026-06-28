@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "zoho": {
+      "description": "Zoho MCP. In testing it points to the local test MCP server; in production replace url and authEnvVar with the real Zoho API.",
+      "transport": { "type": "http", "url": "http://localhost:7777/mcp" },
+      "toolAllowlist": ["list_tasks"]
+    }
+  }
+}

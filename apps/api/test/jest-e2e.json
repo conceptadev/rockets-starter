@@ -27,6 +27,8 @@
   ],
   "moduleNameMapper": {
     "^@nestjs/swagger$": "<rootDir>/swagger.shim.js",
+    "^@stargate/components$": "<rootDir>/stargate-components.shim.js",
+    "^@stargate/core$": "<rootDir>/stargate-core.shim.js",
     "^@stargate/server$": "<rootDir>/stargate-server.shim.js",
     "^@stargate/server/nest$": "<rootDir>/stargate-server-nest.shim.js",
     "^@stargate/engine$": "<rootDir>/stargate-engine.shim.js",

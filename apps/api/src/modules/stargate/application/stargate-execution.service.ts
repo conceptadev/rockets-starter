@@ -53,6 +53,18 @@ export class StargateExecutionService {
     }
   }
 
+  /**
+   * Runs a flow by name and returns the raw runtime state (status, results,
+   * errors) without typed parsing. Powers the generic drop-in endpoint: any
+   * flow JSON in `.stargate/flows` becomes runnable with no per-flow code.
+   */
+  async runRaw(
+    flow: string,
+    inputs: Record<string, unknown> = {},
+  ): Promise<WorkflowRuntimeState> {
+    return this.runtime.execute(flow, inputs);
+  }
+
   private executionError(
     flow: string,
     state: WorkflowRuntimeState,

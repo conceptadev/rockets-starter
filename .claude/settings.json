@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "rockets-artifacts": {
+      "type": "http",
+      "url": "http://localhost:3001/mcp",
+      "headers": {
+        "Authorization": "Bearer 3280f1d69eadadf2358e2368ba7394b5deb9fa5e7238bf8bacdeee99d1433103"
+      }
+    }
+  }
+}

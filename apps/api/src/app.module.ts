@@ -9,10 +9,12 @@ import {
   UserMetadataUpdateDto,
 } from './modules/user-metadata';
 import { workflowsResource } from './modules/workflows/workflows.resource';
+import { WorkflowsModule } from './modules/workflows/workflows.module';
 
 @Module({
   imports: [
     BudgetModule,
+    WorkflowsModule,
     RocketsModule.forRoot({
       auth: defineMicrosoftAuth(),
       userMetadata: {

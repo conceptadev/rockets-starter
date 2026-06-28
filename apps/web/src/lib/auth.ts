@@ -1,4 +1,5 @@
 import {
+  BrowserAuthErrorCodes,
   type AccountInfo,
   type IPublicClientApplication,
   createStandardPublicClientApplication,
@@ -7,6 +8,7 @@ import {
 const LOGIN_SCOPES = ["openid", "profile", "email"];
 
 let msalInstance: IPublicClientApplication | undefined;
+let redirectPromise: Promise<AccountInfo | null> | undefined;
 
 export async function getMsal(): Promise<IPublicClientApplication> {
   msalInstance ??= await createStandardPublicClientApplication({
@@ -29,6 +31,20 @@ export function getActiveAccount(msal: IPublicClientApplication): AccountInfo | 
 // redirect URI page (the root page) — calling handleRedirectPromise on other
 // pages lets MSAL trigger full-page navigations that fight the Next router.
 export async function initAuth(): Promise<AccountInfo | null> {
+  if (redirectPromise) {
+    return redirectPromise;
+  }
+
+  redirectPromise = handleRedirect();
+
+  try {
+    return await redirectPromise;
+  } finally {
+    redirectPromise = undefined;
+  }
+}
+
+async function handleRedirect(): Promise<AccountInfo | null> {
   const msal = await getMsal();
   const result = await msal.handleRedirectPromise({
     navigateToLoginRequestUrl: false,
@@ -49,8 +65,23 @@ export async function getAccount(): Promise<AccountInfo | null> {
 }
 
 export async function signIn(): Promise<void> {
+  const account = await initAuth();
+
+  if (account) {
+    return;
+  }
+
   const msal = await getMsal();
-  await msal.loginRedirect({ scopes: LOGIN_SCOPES });
+
+  try {
+    await msal.loginRedirect({ scopes: LOGIN_SCOPES });
+  } catch (error) {
+    if (isMsalError(error, BrowserAuthErrorCodes.interactionInProgress)) {
+      return;
+    }
+
+    throw error;
+  }
 }
 
 export async function signOut(): Promise<void> {
@@ -74,13 +105,31 @@ export async function getIdToken(): Promise<string | null> {
     return null;
   }
 
-  const result = await msal.acquireTokenSilent({
-    scopes: LOGIN_SCOPES,
-    account,
-    forceRefresh: account.idTokenClaims?.exp
-      ? account.idTokenClaims.exp * 1000 < Date.now()
-      : false,
-  });
+  try {
+    const result = await msal.acquireTokenSilent({
+      scopes: LOGIN_SCOPES,
+      account,
+      forceRefresh: account.idTokenClaims?.exp
+        ? account.idTokenClaims.exp * 1000 < Date.now()
+        : false,
+    });
 
-  return result.idToken;
+    return result.idToken;
+  } catch (error) {
+    // Silent renewal can time out (e.g. blocked third-party cookies on the
+    // hidden iframe, or a slow/misconfigured authority). Degrade gracefully:
+    // return null so the request proceeds tokenless. A guarded API will answer
+    // 401 (meaning "log in"); a dev API with the guard off still loads.
+    console.warn("getIdToken: silent token acquisition failed", error);
+    return null;
+  }
+}
+
+function isMsalError(error: unknown, code: string): boolean {
+  return (
+    error !== null &&
+    typeof error === "object" &&
+    "errorCode" in error &&
+    (error as { errorCode?: unknown }).errorCode === code
+  );
 }
