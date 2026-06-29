@@ -1,9 +1,24 @@
 {
   "servers": {
     "zoho": {
-      "description": "Zoho MCP. In testing it points to the local test MCP server; in production replace url and authEnvVar with the real Zoho API.",
-      "transport": { "type": "http", "url": "http://localhost:7777/mcp" },
-      "toolAllowlist": ["list_tasks"]
+      "description": "Zoho MCP (Sprints + Creator). URL/token live here on the host, never in a flow.",
+      "transport": {
+        "type": "http",
+        "url": "https://concepta-916046415.zohomcp.com/mcp/738741843086a1d11f6fdfc40a3aa114/message"
+      },
+      "toolAllowlist": [
+        "ZohoSprints_GetSprints",
+        "ZohoSprints_GetItems",
+        "ZohoSprints_GetItemDetails",
+        "ZohoSprints_GetLogHours",
+        "ZohoCreator_getCreatorRecords"
+      ]
+    },
+    "meta-ads": {
+      "transport": {
+        "type": "http",
+        "url": "https://mcp.facebook.com/ads"
+      }
     }
   }
 }

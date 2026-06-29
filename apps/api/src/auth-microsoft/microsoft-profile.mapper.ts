@@ -15,14 +15,11 @@ export function mapMicrosoftProfile(payload: JWTPayload): AuthorizedUser {
     (value): value is string => typeof value === 'string',
   );
 
-  const tokenRoles = Array.isArray(payload.roles)
-    ? payload.roles.filter(
-        (role): role is string =>
-          typeof role === 'string' && APP_ROLES.has(role),
-      )
+  const roles = Array.isArray(payload.roles)
+    ? payload.roles.filter((r): r is string => typeof r === 'string' && APP_ROLES.has(r))
     : [];
 
-  const roles = tokenRoles.length > 0 ? tokenRoles : [AppUserRole.USER];
+  console.log(`[MicrosoftAuth] ${email ?? oid} → roles: ${roles.length ? roles.join(', ') : 'none'}`);
 
   return {
     id: oid,

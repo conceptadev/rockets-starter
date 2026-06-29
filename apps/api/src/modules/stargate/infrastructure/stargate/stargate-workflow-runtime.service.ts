@@ -15,6 +15,7 @@ import {
 } from '../../application/ports/stargate-runtime.port';
 import { WorkflowUnavailableError } from '../../domain/stargate-errors';
 
+// reload-bump: mcp.call now present in @stargate/components build
 /** Only string env vars are valid Stargate execution environment values. */
 function stringEnv(): Record<string, string> {
   const out: Record<string, string> = {};
@@ -54,7 +55,7 @@ export class StargateWorkflowRuntimeService implements WorkflowRuntimePort {
 
   private async startEngine(flow: string): Promise<WorkflowEngine> {
     try {
-      const { spec } = await this.flows.read(flow);
+      const spec = await this.flows.read(flow);
       // Generic runtime: only Stargate built-ins — no report-specific host
       // components. Installed artifacts are pure flow.json + ui.json and may
       // only reference components Stargate ships. Then layer in the workspace's

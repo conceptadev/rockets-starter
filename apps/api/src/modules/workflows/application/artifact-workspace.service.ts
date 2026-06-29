@@ -14,6 +14,12 @@ import {
   writeFileSync,
 } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
+
+export interface McpServerEntry {
+  name: string;
+  url: string;
+  token?: string;
+}
 import {
   ARTIFACT_NAME_PATTERN,
   ArtifactSummary,
@@ -62,6 +68,37 @@ export class ArtifactWorkspaceService {
     this.writeJson(uiPath, ui);
 
     return this.summaryFor(input.name);
+  }
+
+  listMcpServers(): Record<string, unknown> {
+    const config = this.readMcpConfig();
+    return config.servers ?? {};
+  }
+
+  registerMcpServer(entry: McpServerEntry): void {
+    const config = this.readMcpConfig();
+    const transport: Record<string, unknown> = { type: 'http', url: entry.url };
+    if (entry.token) {
+      transport['headers'] = { Authorization: `Bearer ${entry.token}` };
+    }
+    config.servers = { ...(config.servers ?? {}), [entry.name]: { transport } };
+    const path = join(this.stargateDir(), 'mcp.json');
+    mkdirSync(this.stargateDir(), { recursive: true });
+    writeFileSync(path, `${JSON.stringify(config, null, 2)}\n`, 'utf8');
+  }
+
+  private readMcpConfig(): { servers?: Record<string, unknown> } {
+    const path = join(this.stargateDir(), 'mcp.json');
+    if (!existsSync(path)) return { servers: {} };
+    try {
+      return JSON.parse(readFileSync(path, 'utf8')) as { servers?: Record<string, unknown> };
+    } catch {
+      return { servers: {} };
+    }
+  }
+
+  private stargateDir(): string {
+    return join(this.workspaceRoot(), '.stargate');
   }
 
   /** Removes an installed artifact (flow + ui-schema). Idempotent per file. */

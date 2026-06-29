@@ -1,5 +1,6 @@
 import {
   BadGatewayException,
+  BadRequestException,
   Body,
   Controller,
   Get,
@@ -8,7 +9,10 @@ import {
   Param,
   Post,
 } from '@nestjs/common';
-import { AuthPublic } from '@bitwild/rockets';
+import {
+  AccessControlGrant,
+  ActionEnum,
+} from '@concepta/nestjs-access-control';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -16,9 +20,13 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { StargateExecutionService } from '../../../stargate/application/stargate-execution.service';
-import { ArtifactWorkspaceService } from '../../application/artifact-workspace.service';
+import { ArtifactWorkspaceService, McpServerEntry } from '../../application/artifact-workspace.service';
 import { ArtifactSummary } from '../../application/artifact-workspace.types';
 import { PublishArtifactDto } from './dto/publish-artifact.dto';
+import {
+  FLOWS_ARTIFACT_RESOURCE,
+  FLOWS_MCP_SERVER_RESOURCE,
+} from '../../workflows.resource-key';
 
 interface RunFlowDto {
   readonly inputs?: Record<string, unknown>;
@@ -43,7 +51,7 @@ export class FlowsController {
 
   /** Lists installed artifacts (flows that have a ui-schema), newest first. */
   @Get()
-  @AuthPublic()
+  @AccessControlGrant({ resource: FLOWS_ARTIFACT_RESOURCE, action: ActionEnum.READ })
   @ApiOkResponse({ description: 'Installed artifacts.' })
   list(): ArtifactSummary[] {
     return this.artifacts.list();
@@ -51,14 +59,15 @@ export class FlowsController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
+  @AccessControlGrant({ resource: FLOWS_ARTIFACT_RESOURCE, action: ActionEnum.CREATE })
   @ApiCreatedResponse({ description: 'Published artifact summary.' })
   publish(@Body() body: PublishArtifactDto): ArtifactSummary {
     return this.artifacts.publish(body);
   }
 
   @Post(':name/run')
-  @AuthPublic()
   @HttpCode(HttpStatus.OK)
+  @AccessControlGrant({ resource: FLOWS_ARTIFACT_RESOURCE, action: ActionEnum.READ })
   @ApiOkResponse({ description: 'Raw workflow execution state.' })
   async run(@Param('name') name: string, @Body() body: RunFlowDto) {
     const state = await this.stargate.runRaw(name, body?.inputs ?? {});
@@ -71,9 +80,28 @@ export class FlowsController {
   }
 
   @Get(':name/ui')
-  @AuthPublic()
+  @AccessControlGrant({ resource: FLOWS_ARTIFACT_RESOURCE, action: ActionEnum.READ })
   @ApiOkResponse({ description: 'UI schema for the flow.' })
   ui(@Param('name') name: string) {
     return this.artifacts.readUi(name);
+  }
+
+  @Get('mcp-servers')
+  @AccessControlGrant({ resource: FLOWS_MCP_SERVER_RESOURCE, action: ActionEnum.READ })
+  @ApiOkResponse({ description: 'Registered MCP servers in .stargate/mcp.json.' })
+  listMcpServers() {
+    return this.artifacts.listMcpServers();
+  }
+
+  @Post('mcp-servers')
+  @HttpCode(HttpStatus.OK)
+  @AccessControlGrant({ resource: FLOWS_MCP_SERVER_RESOURCE, action: ActionEnum.CREATE })
+  @ApiOkResponse({ description: 'Register an MCP server in .stargate/mcp.json.' })
+  registerMcpServer(@Body() body: McpServerEntry) {
+    if (!body?.name || !body?.url) {
+      throw new BadRequestException('name and url are required');
+    }
+    this.artifacts.registerMcpServer(body);
+    return { ok: true, name: body.name };
   }
 }
