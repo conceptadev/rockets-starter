@@ -1,0 +1,39 @@
+{
+  "id": "account-tasks",
+  "name": "Account Tasks (drill-down)",
+  "description": "Drill-down: receives projectId as a workflow input (from the budget report card link) and lists that account's logged entries via Zoho Sprints GetLogHours. Pure JSON: args (reads projectId from input) -> mcp.call -> shape.",
+  "nodes": [
+    {
+      "id": "args",
+      "label": "Build args from projectId input",
+      "componentName": "data.transform",
+      "position": { "x": 80, "y": 160 },
+      "parameters": {
+        "expression": "{arguments: {path_variables: {teamId: '688179193', projectId: projectId}, query_params: {action: 'data', listviewtype: `0`, logtypes: '[0]', index: `1`, range: `250`}, headers: {\"x-za-ui-version\": 'v2', \"X-convert-response\": 'true'}}}"
+      },
+      "disabled": false
+    },
+    {
+      "id": "call",
+      "label": "Zoho GetLogHours (MCP)",
+      "componentName": "mcp.call",
+      "position": { "x": 340, "y": 160 },
+      "parameters": { "server": "zoho", "tool": "ZohoSprints_GetLogHours" },
+      "disabled": false
+    },
+    {
+      "id": "shape",
+      "label": "Project log rows",
+      "componentName": "data.transform",
+      "position": { "x": 600, "y": 160 },
+      "parameters": {
+        "expression": "{rows: (data.data.logs || `[]`)[].{date: logDate, hours: floor(to_number(logTime) / `36000`) / `100`, note: logNotes}}"
+      },
+      "disabled": false
+    }
+  ],
+  "connections": [
+    { "id": "c1", "sourceNodeId": "args", "sourcePortId": "output", "targetNodeId": "call", "targetPortId": "input" },
+    { "id": "c2", "sourceNodeId": "call", "sourcePortId": "output", "targetNodeId": "shape", "targetPortId": "input" }
+  ]
+}

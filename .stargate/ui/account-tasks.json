@@ -1,0 +1,28 @@
+{
+  "title": "Account Tasks — logged entries",
+  "subtitle": "Time logs for the selected account (live via Zoho Sprints MCP)",
+  "accent": "#2f6bff",
+  "data": "shape.rows",
+  "connection": {
+    "label": "Connected to Zoho (MCP)",
+    "meta": "drill-down: projectId input → mcp.call(ZohoSprints_GetLogHours) → data.transform"
+  },
+  "blocks": [
+    {
+      "type": "metric",
+      "items": [
+        { "label": "Entries", "value": "count" },
+        { "label": "Logged", "sum": "hours", "suffix": "h" }
+      ]
+    },
+    { "type": "filter", "search": true, "fields": [] },
+    {
+      "type": "table",
+      "columns": [
+        { "key": "date", "label": "Date", "as": "mono" },
+        { "key": "hours", "label": "Hours" },
+        { "key": "note", "label": "Note" }
+      ]
+    }
+  ]
+}

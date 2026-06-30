@@ -15,7 +15,7 @@ import {
 } from '../../application/ports/stargate-runtime.port';
 import { WorkflowUnavailableError } from '../../domain/stargate-errors';
 
-// reload-bump: mcp.call now present in @stargate/components build
+// reload-bump: mcp.call + flow.merge + mcp.mapCall now present in @stargate/components build
 /** Only string env vars are valid Stargate execution environment values. */
 function stringEnv(): Record<string, string> {
   const out: Record<string, string> = {};

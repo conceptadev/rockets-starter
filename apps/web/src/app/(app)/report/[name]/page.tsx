@@ -179,7 +179,19 @@ export default function ReportPage() {
 
   return (
     <div style={{ maxWidth: 980, margin: "0 auto", padding: "24px 20px" }}>
-      {loading && <p style={{ color: "#5d6b8c" }}>Loading report…</p>}
+      {loading && (
+        <div style={styles.loadingWrap}>
+          <div style={styles.spinner} />
+          <div>
+            <div style={styles.loadingTitle}>Running the workflow…</div>
+            <div style={styles.loadingSub}>
+              Fetching live data via Stargate + MCP. Reports that call several
+              sources can take up to a minute.
+            </div>
+          </div>
+          <style>{"@keyframes sgspin{to{transform:rotate(360deg)}}"}</style>
+        </div>
+      )}
 
       {!loading && mcpError?.type === "missing" && (
         <McpSetupForm
@@ -280,4 +292,25 @@ const styles = {
     borderRadius: 12,
     padding: "14px 16px",
   } as React.CSSProperties,
+  loadingWrap: {
+    display: "flex",
+    alignItems: "center",
+    gap: 14,
+    padding: "20px 18px",
+    background: "var(--color-surface, #fff)",
+    border: "1px solid #e4e9f4",
+    borderRadius: 14,
+    maxWidth: 520,
+  } as React.CSSProperties,
+  spinner: {
+    width: 22,
+    height: 22,
+    flex: "0 0 auto",
+    borderRadius: "50%",
+    border: "3px solid #e4e9f4",
+    borderTopColor: "#2f6bff",
+    animation: "sgspin .8s linear infinite",
+  } as React.CSSProperties,
+  loadingTitle: { fontWeight: 700, fontSize: 15, color: "#141a2e" } as React.CSSProperties,
+  loadingSub: { color: "#5d6b8c", fontSize: 13, marginTop: 2 } as React.CSSProperties,
 };

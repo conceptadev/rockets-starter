@@ -1,0 +1,53 @@
+{
+  "id": "budget-rollup",
+  "name": "Budget Rollup (Creator × Sprints)",
+  "description": "Composed pure-JSON artifact: Zoho Creator (account budgets) fans out to Zoho Sprints (logged hours) per account via mcp.mapCall, then data.transform fills logged + utilization. creatorCall(getCreatorRecords) -> mcp.mapCall(GetLogHours per Project_ID) -> compose. One page of logs per account (full totals need mcp.fetchAll); per-bucket logged needs a GetItems join.",
+  "nodes": [
+    {
+      "id": "creatorArgs",
+      "label": "Creator args",
+      "componentName": "data.transform",
+      "position": { "x": 80, "y": 160 },
+      "parameters": {
+        "expression": "{arguments: {path_variables: {account_owner_name: 'conceptatech', app_link_name: 'concepta-budget-tracker', report_link_name: 'Account_Budget_Report'}}}"
+      },
+      "disabled": false
+    },
+    {
+      "id": "creatorCall",
+      "label": "Zoho Creator getCreatorRecords (MCP)",
+      "componentName": "mcp.call",
+      "position": { "x": 320, "y": 160 },
+      "parameters": { "server": "zoho", "tool": "ZohoCreator_getCreatorRecords" },
+      "disabled": false
+    },
+    {
+      "id": "map",
+      "label": "Per-account logged (mapCall GetLogHours)",
+      "componentName": "mcp.mapCall",
+      "position": { "x": 560, "y": 160 },
+      "parameters": {
+        "server": "zoho",
+        "tool": "ZohoSprints_GetLogHours",
+        "itemsPath": "data.data.data",
+        "argsExpr": "{path_variables: {teamId: '688179193', projectId: Project_ID}, query_params: {action: 'data', listviewtype: `0`, logtypes: '[0]', index: `1`, range: `250`}, headers: {\"x-za-ui-version\": 'v2', \"X-convert-response\": 'true'}}"
+      },
+      "disabled": false
+    },
+    {
+      "id": "compose",
+      "label": "Compose accounts + logged",
+      "componentName": "data.transform",
+      "position": { "x": 820, "y": 160 },
+      "parameters": {
+        "expression": "{accounts: results[].{name: item.Project_Name, projectId: item.Project_ID, total: to_number(item.Total_Budget_Hours), logged: floor(sum((data.data.logs || `[]`)[].to_number(logTime)) / `36000`) / `100`, utilization: floor((sum((data.data.logs || `[]`)[].to_number(logTime)) / `36000`) / to_number(item.Total_Budget_Hours)) / `100`, buckets: [{label: 'Planning / Ops / New Requests', budget: to_number(item.Planning_Ops_New_Requests)}, {label: 'Production Support', budget: to_number(item.Production_Support)}, {label: 'Maintenance / Development', budget: to_number(item.Maintenance_Development)}, {label: 'Deployments / Releases', budget: to_number(item.Deployments_Releases)}, {label: 'Buffer', budget: to_number(item.Buffer1)}]}}"
+      },
+      "disabled": false
+    }
+  ],
+  "connections": [
+    { "id": "c1", "sourceNodeId": "creatorArgs", "sourcePortId": "output", "targetNodeId": "creatorCall", "targetPortId": "input" },
+    { "id": "c2", "sourceNodeId": "creatorCall", "sourcePortId": "output", "targetNodeId": "map", "targetPortId": "input" },
+    { "id": "c3", "sourceNodeId": "map", "sourcePortId": "output", "targetNodeId": "compose", "targetPortId": "input" }
+  ]
+}

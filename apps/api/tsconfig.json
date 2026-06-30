@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "moduleResolution": "node",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -10,6 +11,12 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
+    "paths": {
+      "@stargate/server": ["../../node_modules/@stargate/server/dist"],
+      "@stargate/server/nest": ["../../node_modules/@stargate/server/dist/nest"],
+      "@stargate/core": ["../../node_modules/@stargate/core/dist"],
+      "@stargate/engine": ["../../node_modules/@stargate/engine/dist"]
+    },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,

@@ -1,0 +1,14 @@
+{
+  "title": "Account Budgets — Zoho Creator",
+  "subtitle": "Accounts + per-bucket budget caps from Account_Budget_Report (live via MCP)",
+  "accent": "#2f7d68",
+  "data": "consolidate.accounts",
+  "connection": {
+    "label": "Connected to Zoho Creator (MCP)",
+    "meta": "workflow: data.transform → mcp.call(ZohoCreator_getCreatorRecords) → data.transform"
+  },
+  "blocks": [
+    { "type": "metric", "items": [{ "label": "Accounts", "value": "count" }] },
+    { "type": "budget", "name": "name", "cycle": "cycle", "total": "total", "buckets": "buckets" }
+  ]
+}

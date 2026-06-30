@@ -1,0 +1,14 @@
+{
+  "title": "Budget Rollup — Creator × Sprints",
+  "subtitle": "Account budgets (Zoho Creator) + logged hours (Zoho Sprints), composed live via Stargate",
+  "accent": "#2f7d68",
+  "data": "compose.accounts",
+  "connection": {
+    "label": "Connected to Zoho (MCP)",
+    "meta": "creator getCreatorRecords + sprints GetLogHours → flow.merge → data.transform"
+  },
+  "blocks": [
+    { "type": "metric", "items": [{ "label": "Accounts", "value": "count" }, { "label": "Logged", "sum": "logged", "suffix": "h" }] },
+    { "type": "budget", "name": "name", "cycle": "cycle", "total": "total", "buckets": "buckets", "link": { "to": "account-tasks", "param": "projectId", "from": "projectId" } }
+  ]
+}

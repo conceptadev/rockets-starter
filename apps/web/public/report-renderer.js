@@ -184,11 +184,16 @@
     const body = rows.map((r) => "<tr>" + cols.map((c) => `<td>${cell(r[c.key], c.as)}</td>`).join("") + "</tr>").join("");
     return `<div class="sg-card-wrap"><table data-sg-table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
   }
+  function stripHtml(s) {
+    return s.replace(/<[^>]*>/g, " ").replace(/\s{2,}/g, " ").trim();
+  }
   function cell(v, as) {
     if (as === "status") return `<span class="sg-pill ${pillClass(v)}">${esc(v)}</span>`;
     if (as === "badge") return `<span class="sg-badge">${esc(v)}</span>`;
     if (as === "mono") return `<span class="sg-mono">${esc(v)}</span>`;
+    if (as === "html") return v == null ? "" : String(v);
     if (v != null && typeof v === "object") return `<span class="sg-mono">${esc(JSON.stringify(v))}</span>`;
+    if (typeof v === "string" && v.trimStart().startsWith("<")) return esc(stripHtml(v));
     return esc(v);
   }
   function inferColumns(rows) {

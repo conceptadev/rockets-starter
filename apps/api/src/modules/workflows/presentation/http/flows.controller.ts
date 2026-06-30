@@ -9,10 +9,8 @@ import {
   Param,
   Post,
 } from '@nestjs/common';
-import {
-  AccessControlGrant,
-  ActionEnum,
-} from '@concepta/nestjs-access-control';
+import { AccessControlGrant } from '@concepta/nestjs-access-control';
+import { ActionEnum } from '@concepta/nestjs-core';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
