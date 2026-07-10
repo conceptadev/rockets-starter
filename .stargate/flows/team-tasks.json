@@ -1,0 +1,18 @@
+{
+  "id": "team-tasks",
+  "name": "Team Tasks (data-entry micro-app)",
+  "description": "Data-entry micro-app: rows come from user CRUD at /apps/team-tasks/records, not from a flow. This flow is a no-op placeholder so the artifact bundle is complete; there is no x-rows sync.",
+  "nodes": [
+    {
+      "id": "noop",
+      "label": "noop",
+      "componentName": "data.transform",
+      "position": { "x": 80, "y": 80 },
+      "parameters": {
+        "expression": "`{\"info\": \"data-entry app; data lives in /apps/team-tasks/records\"}`"
+      },
+      "disabled": false
+    }
+  ],
+  "connections": []
+}

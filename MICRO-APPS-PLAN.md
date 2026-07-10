@@ -1,6 +1,24 @@
 # Micro-apps on Rockets — capability audit, contract & policies
 
-Status: **draft for review.** Scope: turn an installed artifact (JSON only, via the MCP) into a small, end-to-end **micro-app** — data (flow) + schema → persisted entity + CRUD endpoints + generative UI — with no per-app backend code in the dynamic tier, and a clean **eject** path to real Rockets code when an app outgrows the envelope.
+Status: **slices 1–6 implemented** (backbone + per-app authz + generative UI). Slice 7 (eject CLI) pending. Scope: turn an installed artifact (JSON only, via the MCP) into a small, end-to-end **micro-app** — data (flow) + schema → persisted entity + CRUD endpoints + generative UI — with no per-app backend code in the dynamic tier, and a clean **eject** path to real Rockets code when an app outgrows the envelope.
+
+## Decisions (locked)
+1. Dynamic tier = **single `artifact_record` JSON table** + one generic resource. ✅
+2. Default authz = **Own** (per-user rows; `owner` column), overridable via `x-acl`. ✅
+3. Migration = **additive-only in dynamic, eject for breaking**. ✅
+4. Sync = **install + manual Refresh** now (cron later — `@nestjs/schedule` not yet added). ✅
+5. Install = **ADMIN-only** (`POST /flows` is ADMIN via ACL; MCP install gated by `ARTIFACT_MCP_TOKEN`). ✅
+
+## What shipped (files)
+- `infrastructure/artifact-record.entity.ts` — generic row table (+ added to `ENTITIES`, `autoLoadEntities:true`).
+- `application/artifact-schema.ts` — JSON-Schema-subset validator + `x-*` helpers + `readPath`.
+- `application/artifact-records.service.ts` — generic CRUD, Own/Any scoping, schema validation.
+- `application/artifact-sync.service.ts` — run flow → validate rows → upsert/append.
+- `presentation/http/records.controller.ts` — `/apps/:app/records` CRUD + `POST /apps/:app/sync` (ADMIN).
+- `flows.controller.ts` — `GET /flows/:name/schema`; `artifact-workspace.service.ts` — schema persist/read; `install_artifact` MCP accepts `schema`.
+- `app.acl.ts` / `workflows.resource-key.ts` — `apps:record` grants (ADMIN *Any; USER *Own).
+- `apps/web/public/report-renderer.js` — `renderApp` schema-driven table + create/edit/delete forms.
+- `report/[name]/page.tsx` — detects schema → generative CRUD UI (dashboards with `x-rows` are read-only).
 
 ---
 

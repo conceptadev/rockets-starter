@@ -24,6 +24,10 @@ export class PublishArtifactDto implements PublishArtifactInput {
   ui!: Record<string, unknown>;
 
   @IsOptional()
+  @IsObject()
+  schema?: Record<string, unknown>;
+
+  @IsOptional()
   @IsBoolean()
   overwrite?: boolean;
 }

@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "properties": {
+    "title": { "type": "string", "title": "Title" },
+    "status": {
+      "type": "string",
+      "enum": ["todo", "in_progress", "done"],
+      "title": "Status"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["low", "medium", "high"],
+      "title": "Priority"
+    },
+    "estimateHours": { "type": "number", "title": "Estimate (h)" },
+    "due": { "type": "string", "format": "date", "title": "Due date" },
+    "notes": { "type": "string", "title": "Notes" }
+  },
+  "required": ["title", "status"],
+  "x-entity": "task",
+  "x-primaryKey": "title",
+  "x-store": "upsert",
+  "x-version": 1,
+  "x-acl": { "read": "own", "write": "own" },
+  "x-ui": {
+    "title": "Team Tasks",
+    "subtitle": "Your personal task list — create, edit and track. Rows are private to you.",
+    "order": ["title", "status", "priority", "estimateHours", "due", "notes"],
+    "fields": {
+      "status": { "as": "status" },
+      "priority": { "as": "badge" }
+    }
+  }
+}

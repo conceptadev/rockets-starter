@@ -25,6 +25,7 @@ import {
   ArtifactSummary,
   PublishArtifactInput,
 } from './artifact-workspace.types';
+import { AppSchema, validateSchemaShape } from './artifact-schema';
 
 @Injectable()
 export class ArtifactWorkspaceService {
@@ -53,6 +54,17 @@ export class ArtifactWorkspaceService {
     const ui = this.normalizeDocument(input.ui, 'ui');
     this.assertFlowId(input.name, flow);
 
+    let schema: Record<string, unknown> | undefined;
+    if (input.schema !== undefined) {
+      schema = this.normalizeDocument(input.schema, 'schema');
+      const schemaErrors = validateSchemaShape(schema);
+      if (schemaErrors.length > 0) {
+        throw new BadRequestException(
+          `Invalid schema: ${schemaErrors.join('; ')}`,
+        );
+      }
+    }
+
     const flowPath = this.flowPath(input.name);
     const uiPath = this.uiPath(input.name);
 
@@ -67,7 +79,24 @@ export class ArtifactWorkspaceService {
     this.writeJson(flowPath, flow);
     this.writeJson(uiPath, ui);
 
+    if (schema) {
+      mkdirSync(this.schemaDirectory(), { recursive: true });
+      this.writeJson(this.schemaPath(input.name), schema);
+    }
+
     return this.summaryFor(input.name);
+  }
+
+  /** Returns the installed micro-app schema for an artifact, or null. */
+  readSchema(name: string): AppSchema | null {
+    this.assertName(name);
+    const path = this.schemaPath(name);
+    if (!existsSync(path)) return null;
+    try {
+      return JSON.parse(readFileSync(path, 'utf8')) as AppSchema;
+    } catch {
+      return null;
+    }
   }
 
   listMcpServers(): Record<string, unknown> {
@@ -112,6 +141,7 @@ export class ArtifactWorkspaceService {
     }
     rmSync(flowPath, { force: true });
     rmSync(uiPath, { force: true });
+    rmSync(this.schemaPath(name), { force: true });
     return { name, removed: true };
   }
 
@@ -178,12 +208,20 @@ export class ArtifactWorkspaceService {
     return join(this.uiDirectory(), `${name}.json`);
   }
 
+  private schemaPath(name: string): string {
+    return join(this.schemaDirectory(), `${name}.json`);
+  }
+
   private flowDirectory(): string {
     return join(this.workspaceRoot(), '.stargate', 'flows');
   }
 
   private uiDirectory(): string {
     return join(this.workspaceRoot(), '.stargate', 'ui');
+  }
+
+  private schemaDirectory(): string {
+    return join(this.workspaceRoot(), '.stargate', 'schema');
   }
 
   private workspaceRoot(): string {

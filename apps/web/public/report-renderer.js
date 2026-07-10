@@ -111,6 +111,27 @@
   .sgr a.sg-clickable{display:block;text-decoration:none;color:inherit;transition:transform .12s,border-color .12s,box-shadow .12s}
   .sgr a.sg-clickable:hover{transform:translateY(-2px);border-color:var(--sg-acc);box-shadow:0 6px 20px rgba(47,107,255,.12)}
   .sgr .sg-bmore{margin-top:12px;font-size:12px;font-weight:700;color:var(--sg-acc)}
+  .sgr .sg-actions{display:flex;gap:10px;align-items:center;margin:0 0 14px;flex-wrap:wrap}
+  .sgr .sg-btn{border:1px solid var(--sg-ln);background:var(--sg-sf);color:var(--sg-ink);border-radius:9px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;transition:.12s}
+  .sgr .sg-btn:hover{border-color:var(--sg-acc)}
+  .sgr .sg-btn.pri{background:var(--sg-acc);border-color:var(--sg-acc);color:#fff}
+  .sgr .sg-btn.pri:hover{filter:brightness(1.06)}
+  .sgr .sg-btn[disabled]{opacity:.5;cursor:default}
+  .sgr .sg-iconbtn{cursor:pointer;color:var(--sg-mut);padding:4px 9px;border-radius:7px;border:1px solid transparent;font-size:12px;font-weight:700;user-select:none}
+  .sgr .sg-iconbtn:hover{background:var(--sg-sf2);color:var(--sg-ink)}
+  .sgr .sg-iconbtn.dng:hover{color:var(--sg-err)}
+  .sgr.sg-ov{position:fixed;inset:0;background:rgba(10,16,30,.45);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
+  .sgr .sg-modal{background:var(--sg-sf);border:1px solid var(--sg-ln);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.3);width:100%;max-width:460px;max-height:90vh;overflow:auto;padding:22px 24px}
+  .sgr .sg-modal h3{margin:0 0 16px;font-size:18px;font-weight:800}
+  .sgr .sg-field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+  .sgr .sg-field label{font-size:12.5px;font-weight:700;color:var(--sg-mut)}
+  .sgr .sg-field .req{color:var(--sg-err)}
+  .sgr .sg-field input,.sgr .sg-field select,.sgr .sg-field textarea{background:var(--sg-bg);border:1px solid var(--sg-ln);border-radius:9px;padding:9px 11px;font-size:14px;color:var(--sg-ink);outline:none;font-family:inherit}
+  .sgr .sg-field textarea{min-height:70px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+  .sgr .sg-field input:focus,.sgr .sg-field select:focus,.sgr .sg-field textarea:focus{border-color:var(--sg-acc);box-shadow:0 0 0 3px var(--sg-accsoft)}
+  .sgr .sg-cbrow{flex-direction:row;align-items:center;gap:9px}
+  .sgr .sg-ferr{color:var(--sg-err);font-size:12.5px;background:var(--sg-errsoft);border:1px solid var(--sg-err);border-radius:9px;padding:8px 11px;margin:0 0 12px}
+  .sgr .sg-mfoot{display:flex;justify-content:flex-end;gap:10px;margin-top:6px}
   `;
 
   function injectCss() {
@@ -411,7 +432,301 @@
     container.appendChild(root);
   }
 
-  const api = { renderReport, renderError, findRows };
+  // ====================================================================
+  // Generative (schema-driven) micro-app UI.
+  // Renders a typed table + create/edit/delete forms straight from the
+  // installed JSON Schema. Data and mutations go through cfg.api, so this
+  // stays framework-agnostic (the page wires fetch calls).
+  //
+  // renderApp(container, {
+  //   schema,                 // the app's JSON Schema (+ x-ui hints)
+  //   records,                // initial array of { id, data, owner, ... }
+  //   title, subtitle, accent,
+  //   can: { create, update, delete },
+  //   api: { create(data), update(id,data), remove(id), list() }  // promises
+  // })
+  // ====================================================================
+  function titleize(k) {
+    return String(k)
+      .replace(/[_-]+/g, " ")
+      .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+      .replace(/\b\w/g, (c) => c.toUpperCase())
+      .trim();
+  }
+  function uiHints(schema) {
+    return (schema && schema["x-ui"]) || {};
+  }
+  function orderedFields(schema) {
+    const props = (schema && schema.properties) || {};
+    const hints = uiHints(schema);
+    const fieldHints = hints.fields || {};
+    const required = (schema && schema.required) || [];
+    let keys = Object.keys(props);
+    if (Array.isArray(hints.order) && hints.order.length) {
+      const head = hints.order.filter((k) => props[k]);
+      keys = head.concat(keys.filter((k) => !head.includes(k)));
+    }
+    return keys.map((k) => {
+      const def = props[k] || {};
+      const fh = fieldHints[k] || {};
+      return {
+        key: k,
+        def,
+        label: fh.label || def.title || titleize(k),
+        hidden: fh.hidden === true,
+        readonly: fh.readOnly === true || fh.readonly === true,
+        as: fh.as,
+        type: def.type,
+        format: def.format,
+        enumVals: Array.isArray(def.enum) ? def.enum : null,
+        required: required.includes(k),
+      };
+    });
+  }
+  function coerce(field, raw) {
+    if (field.type === "boolean") return !!raw;
+    if (raw === "" || raw == null) return undefined;
+    if (field.type === "number" || field.type === "integer") {
+      const n = Number(raw);
+      return Number.isNaN(n) ? raw : n;
+    }
+    if (field.type === "object" || field.type === "array") {
+      return JSON.parse(raw);
+    }
+    return raw;
+  }
+
+  function renderApp(container, cfg) {
+    injectCss();
+    cfg = cfg || {};
+    const schema = cfg.schema || {};
+    const hints = uiHints(schema);
+    const allFields = orderedFields(schema);
+    const fields = allFields.filter((f) => !f.hidden);
+    const can = cfg.can || {};
+    const apiCfg = cfg.api || {};
+    let rows = (cfg.records || []).slice();
+    let query = "";
+
+    const root = document.createElement("div");
+    root.className = "sgr";
+    if (cfg.accent) root.style.setProperty("--sg-acc", cfg.accent);
+    const title = cfg.title || hints.title || schema.title || "Records";
+    const subtitle = cfg.subtitle || hints.subtitle || "";
+    const showActions = can.update || can.delete;
+
+    function visibleRows() {
+      if (!query) return rows;
+      const q = query.toLowerCase();
+      return rows.filter((r) =>
+        JSON.stringify(r.data || {}).toLowerCase().includes(q),
+      );
+    }
+    function tableHtml(list) {
+      const head =
+        fields.map((f) => `<th>${esc(f.label)}</th>`).join("") +
+        (showActions ? "<th></th>" : "");
+      const body = list.length
+        ? list
+            .map((rec) => {
+              const d = rec.data || {};
+              const tds = fields
+                .map((f) => `<td>${cell(d[f.key], f.as)}</td>`)
+                .join("");
+              const act = showActions
+                ? `<td style="text-align:right;white-space:nowrap">${
+                    can.update
+                      ? `<span class="sg-iconbtn" data-edit="${esc(rec.id)}">Edit</span>`
+                      : ""
+                  }${
+                    can.delete
+                      ? `<span class="sg-iconbtn dng" data-del="${esc(rec.id)}">Delete</span>`
+                      : ""
+                  }</td>`
+                : "";
+              return `<tr>${tds}${act}</tr>`;
+            })
+            .join("")
+        : `<tr><td colspan="${fields.length + 1}"><div class="sg-empty" style="border:0;padding:30px">No records yet.</div></td></tr>`;
+      return `<div class="sg-card-wrap"><table data-sg-apptable><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
+    }
+
+    function paint() {
+      const list = visibleRows();
+      let html = `<div class="sg-head"><h1 class="sg-title">${esc(title)}</h1>${
+        subtitle ? `<p class="sg-sub">${esc(subtitle)}</p>` : ""
+      }</div>`;
+      html += `<div class="sg-actions">`;
+      if (can.create) html += `<button class="sg-btn pri" data-new>+ New</button>`;
+      if (apiCfg.list) html += `<button class="sg-btn" data-refresh>Refresh</button>`;
+      html += `<div class="sg-search" style="max-width:280px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" data-appsearch placeholder="Search..." value="${esc(query)}"/></div>`;
+      html += `</div>`;
+      html += tableHtml(list);
+      html += `<div class="sg-foot">${list.length} ${list.length === 1 ? "record" : "records"}</div>`;
+      root.innerHTML = html;
+      wire();
+    }
+
+    async function refresh() {
+      if (!apiCfg.list) return;
+      try {
+        rows = (await apiCfg.list()) || [];
+        paint();
+      } catch (e) {
+        /* keep current view on refresh failure */
+      }
+    }
+
+    function wire() {
+      const search = root.querySelector("[data-appsearch]");
+      if (search)
+        search.addEventListener("input", () => {
+          query = search.value;
+          const tb = root.querySelector("table[data-sg-apptable] tbody");
+          if (tb)
+            tb.innerHTML =
+              tableHtml(visibleRows()).match(/<tbody>([\s\S]*)<\/tbody>/)[1];
+          const foot = root.querySelector(".sg-foot");
+          const n = visibleRows().length;
+          if (foot) foot.textContent = `${n} ${n === 1 ? "record" : "records"}`;
+          wireRowActions();
+        });
+      const newBtn = root.querySelector("[data-new]");
+      if (newBtn) newBtn.addEventListener("click", () => openForm(null));
+      const ref = root.querySelector("[data-refresh]");
+      if (ref) ref.addEventListener("click", refresh);
+      wireRowActions();
+    }
+    function wireRowActions() {
+      root.querySelectorAll("[data-edit]").forEach((el) =>
+        el.addEventListener("click", () => {
+          const rec = rows.find((r) => String(r.id) === el.getAttribute("data-edit"));
+          if (rec) openForm(rec);
+        }),
+      );
+      root.querySelectorAll("[data-del]").forEach((el) =>
+        el.addEventListener("click", () => onDelete(el.getAttribute("data-del"))),
+      );
+    }
+
+    async function onDelete(id) {
+      if (!apiCfg.remove) return;
+      if (typeof confirm === "function" && !confirm("Delete this record?")) return;
+      try {
+        await apiCfg.remove(id);
+        await refresh();
+      } catch (e) {
+        alert("Delete failed: " + (e && e.message ? e.message : e));
+      }
+    }
+
+    function openForm(rec) {
+      const editing = !!rec;
+      const data = (rec && rec.data) || {};
+      const formFields = allFields.filter(
+        (f) => !f.hidden && !(editing && f.readonly),
+      );
+      const overlay = document.createElement("div");
+      overlay.className = "sgr sg-ov";
+      const inputs = formFields
+        .map((f) => fieldInput(f, data[f.key]))
+        .join("");
+      overlay.innerHTML = `<div class="sg-modal">
+        <h3>${editing ? "Edit" : "New"} record</h3>
+        <div class="sg-ferr" data-ferr style="display:none"></div>
+        <form data-form>${inputs}
+          <div class="sg-mfoot">
+            <button type="button" class="sg-btn" data-cancel>Cancel</button>
+            <button type="submit" class="sg-btn pri" data-save>${editing ? "Save" : "Create"}</button>
+          </div>
+        </form></div>`;
+      document.body.appendChild(overlay);
+      const close = () => overlay.remove();
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) close();
+      });
+      overlay.querySelector("[data-cancel]").addEventListener("click", close);
+      overlay.querySelector("[data-form]").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const errBox = overlay.querySelector("[data-ferr]");
+        errBox.style.display = "none";
+        let payload;
+        try {
+          payload = collect(formFields, overlay);
+        } catch (err) {
+          errBox.textContent = "Invalid input: " + (err.message || err);
+          errBox.style.display = "block";
+          return;
+        }
+        const saveBtn = overlay.querySelector("[data-save]");
+        saveBtn.disabled = true;
+        try {
+          if (editing) await apiCfg.update(rec.id, payload);
+          else await apiCfg.create(payload);
+          close();
+          await refresh();
+        } catch (err) {
+          errBox.textContent = err && err.message ? err.message : String(err);
+          errBox.style.display = "block";
+          saveBtn.disabled = false;
+        }
+      });
+    }
+
+    function fieldInput(f, value) {
+      const id = "sgf_" + f.key;
+      const req = f.required ? ` <span class="req">*</span>` : "";
+      const lbl = `<label for="${id}">${esc(f.label)}${req}</label>`;
+      if (f.type === "boolean") {
+        return `<div class="sg-field sg-cbrow"><input type="checkbox" id="${id}" data-k="${esc(f.key)}" ${value ? "checked" : ""}/><label for="${id}" style="margin:0">${esc(f.label)}</label></div>`;
+      }
+      if (f.enumVals) {
+        const opts = [`<option value="">—</option>`]
+          .concat(
+            f.enumVals.map(
+              (o) => `<option value="${esc(o)}" ${String(value) === String(o) ? "selected" : ""}>${esc(o)}</option>`,
+            ),
+          )
+          .join("");
+        return `<div class="sg-field">${lbl}<select id="${id}" data-k="${esc(f.key)}">${opts}</select></div>`;
+      }
+      if (f.type === "object" || f.type === "array") {
+        const v = value == null ? "" : JSON.stringify(value, null, 2);
+        return `<div class="sg-field">${lbl}<textarea id="${id}" data-k="${esc(f.key)}" data-json="1" placeholder="JSON">${esc(v)}</textarea></div>`;
+      }
+      let inputType = "text";
+      if (f.type === "number" || f.type === "integer") inputType = "number";
+      else if (f.format === "date") inputType = "date";
+      else if (f.format === "date-time") inputType = "datetime-local";
+      else if (f.format === "email") inputType = "email";
+      const v = value == null ? "" : value;
+      return `<div class="sg-field">${lbl}<input type="${inputType}" id="${id}" data-k="${esc(f.key)}" value="${esc(v)}"/></div>`;
+    }
+
+    function collect(formFields, overlay) {
+      const out = {};
+      for (const f of formFields) {
+        const el = overlay.querySelector(`[data-k="${cssEscape(f.key)}"]`);
+        if (!el) continue;
+        const raw = f.type === "boolean" ? el.checked : el.value;
+        const val = coerce(f, raw);
+        if (val !== undefined) out[f.key] = val;
+      }
+      return out;
+    }
+
+    paint();
+    container.innerHTML = "";
+    container.appendChild(root);
+  }
+
+  function cssEscape(s) {
+    return String(s).replace(/["\\]/g, "\\$&");
+  }
+
+  const api = { renderReport, renderApp, renderError, findRows };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   global.SGReport = api;
 })(typeof window !== "undefined" ? window : globalThis);

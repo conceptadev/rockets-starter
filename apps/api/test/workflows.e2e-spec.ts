@@ -4,12 +4,24 @@ import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import request from 'supertest';
-import { WorkflowsModule } from '../src/modules/workflows/workflows.module';
+import { AppModule } from '../src/app.module';
+import { MicrosoftTokenVerifierService } from '../src/auth-microsoft';
+import { AppUserRole } from '../src/shared/domain/user-role.enum';
 
 describe('Workflows (e2e)', () => {
   let app: INestApplication;
   let previousWorkspaceRoot: string | undefined;
   let workspaceRoot: string;
+
+  const verifierStub = {
+    isMicrosoftToken: () => true,
+    verify: async () => ({
+      oid: '00000000-0000-0000-0000-000000000001',
+      sub: '00000000-0000-0000-0000-000000000001',
+      preferred_username: 'admin@company.com',
+      roles: [AppUserRole.ADMIN],
+    }),
+  };
 
   beforeAll(async () => {
     previousWorkspaceRoot = process.env.STARGATE_WORKSPACE_ROOT;
@@ -17,8 +29,11 @@ describe('Workflows (e2e)', () => {
     process.env.STARGATE_WORKSPACE_ROOT = workspaceRoot;
 
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [WorkflowsModule],
-    }).compile();
+      imports: [AppModule],
+    })
+      .overrideProvider(MicrosoftTokenVerifierService)
+      .useValue(verifierStub)
+      .compile();
 
     app = moduleFixture.createNestApplication();
     app.useGlobalPipes(
@@ -33,7 +48,7 @@ describe('Workflows (e2e)', () => {
   });
 
   afterAll(async () => {
-    await app.close();
+    await app?.close();
     if (previousWorkspaceRoot === undefined) {
       delete process.env.STARGATE_WORKSPACE_ROOT;
     } else {
@@ -42,51 +57,12 @@ describe('Workflows (e2e)', () => {
     rmSync(workspaceRoot, { recursive: true, force: true });
   });
 
-  it('POST /workflows/ai-summary/summarize returns the mapped summary', async () => {
-    await request(app.getHttpServer())
-      .post('/workflows/ai-summary/summarize')
-      .send({ text: 'something worth summarizing' })
-      .expect(200)
-      .expect({ summary: 'test summary' });
-  });
-
-  it('rejects an empty text with 400', async () => {
-    await request(app.getHttpServer())
-      .post('/workflows/ai-summary/summarize')
-      .send({ text: '' })
-      .expect(400);
-  });
-
-  it('rejects a missing text with 400', async () => {
-    await request(app.getHttpServer())
-      .post('/workflows/ai-summary/summarize')
-      .send({})
-      .expect(400);
-  });
-
-  it('rejects unknown properties with 400', async () => {
-    await request(app.getHttpServer())
-      .post('/workflows/ai-summary/summarize')
-      .send({ text: 'valid', injected: true })
-      .expect(400);
-  });
-
-  it('POST /workflows/budget/run runs the raw budget workflow and returns the mapped result', async () => {
-    await request(app.getHttpServer())
-      .post('/workflows/budget/run')
-      .send({ budgetId: 'budget-1' })
-      .expect(200)
-      .expect((res) => {
-        expect(res.body.snapshotId).toBe(
-          '51447000000377349-2026-06-15T08:00:00Z',
-        );
-        expect(res.body.accounts).toHaveLength(1);
-      });
-  });
+  const auth = { Authorization: 'Bearer stubbed-microsoft-token' };
 
   it('POST /flows publishes a flow and ui schema into the Stargate workspace', async () => {
     await request(app.getHttpServer())
       .post('/flows')
+      .set(auth)
       .send({
         name: 'ops-report',
         flow: {
@@ -125,6 +101,7 @@ describe('Workflows (e2e)', () => {
   it('GET /flows lists published artifacts and GET /flows/:name/ui returns the schema', async () => {
     await request(app.getHttpServer())
       .get('/flows')
+      .set(auth)
       .expect(200)
       .expect((res) => {
         expect(res.body).toEqual(
@@ -139,6 +116,7 @@ describe('Workflows (e2e)', () => {
 
     await request(app.getHttpServer())
       .get('/flows/ops-report/ui')
+      .set(auth)
       .expect(200)
       .expect({
         title: 'Operations Report',
@@ -149,6 +127,7 @@ describe('Workflows (e2e)', () => {
   it('POST /flows rejects duplicate artifacts unless overwrite is true', async () => {
     await request(app.getHttpServer())
       .post('/flows')
+      .set(auth)
       .send({
         name: 'ops-report',
         flow: { id: 'ops-report', nodes: [] },
@@ -158,6 +137,7 @@ describe('Workflows (e2e)', () => {
 
     await request(app.getHttpServer())
       .post('/flows')
+      .set(auth)
       .send({
         name: 'ops-report',
         flow: { id: 'ops-report', nodes: [] },
@@ -173,6 +153,7 @@ describe('Workflows (e2e)', () => {
   it('POST /flows rejects unsafe names and mismatched flow ids', async () => {
     await request(app.getHttpServer())
       .post('/flows')
+      .set(auth)
       .send({
         name: '../bad',
         flow: {},
@@ -182,6 +163,7 @@ describe('Workflows (e2e)', () => {
 
     await request(app.getHttpServer())
       .post('/flows')
+      .set(auth)
       .send({
         name: 'safe-name',
         flow: { id: 'other-name' },

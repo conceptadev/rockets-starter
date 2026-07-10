@@ -84,6 +84,16 @@ export class FlowsController {
     return this.artifacts.readUi(name);
   }
 
+  @Get(':name/schema')
+  @AccessControlGrant({ resource: FLOWS_ARTIFACT_RESOURCE, action: ActionEnum.READ })
+  @ApiOkResponse({
+    description:
+      'Micro-app schema for the artifact, or null when it is a plain report.',
+  })
+  schema(@Param('name') name: string) {
+    return this.artifacts.readSchema(name);
+  }
+
   @Get('mcp-servers')
   @AccessControlGrant({ resource: FLOWS_MCP_SERVER_RESOURCE, action: ActionEnum.READ })
   @ApiOkResponse({ description: 'Registered MCP servers in .stargate/mcp.json.' })

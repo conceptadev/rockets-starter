@@ -1,0 +1,84 @@
+<svg viewBox="0 0 1600 940" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica,Arial,sans-serif" role="img">
+  <title>Executive overview: business value and security of the live reports and mini-apps platform.</title>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8893ad"/></marker>
+  </defs>
+  <rect width="1600" height="940" fill="#ffffff"/>
+
+  <text x="80" y="88" font-size="38" font-weight="bold" fill="#1f2a44">Live reports &amp; mini-apps — built fast, shared safely</text>
+  <text x="80" y="126" font-size="19" fill="#5b6784">Turn connected data into always-current dashboards and small end-to-end apps — installed in minutes, with full control over who sees what.</text>
+  <line x1="80" y1="150" x2="1520" y2="150" stroke="#e6e9f2" stroke-width="2"/>
+
+  <rect x="80" y="196" width="250" height="96" rx="14" fill="#f7f9fc" stroke="#d9deea"/>
+  <text x="205" y="238" font-size="17" font-weight="bold" fill="#1f2a44" text-anchor="middle">Your systems</text>
+  <text x="205" y="262" font-size="13" fill="#5b6784" text-anchor="middle">the data you already have</text>
+
+  <rect x="386" y="172" width="820" height="144" rx="16" fill="#f4f6ff" stroke="#3e63dd" stroke-width="2.5"/>
+  <text x="406" y="196" font-size="15" font-weight="bold" fill="#2b3a63">SECURE PLATFORM</text>
+  <rect x="406" y="210" width="240" height="86" rx="11" fill="#eef2ff" stroke="#c3ccf0"/>
+  <text x="526" y="248" font-size="16" font-weight="bold" fill="#2b3a63" text-anchor="middle">Prepare</text>
+  <text x="526" y="270" font-size="12.5" fill="#4a5680" text-anchor="middle">gather &amp; combine data</text>
+  <rect x="662" y="210" width="240" height="86" rx="11" fill="#eef2ff" stroke="#c3ccf0"/>
+  <text x="782" y="248" font-size="16" font-weight="bold" fill="#2b3a63" text-anchor="middle">Store</text>
+  <text x="782" y="270" font-size="12.5" fill="#4a5680" text-anchor="middle">kept current &amp; ready</text>
+  <rect x="918" y="210" width="268" height="86" rx="11" fill="#eef2ff" stroke="#c3ccf0"/>
+  <text x="1052" y="248" font-size="16" font-weight="bold" fill="#2b3a63" text-anchor="middle">Reports &amp; mini-apps</text>
+  <text x="1052" y="270" font-size="12.5" fill="#4a5680" text-anchor="middle">what people see &amp; use</text>
+
+  <rect x="1262" y="196" width="258" height="96" rx="14" fill="#f7f9fc" stroke="#d9deea"/>
+  <text x="1391" y="234" font-size="17" font-weight="bold" fill="#1f2a44" text-anchor="middle">Teams &amp; clients</text>
+  <text x="1391" y="258" font-size="12.5" fill="#5b6784" text-anchor="middle">partners via view-only link</text>
+
+  <line x1="330" y1="244" x2="384" y2="244" stroke="#8893ad" stroke-width="2.4" marker-end="url(#ar)"/>
+  <line x1="1206" y1="244" x2="1260" y2="244" stroke="#8893ad" stroke-width="2.4" marker-end="url(#ar)"/>
+
+  <text x="80" y="372" font-size="21" font-weight="bold" fill="#3e63dd">Business value</text>
+  <line x1="245" y1="366" x2="1520" y2="366" stroke="#e6e9f2" stroke-width="1.5"/>
+
+  <rect x="80" y="392" width="460" height="150" rx="14" fill="#ffffff" stroke="#dbe2f2"/>
+  <rect x="80" y="392" width="8" height="150" rx="4" fill="#3e63dd"/>
+  <text x="112" y="432" font-size="19" font-weight="bold" fill="#1f2a44">Always current</text>
+  <text x="112" y="464" font-size="14.5" fill="#5b6784">Data refreshes automatically, so every</text>
+  <text x="112" y="486" font-size="14.5" fill="#5b6784">decision is made on today's numbers —</text>
+  <text x="112" y="508" font-size="14.5" fill="#5b6784">not last month's export.</text>
+
+  <rect x="570" y="392" width="460" height="150" rx="14" fill="#ffffff" stroke="#dbe2f2"/>
+  <rect x="570" y="392" width="8" height="150" rx="4" fill="#3e63dd"/>
+  <text x="602" y="432" font-size="19" font-weight="bold" fill="#1f2a44">Apps, not spreadsheets</text>
+  <text x="602" y="464" font-size="14.5" fill="#5b6784">Small, end-to-end tools your team</text>
+  <text x="602" y="486" font-size="14.5" fill="#5b6784">actually uses — view, filter, and enter</text>
+  <text x="602" y="508" font-size="14.5" fill="#5b6784">data in one place.</text>
+
+  <rect x="1060" y="392" width="460" height="150" rx="14" fill="#ffffff" stroke="#dbe2f2"/>
+  <rect x="1060" y="392" width="8" height="150" rx="4" fill="#3e63dd"/>
+  <text x="1092" y="432" font-size="19" font-weight="bold" fill="#1f2a44">Minutes, not months</text>
+  <text x="1092" y="464" font-size="14.5" fill="#5b6784">A new app is a definition, installed</text>
+  <text x="1092" y="486" font-size="14.5" fill="#5b6784">live — no custom development per app,</text>
+  <text x="1092" y="508" font-size="14.5" fill="#5b6784">so ideas ship the same day.</text>
+
+  <text x="80" y="606" font-size="21" font-weight="bold" fill="#0f9d76">Security &amp; control</text>
+  <line x1="300" y1="600" x2="1520" y2="600" stroke="#e6e9f2" stroke-width="1.5"/>
+
+  <rect x="80" y="626" width="460" height="152" rx="14" fill="#ffffff" stroke="#cfeadf"/>
+  <rect x="80" y="626" width="8" height="152" rx="4" fill="#0f9d76"/>
+  <text x="112" y="666" font-size="19" font-weight="bold" fill="#1f2a44">One sign-in, clear roles</text>
+  <text x="112" y="698" font-size="14.5" fill="#5b6784">Everyone signs in through your own</text>
+  <text x="112" y="720" font-size="14.5" fill="#5b6784">login. Admins manage; members use.</text>
+  <text x="112" y="742" font-size="14.5" fill="#5b6784">One access pass, checked every time.</text>
+
+  <rect x="570" y="626" width="460" height="152" rx="14" fill="#ffffff" stroke="#cfeadf"/>
+  <rect x="570" y="626" width="8" height="152" rx="4" fill="#0f9d76"/>
+  <text x="602" y="666" font-size="19" font-weight="bold" fill="#1f2a44">You control who sees what</text>
+  <text x="602" y="698" font-size="14.5" fill="#5b6784">Each app is private (only your data)</text>
+  <text x="602" y="720" font-size="14.5" fill="#5b6784">or shared. External sharing is a</text>
+  <text x="602" y="742" font-size="14.5" fill="#5b6784">view-only link — temporary &amp; revocable.</text>
+
+  <rect x="1060" y="626" width="460" height="152" rx="14" fill="#ffffff" stroke="#cfeadf"/>
+  <rect x="1060" y="626" width="8" height="152" rx="4" fill="#0f9d76"/>
+  <text x="1092" y="666" font-size="19" font-weight="bold" fill="#1f2a44">Safe by design</text>
+  <text x="1092" y="698" font-size="14.5" fill="#5b6784">Connection keys never leave the</text>
+  <text x="1092" y="720" font-size="14.5" fill="#5b6784">platform — never inside an app or a</text>
+  <text x="1092" y="742" font-size="14.5" fill="#5b6784">shared link. Shared links can't change data.</text>
+
+  <text x="80" y="838" font-size="14" fill="#8893ad">Overview for internal review · neutral styling</text>
+</svg>

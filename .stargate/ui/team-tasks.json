@@ -1,0 +1,5 @@
+{
+  "title": "Team Tasks",
+  "subtitle": "Data-entry micro-app (schema-driven UI). This hand-written UI is a fallback; the page renders the generative CRUD view from the schema.",
+  "blocks": [{ "type": "table" }]
+}

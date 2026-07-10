@@ -95,6 +95,15 @@ export class ArtifactMcpController {
           ui: z
             .record(z.string(), z.unknown())
             .describe('UI-schema JSON object ({ title, subtitle, data, blocks, ... }).'),
+          schema: z
+            .record(z.string(), z.unknown())
+            .optional()
+            .describe(
+              'Optional micro-app schema (JSON Schema + x-* extensions: ' +
+                'x-entity, x-primaryKey, x-store, x-rows, x-writeOn, x-version, ' +
+                'x-acl, x-ui). When present, rows sync into the DB and a CRUD API ' +
+                'is served at /apps/<name>/records.',
+            ),
           overwrite: z
             .boolean()
             .optional()
@@ -107,6 +116,7 @@ export class ArtifactMcpController {
             name: args.name,
             flow: args.flow as Record<string, unknown>,
             ui: args.ui as Record<string, unknown>,
+            schema: args.schema as Record<string, unknown> | undefined,
             overwrite: args.overwrite,
           });
           return this.ok(`Installed "${summary.name}" — ${summary.title}`, summary);

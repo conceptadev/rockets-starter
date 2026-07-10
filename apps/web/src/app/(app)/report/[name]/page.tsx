@@ -4,10 +4,36 @@ import { useEffect, useRef, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import { apiFetch } from "@/lib/api";
 
+interface AppRecord {
+  id: string;
+  data: Record<string, unknown>;
+  owner: string | null;
+}
+
+interface RecordsPage {
+  items: AppRecord[];
+  total: number;
+}
+
+interface RenderAppConfig {
+  schema: unknown;
+  records: AppRecord[];
+  title?: string;
+  subtitle?: string;
+  can?: { create?: boolean; update?: boolean; delete?: boolean };
+  api?: {
+    list?: () => Promise<AppRecord[]>;
+    create?: (data: unknown) => Promise<unknown>;
+    update?: (id: string, data: unknown) => Promise<unknown>;
+    remove?: (id: string) => Promise<unknown>;
+  };
+}
+
 declare global {
   interface Window {
     SGReport?: {
       renderReport: (el: HTMLElement, uiSchema: unknown, data: unknown) => void;
+      renderApp: (el: HTMLElement, cfg: RenderAppConfig) => void;
       renderError: (el: HTMLElement, message: string) => void;
     };
   }
@@ -17,6 +43,12 @@ interface RunState {
   status: string;
   results: Record<string, unknown>;
   errors?: { message: string }[];
+}
+
+interface AppSchema {
+  ["x-rows"]?: string;
+  ["x-ui"]?: { title?: string; subtitle?: string };
+  [key: string]: unknown;
 }
 
 function loadRenderer(): Promise<NonNullable<Window["SGReport"]>> {
@@ -146,8 +178,49 @@ export default function ReportPage() {
       setError(null);
       setMcpError(null);
       try {
-        const [renderer, ui, state] = await Promise.all([
+        const [renderer, schema] = await Promise.all([
           loadRenderer(),
+          apiFetch<AppSchema | null>(`/flows/${name}/schema`).catch(() => null),
+        ]);
+
+        // Micro-app (schema installed): render the generative CRUD UI backed by
+        // the records resource. Dashboards (x-rows = synced data) are read-only;
+        // data-entry apps are editable.
+        if (schema && typeof schema === "object") {
+          const isDashboard = typeof schema["x-rows"] === "string";
+          const page = await apiFetch<RecordsPage>(`/apps/${name}/records`);
+          if (cancelled || !mountRef.current) return;
+          const can = isDashboard
+            ? {}
+            : { create: true, update: true, delete: true };
+          renderer.renderApp(mountRef.current, {
+            schema,
+            records: page.items ?? [],
+            title: schema["x-ui"]?.title,
+            subtitle: schema["x-ui"]?.subtitle,
+            can,
+            api: {
+              list: async () =>
+                (await apiFetch<RecordsPage>(`/apps/${name}/records`)).items ?? [],
+              create: (data) =>
+                apiFetch(`/apps/${name}/records`, {
+                  method: "POST",
+                  body: JSON.stringify(data),
+                }),
+              update: (id, data) =>
+                apiFetch(`/apps/${name}/records/${id}`, {
+                  method: "PATCH",
+                  body: JSON.stringify(data),
+                }),
+              remove: (id) =>
+                apiFetch(`/apps/${name}/records/${id}`, { method: "DELETE" }),
+            },
+          });
+          return;
+        }
+
+        // Plain report: run the flow live and render the hand-written UI schema.
+        const [ui, state] = await Promise.all([
           apiFetch<unknown>(`/flows/${name}/ui`),
           apiFetch<RunState>(`/flows/${name}/run`, {
             method: "POST",
