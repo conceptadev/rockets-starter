@@ -1,13 +1,8 @@
 import { Module } from '@nestjs/common';
 import { RocketsModule, defineTypeOrmRepository } from '@bitwild/rockets';
-import { AccessControlModule } from '@concepta/nestjs-access-control';
 import { defineMicrosoftAuth } from './auth-microsoft';
 import { getDatabaseConfig } from './config/database.config';
-import {
-  UserMetadataCreateDto,
-  UserMetadataEntity,
-  UserMetadataUpdateDto,
-} from './modules/user-metadata';
+import { userMetadata } from './modules/user-metadata';
 import { workflowsResource } from './modules/workflows/workflows.resource';
 import { appAcl } from './app.acl';
 import { AppAccessControlService } from './access-control.service';
@@ -16,18 +11,14 @@ import { AppAccessControlService } from './access-control.service';
   imports: [
     RocketsModule.forRoot({
       auth: defineMicrosoftAuth(),
-      userMetadata: {
-        entity: UserMetadataEntity,
-        createDto: UserMetadataCreateDto,
-        updateDto: UserMetadataUpdateDto,
-      },
+      userMetadata,
       repository: defineTypeOrmRepository(getDatabaseConfig()),
       resources: [workflowsResource],
       enableGlobalGuard: true,
-    }),
-    AccessControlModule.forRoot({
-      settings: { rules: appAcl },
-      service: new AppAccessControlService(),
+      accessControl: {
+        settings: { rules: appAcl },
+        service: new AppAccessControlService(),
+      },
     }),
   ],
 })

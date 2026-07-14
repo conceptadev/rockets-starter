@@ -15,76 +15,55 @@
 
 ---
 
-## ⚠️ **Module Import Order**
+## ⚠️ **`RocketsModule.forRoot()` — the single wiring point**
 
-> **CRITICAL**: When using both `RocketsModule` and `RocketsAuthModule` together, the import order is **mandatory**.
+> **Verified against `@bitwild/rockets@1.0.0-alpha.10` / `@bitwild/rockets-core@1.0.0-alpha.10`** (source: `../../rockets/packages/{rockets-server,rockets-core}`) and against this repo's actual `apps/api/src/app.module.ts`. Sections below describing a separate `RocketsAuthModule`/`RocketsServerModule` two-module wiring predate this package version and are **wrong for the currently installed SDK** — do not follow them.
 
-### **Correct Import Order**
+There is one module import. `RocketsModule` (published as `@bitwild/rockets`, defined in `rockets-server`, thin composition layer over `@bitwild/rockets-core`) takes everything as `forRoot()` options: the auth adapter(s), the user-metadata config, the repository bootstrap, declarative CRUD resources, and — as of this version — **access control nested inside the same call**.
 
 ```typescript
-// app.module.ts
+// app.module.ts (real, current — see apps/api/src/app.module.ts)
+import { Module } from '@nestjs/common';
+import { RocketsModule, defineTypeOrmRepository } from '@bitwild/rockets';
+import { defineMicrosoftAuth } from './auth-microsoft';
+import { getDatabaseConfig } from './config/database.config';
+import { userMetadata } from './modules/user-metadata';
+import { workflowsResource } from './modules/workflows/workflows.resource';
+import { appAcl } from './app.acl';
+import { AppAccessControlService } from './access-control.service';
+
 @Module({
   imports: [
-    // 1. FIRST: RocketsAuthModule - provides RocketsJwtAuthProvider
-    RocketsAuthModule.forRootAsync({
-      // ... configuration
-    }),
-    
-    // 2. SECOND: RocketsModule - consumes RocketsJwtAuthProvider
-    RocketsModule.forRootAsync({
-      inject: [RocketsJwtAuthProvider],
-      useFactory: (authProvider: RocketsJwtAuthProvider) => ({
-        authProvider,
-        enableGlobalGuard: true,
-        // ... other configuration
-      }),
+    RocketsModule.forRoot({
+      auth: defineMicrosoftAuth(),        // AuthBootstrap | AuthBootstrap[] — chain adapters here
+      userMetadata,                        // RocketsUserMetadataConfig (entity/createDto/updateDto)
+      repository: defineTypeOrmRepository(getDatabaseConfig()),
+      resources: [workflowsResource],      // defineResource()/defineModuleResource()/zodResource() bundles
+      enableGlobalGuard: true,             // registers AuthServerGuard as APP_GUARD
+      accessControl: {                     // omit entirely to skip ACL — fully opt-in
+        settings: { rules: appAcl },
+        service: new AppAccessControlService(),
+      },
     }),
   ],
 })
 export class AppModule {}
 ```
 
-### **Why This Order Matters**
+### **What each key does**
 
-- **RocketsAuthModule** exports `RocketsJwtAuthProvider`
-- **RocketsModule** needs to inject `RocketsJwtAuthProvider` for authentication
-- **Dependency Resolution**: NestJS resolves dependencies in import order
+| Key | Type | Purpose |
+|---|---|---|
+| `auth` | `AuthBootstrap \| AuthBootstrap[]` | One or more `{ adapter, forRoot? }` bootstraps implementing `AuthAdapterInterface.authenticate(request)`. `AuthServerGuard` tries each adapter per request in order. Multiple identity providers = an array, e.g. `auth: [defineMicrosoftAuth(), someOtherAdapter]`. |
+| `userMetadata` | `RocketsUserMetadataConfig` | `{ entity, createDto, updateDto, responseDto? }`. Powers `GET/PATCH /me`. Build by hand or via `defineZodUserMetadata()` (see below). |
+| `repository` | `RepositoryModuleInterface \| RepositoryBootstrap` | `defineTypeOrmRepository(typeOrmModuleOptions)` wires TypeORM; core auto-derives the entity list from `resources` + `userMetadata` and calls `TypeOrmModule.forRoot()` itself — never list entities manually here. |
+| `resources` | `ResourceInput[]` | CRUD resource bundles from `defineResource()`/`defineModuleResource()` (hand-built) or `zodResource()` (Zod-schema-derived). |
+| `accessControl` | `AccessControlOptionsInterface & { imports?, queryServices? }` | Same shape `@concepta/nestjs-access-control`'s `AccessControlModule.forRoot()` always took (`settings.rules`, `service`), now nested here instead of a sibling top-level import. **Omit the key to run with no ACL at all.** |
+| `enableGlobalGuard` | `boolean` | Registers `AuthServerGuard` globally so every route requires a matching auth adapter unless `@AuthPublic()`. |
 
-### **With Access Control**
+### **Common error this version does NOT have**
 
-When adding AccessControlModule, use this order:
-
-```typescript
-@Module({
-  imports: [
-    // 1. AccessControlModule (global module)
-    AccessControlModule.forRoot({...}),
-    
-    // 2. RocketsAuthModule with ACL configuration
-    RocketsAuthModule.forRootAsync({
-      accessControl: { ... },
-      // ... other config
-    }),
-    
-    // 3. RocketsModule with auth provider
-    RocketsModule.forRootAsync({
-      inject: [RocketsJwtAuthProvider],
-      // ... config
-    }),
-  ],
-})
-```
-
-### **Common Errors**
-
-```bash
-# Wrong order causes this error:
-❌ Nest can't resolve dependencies of RocketsModule (?). 
-   Please make sure that the RocketsJwtAuthProvider is available.
-
-# Solution: Import RocketsAuthModule BEFORE RocketsModule
-✅ RocketsAuthModule → RocketsModule
-```
+The "wrong import order → `RocketsJwtAuthProvider` not found" error described in older docs does not apply — there is no `RocketsJwtAuthProvider` and no `RocketsAuthModule`/`RocketsModule` two-step dance in the currently installed SDK. If you see that error, you're reading generated code against a different (older or hypothetical) package version — check `node_modules/@bitwild/rockets/package.json` version and cross-reference `../../rockets/packages/rockets-server/src` directly, not this doc's older sections below.
 
 ---
 
@@ -92,68 +71,62 @@ When adding AccessControlModule, use this order:
 
 ### **Main Application Setup (main.ts)**
 
-The latest Rockets SDK provides built-in services for automatic application setup:
+Real, current pattern — see `apps/api/src/main.ts`. `SwaggerUiService` and `ExceptionsFilter` are re-exported from `@bitwild/rockets` (originating in `@bitwild/rockets-core`):
 
 ```typescript
 // main.ts
-import { NestFactory } from '@nestjs/core';
+import 'dotenv/config';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
-import { SwaggerUiService } from '@bitwild/rockets-server-auth'; // or @bitwild/rockets-server
+import { SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { ExceptionsFilter, SwaggerUiService } from '@bitwild/rockets';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Enable CORS for development
-  app.enableCors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-    credentials: true,
-  });
+  app.enableCors();
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      forbidUnknownValues: true,
+    }),
+  );
 
-  // Global validation pipe with enhanced configuration
-  app.useGlobalPipes(new ValidationPipe({
-    transform: true,
-    whitelist: true,
-    forbidNonWhitelisted: true,
-    transformOptions: {
-      enableImplicitConversion: true,
-    },
-  }));
-
-  // Swagger setup (automatic with Rockets SDK)
   const swaggerUiService = app.get(SwaggerUiService);
-  swaggerUiService.builder()
-    .addBearerAuth()
-    .addTag('authentication', 'Authentication endpoints')
-    .addTag('users', 'User management endpoints')
-    .addTag('admin', 'Admin management endpoints');
-  swaggerUiService.setup(app);
+  swaggerUiService
+    .builder()
+    .setTitle('Rockets Starter API')
+    .setDescription('Rockets SDK starter')
+    .setVersion('1.0')
+    .addBearerAuth();
 
-  const port = process.env.PORT || 3000;
-  await app.listen(port);
-  
-  console.log('🚀 Rockets Server running on http://localhost:' + port);
-  console.log('📚 API Docs available at http://localhost:' + port + '/api');
+  const swaggerPath = process.env.SWAGGER_UI_PATH ?? 'api';
+  const document = SwaggerModule.createDocument(app, swaggerUiService.builder().build());
+  SwaggerModule.setup(swaggerPath, app, document);
+
+  const httpAdapterHost = app.get(HttpAdapterHost);
+  app.useGlobalFilters(new ExceptionsFilter(httpAdapterHost));
+
+  await app.listen(Number(process.env.PORT ?? 3001));
 }
 
-bootstrap().catch(error => {
-  console.error('Failed to start application:', error);
-  process.exit(1);
-});
+bootstrap();
 ```
 
-### **Key Features:**
-- ✅ **Automatic Swagger Configuration**: SDK handles DocumentBuilder setup
-- ✅ **JWT Configuration**: Automatic JWT strategy registration
-- ✅ **Global Validation**: Enhanced validation with transformation
-- ✅ **CORS Support**: Configurable cross-origin requests
-- ✅ **Error Handling**: Built-in exception filters
+`SwaggerUiService.builder()` returns a standard `@nestjs/swagger` `DocumentBuilder` — chain `.addTag(...)` etc. on it same as vanilla NestJS. There is no separate "automatic setup" magic beyond this.
 
 ---
 
-## 🔧 **Rockets Server Configuration**
+## 🔧 **Everything below this line predates the current package version**
 
-### **Basic Setup (External Auth Provider)**
+> The "Rockets Server Configuration" / "Rockets Server Auth Configuration" sections below describe a `RocketsServerModule` + `RocketsAuthModule.forRootAsync({settings:{authLocal, authOAuth, otp, email, ...}})` split that **does not exist** in the currently installed `@bitwild/rockets@1.0.0-alpha.10`. There is one module (`RocketsModule.forRoot(...)`, documented above) and no built-in OTP/email/OAuth config block — those concerns live in the separate `@bitwild/rockets-auth` package's `defineRocketsAuth()` (password/JWT auth domain: user, credential, role, otp, invitation), which this project does not currently use (Microsoft Entra ID is the sole auth adapter). If a future project adds `defineRocketsAuth()`, read `../../rockets/packages/rockets-server-auth/src/define-rockets-auth.ts` directly rather than the sections below — they will not match.
+>
+> The Database Configuration, Environment Configuration, Docker, and general best-practice sections further down are still broadly accurate as generic NestJS/TypeORM advice and can be used as reference.
+
+### **Basic Setup (External Auth Provider) — ⚠️ outdated, `RocketsServerModule` does not exist**
 
 ```typescript
 // app.module.ts - rockets-server only
@@ -226,7 +199,7 @@ export class Auth0Provider implements AuthProviderInterface {
 
 ---
 
-## 🔐 **Rockets Server Auth Configuration**
+## 🔐 **⚠️ outdated — Rockets Server Auth Configuration**
 
 ### **Complete Auth System Setup**
 

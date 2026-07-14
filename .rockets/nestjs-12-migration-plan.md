@@ -1,8 +1,8 @@
 # NestJS 12 Migration Plan — rockets-starter
 
-> Status: **spike done** — `spike/nestjs-12-alpha` branch runs on 12.0.0-alpha.5 (see `docs/nestjs-12-spike.md`)  
-> Last reviewed: 2026-06-12  
-> Decision: **main stays on Nest 11.1.18 until stable Nest 12 + ecosystem packages are ready**
+> Status: **spike done, rockets repo blocker resolved** — `spike/nestjs-12-alpha` branch runs on 12.0.0-alpha.5 (see `docs/nestjs-12-spike.md`). As of 2026-07-10, `../../rockets/packages/{rockets-core,rockets-server,rockets-repository-typeorm}` (source, unreleased, vendored locally as `1.0.0-alpha.10`) are themselves pinned to `@nestjs/common|core@12.0.0-alpha.5`, `@nestjs/swagger@12.0.0-alpha.2`, `@concepta/nestjs-*@8.0.0-alpha.7` — the "rockets repo monorepo must move first" blocker below is resolved for the packages `feature/stargate-artifact` actually uses. `@nestjs/cqrs` moved to a **hard** (non-peer) dependency of `rockets-core` at `^11.0.0`, still no v12 line, running fine under the existing `require(esm)` CJS interop.
+> Last reviewed: 2026-07-10
+> Decision: **main stays on Nest 11.1.18 until stable Nest 12 + ecosystem packages are ready** — this only describes the alpha spike branches, not a production migration decision.
 
 ---
 

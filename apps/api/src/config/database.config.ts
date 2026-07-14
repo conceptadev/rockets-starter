@@ -1,6 +1,6 @@
 import type { DataSourceOptions } from 'typeorm';
 import type { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { UserMetadataEntity } from '../modules/user-metadata/infrastructure/user-metadata.entity';
+import { UserMetadataEntity } from '../modules/user-metadata';
 import { ArtifactRecordEntity } from '../modules/workflows/infrastructure/artifact-record.entity';
 
 const ENTITIES = [UserMetadataEntity, ArtifactRecordEntity];

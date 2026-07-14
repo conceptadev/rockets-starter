@@ -14,11 +14,48 @@
 
 ---
 
-## 🏗️ **Base DTO Pattern**
+## 🧬 **Zod-first pattern (recommended for new CRUD entities)**
+
+> **Verified against `@bitwild/rockets-core@1.0.0-alpha.10`**, `/zod` subpath. This is the current recommended way to define an entity + its create/update/response DTOs together, replacing hand-written entity + 2-3 DTO classes with one schema. It's **optional** — the class-validator pattern in the rest of this guide still works and is required wherever you need custom decorators/validators Zod doesn't cover.
+
+Requires `zod` and `nestjs-zod` as real dependencies (they're optional peers of `rockets-core`/`rockets-repository-typeorm` — add them yourself: `zod@^4.4.3`, `nestjs-zod@^5.4.0`).
+
+```typescript
+// modules/user-metadata/user-metadata.schema.ts — real, working example in this repo
+import { auditableEntity, bindZodResources, f } from '@bitwild/rockets-core/zod';
+import { typeOrmZodEntityCompiler } from '@bitwild/rockets-repository-typeorm/zod';
+
+// Bind once per app (or per module) so entityCompiler doesn't need repeating everywhere.
+const { defineUserMetadata, zodResource } = bindZodResources(typeOrmZodEntityCompiler);
+
+export const userMetadataSchema = auditableEntity({
+  userId: f.string({ max: 255 }),
+  firstName: f.string({ min: 1, max: 100, example: 'John' }).optional(),
+  lastName: f.string({ min: 1, max: 100, example: 'Doe' }).optional(),
+});
+
+// { entity, createDto, updateDto, responseDto } — feed straight into RocketsModule.forRoot({ userMetadata })
+export const userMetadata = defineUserMetadata(userMetadataSchema, { table: 'user_metadata' });
+```
+
+**Entity presets** (`@bitwild/rockets-core/zod`, `base-entity.ts`) — pick the one matching your audit-column needs, then add your own fields:
+- `createdEntity(shape)` → `{ id, ...shape, dateCreated }` — append-only/log resources.
+- `baseEntity(shape)` → `{ id, ...shape, dateCreated, dateUpdated }` — mutable, no soft delete.
+- `auditableEntity(shape)` → `{ id, ...shape, dateCreated, dateUpdated, dateDeleted, version }` — full audit (what `userMetadata` requires: `id`, `userId`, `dateCreated`, `dateUpdated`, `dateDeleted`, `version`).
+
+**`f.*` field helpers** (`fields.ts`) bake in `.register(rocketsFieldMeta, ...)` for the common cases: `f.pk()`, `f.string({min,max,text,unique,index,example,description})`, `f.int()`, `f.bool()`, `f.enumField(values)`, `f.fk(target, opts)` (indexed uuid FK with relation metadata), `f.hasMany(elementSchema, opts)`, `f.owner()` (auto-wires an `OwnerStampHook`), `f.compute(schema, fn)` (response-only computed field). Anything richer (`.refine()`, unions, nested objects) stays raw `z.object(...)` — the helpers cover the common 90%, not all of Zod.
+
+**For a full CRUD resource** (not just user-metadata), use `zodResource()` from the same `bindZodResources()` call — same idea as `defineResource()`/`defineModuleResource()` (see CRUD_PATTERNS_GUIDE.md) but schema-derived. Use the hand-built `defineResource`/`defineModuleResource` path instead when a module needs custom controllers/services beyond plain CRUD (this repo's `workflows` module is that case — see `apps/api/src/modules/workflows/workflows.resource.ts`).
+
+---
+
+## 🏗️ **Base DTO Pattern (class-validator — still valid, but not for user-metadata)**
 
 ### **SDK DTO Extension Pattern**
 
 When working with Rockets SDK, always extend from SDK DTOs instead of creating from scratch:
+
+> ⚠️ The import below (`RocketsAuthUserMetadataDto` from `@bitwild/rockets-server-auth`) is outdated — for user-metadata specifically, prefer the Zod pattern above, or if hand-writing, extend `BaseUserMetadataDto` from `@bitwild/rockets` (see the real example this repo used to have at `apps/api/src/modules/user-metadata/` before it was migrated to Zod). The general "extend the SDK base DTO" *pattern* below is still sound for other entities — only this specific import path is wrong.
 
 ```typescript
 // user-metadata.dto.ts - Extending from SDK UserMetadata DTO (CORRECT PATTERN)

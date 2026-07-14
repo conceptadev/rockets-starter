@@ -4,6 +4,22 @@ This guide covers advanced authentication patterns, customization techniques, an
 
 > **⚠️ Important Note**: This guide contains advanced patterns and conceptual examples. Some examples may require additional services, dependencies, or custom implementations not provided by the SDK. Always verify method signatures and availability in your specific SDK version before implementation.
 
+> **⚠️ Real contract (verified against `@bitwild/rockets-core@1.0.0-alpha.10`)**: the actual auth extension point is much simpler than most of what follows. There is no built-in local/OAuth/passport strategy system active in this version. Auth is one interface:
+> ```typescript
+> interface AuthAdapterInterface {
+>   authenticate(request: AuthRequest): Promise<AuthAttemptResult>;
+> }
+> type AuthAttemptResult =
+>   | { matched: false }
+>   | { matched: true; user: AuthorizedUser }
+>   | { matched: true; error: HttpException };
+> interface AuthBootstrap<Adapter = AuthAdapterInterface> {
+>   readonly adapter: Type<Adapter>;
+>   readonly forRoot?: () => DynamicModule;
+> }
+> ```
+> Register one or more adapters via `RocketsModule.forRoot({ auth: bootstrap | bootstrap[] })` — `AuthServerGuard` tries each per request in order and sets `request.user`. `extractBearerToken(request)` is exported from `@bitwild/rockets-core` for adapters that need it. Real, working example: `apps/api/src/auth-microsoft/` (`define-microsoft-auth.ts` returns the `AuthBootstrap`; the adapter validates a Microsoft-issued JWT via `jose` — `createRemoteJWKSet` + `jwtVerify` — against the tenant's JWKS; there is no local user table, the identity is the token's `oid` claim and profile data lives entirely in `user_metadata`). OAuth-provider modules (Google/GitHub/Apple) referenced later in this guide are **disabled upstream** in `@bitwild/rockets-auth` (v7/v8 `@concepta/nestjs-authentication` dependency conflict) — do not attempt to wire them up; write a custom `AuthAdapterInterface` adapter instead, following the Microsoft example.
+
 ## Table of Contents
 
 1. [Introduction to Advanced Authentication Patterns](#introduction-to-advanced-authentication-patterns)

@@ -13,15 +13,29 @@
 
 ---
 
+## ⚠️ **Package inventory — verified against `1.0.0-alpha.10`**
+
+Published npm names vs. source-repo folder names differ, and packages were consolidated on 2026-07-07. Current state (`../../rockets/packages/`):
+
+| npm package | source folder | role |
+|---|---|---|
+| `@bitwild/rockets-core` | `rockets-core` | Shared infrastructure: `AuthAdapterInterface`/`AuthBootstrap`, user-metadata CQRS handlers, access-control wiring (`accessControl` extras key), the Zod resource layer (`/zod` subpath), `defineResource`/`defineModuleResource`. Everything else composes on top of this. |
+| `@bitwild/rockets` | `rockets-server` | External-auth composition layer — `RocketsModule.forRoot()`, `/me`, `defineTypeOrmRepository()`. Mostly re-exports `rockets-core` types. **This is what rockets-starter uses.** |
+| `@bitwild/rockets-repository-typeorm` | `rockets-repository-typeorm` | Real dependency of `@bitwild/rockets` — TypeORM repository implementation + `typeOrmZodEntityCompiler` (for Zod-schema entities) at its own `/zod` subpath. |
+| `@bitwild/rockets-auth` | `rockets-server-auth` | Full password/JWT auth domain (`defineRocketsAuth()`): user/credential/role/otp/invitation entities, DDD-layered. **Not currently used by rockets-starter** (Microsoft Entra ID is the sole adapter) — it plugs in as one more `AuthBootstrap` in the `auth: []` array if a project needs it. |
+| `@bitwild/rockets-adapter-firebase`, `@bitwild/rockets-repository-firestore` | — | Firebase auth adapter + Firestore repository — proof-of-pattern for non-TypeORM/non-Microsoft setups. Not used here. |
+
+`@bitwild/rockets-access-control` and `@bitwild/rockets-common` **no longer exist as separate packages** — ACL was folded into `rockets-core` (opt-in `accessControl` extras key, see `ACCESS_CONTROL_GUIDE.md`); anything `rockets-common` used to hold is now in `rockets-core`.
+
 ## 📊 **Package Decision Matrix**
 
 ### **Choose Your Rockets Package:**
 
 | Your Need | Package | When to Use |
 |-----------|---------|-------------|
-| **External Auth System** (Auth0, Firebase, Cognito) | `@bitwild/rockets-server` | You have existing auth, just need user metadata |
-| **Complete Auth System** | `@bitwild/rockets-server-auth` | You need login, signup, recovery, OAuth, admin |
-| **Both** (Recommended) | Both packages | Complete system with external provider option |
+| **External Auth System** (Microsoft Entra ID, Auth0, Firebase, Cognito) | `@bitwild/rockets` | You have existing auth, just need user metadata + CRUD resources. This repo's setup. |
+| **Complete Auth System** | `@bitwild/rockets-auth` (via `defineRocketsAuth()`, chained into `auth: []`) | You need login, signup, recovery, admin — on top of the same `@bitwild/rockets` core. |
+| **Both** | `auth: [defineRocketsAuth(...), defineMicrosoftAuth()]` | `AuthBootstrap` natively supports an array — `AuthServerGuard` tries each adapter per request. |
 
 ### **Feature Comparison:**
 

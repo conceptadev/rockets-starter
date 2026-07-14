@@ -174,46 +174,42 @@ export class ACService implements AccessControlServiceInterface {
 }
 ```
 
-### **Step 5: Integrate with RocketsAuthModule**
+### **Step 5: Integrate with `RocketsModule.forRoot()`**
 
-Update `src/app.module.ts`:
+> **Verified against `@bitwild/rockets@1.0.0-alpha.10`.** There is no `RocketsAuthModule` in the currently installed SDK — ACL is a nested `accessControl` extras key on the same `RocketsModule.forRoot()` call that wires auth/userMetadata/repository/resources (see `CONFIGURATION_GUIDE.md`). It is **fully opt-in**: omit the `accessControl` key entirely and no ACL module/guard/provider gets registered at all.
+
+Update `src/app.module.ts` (real example — see this repo's `apps/api/src/app.module.ts`):
 
 ```typescript
 import { Module } from '@nestjs/common';
-import { RocketsAuthModule } from '@bitwild/rockets-server-auth';
-
-import { ACService } from './access-control.service';
-import { acRules, AppRole } from './app.acl';
+import { RocketsModule, defineTypeOrmRepository } from '@bitwild/rockets';
+import { defineMicrosoftAuth } from './auth-microsoft';
+import { getDatabaseConfig } from './config/database.config';
+import { userMetadata } from './modules/user-metadata';
+import { workflowsResource } from './modules/workflows/workflows.resource';
+import { appAcl } from './app.acl';
+import { AppAccessControlService } from './access-control.service';
 
 @Module({
   imports: [
-    // Import AccessControlModule first
-    AccessControlModule,
-    
-    // Configure RocketsAuthModule with ACL
-    RocketsAuthModule.forRootAsync({
-      inject: [],
-      useFactory: () => ({
-        settings: {
-          role: {
-            adminRoleName: AppRole.Admin,
-            defaultUserRoleName: AppRole.User,
-          },
-        },
-        accessControl: {
-          service: new ACService(),
-          settings: {
-            rules: acRules,  // Pass ACL rules here
-          },
-        },
-      }),
+    RocketsModule.forRoot({
+      auth: defineMicrosoftAuth(),
+      userMetadata,
+      repository: defineTypeOrmRepository(getDatabaseConfig()),
+      resources: [workflowsResource],
+      enableGlobalGuard: true,
+      accessControl: {
+        settings: { rules: appAcl },   // same `acRules`/`appAcl` object from Step 2
+        service: new AppAccessControlService(),  // same service from Step 3
+        // queryServices?: Provider<CanAccess>[]  — ownership-check services, also first-class here
+      },
     }),
-    
-    // ... other modules
   ],
 })
 export class AppModule {}
 ```
+
+Internally, `accessControl` gets forwarded to the exact same `AccessControlModule.forRoot({...})` call from `@concepta/nestjs-access-control` this doc's Step 2/3 rules already target — nothing about how you *author* ACL rules or the access-control service changes, only where you *wire* them in.
 
 ### **ACL Permission Patterns**
 
