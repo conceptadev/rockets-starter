@@ -26,11 +26,11 @@ Register workflow definitions with `StargateModule.register`.
 @Module({
   imports: [
     StargateModule.register({
-      workflows: [budgetWorkflow, featureEstimateWorkflow],
+      workflows: [aiSummaryWorkflow],
     }),
   ],
 })
-export class BudgetModule {}
+export class WorkflowsModule {}
 ```
 
 `workflows` are not the workflow JSON files. They are API mapping objects that define:
@@ -44,29 +44,29 @@ export class BudgetModule {}
 ## Workflow Definition
 
 ```ts
-export const budgetWorkflow: StargateWorkflow<
-  BudgetWorkflowInput,
-  BudgetWorkflowResults,
-  BudgetWorkflowOutput
+export const aiSummaryWorkflow: StargateWorkflow<
+  SummarizeWorkflowInput,
+  AiSummaryWorkflowResults,
+  SummarizeWorkflowOutput
 > = {
-  key: 'budget',
-  flow: process.env.STARGATE_BUDGET_FLOW ?? 'budget',
+  key: 'ai-summary',
+  flow: process.env.STARGATE_AI_SUMMARY_FLOW ?? 'ai-summary',
 
-  toInputs: ({ requestId }) => ({ requestId }),
+  toInputs: ({ text }) => ({ text }),
 
   parseResults: (results) => {
-    const output = results.format?.output;
+    const summary = results.format?.summary;
 
-    if (!isBudgetOutput(output)) {
+    if (typeof summary !== 'string') {
       throw new WorkflowOutputError(
-        'Stargate workflow did not include results.format.output',
+        'Stargate workflow did not include results.format.summary',
       );
     }
 
-    return { format: { output } };
+    return { format: { summary } };
   },
 
-  toOutput: ({ format }) => format.output,
+  toOutput: ({ format }) => ({ summary: format.summary }),
 };
 ```
 
@@ -97,7 +97,7 @@ Workflow JSON files:
 - Keep external service details inside workflows when possible. Rockets should consume normalized results, not vendor-specific payloads.
 - Validate workflow output in `parseResults`. Do not pass raw Stargate output into application code.
 - Keep workflow definitions close to the feature that owns the use case.
-- Keep `StargateModule` generic. Do not add Zoho, budget, auth, or dashboard logic here.
+- Keep `StargateModule` generic. Do not add domain, auth, or dashboard logic here.
 - Prefer explicit input/output interfaces per workflow.
 - Throw `WorkflowOutputError` when the workflow result shape is wrong.
 - Use environment variables for flow ids when a deployment needs to swap installed flows.
@@ -105,9 +105,6 @@ Workflow JSON files:
 
 ## Current Workflows
 
-- `budget`: simulates pulling project budget and time data from Zoho Creator.
-- `zoho-tasks`: simulates reading new incoming task requests from Zoho.
-- `feature-estimate`: simulates code analysis and feature effort estimation using the latest budget context.
 - `ai-summary`: summarizes submitted text through the installed AI summary flow.
 
 ## Adding a Workflow

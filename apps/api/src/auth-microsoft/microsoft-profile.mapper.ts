@@ -1,4 +1,4 @@
-import type { AuthorizedUser } from '@bitwild/rockets';
+import type { AuthorizedUser } from '@concepta/rockets';
 import type { JWTPayload } from 'jose';
 import { AppUserRole } from '../shared/domain/user-role.enum';
 

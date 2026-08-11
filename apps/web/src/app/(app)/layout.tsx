@@ -7,7 +7,6 @@ import { getAccount, signOut } from "@/lib/auth";
 
 const NAV_ITEMS = [
   { href: "/profile", label: "Profile" },
-  { href: "/dashboard", label: "Dashboard" },
   { href: "/artifacts", label: "Artifacts" },
 ];
 

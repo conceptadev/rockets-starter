@@ -54,7 +54,7 @@ export class StargateWorkflowRuntimeService implements WorkflowRuntimePort {
 
   private async startEngine(flow: string): Promise<WorkflowEngine> {
     try {
-      const { spec } = await this.flows.read(flow);
+      const spec = await this.flows.read(flow);
       // Generic runtime: only Stargate built-ins — no report-specific host
       // components. Installed artifacts are pure flow.json + ui.json and may
       // only reference components Stargate ships. Then layer in the workspace's

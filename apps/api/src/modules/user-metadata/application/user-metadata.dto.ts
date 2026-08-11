@@ -11,7 +11,7 @@ import {
   BaseUserMetadataDto,
   type UserMetadataCreatableInterface,
   type UserMetadataModelUpdatableInterface,
-} from '@bitwild/rockets';
+} from '@concepta/rockets';
 
 @Exclude()
 class UserMetadataFields extends BaseUserMetadataDto {

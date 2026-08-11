@@ -1,10 +1,28 @@
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { INestApplication, Module, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import request from 'supertest';
-import { WorkflowsModule } from '../src/modules/workflows/workflows.module';
+import { StargateModule } from '../src/modules/stargate/stargate.module';
+import { ArtifactWorkspaceService } from '../src/modules/workflows/application/artifact-workspace.service';
+import { aiSummaryWorkflow } from '../src/modules/workflows/application/flows/ai-summary.workflow';
+import { FlowsController } from '../src/modules/workflows/presentation/http/flows.controller';
+import { WorkflowsController } from '../src/modules/workflows/presentation/http/workflows.controller';
+
+/**
+ * E2E slice without ArtifactMcpController — MCP SDK leaves open handles under Jest.
+ */
+@Module({
+  imports: [
+    StargateModule.register({
+      workflows: [aiSummaryWorkflow],
+    }),
+  ],
+  controllers: [WorkflowsController, FlowsController],
+  providers: [ArtifactWorkspaceService],
+})
+class WorkflowsHttpE2eModule {}
 
 describe('Workflows (e2e)', () => {
   let app: INestApplication;
@@ -17,7 +35,7 @@ describe('Workflows (e2e)', () => {
     process.env.STARGATE_WORKSPACE_ROOT = workspaceRoot;
 
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [WorkflowsModule],
+      imports: [WorkflowsHttpE2eModule],
     }).compile();
 
     app = moduleFixture.createNestApplication();
@@ -69,19 +87,6 @@ describe('Workflows (e2e)', () => {
       .post('/workflows/ai-summary/summarize')
       .send({ text: 'valid', injected: true })
       .expect(400);
-  });
-
-  it('POST /workflows/budget/run runs the raw budget workflow and returns the mapped result', async () => {
-    await request(app.getHttpServer())
-      .post('/workflows/budget/run')
-      .send({ budgetId: 'budget-1' })
-      .expect(200)
-      .expect((res) => {
-        expect(res.body.snapshotId).toBe(
-          '51447000000377349-2026-06-15T08:00:00Z',
-        );
-        expect(res.body.accounts).toHaveLength(1);
-      });
   });
 
   it('POST /flows publishes a flow and ui schema into the Stargate workspace', async () => {

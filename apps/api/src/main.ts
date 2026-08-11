@@ -3,7 +3,7 @@ import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import { ExceptionsFilter, SwaggerUiService } from '@bitwild/rockets';
+import { ExceptionsFilter, SwaggerUiService } from '@concepta/rockets';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

@@ -1,12 +1,16 @@
 # Rockets Starter
 
-Monorepo boilerplate: NestJS 11 API (`@bitwild/rockets` v2 DSL) + Next.js frontend, managed with Turborepo.
+Monorepo boilerplate: NestJS 12 API (`@concepta/rockets` `0.0.1-dev.0`) + Next.js frontend, managed with Turborepo.
+
+Clean starter for a new project: Microsoft Entra ID auth, user metadata, and a single **workflows** module backed by Stargate.
 
 ## Quick start
 
 ```bash
 yarn install
 cp apps/api/.env.example apps/api/.env
+# set MICROSOFT_TENANT_ID / MICROSOFT_CLIENT_ID in apps/api/.env
+# set NEXT_PUBLIC_MICROSOFT_TENANT_ID / NEXT_PUBLIC_MICROSOFT_CLIENT_ID for the web app
 yarn dev
 ```
 
@@ -18,8 +22,8 @@ yarn dev
 
 ## What's inside
 
-- **`apps/api`** — NestJS backend, SQLite, Microsoft auth adapter, module-based DDD layout
-- **`apps/web`** — Next.js + Tailwind
+- **`apps/api`** — NestJS 12 + `@concepta/rockets`, SQLite, Microsoft Entra ID, Stargate workflows
+- **`apps/web`** — Next.js 16 + MSAL login, profile, artifacts UI
 - **`packages/`** — shared ESLint and TypeScript configs
 
 ## Architecture
@@ -28,40 +32,37 @@ The browser talks only to Rockets API. Rockets owns authentication, database acc
 
 ```mermaid
 flowchart LR
-  user[User] --> web[Dashboard]
+  user[User] --> web[Web App]
   web --> ms[Microsoft Entra ID]
   ms --> web
   web -->|Bearer Microsoft token| api[Rockets API]
 
-  api -->|validates token| auth[Rockets Auth Adapter]
-  api --> db[(Application Database)]
-  api --> wf[Workflow Endpoint]
+  api -->|validates token| auth[Microsoft Auth Adapter]
+  api --> db[(SQLite)]
+  api --> wf[Workflows Module]
   wf --> sg[Stargate Runtime]
-  sg --> flow[Installed Workflow Spec]
+  sg --> flow[.stargate/flows]
   flow --> sg
   sg --> wf
   wf --> api
   api --> web
-
-  registry[Stargate Workspace Registry] -. installs/updates .-> bundle[ai-summary Bundle]
-  bundle -. provides .-> flow
-  registry -. records provenance .-> installed[.stargate/installed-bundles.json]
-
-  classDef trust fill:#fff4cc,stroke:#a66f00,color:#2b2100;
-  class registry,bundle,installed trust;
 ```
 
-Key boundaries:
+Key packages (npm):
 
-- **Microsoft token** authenticates user requests from the dashboard to Rockets API.
-- **Rockets API** is the only backend exposed to the browser.
-- **Stargate Runtime** executes workflows in-process through `@stargate/server`.
-- **Workspace Registry** is future asset distribution/provenance, not auth and not runtime.
-- **MCP trust** belongs to registry-installed MCP presets only; it is separate from user login.
+- [`@concepta/rockets`](https://www.npmjs.com/package/@concepta/rockets)
+- [`@concepta/rockets-core`](https://www.npmjs.com/package/@concepta/rockets-core)
+- [`@concepta/rockets-repository-typeorm`](https://www.npmjs.com/package/@concepta/rockets-repository-typeorm)
 
-Today, `.stargate/flows/ai-summary.json` is a local workflow asset. When Workspace Registry lands, that flow should come from an installed bundle and be tracked in `.stargate/installed-bundles.json`.
+`@stargate/*` is still linked from a sibling local checkout via yarn resolutions.
 
-See [docs/stargate-workspace-registry-analysis.md](docs/stargate-workspace-registry-analysis.md) for the detailed decision record.
+## Modules
+
+- **`user-metadata`** — `/me` profile fields
+- **`stargate`** — generic workflow runtime boundary
+- **`workflows`** — sample typed workflow (`ai-summary`) + generic flow catalog / publish / MCP
+
+Add domain modules under `apps/api/src/modules/` and register them in `RocketsModule.forRoot({ resources: [...] })`.
 
 ## Scripts
 
@@ -70,14 +71,4 @@ See [docs/stargate-workspace-registry-analysis.md](docs/stargate-workspace-regis
 - `yarn build` — production build
 - `yarn type-check` — TypeScript
 - `yarn lint` — ESLint
-
-## development-guides/
-
-Markdown guides in this folder describe **legacy v7 patterns** (manual CRUD adapters, Postgres, rockets-auth). For the current v2 DSL, use [btwld/skills](https://github.com/btwld/skills) instead.
-
-## Next steps
-
-- Install the `ai-summary` workflow through Workspace Registry when it is available
-- Add modules under `apps/api/src/modules/`
-- Extend `apps/web`
 - Tests: `cd apps/api && yarn test && yarn test:e2e`

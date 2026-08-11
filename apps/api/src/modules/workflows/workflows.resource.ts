@@ -1,14 +1,6 @@
-import { defineModuleResource } from '@bitwild/rockets';
-import { StargateModule } from '../stargate/stargate.module';
-import { aiSummaryWorkflow } from './application/flows/ai-summary.workflow';
-import { budgetWorkflow } from './application/flows/budget.workflow';
-import { WorkflowsController } from './presentation/http/workflows.controller';
+import { defineModuleResource } from '@concepta/rockets';
+import { WorkflowsModule } from './workflows.module';
 
 export const workflowsResource = defineModuleResource({
-  imports: [
-    StargateModule.register({
-      workflows: [aiSummaryWorkflow, budgetWorkflow],
-    }),
-  ],
-  controllers: [WorkflowsController],
+  imports: [WorkflowsModule],
 });

@@ -1,6 +1,6 @@
 import { Controller, Post, Req, Res } from '@nestjs/common';
 import { ApiExcludeController } from '@nestjs/swagger';
-import { AuthPublic } from '@bitwild/rockets';
+import { AuthPublic } from '@concepta/rockets';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
@@ -27,7 +27,10 @@ export class ArtifactMcpController {
   constructor(private readonly artifacts: ArtifactWorkspaceService) {}
 
   @Post()
-  async handle(@Req() req: ReqWithBody, @Res() res: ServerResponse): Promise<void> {
+  async handle(
+    @Req() req: ReqWithBody,
+    @Res() res: ServerResponse,
+  ): Promise<void> {
     if (!this.authorize(req, res)) return;
 
     const server = this.buildServer();
@@ -88,17 +91,25 @@ export class ArtifactMcpController {
         inputSchema: {
           name: z
             .string()
-            .describe('Artifact id (letters, numbers, _ or -). Used as filename and flow.id.'),
+            .describe(
+              'Artifact id (letters, numbers, _ or -). Used as filename and flow.id.',
+            ),
           flow: z
             .record(z.string(), z.unknown())
-            .describe('Stargate flow spec JSON object ({ id, name, nodes, connections }).'),
+            .describe(
+              'Stargate flow spec JSON object ({ id, name, nodes, connections }).',
+            ),
           ui: z
             .record(z.string(), z.unknown())
-            .describe('UI-schema JSON object ({ title, subtitle, data, blocks, ... }).'),
+            .describe(
+              'UI-schema JSON object ({ title, subtitle, data, blocks, ... }).',
+            ),
           overwrite: z
             .boolean()
             .optional()
-            .describe('Replace an existing artifact with the same name. Default false.'),
+            .describe(
+              'Replace an existing artifact with the same name. Default false.',
+            ),
         },
       },
       async (args) => {
@@ -109,7 +120,10 @@ export class ArtifactMcpController {
             ui: args.ui as Record<string, unknown>,
             overwrite: args.overwrite,
           });
-          return this.ok(`Installed "${summary.name}" — ${summary.title}`, summary);
+          return this.ok(
+            `Installed "${summary.name}" — ${summary.title}`,
+            summary,
+          );
         } catch (error) {
           return this.fail(error);
         }
@@ -120,7 +134,8 @@ export class ArtifactMcpController {
       'list_artifacts',
       {
         title: 'List artifacts',
-        description: 'List installed artifacts (name, title, subtitle, updatedAt), newest first.',
+        description:
+          'List installed artifacts (name, title, subtitle, updatedAt), newest first.',
         inputSchema: {},
       },
       async () => {
@@ -140,7 +155,8 @@ export class ArtifactMcpController {
       'remove_artifact',
       {
         title: 'Remove artifact',
-        description: 'Remove an installed artifact (its flow and UI schema) by name.',
+        description:
+          'Remove an installed artifact (its flow and UI schema) by name.',
         inputSchema: {
           name: z.string().describe('Artifact id to remove.'),
         },

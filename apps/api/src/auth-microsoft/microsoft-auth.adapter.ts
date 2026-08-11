@@ -1,10 +1,10 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { extractBearerToken } from '@bitwild/rockets';
+import { extractBearerToken } from '@concepta/rockets';
 import type {
   AuthAdapterInterface,
   AuthAttemptResult,
   AuthRequest,
-} from '@bitwild/rockets';
+} from '@concepta/rockets';
 import { mapMicrosoftProfile } from './microsoft-profile.mapper';
 import { MicrosoftTokenVerifierService } from './microsoft-token-verifier.service';
 

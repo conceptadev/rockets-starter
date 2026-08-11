@@ -1,6 +1,6 @@
 # Rockets Starter — API
 
-NestJS 11 backend using **@bitwild/rockets** (v2 DSL), TypeORM, and SQLite. Runs on port **3001**.
+NestJS 12 backend using **@concepta/rockets** (`0.0.1-dev.0`), TypeORM, SQLite, Microsoft Entra ID, and Stargate workflows. Port **3001**.
 
 ## Quick start
 
@@ -11,42 +11,33 @@ cp apps/api/.env.example apps/api/.env
 yarn dev:api
 ```
 
-Or from this folder:
-
-```bash
-cp .env.example .env
-yarn dev
-```
-
 Swagger UI: http://localhost:3001/api
 
 ## Stack
 
-- **NestJS 11** — API framework
-- **@bitwild/rockets** — `defineResource`, `defineModuleResource`, CRUD, hooks, auth guard
-- **TypeORM** — SQLite (dev), migrations for CLI/seeding
-- **Fake auth** — static dev user; no login endpoint (replace with a real adapter for production)
+- **NestJS 12 alpha** — API framework
+- **@concepta/rockets** — `RocketsModule`, `defineModuleResource`, `/me`, global auth guard
+- **@concepta/rockets-repository-typeorm** — TypeORM repository bootstrap
+- **TypeORM** — SQLite (dev)
+- **Microsoft Entra ID** — `defineMicrosoftAuth()`
+- **Stargate** — in-process workflow runtime (`@stargate/server`)
 
-## Auth behaviour
+## Auth
 
-| Resource | Guard | Notes |
-|----------|-------|-------|
-| `announcement` | skipped (`@AuthPublic()`) | truly public |
-| `category`, `task`, `report`, `/me` | `AuthServerGuard` runs | fake adapter always matches — any request gets the dev user |
+Set `MICROSOFT_TENANT_ID` and `MICROSOFT_CLIENT_ID` in `.env`. Requests need `Authorization: Bearer <Entra access token>`.
 
-Replace `defineFakeAuth()` when you need real token validation.
+## Project layout
 
-## Database
-
-- **SQLite** file: `DATABASE_PATH` (default `rockets-starter.sqlite` under `apps/api`)
-- Dev: `synchronize: true` via `src/config/database.config.ts`
-- CLI: `yarn sandbox:init` (migrations + seed)
-
-```bash
-yarn migration:run
-yarn migration:generate ./src/migrations/MigrationName
-yarn seed:run
-yarn sandbox:init
+```
+src/
+├── app.module.ts              # RocketsModule.forRoot
+├── auth-microsoft/            # Entra ID adapter
+├── config/database.config.ts
+├── shared/domain/
+└── modules/
+    ├── user-metadata/         # /me fields
+    ├── stargate/              # workflow runtime boundary
+    └── workflows/             # sample + generic flow endpoints
 ```
 
 ## Scripts
@@ -55,39 +46,12 @@ yarn sandbox:init
 |--------|---------|
 | `yarn dev` | Start with watch (port 3001) |
 | `yarn build` | Compile for production |
-| `yarn start:prod` | Run compiled app |
 | `yarn test` | Unit tests |
 | `yarn test:e2e` | E2E tests |
 | `yarn migration:run` | Run pending migrations |
-| `yarn seed:run` | Run seeders |
-| `yarn sandbox:init` | Migrations + seed |
-
-## Project layout
-
-```
-src/
-├── app.module.ts              # composition root — RocketsModule.forRoot only
-├── auth/                      # fake auth bootstrap
-├── config/database.config.ts  # SQLite + entity list for CLI
-├── shared/domain/             # shared enums (AppUserRole)
-└── modules/                   # bounded contexts (DDD)
-    ├── announcement/          # public CRUD (defineResource)
-    ├── category/              # owned CRUD + soft delete
-    ├── task/                  # owned CRUD + soft delete
-    ├── report/                # custom endpoint (defineModuleResource)
-    ├── user-metadata/         # Rockets userMetadata wiring
-    └── user/                  # UserEntity for seeder
-```
-
-Each module:
-
-- `domain/` — enums, domain types
-- `application/` — DTOs, controllers, services
-- `infrastructure/` — TypeORM entities
-- `{name}.resource.ts` or `{name}.feature.ts` — Rockets registration
-- `index.ts` — public export
 
 ## Docs
 
 - Monorepo: [README](../../README.md)
-- Rockets patterns: [btwld/skills](https://github.com/btwld/skills)
+- Stargate module: [src/modules/stargate/README.md](./src/modules/stargate/README.md)
+- Packages: [npm @concepta/rockets](https://www.npmjs.com/package/@concepta/rockets)

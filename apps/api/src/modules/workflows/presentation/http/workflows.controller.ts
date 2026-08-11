@@ -12,9 +12,6 @@ import {
 import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { StargateExecutionService } from '../../../stargate/application/stargate-execution.service';
 import { aiSummaryWorkflow } from '../../application/flows/ai-summary.workflow';
-import { budgetWorkflow } from '../../application/flows/budget.workflow';
-import { BudgetResponseDto } from './dto/budget-response.dto';
-import { BudgetWorkflowDto } from './dto/budget-workflow.dto';
 import { SummarizeResponseDto } from './dto/summarize-response.dto';
 import { SummarizeWorkflowDto } from './dto/summarize-workflow.dto';
 import {
@@ -38,17 +35,6 @@ export class WorkflowsController {
   ): Promise<SummarizeResponseDto> {
     try {
       return await this.stargate.run(aiSummaryWorkflow, dto);
-    } catch (error) {
-      throw this.toHttpError(error);
-    }
-  }
-
-  @Post('budget/run')
-  @HttpCode(HttpStatus.OK)
-  @ApiOkResponse({ type: BudgetResponseDto })
-  async runBudget(@Body() dto: BudgetWorkflowDto): Promise<BudgetResponseDto> {
-    try {
-      return await this.stargate.run(budgetWorkflow, dto);
     } catch (error) {
       throw this.toHttpError(error);
     }

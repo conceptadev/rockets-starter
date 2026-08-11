@@ -8,7 +8,7 @@ import {
   Param,
   Post,
 } from '@nestjs/common';
-import { AuthPublic } from '@bitwild/rockets';
+import { AuthPublic } from '@concepta/rockets';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,

@@ -1,7 +1,7 @@
 {
   "name": "api",
   "version": "0.0.1",
-  "description": "Rockets Starter API \u2014 NestJS 11 backend with TypeORM, SQLite, and Microsoft 365 (Entra ID) auth.",
+  "description": "Rockets Starter API — NestJS 12 backend with TypeORM, SQLite, Microsoft Entra ID auth, and Stargate workflows.",
   "author": "BTWLD",
   "private": true,
   "license": "UNLICENSED",
@@ -21,7 +21,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e": "jest --config ./test/jest-e2e.json && ts-node -r tsconfig-paths/register ./test/app.smoke-e2e.ts",
     "typeorm": "typeorm -d ./dist/ormconfig.js",
     "schema:drop": "yarn typeorm schema:drop",
     "schema:sync": "yarn typeorm schema:sync",
@@ -33,13 +33,17 @@
     "migration:rebuild": "yarn schema:drop && yarn migration:run"
   },
   "dependencies": {
-    "@bitwild/rockets": "file:../../../../rockets/packages/rockets-server",
+    "@concepta/rockets": "0.0.1-dev.0",
+    "@concepta/rockets-core": "0.0.1-dev.0",
+    "@concepta/rockets-repository-typeorm": "0.0.1-dev.0",
     "@nestjs/common": "12.0.0-alpha.5",
+    "@nestjs/config": "12.0.0-next.0",
     "@nestjs/core": "12.0.0-alpha.5",
     "@nestjs/platform-express": "12.0.0-alpha.5",
     "@nestjs/swagger": "12.0.0-alpha.2",
     "@nestjs/typeorm": "11.0.0",
     "@stargate/server": "file:../../../../stargate/packages/server",
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "dotenv": "^16.4.5",
@@ -47,7 +51,8 @@
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
     "sqlite3": "^5.1.7",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.20",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@nestjs/cli": "^11.0.0",
@@ -92,7 +97,7 @@
       ]
     },
     "transformIgnorePatterns": [
-      "/node_modules/(?!@nestjs/)"
+      "/node_modules/(?!@nestjs/|@concepta/)"
     ],
     "moduleNameMapper": {
       "^@nestjs/swagger$": "<rootDir>/../test/swagger.shim.js",

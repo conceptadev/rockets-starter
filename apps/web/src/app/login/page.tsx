@@ -69,7 +69,7 @@ export default function LoginPage() {
             className="rise mt-4 text-sm leading-relaxed text-muted"
             style={{ animationDelay: "240ms" }}
           >
-            Sign in with your Microsoft 365 account to access the dashboard.
+            Sign in with your Microsoft 365 account to continue.
           </p>
 
           <div className="rise mt-10" style={{ animationDelay: "320ms" }}>

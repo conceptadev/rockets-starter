@@ -1,5 +1,5 @@
 import { UnauthorizedException } from '@nestjs/common';
-import type { AuthRequest } from '@bitwild/rockets';
+import type { AuthRequest } from '@concepta/rockets';
 import { MicrosoftAuthAdapter } from './microsoft-auth.adapter';
 import { MicrosoftTokenVerifierService } from './microsoft-token-verifier.service';
 import { mapMicrosoftProfile } from './microsoft-profile.mapper';

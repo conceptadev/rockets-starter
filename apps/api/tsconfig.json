@@ -16,6 +16,10 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@stargate/server": ["../../node_modules/@stargate/server/dist/index.js"],
+      "@stargate/server/nest": ["../../node_modules/@stargate/server/dist/nest.js"]
+    }
   }
 }

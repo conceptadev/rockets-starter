@@ -1,4 +1,4 @@
-import type { AuthBootstrap } from '@bitwild/rockets';
+import type { AuthBootstrap } from '@concepta/rockets';
 import { MICROSOFT_AUTH_SETTINGS_TOKEN } from './microsoft-auth.constants';
 import { microsoftAuthSettingsFactory } from './microsoft-auth.settings';
 import { MicrosoftAuthAdapter } from './microsoft-auth.adapter';

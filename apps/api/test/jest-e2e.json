@@ -7,6 +7,7 @@
   "rootDir": ".",
   "testEnvironment": "node",
   "testRegex": ".e2e-spec.ts$",
+  "forceExit": true,
   "setupFiles": [
     "<rootDir>/setup-e2e.ts"
   ],
@@ -23,7 +24,7 @@
     ]
   },
   "transformIgnorePatterns": [
-    "/node_modules/(?!@nestjs/)"
+    "/node_modules/(?!@nestjs/|@concepta/)"
   ],
   "moduleNameMapper": {
     "^@nestjs/swagger$": "<rootDir>/swagger.shim.js",
